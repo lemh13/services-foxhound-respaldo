@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fox.hound.spring.models.TipoServicio;
+import fox.hound.spring.models.Cargo;
 import fox.hound.spring.services.MaestroService;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("tipo_servicio")
-public class TipoServicioController {
+@RequestMapping("cargo")
+public class CargoController {
 
 	@Autowired
 	private MaestroService service;
 	
-	private Class<?> CLASE = TipoServicio.class;
+	private Class<?> CLASE = Cargo.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("TipoServicio"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll("Cargo"), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -35,12 +35,12 @@ public class TipoServicioController {
 	}
 
 	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> agregar(@RequestBody TipoServicio clase, HttpServletRequest request) {
+	public ResponseEntity<?> agregar(@RequestBody Cargo clase, HttpServletRequest request) {
 		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void modificar(@RequestBody TipoServicio clase, HttpServletRequest request) {
+	public void modificar(@RequestBody Cargo clase, HttpServletRequest request) {
 		ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
