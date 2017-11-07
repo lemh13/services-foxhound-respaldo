@@ -147,14 +147,14 @@ Buscar un estatus por id.
 ```ruby
 Insertar un estatus.
     PARAMETROS
-        { "descripcion": "", "estatus": "" }    `Content-Type: application/json`
+        { "descripcion": "" }    `Content-Type: application/json`
 ```
 
 ``PUT`` /estatus/modificar
 ```ruby
 Modifica un estatus.
     PARAMETROS
-        { "id": 1, "descripcion": "", "estatus": "" }   `Content-Type: application/json`
+        { "id": 1, "descripcion": "" }   `Content-Type: application/json`
 ```
 
 ``DELETE`` /estatus/borrar/{id}
