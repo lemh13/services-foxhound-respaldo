@@ -17,7 +17,7 @@ public class InmuebleService {
 
 	public List<Inmueble> getAllInmuebles(String usuarioId) {
 		List<Inmueble> lista = new ArrayList<>();
-		preferenciaRepository.findByUsuarioId(Long.valueOf(usuarioId))
+		preferenciaRepository.findByClienteId(Long.valueOf(usuarioId))
 		.forEach(lista::add);
 		
 		return lista.isEmpty() ? null : lista;

@@ -5,9 +5,10 @@
 #### Endspoints    
 1. [Usuario Endpoints](README.md#usuario-endpoints)
 2. [Inmueble Endpoints](README.md#inmueble-endpoints)
-3. [Mail Endpoints](README.md#mail-endpoints)
-4. [PDF Endpoints](README.md#pdf-endpoints)
-5. [Notificacion Endpoints](README.md#notificacion-endpoints)
+3. [Maestros Endpoints](README.md#maestro-endpoints)
+4. [Mail Endpoints](README.md#mail-endpoints)
+5. [PDF Endpoints](README.md#pdf-endpoints)
+6. [Notificacion Endpoints](README.md#notificacion-endpoints)
 
 ## Usuario Endpoints
 
@@ -16,36 +17,31 @@
 Imprime 'Fox Hound Rules!', validación para saber que el servidor esta activo.
 ```
 
-``GET`` /usuarios
+``GET`` /usuario/buscarTodos
 ```
 Listado de usuarios.
 ```
 
-``GET`` /usuario/{id}
+``GET`` /usuario/buscar/{id}
 ```
 Buscar un usuario por id.
 ```
 
-``GET`` /usuarioPorNombre/{name}
-```
-Buscar un usuario por nombre.
-```
-
-``POST`` /usuario
+``POST`` /usuario/agregar
 ```ruby
 Inserta un usuario.
     PARAMETROS
-        { "name": "Jose", "password": "1234" }  `Content-Type: application/json`
+        
 ```
 
-``PUT`` /usuario
+``PUT`` /usuario/modificar
 ```ruby
 Modifica un usuario.
     PARAMETROS
-        { "id": 1, "name": "Jose Duin", "password": "1234" }    `Content-Type: application/json`
+        
 ```
 
-``DELETE`` /usuario/{id}
+``DELETE`` /borrar/{id}
 ```
 Elimina un usuario.
 ```
@@ -57,35 +53,81 @@ Genera un token de acceso.
 
 ## Inmueble Endpoints
 
-``GET`` /usuario/{usuarioId}/inmueble
+## Maestro Endpoints
+
+### Cargo
+
+``GET`` /cargo/buscarTodos
 ```
-Listado de inmuebles por usuario.
+Listado de cargos.
 ```
 
-``GET`` /inmueble/{id}
+``GET`` /cargo/buscar/{id}
 ```
-Buscar un inmueble por id.
+Buscar un cargo por id.
 ```
 
-``POST`` /usuario/{usuarioId}/inmueble
+``POST`` /cargo/agregar
 ```ruby
-Insertar un inmueble a un usuario.
+Insertar un cargo.
     PARAMETROS
-        { "direccion": "Somewhere" }    `Content-Type: application/json`
+        { "descripcion": "", "estatus": "" }    `Content-Type: application/json`
 ```
 
-``PUT`` /usuario/{usuarioId}/inmueble
+``PUT`` /cargo/modificar
 ```ruby
-Modifica un inmueble.
+Modifica un cargo.
     PARAMETROS
-        { "id": 1, "direccion": "Somewhere" }   `Content-Type: application/json`
+        { "id": 1, "descripcion": "", "estatus": "" }   `Content-Type: application/json`
 ```
 
-``DELETE`` /inmueble/{id}
+``DELETE`` /cargo/borrar/{id}
 ```
-Elimina inmueble.
+Elimina cargo.
 ```
+Todos los demas Maestros seguiran el mismo patron: 
+	``GET``		/{nombre-maestro}/buscarTodos
+	``GET``		/{nombre-maestro}/buscar/{id}
+	``POST``		/{nombre-maestro}/agregar
+	``PUT``		/{nombre-maestro}/modificar
+	``DELETE``	/{nombre-maestro}/borrar/{id}
 
+Todos los {nombre-maestro} son:
+	1. cargo
+	2. categoria
+	3. categoriaInmueble
+	4. categoriaServicio
+	5. condicion
+	6. estado
+	7. estadoServicio
+	8. herramienta
+	9. ocupacion
+	10. opcion
+	11. pregunta
+	12. profesion
+	13 redSocial
+	14. tarea
+	15. tipoCaracteristica
+	16. tipoCliente
+	17. tipoDiagnosticoVisita
+	18. tipoEventualidad
+	19. tipoGarantia
+	20. tipoIdentificacion
+	21. tipoInmueble
+	22. tipoMotivo
+	23. tipoNotificacion
+	24. tipoPersona
+	25. tipoPromocion
+	26. tipoReclamo
+	27. tipoRecurso
+	28. tipoRespuesta
+	29. tipoServicio
+	30. tipoVisita
+	31. turno
+	32. ubicacion
+	33. unidadMedida
+	34. usoInmueble 
+	
 ## Mail Endpoints
 
 ``POST`` /sendMail

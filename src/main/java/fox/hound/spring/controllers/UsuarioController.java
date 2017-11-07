@@ -20,6 +20,7 @@ import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
+@RequestMapping("usuario")
 public class UsuarioController {
 	
 	private final Logger logger = Logger.getLogger(this.getClass());
@@ -35,36 +36,31 @@ public class UsuarioController {
 	
 	private Class<?> CLASE = Usuario.class;
 	
-	@RequestMapping(value="/usuarios", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAllUsers() {		
 		return ResponseDefault.ok(usuarioService.getAllUsers(), CLASE, ResponseDefault.PLURAL);
 	}
 	
-	@RequestMapping(value="/usuario/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getUser(@PathVariable("id") String id, HttpServletRequest request) {
 		Usuario u = tokenUtil.getUserFromToken(request.getHeader(tokenHeader));
 	     
-		logger.info("UsuarioId: " + u.getId() + " Username: " + u.getUserName());
+//		logger.info("UsuarioId: " + u.getId() + " Username: " + u.getUserName());
 		
 		return ResponseDefault.ok(usuarioService.getUser(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	}
 	
-	@RequestMapping(value="/usuarioPorNombre/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getUserByName(@PathVariable String name) {
-		return ResponseDefault.ok(usuarioService.getUserByUserName(name), CLASE, ResponseDefault.SINGULAR);
-	}
-	
-	@RequestMapping(value="/usuario", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> addUser(@RequestBody Usuario user) {
 		return ResponseDefault.ok(usuarioService.saveOrUpdateUser(user), CLASE, ResponseDefault.SINGULAR);
 	}
 	
-	@RequestMapping(value="/usuario", method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> updateUser(@RequestBody Usuario user) {
 		return ResponseDefault.ok(usuarioService.saveOrUpdateUser(user), CLASE, ResponseDefault.SINGULAR);
 	}
 	
-	@RequestMapping(value="/usuario/{id}", method=RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> deleteUser(@PathVariable String id) {
 		usuarioService.deleteUser(Long.valueOf(id));
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Usuario");

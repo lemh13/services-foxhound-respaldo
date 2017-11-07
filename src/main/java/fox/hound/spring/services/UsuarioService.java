@@ -29,14 +29,6 @@ public class UsuarioService {
 		return usuarioRepository.findOne(id);
 	}
 
-	public Usuario getUserByUserName(String name) {
-		return usuarioRepository.findByUserName(name);
-	}
-	
-	public Usuario getUserByUserNameAndPassword(String name, String password) {
-		return usuarioRepository.findByUserNameAndPassword(name, password);
-	}
-	
 	public Usuario saveOrUpdateUser(Usuario user) {
 		user.setPassword( encript.md5( user.getPassword() ) );
 		Usuario u = usuarioRepository.save(user);

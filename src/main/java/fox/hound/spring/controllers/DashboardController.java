@@ -1,3 +1,4 @@
+
 package fox.hound.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,8 +41,8 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void modificar(@RequestBody Dashboard clase, HttpServletRequest request) {
-		ResponseDefault.ok(dasboardService.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	public ResponseEntity<?> modificar(@RequestBody Dashboard clase, HttpServletRequest request) {
+		return ResponseDefault.ok(dasboardService.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

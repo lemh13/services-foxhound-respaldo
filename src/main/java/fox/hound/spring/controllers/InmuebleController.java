@@ -20,7 +20,7 @@ public class InmuebleController {
 	@Autowired
 	private InmuebleService preferenciaService;
 	@Autowired	
-	private UsuarioService usuarioService;
+	private UsuarioService clienteService;
 	
 	private Class<?> CLASE = Inmueble.class;
 	
@@ -35,22 +35,22 @@ public class InmuebleController {
 	}
 	
 	@RequestMapping(value="/usuario/{usuarioId}/inmueble", method=RequestMethod.POST)
-	public ResponseEntity<?> addInmueble(@RequestBody Inmueble inmueble, @PathVariable String usuarioId) {
-		Usuario u = usuarioService.getUser(Long.valueOf(usuarioId));
+	public ResponseEntity<?> addInmueble(@RequestBody Inmueble inmueble, @PathVariable String clienteId) {
+//		Cliente c = clienteService.getCliente(Long.valueOf(clienteId));
 		
-		if (u == null) {
-			return ResponseDefault.ok(new Inmueble(), CLASE, ResponseDefault.SINGULAR);
-		} else {
-			inmueble.setUsuario(u);
+//		if (c == null) {
+//			return ResponseDefault.ok(new Inmueble(), CLASE, ResponseDefault.SINGULAR);
+//		} else {
+//			inmueble.setCliente(c);
 			return ResponseDefault.ok(preferenciaService.saveOrUpdateInmueble(inmueble), CLASE, ResponseDefault.SINGULAR);
-		}
+//		}
 	}
 	
 	@RequestMapping(value="/usuario/{usuarioId}/inmueble", method=RequestMethod.PUT)
 	public void updateInmueble(@RequestBody Inmueble inmueble, @PathVariable String usuarioId, @PathVariable String id) {
-		Usuario u = usuarioService.getUser(Long.valueOf(usuarioId));
-
-		if (u != null)
+//		Usuario u = usuarioService.getUser(Long.valueOf(usuarioId));
+//
+//		if (u != null)
 			preferenciaService.saveOrUpdateInmueble(inmueble);
 	}
 	

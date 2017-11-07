@@ -7,5 +7,6 @@ public class MessageUtil {
 
 	public static String GUARDAR_REGISTRO = "%s guardado exitosamente"; 
 	public static String ELIMINAR_REGISTRO = "%s eliminado exitosamente"; 
-
+	public static String ERROR_ASOCIACION = "Falta asociacion con %s"; 
+	
 }

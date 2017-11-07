@@ -43,9 +43,9 @@ public class ResponseDefault {
 		} else {
 			result.put(classModel.getAnnotation(CustomJsonRootName.class).plural(), body);			
 		}
-		if (body == null) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
+//		if (body == null) {
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//		}
 		return ResponseEntity.ok(result);
 	}
 	
