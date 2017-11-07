@@ -2,6 +2,9 @@
 
 ![Heroku](https://dashboard.heroku.com/images/static/apple-touch-icon-120x120.png) -> [Heroku url](https://fox-hound.herokuapp.com/)
     
+``OJO`` Antes de ingresar cualquier cosa, primero verificar si existen los [estatus](README.md#estatus-endpoints),
+esta tabla es solo para uso interno	
+
 #### Endspoints    
 1. [Usuario Endpoints](README.md#usuario-endpoints)
 2. [Inmueble Endpoints](README.md#inmueble-endpoints)
@@ -85,6 +88,7 @@ Modifica un cargo.
 ```
 Elimina cargo.
 ```
+
 Todos los demas Maestros seguiran el mismo patron: 
 	``GET``		/{nombre-maestro}/buscarTodos
 	``GET``		/{nombre-maestro}/buscar/{id}
@@ -93,40 +97,70 @@ Todos los demas Maestros seguiran el mismo patron:
 	``DELETE``	/{nombre-maestro}/borrar/{id}
 
 Todos los {nombre-maestro} son:
-	1. cargo
-	2. categoria
-	3. categoriaInmueble
-	4. categoriaServicio
-	5. condicion
-	6. estado
-	7. estadoServicio
-	8. herramienta
-	9. ocupacion
-	10. opcion
-	11. pregunta
-	12. profesion
-	13 redSocial
-	14. tarea
-	15. tipoCaracteristica
-	16. tipoCliente
-	17. tipoDiagnosticoVisita
-	18. tipoEventualidad
-	19. tipoGarantia
-	20. tipoIdentificacion
-	21. tipoInmueble
-	22. tipoMotivo
-	23. tipoNotificacion
-	24. tipoPersona
-	25. tipoPromocion
-	26. tipoReclamo
-	27. tipoRecurso
-	28. tipoRespuesta
-	29. tipoServicio
-	30. tipoVisita
-	31. turno
-	32. ubicacion
-	33. unidadMedida
-	34. usoInmueble 
+1. cargo
+2. categoria
+3. categoriaInmueble
+4. categoriaServicio
+5. condicion
+6. estado	
+7. estadoServicio
+8. herramienta
+9. ocupacion
+10. opcion
+11. pregunta
+12. profesion
+13 redSocial
+14. tarea
+15. tipoCaracteristica
+16. tipoCliente
+17. tipoDiagnosticoVisita
+18. tipoEventualidad
+19. tipoGarantia
+20. tipoIdentificacion
+21. tipoInmueble
+22. tipoMotivo
+23. tipoNotificacion
+24. tipoPersona
+25. tipoPromocion
+26. tipoReclamo
+27. tipoRecurso
+28. tipoRespuesta
+29. tipoServicio
+30. tipoVisita
+31. turno
+32. ubicacion
+33. unidadMedida
+34. usoInmueble 
+
+### Estatus Endpoints
+``GET`` /estatus/buscarTodos
+```
+Listado de estatus.
+```
+
+``GET`` /estatus/buscar/{id}
+```
+Buscar un estatus por id.
+```
+
+``POST`` /estatus/agregar
+```ruby
+Insertar un estatus.
+    PARAMETROS
+        { "descripcion": "", "estatus": "" }    `Content-Type: application/json`
+```
+
+``PUT`` /estatus/modificar
+```ruby
+Modifica un estatus.
+    PARAMETROS
+        { "id": 1, "descripcion": "", "estatus": "" }   `Content-Type: application/json`
+```
+
+``DELETE`` /estatus/borrar/{id}
+```
+Elimina estatus.
+```
 	
 ## Mail Endpoints
 
