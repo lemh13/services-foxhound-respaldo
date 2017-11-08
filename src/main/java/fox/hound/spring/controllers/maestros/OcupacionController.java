@@ -40,18 +40,18 @@ public class OcupacionController {
 	public ResponseEntity<?> agregar(@RequestBody Ocupacion clase, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Ocupacion", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody Ocupacion clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Ocupacion", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		service.delete(Long.valueOf(id));
-		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Ocupación");
+		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Ocupacion");
 	}
 	
 }

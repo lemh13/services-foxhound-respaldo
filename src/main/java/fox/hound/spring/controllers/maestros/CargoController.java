@@ -40,12 +40,12 @@ public class CargoController {
 	public ResponseEntity<?> agregar(@RequestBody Cargo clase, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Cargo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody Cargo clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Cargo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -40,18 +40,18 @@ public class UsoInmuebleController {
 	public ResponseEntity<?> agregar(@RequestBody UsoInmueble clase, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Uso del Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody UsoInmueble clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Uso del Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		service.delete(Long.valueOf(id));
-		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "UsoInmueble");
+		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Uso del Inmueble");
 	}
 	
 }

@@ -41,18 +41,18 @@ public class TipoNotificacionController {
 	public ResponseEntity<?> agregar(@RequestBody TipoNotificacion clase, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Tipo de Notificacion", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody TipoNotificacion clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Tipo de Notificacion", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		service.delete(Long.valueOf(id));
-		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Tipo de Notificación");
+		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Tipo de Notificacion");
 	}
 	
 	

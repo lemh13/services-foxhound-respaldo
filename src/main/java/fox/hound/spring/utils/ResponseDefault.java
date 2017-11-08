@@ -49,6 +49,17 @@ public class ResponseDefault {
 		return ResponseEntity.ok(result);
 	}
 	
+	public static ResponseEntity<?> messageAndObject(String messageUtil, String model, Object body, Class<?> classModel, int tipo) {
+		Map<String, Object> result = new HashMap<>();
+		if (tipo == SINGULAR) {
+			result.put(classModel.getAnnotation(CustomJsonRootName.class).singular(), body);	
+		} else {
+			result.put(classModel.getAnnotation(CustomJsonRootName.class).plural(), body);			
+		}
+		
+		return new ResponseEntity<>(new HttpResponse(String.format(messageUtil, model), result), HttpStatus.OK);
+	}
+	
 	public static ResponseEntity<?> message(String messageUtil, String model) {
 		return new ResponseEntity<>(new HttpResponse(String.format(messageUtil, model)), HttpStatus.OK);
 	}

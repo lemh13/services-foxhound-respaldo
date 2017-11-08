@@ -45,7 +45,7 @@ public class TipoInmuebleController {
 		
 		if (padre != null) {
 			clase.setCategoriaInmueble(padre);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Tipo de Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Categoria del Inmueble");
 		}
@@ -53,7 +53,7 @@ public class TipoInmuebleController {
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody TipoInmueble clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Tipo de Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
