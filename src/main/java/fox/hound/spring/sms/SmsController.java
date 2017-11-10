@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fox.hound.spring.models.Sms;
+import fox.hound.spring.models.response.Sms;
 import fox.hound.spring.services.sms.AndroidSmsService;
 
 @RestController

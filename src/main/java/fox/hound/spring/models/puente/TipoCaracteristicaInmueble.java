@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.CondicionInmueble;
+import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.TipoCaracteristica;
 import fox.hound.spring.models.maestros.TipoInmueble;
 
@@ -22,28 +22,33 @@ import fox.hound.spring.models.maestros.TipoInmueble;
 public class TipoCaracteristicaInmueble extends Puente {
 
 	@ManyToOne
-	@JoinColumn(name="tipoCaracteristicaId", nullable = false)
-	@JsonBackReference
+	@JoinColumn(name="tipoCaracteristica_id", nullable = false)
+	@JsonBackReference(value="tipoCaracteristica-tipoCaracteristicaInmueble")
 	private TipoCaracteristica tipoCaracteristica;
+	
 	@ManyToOne
 	@JoinColumn(name="tipoInmuebleId", nullable = false)
-	@JsonBackReference
+	@JsonBackReference(value="tipoInmueble-tipoCaracteristicaInmueble")
 	private TipoInmueble tipoInmueble;
-	//ManyToOne
-	//Servicio
+	
+	@ManyToOne
+	@JoinColumn(name="servicio_id", nullable = false)
+	@JsonBackReference(value="servicio-tipoCaracteristicaInmueble")
+	private Servicio servicio;
 	
 	@OneToMany(mappedBy="tipoCaracteristicaInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="tipoCaracteristicaInmueble-preferenciaCliente")
 	private List<PreferenciaCliente> preferenciaClientes;
 	
 	public TipoCaracteristicaInmueble() {
 		super();
 	}
-	public TipoCaracteristicaInmueble(Long id, String descripcion, String estatusId, String tipoCaracteristicaId,
-			String tipoInmuebleId) {
-		super(id, descripcion, estatusId);
+	public TipoCaracteristicaInmueble(Long id, String estatusId, String tipoCaracteristicaId,
+			String tipoInmuebleId, String servicioId) {
+		super(id, estatusId);
 		this.tipoCaracteristica = new TipoCaracteristica(tipoCaracteristicaId);
 		this.tipoInmueble = new TipoInmueble(tipoInmuebleId);
+		this.servicio = new Servicio(servicioId);
 	}
 	public TipoCaracteristicaInmueble(String id) {
 		super(id);
@@ -65,6 +70,12 @@ public class TipoCaracteristicaInmueble extends Puente {
 	}
 	public void setPreferenciaClientes(List<PreferenciaCliente> preferenciaClientes) {
 		this.preferenciaClientes = preferenciaClientes;
+	}
+	public Servicio getServicio() {
+		return servicio;
+	}
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 	
 }

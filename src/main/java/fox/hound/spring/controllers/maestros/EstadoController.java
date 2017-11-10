@@ -2,6 +2,7 @@ package fox.hound.spring.controllers.maestros;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nimbusds.oauth2.sdk.GeneralException;
+
 import fox.hound.spring.models.maestros.Estado;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.EstadoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,23 +24,26 @@ import fox.hound.spring.utils.ResponseDefault;
 @RequestMapping("estado")
 public class EstadoController {
 
+	private final Logger logger = Logger.getLogger(this.getClass());
+	
 	@Autowired
-	private MaestroService service;
+	private EstadoService service;
 	
 	private Class<?> CLASE = Estado.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Estado"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
+	public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) throws GeneralException {
 		return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody Estado clase, HttpServletRequest request) {
+		logger.info("HEY");
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
 		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Estado", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);

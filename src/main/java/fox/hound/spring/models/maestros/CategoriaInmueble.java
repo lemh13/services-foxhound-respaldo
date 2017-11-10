@@ -16,7 +16,7 @@ import fox.hound.spring.beans.CustomJsonRootName;
 public class CategoriaInmueble extends Maestro {
 
 	@OneToMany(mappedBy="categoriaInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="tipoInmueble-categoriaInmueble")
 	private List<TipoInmueble> tipoInmueble;
 	
 	public CategoriaInmueble(Long id, String name, String estatusId) {

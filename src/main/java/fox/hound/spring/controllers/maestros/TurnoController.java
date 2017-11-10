@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.Turno;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.TurnoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -22,13 +22,13 @@ import fox.hound.spring.utils.ResponseDefault;
 public class TurnoController {
 
 	@Autowired
-	private MaestroService service;
+	private TurnoService service;
 	
 	private Class<?> CLASE = Turno.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Turno"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

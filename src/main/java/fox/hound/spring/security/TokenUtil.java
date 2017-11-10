@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
-
-import fox.hound.spring.models.Usuario;
+import fox.hound.spring.models.Persona;
 
 @Component
 public class TokenUtil {
@@ -33,13 +32,13 @@ public class TokenUtil {
 	 *  @params token: token generado segun el rol
 	 *  @return Useruario
 	 **/
-	public Usuario getUserFromToken(String token) {
+	public Persona getUserFromToken(String token) {
 		ObjectMapper mapper = new ObjectMapper();
 	    String user;
 	    try {
 	      final Claims claims = this.getClaimsFromToken(token);
 	      user = claims.getSubject();
-	      return mapper.readValue(new StringReader(user), Usuario.class);
+	      return mapper.readValue(new StringReader(user), Persona.class);
 	    } catch (Exception e) {
 	      return null;
 	    }

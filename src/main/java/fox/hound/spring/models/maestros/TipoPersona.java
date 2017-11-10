@@ -17,7 +17,7 @@ import fox.hound.spring.models.Persona;
 public class TipoPersona extends Maestro {
 	
 	@OneToMany(mappedBy="tipoPersona")
-	@JsonManagedReference
+	@JsonManagedReference(value="personas-tipoPersona")
 	private List<Persona> personas;
 
 	public TipoPersona(Long id, String name, String estatusId) {

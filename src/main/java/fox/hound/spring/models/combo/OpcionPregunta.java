@@ -20,11 +20,12 @@ public class OpcionPregunta extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="opcion_id")
-	@JsonBackReference
+	@JsonBackReference(value="opcionPregunta-opcion")
 	private Opcion opcion;
+	
 	@ManyToOne
 	@JoinColumn(name="pregunta_id")
-	@JsonBackReference
+	@JsonBackReference(value="opcionPregunta-pregunta")
 	private Pregunta pregunta;
 	
 	public OpcionPregunta(Long id, String name, String estatusId, String opcionId, String preguntaId) {

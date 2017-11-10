@@ -17,7 +17,7 @@ import fox.hound.spring.models.combo.CondicionInmueble;
 public class Condicion extends Maestro {
 
 	@OneToMany(mappedBy="condicion")
-	@JsonManagedReference
+	@JsonManagedReference(value="condicionInmueble-condicion")
 	private List<CondicionInmueble> condicionInmueble;
 	
 	public Condicion(Long id, String name, String estatusId) {

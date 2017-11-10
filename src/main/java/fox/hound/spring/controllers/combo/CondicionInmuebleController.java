@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.combo.CondicionInmueble;
 import fox.hound.spring.models.maestros.Condicion;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.CondicionInmuebleService;
+import fox.hound.spring.services.CondicionService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class CondicionInmuebleController {
 
 	@Autowired
-	private MaestroService service;
+	private CondicionInmuebleService service;
+	
+	@Autowired
+	private CondicionService condicionService;
 	
 	private Class<?> CLASE = CondicionInmueble.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("CondicionInmueble"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,7 +44,7 @@ public class CondicionInmuebleController {
 	@RequestMapping(value="condicion/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody CondicionInmueble clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		Condicion padre = (Condicion) service.getOne(Long.valueOf(id));
+		Condicion padre = condicionService.getOne(Long.valueOf(id));
 		
 		if (padre != null) {
 			clase.setCondicion(padre);

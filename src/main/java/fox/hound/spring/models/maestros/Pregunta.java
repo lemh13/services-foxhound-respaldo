@@ -17,11 +17,9 @@ import fox.hound.spring.models.combo.OpcionPregunta;
 public class Pregunta extends Maestro {
 	
 	@OneToMany(mappedBy="pregunta")
-	@JsonManagedReference
+	@JsonManagedReference(value="opcionPregunta-pregunta")
 	private List<OpcionPregunta> opcionPreguntas;
-	//OneToMany
-	//NotificacionPregunta
-
+	
 	public Pregunta(Long id, String name, String estatusId) {
 		super(id, name, estatusId);
 	}

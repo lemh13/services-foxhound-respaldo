@@ -21,11 +21,11 @@ public class Municipio extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="ciudad_id")
-	@JsonBackReference
+	@JsonBackReference(value="ciudad-municipios")
 	private Ciudad ciudad;
 	
 	@OneToMany(mappedBy="municipio")
-	@JsonManagedReference
+	@JsonManagedReference(value="municipio-parroquias")
 	private List<Parroquia> parroquias;
 
 	public Municipio(Long id, String name, String estatusId, String ciudadId) {

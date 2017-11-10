@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fox.hound.spring.models.HttpResponseError;
-import fox.hound.spring.models.Usuario;
+import fox.hound.spring.models.Persona;
+import fox.hound.spring.models.response.HttpResponseError;
 import fox.hound.spring.security.TokenUtil;
-import fox.hound.spring.services.UsuarioService;
+import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.utils.EncryptionUtil;
 
 @RestController
@@ -36,7 +36,7 @@ public class LoginController {
     private TokenUtil tokenUtil;
     
     @Autowired
-    private UsuarioService usuarioService;
+    private PersonaService personaService;
     
     @Autowired
 	private EncryptionUtil encript;
@@ -45,35 +45,34 @@ public class LoginController {
     public ResponseEntity<?> login(@RequestParam(value = "user", required = true) String name,
                                    @RequestParam(value = "passw", required = true) String passw,
                                    Device device, HttpServletResponse response) {
-//    	Usuario usuario = usuarioService.getUserByUserNameAndPassword(name, encript.md5( passw ));
-//    	if (usuario != null) {
-//    		ObjectMapper mapper = new ObjectMapper();
-//            String userJson = null;
+    	Persona persona = personaService.getByEmailAndPassword(name, encript.md5( passw ));
+    	if (persona != null) {
+    		ObjectMapper mapper = new ObjectMapper();
+            String userJson = null;
+            
+            // Meter los permisos y dashboard
+            
+            try {
+                userJson = mapper.writeValueAsString(persona);
+            } catch (JsonProcessingException ex) {
+                logger.error("Error Transformando Usuario a JSON ", ex);
+                return ResponseEntity.ok(new HttpResponseError(500, "Error Interno", "Error Interno del Servidor"));
+            }
+            
+            String token = this.tokenUtil.generateToken(userJson, device);
+            response.setHeader(tokenHeader, token);
+            
+//            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+//            		usuario.getUserName(),
+//            		usuario.getPassword()));
 //            
-//            // Meter los permisos y dashboard
-//            
-//            try {
-//                userJson = mapper.writeValueAsString(usuario);
-//            } catch (JsonProcessingException ex) {
-//                logger.error("Error Transformando Usuario a JSON ", ex);
-//                return ResponseEntity.ok(new HttpResponseError(500, "Error Interno", "Error Interno del Servidor"));
-//            }
-//            
-//            String token = this.tokenUtil.generateToken(userJson, device);
-//            response.setHeader(tokenHeader, token);
-//            
-////            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
-////            		usuario.getUserName(),
-////            		usuario.getPassword()));
-////            
-//            // Invisible a la hora de responder
-//            usuario.setPassword(null);
-//    	} else {
-//    		response.setHeader(tokenHeader, null);
-//    		return ResponseEntity.ok(new HttpResponseError(401, "Unauthorized", "Los datos introducidos son inválidos. Por favor intente de nuevo."));
-//    	}
-//    	return ResponseEntity.ok(usuario);
-    	return ResponseEntity.ok("hola");
+            // Invisible a la hora de responder
+            persona.setPassword(null);
+    	} else {
+    		response.setHeader(tokenHeader, null);
+    		return ResponseEntity.ok(new HttpResponseError(401, "Unauthorized", "Los datos introducidos son inválidos. Por favor intente de nuevo."));
+    	}
+    	return ResponseEntity.ok(persona);
     }
 
 }

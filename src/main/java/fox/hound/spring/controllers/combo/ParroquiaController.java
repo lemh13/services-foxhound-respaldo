@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.combo.Municipio;
 import fox.hound.spring.models.combo.Parroquia;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.MunicipioService;
+import fox.hound.spring.services.ParroquiaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class ParroquiaController {
 
 	@Autowired
-	private MaestroService service;
+	private ParroquiaService service;
+	
+	@Autowired
+	private MunicipioService municipioService;
 	
 	private Class<?> CLASE = Parroquia.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Parroquia"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,7 +44,7 @@ public class ParroquiaController {
 	@RequestMapping(value="municipio/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody Parroquia clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		Municipio municipio = (Municipio) service.getOne(Long.valueOf(id));
+		Municipio municipio = municipioService.getOne(Long.valueOf(id));
 		
 		if (municipio != null) {
 			clase.setMunicipio(municipio);

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Inmueble;
+import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.maestros.Ubicacion;
 
 @Entity
@@ -22,28 +23,32 @@ public class CaracteristicaInmueble extends Puente {
 	
 	@ManyToOne
 	@JoinColumn(name="inmueble_id")
-	@JsonBackReference
+	@JsonBackReference(value="inmueble-caracteristicaInmueble")
 	private Inmueble inmueble;
+	
 	@ManyToOne
 	@JoinColumn(name="ubicacion_id")
-	@JsonBackReference
+	@JsonBackReference(value="caracteristicaInmueble-ubicacion")
 	private Ubicacion ubicacion;
-	//ManyToOne
-	//Caracteristica
+	
+	@ManyToOne
+	@JoinColumn(name="caracteristica_id")
+	@JsonBackReference(value="caracteristica-caracteristicaInmuebles")
+	private Caracteristica caracteristica;
 	
 	@OneToMany(mappedBy="caracteristicaInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="caracteristicaInmueble-detalleDiagnostico")
 	private List<DetalleDiagnostico> detalleDiagnostico;
-	//OneToMany
-	//ServicioCaracteristicaInmueble
 	
 	public CaracteristicaInmueble() {
 		super();
 	}
-	public CaracteristicaInmueble(Long id, String descripcion, String estatusId, String inmuebleId, String ubicacionId) {
-		super(id, descripcion, estatusId);
+	public CaracteristicaInmueble(Long id, String estatusId, String inmuebleId, String ubicacionId,
+			String caracteristicaId) {
+		super(id, estatusId);
 		this.inmueble = new Inmueble(inmuebleId);
 		this.ubicacion = new Ubicacion(ubicacionId);
+		this.caracteristica = new Caracteristica(caracteristicaId);
 	}
 	public CaracteristicaInmueble(String id) {
 		super(id);
@@ -53,6 +58,24 @@ public class CaracteristicaInmueble extends Puente {
 	}
 	public void setInmueble(Inmueble inmueble) {
 		this.inmueble = inmueble;
+	}
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+	public Caracteristica getCaracteristica() {
+		return caracteristica;
+	}
+	public void setCaracteristica(Caracteristica caracteristica) {
+		this.caracteristica = caracteristica;
+	}
+	public List<DetalleDiagnostico> getDetalleDiagnostico() {
+		return detalleDiagnostico;
+	}
+	public void setDetalleDiagnostico(List<DetalleDiagnostico> detalleDiagnostico) {
+		this.detalleDiagnostico = detalleDiagnostico;
 	}
 	
 }

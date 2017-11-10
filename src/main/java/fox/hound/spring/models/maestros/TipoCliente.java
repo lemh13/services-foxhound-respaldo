@@ -17,7 +17,7 @@ import fox.hound.spring.models.Cliente;
 public class TipoCliente extends Maestro {
 
 	@OneToMany(mappedBy="tipoCliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-tipoCliente")
 	private List<Cliente> clientes;
 	
 	public TipoCliente(Long id, String name, String estatusId) {

@@ -18,6 +18,7 @@ public class Estatus {
 	private Long id;
 	@Column(nullable = false)
     private String descripcion;
+	
 	public Estatus(Long id, String descripcion) {
 		super();
 		this.id = id;

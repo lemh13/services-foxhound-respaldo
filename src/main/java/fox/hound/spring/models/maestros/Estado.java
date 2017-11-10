@@ -17,7 +17,7 @@ import fox.hound.spring.models.combo.Ciudad;
 public class Estado extends Maestro {
 	
 	@OneToMany(mappedBy="estado")
-	@JsonManagedReference
+	@JsonManagedReference(value="ciudad-estado")
 	private List<Ciudad> ciudades;
 
 	public Estado(Long id, String name, String estatusId) {

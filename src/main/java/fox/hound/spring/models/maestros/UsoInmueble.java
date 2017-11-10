@@ -17,7 +17,7 @@ import fox.hound.spring.models.Inmueble;
 public class UsoInmueble extends Maestro {
 
 	@OneToMany(mappedBy="usoInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="inmueble-usoInmueble")
 	private List<Inmueble> inmueble;
 	
 	public UsoInmueble(Long id, String name, String estatusId) {

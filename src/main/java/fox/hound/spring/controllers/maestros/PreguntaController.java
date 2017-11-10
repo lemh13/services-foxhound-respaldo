@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.Pregunta;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.PreguntaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -22,13 +22,13 @@ import fox.hound.spring.utils.ResponseDefault;
 public class PreguntaController {
 
 	@Autowired
-	private MaestroService service;
+	private PreguntaService service;
 	
 	private Class<?> CLASE = Pregunta.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Pregunta"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -13,7 +13,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
+import fox.hound.spring.models.combo.Reclamo;
 import fox.hound.spring.models.maestros.TipoCliente;
+import fox.hound.spring.models.puente.ClienteOcupacion;
+import fox.hound.spring.models.puente.ClienteProfesion;
+import fox.hound.spring.models.puente.PreferenciaCliente;
 
 @Entity
 @Table(name="cliente")
@@ -23,29 +27,38 @@ public class Cliente extends Persona {
 
 	@ManyToOne
 	@JoinColumn(name="tipoCliente_id")
-	@JsonBackReference
+	@JsonBackReference(value="cliente-tipoCliente")
 	private TipoCliente tipoCliente;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-inmueble")
 	private List<Inmueble> inmuebles;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-opcionCliente")
 	private List<OpcionCliente> opcionCliente;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-clienteProfesion")
 	private List<ClienteProfesion> clienteProfesion;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-clienteOcupacion")
 	private List<ClienteOcupacion> clienteOcupacion;
+	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonManagedReference(value="cliente-preferenciaCliente")
 	private List<PreferenciaCliente> preferenciaCliente;
 	
+	@OneToMany(mappedBy="cliente")
+	@JsonManagedReference(value="cliente-reclamos")
+	private List<Reclamo> reclamos;
+	
 	public Cliente(Long id, String nombre, char sexo, String direccion, int identificacion, Long estatus,
-			Date fecha_de_nacimiento, String telefono, String estatusId, String tipoIdentificacionId,
-			String tipoPersonaId, String sectorId, String tipoClienteId) {
+			Date fecha_de_nacimiento, String telefono, String estatusId,
+			String tipoPersonaId, String sectorId, String email, String password, String tipoClienteId, String rolId) {
 		super(id, nombre, sexo, direccion, identificacion, estatus, fecha_de_nacimiento, telefono, estatusId,
-				tipoIdentificacionId, tipoPersonaId, sectorId);
+				tipoPersonaId, sectorId, email, password, rolId);
 		this.tipoCliente = new TipoCliente(tipoClienteId);
 	}
 	public Cliente(String id) {
@@ -53,6 +66,12 @@ public class Cliente extends Persona {
 	}
 	public Cliente() {
 		super();
+	}
+	public List<Reclamo> getReclamos() {
+		return reclamos;
+	}
+	public void setReclamos(List<Reclamo> reclamos) {
+		this.reclamos = reclamos;
 	}
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;

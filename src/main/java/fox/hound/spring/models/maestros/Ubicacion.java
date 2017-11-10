@@ -17,7 +17,7 @@ import fox.hound.spring.models.puente.CaracteristicaInmueble;
 public class Ubicacion extends Maestro {
 	
 	@OneToMany(mappedBy="ubicacion")
-	@JsonManagedReference
+	@JsonManagedReference(value="caracteristicaInmueble-ubicacion")
 	private List<CaracteristicaInmueble> caracteristicaInmuebles;
 
 	public Ubicacion(Long id, String name, String estatusId) {

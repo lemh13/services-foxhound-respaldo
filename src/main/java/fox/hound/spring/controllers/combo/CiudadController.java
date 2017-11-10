@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.combo.Ciudad;
 import fox.hound.spring.models.maestros.Estado;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.CiudadService;
+import fox.hound.spring.services.EstadoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class CiudadController {
 
 	@Autowired
-	private MaestroService service;
+	private CiudadService service;
+	
+	@Autowired
+	private EstadoService estadoService;
 	
 	private Class<?> CLASE = Ciudad.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Ciudad"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,7 +44,7 @@ public class CiudadController {
 	@RequestMapping(value="estado/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody Ciudad clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		Estado estado = (Estado) service.getOne(Long.valueOf(id));
+		Estado estado = estadoService.getOne(Long.valueOf(id));
 		
 		if (estado != null) {
 			clase.setEstado(estado);

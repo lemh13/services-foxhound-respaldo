@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.HttpResponse;
+import fox.hound.spring.models.response.HttpResponse;
 
 @Component
 public class ResponseDefault {

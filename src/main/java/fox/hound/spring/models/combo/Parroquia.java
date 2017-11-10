@@ -21,11 +21,11 @@ public class Parroquia extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="municipio_id")
-	@JsonBackReference
+	@JsonBackReference(value="municipio-parroquias")
 	private Municipio municipio;
 	
 	@OneToMany(mappedBy="parroquia")
-	@JsonManagedReference
+	@JsonManagedReference(value="sectores-parroquias")
 	private List<Sector> sectores;
 
 	public Parroquia(Long id, String name, String estatusId, String municipioId) {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.TipoCaracteristica;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.TipoCaracteristicaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -22,13 +22,13 @@ import fox.hound.spring.utils.ResponseDefault;
 public class TipoCaracteristicaController {
 
 	@Autowired
-	private MaestroService service;
+	private TipoCaracteristicaService service;
 	
 	private Class<?> CLASE = TipoCaracteristica.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("TipoCaracteristica"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

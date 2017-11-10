@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
+import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.Maestro;
 
 @Entity
@@ -17,15 +18,18 @@ public class Zona extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="sector_id")
-	@JsonBackReference
+	@JsonBackReference(value="zonas-sector")
 	private Sector sector;
 	
-	//ManyToOne
-	//Servicio
+	@ManyToOne
+	@JoinColumn(name="servicio_id")
+	@JsonBackReference(value="servicio-zonas")
+	private Servicio servicio;
 
-	public Zona(Long id, String name, String estatusId, String sectorId) {
+	public Zona(Long id, String name, String estatusId, String sectorId, String servicioId) {
 		super(id, name, estatusId);
 		this.sector = new Sector(sectorId);
+		this.servicio = new Servicio(servicioId);
 	}
 	public Zona(String id) {
 		super(id);
@@ -38,6 +42,12 @@ public class Zona extends Maestro {
 	}
 	public void setSector(Sector sector) {
 		this.sector = sector;
+	}
+	public Servicio getServicio() {
+		return servicio;
+	}
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 	
 }

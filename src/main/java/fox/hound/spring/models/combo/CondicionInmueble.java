@@ -23,10 +23,11 @@ public class CondicionInmueble extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="condicion_id")
-	@JsonBackReference
+	@JsonBackReference(value="condicionInmueble-condicion")
 	private Condicion condicion;
+	
 	@OneToMany(mappedBy="condicionInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="condicionInmueble-detalleDiagnosticos")
 	private List<DetalleDiagnostico> detalleDiagnosticos;
 
 	public CondicionInmueble(Long id, String name, String estatusId, String condicionId) {

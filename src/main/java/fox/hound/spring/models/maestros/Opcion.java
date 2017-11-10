@@ -18,10 +18,11 @@ import fox.hound.spring.models.combo.OpcionPregunta;
 public class Opcion extends Maestro {
 
 	@OneToMany(mappedBy="opcion")
-	@JsonManagedReference
+	@JsonManagedReference(value="opcionPregunta-opcion")
 	private List<OpcionPregunta> opcionPreguntas;
+	
 	@OneToMany(mappedBy="opcion")
-	@JsonManagedReference
+	@JsonManagedReference(value="opcionCliente-opcion")
 	private List<OpcionCliente> opcionClientes;
 	
 	public Opcion(Long id, String name, String estatusId) {

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.TipoPromocion;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.TipoPromocionService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -22,13 +22,13 @@ import fox.hound.spring.utils.ResponseDefault;
 public class TipoPromocionController {
 
 	@Autowired
-	private MaestroService service;
+	private TipoPromocionService service;
 	
 	private Class<?> CLASE = TipoPromocion.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("TipoPromocion"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

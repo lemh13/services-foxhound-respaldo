@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
+import fox.hound.spring.models.puente.TipoCaracteristicaServicio;
 
 @Entity
 @Table(name="tipo_caracteristica")
@@ -18,11 +19,16 @@ import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
 public class TipoCaracteristica extends Maestro {
 	
 	@OneToMany(mappedBy="tipoCaracteristica")
-	@JsonManagedReference
+	@JsonManagedReference(value="caracteristica-tipoCaracteristica")
 	private List<Caracteristica> caracteristicas;
+	
 	@OneToMany(mappedBy="tipoCaracteristica")
-	@JsonManagedReference
+	@JsonManagedReference(value="tipoCaracteristica-tipoCaracteristicaInmueble")
 	private List<TipoCaracteristicaInmueble> tipoCaracteristicaInmueble;
+	
+	@OneToMany(mappedBy="tipoCaracteristica")
+	@JsonManagedReference(value="tipoCaracteristica-tipoCaracteristicaServicios")
+	private List<TipoCaracteristicaServicio> tipoCaracteristicaServicios;
 	
 	public TipoCaracteristica(Long id, String name, String estatusId) {
 		super(id, name, estatusId);
@@ -44,6 +50,12 @@ public class TipoCaracteristica extends Maestro {
 	}
 	public void setTipoCaracteristicaInmueble(List<TipoCaracteristicaInmueble> tipoCaracteristicaInmueble) {
 		this.tipoCaracteristicaInmueble = tipoCaracteristicaInmueble;
+	}
+	public List<TipoCaracteristicaServicio> getTipoCaracteristicaServicios() {
+		return tipoCaracteristicaServicios;
+	}
+	public void setTipoCaracteristicaServicios(List<TipoCaracteristicaServicio> tipoCaracteristicaServicios) {
+		this.tipoCaracteristicaServicios = tipoCaracteristicaServicios;
 	}
 
 }

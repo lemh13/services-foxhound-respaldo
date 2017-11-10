@@ -22,15 +22,15 @@ public class TipoInmueble extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="categoriaInmueble_id")
-	@JsonBackReference
+	@JsonBackReference(value="tipoInmueble-categoriaInmueble")
 	private CategoriaInmueble categoriaInmueble;
 
 	@OneToMany(mappedBy="tipoInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="inmueble-tipoInmueble")
 	private List<Inmueble> inmuebles;
 	
 	@OneToMany(mappedBy="tipoInmueble")
-	@JsonManagedReference
+	@JsonManagedReference(value="tipoInmueble-tipoCaracteristicaInmueble")
 	private List<TipoCaracteristicaInmueble> tipoCaracteristicaInmueble;
 	
 	public TipoInmueble(Long id, String name, String estatusId, String categoriaInmuebleId) {

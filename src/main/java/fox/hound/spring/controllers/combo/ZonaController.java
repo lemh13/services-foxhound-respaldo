@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.combo.Sector;
 import fox.hound.spring.models.combo.Zona;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.SectorService;
+import fox.hound.spring.services.ZonaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class ZonaController {
 
 	@Autowired
-	private MaestroService service;
+	private ZonaService service;
+	
+	@Autowired
+	private SectorService sectorService;
 	
 	private Class<?> CLASE = Zona.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Zona"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,7 +44,7 @@ public class ZonaController {
 	@RequestMapping(value="sector/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody Zona clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		Sector sector = (Sector) service.getOne(Long.valueOf(id));
+		Sector sector = sectorService.getOne(Long.valueOf(id));
 		
 		if (sector != null) {
 			clase.setSector(sector);

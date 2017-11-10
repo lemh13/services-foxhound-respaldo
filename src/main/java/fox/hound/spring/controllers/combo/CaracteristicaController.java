@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.maestros.TipoCaracteristica;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.CaracteristicaService;
+import fox.hound.spring.services.TipoCaracteristicaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class CaracteristicaController {
 
 	@Autowired
-	private MaestroService service;
+	private CaracteristicaService service;
+	
+	@Autowired
+	private TipoCaracteristicaService tipoCaracteristicaService;
 	
 	private Class<?> CLASE = Caracteristica.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("Caracteristica"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,7 +44,7 @@ public class CaracteristicaController {
 	@RequestMapping(value="tipoCaracteristica/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> agregar(@RequestBody Caracteristica clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		TipoCaracteristica padre = (TipoCaracteristica) service.getOne(Long.valueOf(id));
+		TipoCaracteristica padre = tipoCaracteristicaService.getOne(Long.valueOf(id));
 		
 		if (padre != null) {
 			clase.setTipoCaracteristica(padre);

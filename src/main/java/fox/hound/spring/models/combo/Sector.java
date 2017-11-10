@@ -23,19 +23,19 @@ public class Sector extends Maestro {
 	
 	@ManyToOne
 	@JoinColumn(name="parroquia_id")
-	@JsonBackReference
+	@JsonBackReference(value="sectores-parroquias")
 	private Parroquia parroquia;
 	
 	@OneToMany(mappedBy="sector")
-	@JsonManagedReference
+	@JsonManagedReference(value="zonas-sector")
 	private List<Zona> zonas;
 
 	@OneToMany(mappedBy="sector")
-	@JsonManagedReference
+	@JsonManagedReference(value="inmueble-sector")
 	private List<Inmueble> inmuebles;
 	
 	@OneToMany(mappedBy="sector")
-	@JsonManagedReference
+	@JsonManagedReference(value="personas-sector")
 	private List<Persona> personas;
 	
 	public Sector(Long id, String name, String estatusId, String parroquiaId) {

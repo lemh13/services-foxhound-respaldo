@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fox.hound.spring.models.HttpResponse;
+import fox.hound.spring.models.response.HttpResponse;
 import fox.hound.spring.services.mails.MailService;
 
 @RestController

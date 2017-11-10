@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.CategoriaInmueble;
 import fox.hound.spring.models.maestros.TipoInmueble;
-import fox.hound.spring.services.MaestroService;
+import fox.hound.spring.services.CategoriaInmuebleService;
+import fox.hound.spring.services.TipoInmuebleService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -23,13 +24,16 @@ import fox.hound.spring.utils.ResponseDefault;
 public class TipoInmuebleController {
 
 	@Autowired
-	private MaestroService service;
+	private TipoInmuebleService service;
+	
+	@Autowired
+	private CategoriaInmuebleService categoriaInmuebleService;
 	
 	private Class<?> CLASE = TipoInmueble.class;
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll("TipoInmueble"), CLASE, ResponseDefault.PLURAL);
+		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -41,7 +45,7 @@ public class TipoInmuebleController {
 	public ResponseEntity<?> agregar(@RequestBody TipoInmueble clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		CategoriaInmueble padre = (CategoriaInmueble) service.getOne(Long.valueOf(id));
+		CategoriaInmueble padre = categoriaInmuebleService.getOne(Long.valueOf(id));
 		
 		if (padre != null) {
 			clase.setCategoriaInmueble(padre);
