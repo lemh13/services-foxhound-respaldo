@@ -1,7 +1,6 @@
 package fox.hound.spring.controllers.combo;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,59 +9,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import fox.hound.spring.models.combo.CondicionInmueble;
-import fox.hound.spring.models.maestros.Condicion;
 import fox.hound.spring.services.CondicionInmuebleService;
-import fox.hound.spring.services.CondicionService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("condicionInmueble")
+@RequestMapping("condicioninmueble")
 public class CondicionInmuebleController {
 
-	@Autowired
-	private CondicionInmuebleService service;
-	
-	@Autowired
-	private CondicionService condicionService;
-	
-	private Class<?> CLASE = CondicionInmueble.class;
+	 @Autowired
+	 private CondicionInmuebleService service;
 
-	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
-	}
+	 private Class<?> CLASE = CondicionInmueble.class;
 
-	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
-		return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
-	}
+	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAll(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
+	 }
 
-	@RequestMapping(value="condicion/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> agregar(@RequestBody CondicionInmueble clase, @PathVariable String id, HttpServletRequest request) {
-		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		Condicion padre = condicionService.getOne(Long.valueOf(id));
-		
-		if (padre != null) {
-			clase.setCondicion(padre);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-		} else {
-			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Condicion");
-		}
-	}
+	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
+	 }
 
-	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> modificar(@RequestBody CondicionInmueble clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	}
+	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody CondicionInmueble clase, @PathVariable String id, HttpServletRequest request) {
+		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
+		 // PENDIENTE -> @ManyToOne
+		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	 }
 
-	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
-		service.delete(Long.valueOf(id));
-		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "CondicionInmueble");
-	}
-	
+	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> modificar(@RequestBody CondicionInmueble clase, HttpServletRequest request) {
+		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	 }
+
+	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
+		 service.delete(Long.valueOf(id));
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "CondicionInmueble");
+	 }
+
 }

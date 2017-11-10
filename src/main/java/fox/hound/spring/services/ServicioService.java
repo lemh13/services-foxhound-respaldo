@@ -4,35 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import fox.hound.spring.models.Inmueble;
-import fox.hound.spring.repositories.InmuebleRepository;
+import fox.hound.spring.models.Servicio;
+import fox.hound.spring.repositories.ServicioRepository;
 import fox.hound.spring.utils.DateUtil;
 
 @Service
-public class InmuebleService implements ServiceGeneral<Inmueble> {
+public class ServicioService implements ServiceGeneral<Servicio> {
 
 	 @Autowired
-	 private InmuebleRepository repository;
+	 private ServicioRepository repository;
 
 	 @Autowired
 	 private EstatusService estatusService;
 
 	 @Override
-	 public List<Inmueble> getAll() {
-		 List<Inmueble> lista = new ArrayList<>();
+	 public List<Servicio> getAll() {
+		 List<Servicio> lista = new ArrayList<>();
 		 repository.findAll().forEach(lista::add);
 		 return lista;
 	 }
 
 	 @Override
-	 public Inmueble getOne(Long id) {
+	 public Servicio getOne(Long id) {
 		 return repository.findOne(id);
 	 }
 
 	 @Override
-	 public Inmueble saveOrUpdate(Inmueble clase) {
+	 public Servicio saveOrUpdate(Servicio clase) {
 		 if (clase.getId() != null) {
-			 Inmueble claseAux = getOne( clase.getId() );
+			 Servicio claseAux = getOne( clase.getId() );
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );

@@ -1,4 +1,4 @@
-package fox.hound.spring.controllers;
+package fox.hound.spring.controllers.puente;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import fox.hound.spring.models.Inmueble;
-import fox.hound.spring.services.InmuebleService;
+import fox.hound.spring.models.puente.ReclamoOrdenEntrega;
+import fox.hound.spring.services.ReclamoOrdenEntregaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("inmueble")
-public class InmuebleController {
+@RequestMapping("reclamoordenentrega")
+public class ReclamoOrdenEntregaController {
 
 	 @Autowired
-	 private InmuebleService service;
+	 private ReclamoOrdenEntregaService service;
 
-	 private Class<?> CLASE = Inmueble.class;
+	 private Class<?> CLASE = ReclamoOrdenEntrega.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -35,21 +35,21 @@ public class InmuebleController {
 	 }
 
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody Inmueble clase, @PathVariable String id, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody Inmueble clase, HttpServletRequest request) {
+	 public ResponseEntity<?> modificar(@RequestBody ReclamoOrdenEntrega clase, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		 service.delete(Long.valueOf(id));
-		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Inmueble");
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "ReclamoOrdenEntrega");
 	 }
 
 }
