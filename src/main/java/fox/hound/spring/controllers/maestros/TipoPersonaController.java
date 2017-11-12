@@ -1,5 +1,8 @@
 package fox.hound.spring.controllers.maestros;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.maestros.TipoPersona;
 import fox.hound.spring.services.TipoPersonaService;
-import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
@@ -28,7 +30,16 @@ public class TipoPersonaController {
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
+		
+		List<TipoPersona> tiposPersonas = new ArrayList<>(); 
+		tiposPersonas.add(new TipoPersona( Long.valueOf(1), "V"));
+		tiposPersonas.add(new TipoPersona( Long.valueOf(2), "E"));
+		tiposPersonas.add(new TipoPersona( Long.valueOf(3), "J"));
+		tiposPersonas.add(new TipoPersona( Long.valueOf(4), "G"));
+		tiposPersonas.add(new TipoPersona( Long.valueOf(5), "A"));
+		tiposPersonas.add(new TipoPersona( Long.valueOf(6), "C"));
+		
+		return ResponseDefault.ok(tiposPersonas, CLASE, ResponseDefault.SINGULAR);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -37,9 +48,7 @@ public class TipoPersonaController {
 	}
 
 	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> agregar(@RequestBody TipoPersona clase, HttpServletRequest request) {
-		clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		
+	public ResponseEntity<?> agregar(@RequestBody TipoPersona clase, HttpServletRequest request) {		
 		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Tipo de Persona", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	}
 

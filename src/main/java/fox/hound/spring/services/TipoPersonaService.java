@@ -6,16 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fox.hound.spring.models.maestros.TipoPersona;
 import fox.hound.spring.repositories.TipoPersonaRepository;
-import fox.hound.spring.utils.DateUtil;
 
 @Service
 public class TipoPersonaService implements ServiceGeneral<TipoPersona> {
 
 	 @Autowired
 	 private TipoPersonaRepository repository;
-
-	 @Autowired
-	 private EstatusService estatusService;
 
 	 @Override
 	 public List<TipoPersona> getAll() {
@@ -31,12 +27,6 @@ public class TipoPersonaService implements ServiceGeneral<TipoPersona> {
 
 	 @Override
 	 public TipoPersona saveOrUpdate(TipoPersona clase) {
-		 if (clase.getId() != null) {
-			 TipoPersona claseAux = getOne( clase.getId() );
-			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
-		 }
-		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
 		 return repository.save(clase);
 	 }
 

@@ -1,6 +1,9 @@
 
 package fox.hound.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,13 @@ public class EstatusController {
 
 	@RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getAll(HttpServletRequest request) {
-		return ResponseDefault.ok(estatusService.getAll(), CLASE, ResponseDefault.PLURAL);
+		
+		List<Estatus> estatus = new ArrayList<>();
+		estatus.add(new Estatus(Long.valueOf(1), "Activo"));
+		estatus.add(new Estatus(Long.valueOf(2), "Suspendido"));
+		estatus.add(new Estatus(Long.valueOf(3), "Eliminado"));
+		
+		return ResponseDefault.ok(estatus, CLASE, ResponseDefault.PLURAL);
 	}
 
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
