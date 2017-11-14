@@ -2,57 +2,35 @@ package fox.hound.spring.models;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.puente.RolFuncion;
 
-@Entity
-//http://www.baeldung.com/jackson-annotations
 @CustomJsonRootName(plural = "menu", singular = "menu")
 public class Menu {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false)
+	private int id;
     private String descripcion;
-	@Column(nullable = false)
     private String icono;
-	@Column(nullable = false)
     private String url_path;
-	@Column(nullable = false)
-    private Long padre;
+    private List<Menu> child;
 	
-	@OneToMany(mappedBy="menu")
-	@JsonManagedReference(value="menu-rolFuncion")
-	private List<RolFuncion> rolFuncion;
-	
-	public Menu(Long id, String descripcion, String icono, String url_path, Long padre) {
+	public Menu(int id, String descripcion, String icono, String url_path, List<Menu> child) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.icono = icono;
 		this.url_path = url_path;
-		this.padre = padre;
+		this.child = child;
 	}
 	public Menu(String id) {
-		this.id = Long.valueOf(id);
+		this.id = Integer.valueOf(id);
 	}
 	public Menu() {
 		
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getDescripcion() {
@@ -73,17 +51,12 @@ public class Menu {
 	public void setUrl_path(String url_path) {
 		this.url_path = url_path;
 	}
-	public Long getPadre() {
-		return padre;
+	public List<Menu> getChild() {
+		return child;
 	}
-	public void setPadre(Long padre) {
-		this.padre = padre;
+	public void setChild(List<Menu> child) {
+		this.child = child;
 	}
-	public List<RolFuncion> getRolFuncion() {
-		return rolFuncion;
-	}
-	public void setRolFuncion(List<RolFuncion> rolFuncion) {
-		this.rolFuncion = rolFuncion;
-	}
+	
 	
 }

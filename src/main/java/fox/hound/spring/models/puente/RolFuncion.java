@@ -16,19 +16,19 @@ import fox.hound.spring.models.combo.Rol;
 @CustomJsonRootName(plural = "rolFuncion", singular = "rolFuncion")
 public class RolFuncion extends Puente {
 
-	@ManyToOne
-	@JoinColumn(name="menu_id")
-	@JsonBackReference(value="menu-rolFuncion")
-	private Menu menu;
+//	@ManyToOne
+//	@JoinColumn(name="menu_id")
+//	@JsonBackReference(value="menu-rolFuncion")
+//	private Menu menu;
 
 	@ManyToOne
 	@JoinColumn(name="rol_id")
 	@JsonBackReference(value="rolFuncions-rol")
 	private Rol rol;
 	
-	public RolFuncion(Long id, String estatusId, String menuId, String rolId) {
+	public RolFuncion(Long id, String estatusId, String rolId) {
 		super(id, estatusId);
-		this.menu = new Menu(menuId);
+//		this.menu = new Menu(menuId);
 		this.rol = new Rol(rolId);
 	}
 	public RolFuncion(String id) {
@@ -37,12 +37,12 @@ public class RolFuncion extends Puente {
 	public RolFuncion() {
 		super();
 	}
-	public Menu getMenu() {
-		return menu;
-	}
-	public void setMenu(Menu menu) {
-		this.menu = menu;
-	}
+//	public Menu getMenu() {
+//		return menu;
+//	}
+//	public void setMenu(Menu menu) {
+//		this.menu = menu;
+//	}
 	public Rol getRol() {
 		return rol;
 	}
