@@ -17,7 +17,7 @@ public class Maestro extends Base {
 	@Column(nullable = false)
     private String descripcion;
 	
-	public Maestro(Long id, String descripcion, String estatusId) {
+	public Maestro(Long id, String descripcion, int estatusId) {
 		super(estatusId);
 		this.id = id;
 		this.descripcion = descripcion;

@@ -2,20 +2,19 @@ package fox.hound.spring.models.combo;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
+import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.CondicionGarantia;
 import fox.hound.spring.models.maestros.Maestro;
-import fox.hound.spring.models.maestros.TipoGarantia;
-import fox.hound.spring.models.puente.ServicioGarantia;
 
 @Entity
 @Table(name="garantia")
@@ -26,21 +25,14 @@ public class Garantia extends Maestro {
 	@JsonManagedReference(value="garantia-condicionGarantias")
 	private List<CondicionGarantia> condicionGarantias;
 	
-	@ManyToOne
-	@JoinColumn(name="tipoGarantia_id")
-	@JsonBackReference(value="garantia-tipoGarantia")
-	private TipoGarantia tipoGarantia;
-	
-	@OneToMany(mappedBy="garantia")
-	@JsonManagedReference(value="garantia-servicioGarantias")
-	private List<ServicioGarantia> servicioGarantias;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "garantia", cascade = CascadeType.ALL)
+	private Servicio servicio;
 	
 	public Garantia() {
 		super();
 	}
-	public Garantia(Long id, String descripcion, String estatusId, String tipoGarantiaId) {
+	public Garantia(Long id, String descripcion, int estatusId) {
 		super(id, descripcion, estatusId);
-		this.tipoGarantia = new TipoGarantia(tipoGarantiaId);
 	}
 	public Garantia(String id) {
 		super(id);
@@ -51,17 +43,12 @@ public class Garantia extends Maestro {
 	public void setCondicionGarantias(List<CondicionGarantia> condicionGarantias) {
 		this.condicionGarantias = condicionGarantias;
 	}
-	public TipoGarantia getTipoGarantia() {
-		return tipoGarantia;
+	public Servicio getServicio() {
+		return servicio;
 	}
-	public void setTipoGarantia(TipoGarantia tipoGarantia) {
-		this.tipoGarantia = tipoGarantia;
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
-	public List<ServicioGarantia> getServicioGarantias() {
-		return servicioGarantias;
-	}
-	public void setServicioGarantias(List<ServicioGarantia> servicioGarantias) {
-		this.servicioGarantias = servicioGarantias;
-	}
+	
 	
 }

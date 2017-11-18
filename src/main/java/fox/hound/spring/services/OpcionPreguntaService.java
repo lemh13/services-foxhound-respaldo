@@ -14,8 +14,7 @@ public class OpcionPreguntaService implements ServiceGeneral<OpcionPregunta> {
 	 @Autowired
 	 private OpcionPreguntaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<OpcionPregunta> getAll() {
@@ -36,7 +35,7 @@ public class OpcionPreguntaService implements ServiceGeneral<OpcionPregunta> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

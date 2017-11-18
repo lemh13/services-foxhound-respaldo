@@ -29,7 +29,7 @@ public class MotivoPresupuesto extends Puente {
 	public MotivoPresupuesto() {
 		super();
 	}
-	public MotivoPresupuesto(Long id, String estatusId, String motivo, String presupuesto) {
+	public MotivoPresupuesto(Long id, int estatusId, String motivo, String presupuesto) {
 		super(id, estatusId);
 		this.motivo = new Motivo(motivo);
 		this.presupuesto = new Presupuesto(presupuesto);

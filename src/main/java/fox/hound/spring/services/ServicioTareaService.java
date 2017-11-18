@@ -14,8 +14,7 @@ public class ServicioTareaService implements ServiceGeneral<ServicioTarea> {
 	 @Autowired
 	 private ServicioTareaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<ServicioTarea> getAll() {
@@ -36,7 +35,7 @@ public class ServicioTareaService implements ServiceGeneral<ServicioTarea> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

@@ -14,8 +14,7 @@ public class SolicitudEventualidadService implements ServiceGeneral<SolicitudEve
 	 @Autowired
 	 private SolicitudEventualidadRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<SolicitudEventualidad> getAll() {
@@ -36,7 +35,7 @@ public class SolicitudEventualidadService implements ServiceGeneral<SolicitudEve
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

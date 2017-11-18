@@ -14,7 +14,7 @@ public class Puente extends Base {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	public Puente(Long id, String estatusId) {
+	public Puente(Long id, int estatusId) {
 		super(estatusId);
 		this.id = id;
 	}

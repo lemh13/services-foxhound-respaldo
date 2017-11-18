@@ -14,8 +14,7 @@ public class CargoService implements ServiceGeneral<Cargo> {
 	 @Autowired
 	 private CargoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Cargo> getAll() {
@@ -36,7 +35,7 @@ public class CargoService implements ServiceGeneral<Cargo> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

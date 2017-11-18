@@ -14,9 +14,6 @@ public class TipoMotivoService implements ServiceGeneral<TipoMotivo> {
 	 @Autowired
 	 private TipoMotivoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<TipoMotivo> getAll() {
 		 List<TipoMotivo> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class TipoMotivoService implements ServiceGeneral<TipoMotivo> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

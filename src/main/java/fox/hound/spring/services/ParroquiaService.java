@@ -14,8 +14,7 @@ public class ParroquiaService implements ServiceGeneral<Parroquia> {
 	 @Autowired
 	 private ParroquiaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Parroquia> getAll() {
@@ -36,7 +35,7 @@ public class ParroquiaService implements ServiceGeneral<Parroquia> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

@@ -14,8 +14,7 @@ public class CondicionGarantiaService implements ServiceGeneral<CondicionGaranti
 	 @Autowired
 	 private CondicionGarantiaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<CondicionGarantia> getAll() {
@@ -36,7 +35,7 @@ public class CondicionGarantiaService implements ServiceGeneral<CondicionGaranti
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

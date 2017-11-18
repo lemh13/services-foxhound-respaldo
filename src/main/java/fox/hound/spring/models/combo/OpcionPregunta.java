@@ -28,7 +28,7 @@ public class OpcionPregunta extends Maestro {
 	@JsonBackReference(value="opcionPregunta-pregunta")
 	private Pregunta pregunta;
 	
-	public OpcionPregunta(Long id, String name, String estatusId, String opcionId, String preguntaId) {
+	public OpcionPregunta(Long id, String name, int estatusId, String opcionId, String preguntaId) {
 		super(id, name, estatusId);
 		this.opcion = new Opcion(opcionId);
 		this.pregunta = new Pregunta(preguntaId);

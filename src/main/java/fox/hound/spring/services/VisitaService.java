@@ -14,9 +14,6 @@ public class VisitaService implements ServiceGeneral<Visita> {
 	 @Autowired
 	 private VisitaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<Visita> getAll() {
 		 List<Visita> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class VisitaService implements ServiceGeneral<Visita> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

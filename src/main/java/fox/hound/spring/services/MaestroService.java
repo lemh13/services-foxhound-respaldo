@@ -37,7 +37,7 @@
 //		}
 //		clase.setFecha_modificacion( DateUtil.getCurrentDate() );
 //		
-//		clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+//		
 //		return repository.save(clase);
 //	}
 //

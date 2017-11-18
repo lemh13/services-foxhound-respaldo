@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.puente.RedSocialEmpresa;
+import fox.hound.spring.models.Empresa;
 
 @Entity
 @Table(name="redSocial")
@@ -16,22 +16,23 @@ import fox.hound.spring.models.puente.RedSocialEmpresa;
 public class RedSocial extends Maestro {
 	
 	@ManyToOne
-	@JoinColumn(name="redSocialEmpresa_id")
-	@JsonBackReference(value="redSocial-redSocialEmpresas")
-	private RedSocialEmpresa redSocialEmpresa;
+	@JoinColumn(name="empresa_id")
+	@JsonBackReference(value="empresa-redSocialEmpresas")
+	private Empresa empresa;
 
-	public RedSocial(Long id, String name, String estatusId, String redSocialEmpresaId) {
+	public RedSocial(Long id, String name, int estatusId, String empresa) {
 		super(id, name, estatusId);
-		this.redSocialEmpresa = new RedSocialEmpresa(redSocialEmpresaId);
+		this.empresa = new Empresa(empresa);
 	}
 	public RedSocial() {
 		super();
 	}
-	public RedSocialEmpresa getRedSocialEmpresa() {
-		return redSocialEmpresa;
+	public Empresa getEmpresa() {
+		return empresa;
 	}
-	public void setRedSocialEmpresa(RedSocialEmpresa redSocialEmpresa) {
-		this.redSocialEmpresa = redSocialEmpresa;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
+	
 	
 }

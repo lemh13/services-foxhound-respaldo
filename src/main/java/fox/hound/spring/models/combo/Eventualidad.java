@@ -35,7 +35,7 @@ public class Eventualidad extends Maestro {
 	@JsonManagedReference(value="eventualidad-solicitudEventualidads")
 	private List<SolicitudEventualidad> solicitudEventualidads;
 	
-	public Eventualidad(Long id, String name, String estatusId, String tipoEventualidad) {
+	public Eventualidad(Long id, String name, int estatusId, String tipoEventualidad) {
 		super(id, name, estatusId);
 		this.tipoEventualidad = new TipoEventualidad(tipoEventualidad);
 	}

@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.Reclamo;
 import fox.hound.spring.models.maestros.TipoCliente;
 import fox.hound.spring.models.puente.ClienteOcupacion;
 import fox.hound.spring.models.puente.ClienteProfesion;
@@ -50,15 +49,13 @@ public class Cliente extends Persona {
 	@JsonManagedReference(value="cliente-preferenciaCliente")
 	private List<PreferenciaCliente> preferenciaCliente;
 	
-	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference(value="cliente-reclamos")
-	private List<Reclamo> reclamos;
 	
-	public Cliente(Long id, String nombre, char sexo, String direccion, int identificacion, Long estatus,
-			Date fecha_de_nacimiento, String telefono, String estatusId,
-			String tipoPersonaId, String sectorId, String email, String password, String tipoClienteId, String rolId) {
-		super(id, nombre, sexo, direccion, identificacion, estatus, fecha_de_nacimiento, telefono, estatusId,
-				tipoPersonaId, sectorId, email, password, rolId);
+	
+	public Cliente(Long id, String nombre, char sexo, String direccion, int identificacion, Date fecha_de_nacimiento,
+			String telefono, int estatusId, String tipoPersonaId, String sectorId, String email, String password,
+			String rolId, String tipoClienteId) {
+		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, tipoPersonaId, sectorId,
+				email, password, rolId);
 		this.tipoCliente = new TipoCliente(tipoClienteId);
 	}
 	public Cliente(String id) {
@@ -66,12 +63,6 @@ public class Cliente extends Persona {
 	}
 	public Cliente() {
 		super();
-	}
-	public List<Reclamo> getReclamos() {
-		return reclamos;
-	}
-	public void setReclamos(List<Reclamo> reclamos) {
-		this.reclamos = reclamos;
 	}
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;

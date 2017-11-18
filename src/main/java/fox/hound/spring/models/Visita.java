@@ -21,8 +21,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.DiagnosticoVisita;
-import fox.hound.spring.models.combo.Reclamo;
-import fox.hound.spring.models.maestros.EstadoServicio;
 import fox.hound.spring.models.maestros.TipoVisita;
 import fox.hound.spring.models.maestros.Turno;
 import fox.hound.spring.models.puente.Solicitud;
@@ -39,10 +37,6 @@ public class Visita extends Base {
 	private Long id;
 	@Column(nullable = false)
 	private Date fechaVisita;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Reclamo reclamo;
 	
 	@ManyToOne
 	@JoinColumn(name="turno_id")
@@ -67,24 +61,20 @@ public class Visita extends Base {
 	@PrimaryKeyJoinColumn
 	private DiagnosticoVisita diagnosticoVisita;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private EstadoServicio estadoServicio;
+	@ManyToOne
+	@JoinColumn(name="ordenServicio_id")
+	@JsonBackReference(value="ordenServicio-visitas")
+	private OrdenServicio ordenServicio;
 	
-	public Visita(Long id, Date fechaVisita, String estatus,
-			String tipoVisita, String turno, String solicitud) {
+	public Visita(Long id, Date fechaVisita, int estatus,
+			String tipoVisita, String turno, String solicitud, String ordenServicio) {
 		super(estatus);
 		this.id = id;
 		this.fechaVisita = fechaVisita;
 		this.turno = new Turno(turno);
 		this.tipoVisita = new TipoVisita(tipoVisita);
 		this.solicitud = new Solicitud(solicitud);
-	}
-	public Reclamo getReclamo() {
-		return reclamo;
-	}
-	public void setReclamo(Reclamo reclamo) {
-		this.reclamo = reclamo;
+		this.ordenServicio = new OrdenServicio(ordenServicio);
 	}
 	public Turno getTurno() {
 		return turno;
@@ -116,6 +106,29 @@ public class Visita extends Base {
 	public void setFechaVisita(Date fechaVisita) {
 		this.fechaVisita = fechaVisita;
 	}
-	
+	public List<TrabajadorVisita> getTrabajadorVisitas() {
+		return trabajadorVisitas;
+	}
+	public void setTrabajadorVisitas(List<TrabajadorVisita> trabajadorVisitas) {
+		this.trabajadorVisitas = trabajadorVisitas;
+	}
+	public Solicitud getSolicitud() {
+		return solicitud;
+	}
+	public void setSolicitud(Solicitud solicitud) {
+		this.solicitud = solicitud;
+	}
+	public DiagnosticoVisita getDiagnosticoVisita() {
+		return diagnosticoVisita;
+	}
+	public void setDiagnosticoVisita(DiagnosticoVisita diagnosticoVisita) {
+		this.diagnosticoVisita = diagnosticoVisita;
+	}
+	public OrdenServicio getOrdenServicio() {
+		return ordenServicio;
+	}
+	public void setOrdenServicio(OrdenServicio ordenServicio) {
+		this.ordenServicio = ordenServicio;
+	}
 	
 }

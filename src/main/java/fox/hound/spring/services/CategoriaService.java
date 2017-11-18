@@ -14,8 +14,7 @@ public class CategoriaService implements ServiceGeneral<Categoria> {
 	 @Autowired
 	 private CategoriaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Categoria> getAll() {
@@ -36,7 +35,7 @@ public class CategoriaService implements ServiceGeneral<Categoria> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

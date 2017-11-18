@@ -14,9 +14,6 @@ public class TurnoService implements ServiceGeneral<Turno> {
 	 @Autowired
 	 private TurnoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<Turno> getAll() {
 		 List<Turno> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class TurnoService implements ServiceGeneral<Turno> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

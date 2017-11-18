@@ -27,7 +27,7 @@ public class Descuento extends Maestro {
 	@JsonManagedReference(value="descuento-promociones")
 	private List<Promocion> promociones;
 	
-	public Descuento(Long id, String name, String estatusId, double monto, double porcentaje) {
+	public Descuento(Long id, String name, int estatusId, double monto, double porcentaje) {
 		super(id, name, estatusId);
 		this.monto = monto;
 		this.porcentaje = porcentaje;

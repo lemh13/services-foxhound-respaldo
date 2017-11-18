@@ -26,7 +26,7 @@ public class RolFuncion extends Puente {
 	@JsonBackReference(value="rolFuncions-rol")
 	private Rol rol;
 	
-	public RolFuncion(Long id, String estatusId, String rolId) {
+	public RolFuncion(Long id, int estatusId, String rolId) {
 		super(id, estatusId);
 //		this.menu = new Menu(menuId);
 		this.rol = new Rol(rolId);

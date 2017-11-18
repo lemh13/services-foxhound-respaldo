@@ -14,8 +14,7 @@ public class TipoClienteService implements ServiceGeneral<TipoCliente> {
 	 @Autowired
 	 private TipoClienteRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<TipoCliente> getAll() {
@@ -36,7 +35,7 @@ public class TipoClienteService implements ServiceGeneral<TipoCliente> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

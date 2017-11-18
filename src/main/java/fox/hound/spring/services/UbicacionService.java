@@ -14,9 +14,6 @@ public class UbicacionService implements ServiceGeneral<Ubicacion> {
 	 @Autowired
 	 private UbicacionRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<Ubicacion> getAll() {
 		 List<Ubicacion> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class UbicacionService implements ServiceGeneral<Ubicacion> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

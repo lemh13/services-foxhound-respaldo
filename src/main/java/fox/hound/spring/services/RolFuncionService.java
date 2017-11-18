@@ -14,8 +14,7 @@ public class RolFuncionService implements ServiceGeneral<RolFuncion> {
 	 @Autowired
 	 private RolFuncionRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<RolFuncion> getAll() {
@@ -36,7 +35,7 @@ public class RolFuncionService implements ServiceGeneral<RolFuncion> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

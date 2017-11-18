@@ -14,8 +14,7 @@ public class CalificarServicioService implements ServiceGeneral<CalificarServici
 	 @Autowired
 	 private CalificarServicioRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<CalificarServicio> getAll() {
@@ -36,7 +35,7 @@ public class CalificarServicioService implements ServiceGeneral<CalificarServici
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

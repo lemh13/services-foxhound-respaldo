@@ -14,8 +14,7 @@ public class CategoriaInmuebleService implements ServiceGeneral<CategoriaInmuebl
 	 @Autowired
 	 private CategoriaInmuebleRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<CategoriaInmueble> getAll() {
@@ -36,7 +35,7 @@ public class CategoriaInmuebleService implements ServiceGeneral<CategoriaInmuebl
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

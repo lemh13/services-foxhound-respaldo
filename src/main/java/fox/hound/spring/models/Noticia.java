@@ -18,6 +18,8 @@ public class Noticia extends Maestro {
 
 	@Column(nullable = false)
 	private String titulo;
+	@Column(nullable = false)
+	private String imgNoticia;
 	
 	@ManyToOne
 	@JoinColumn(name="empresa_id")
@@ -27,8 +29,9 @@ public class Noticia extends Maestro {
 	public Noticia() {
 		super();
 	}
-	public Noticia(Long id, String descripcion, String estatusId, String titulo, String empresaId) {
+	public Noticia(Long id, String descripcion, int estatusId, String titulo, String imgNoticia, String empresaId) {
 		super(id, descripcion, estatusId);
+		this.imgNoticia = imgNoticia;
 		this.titulo = titulo;
 		this.empresa = new Empresa(empresaId);
 	}
@@ -47,5 +50,12 @@ public class Noticia extends Maestro {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+	public String getImgNoticia() {
+		return imgNoticia;
+	}
+	public void setImgNoticia(String imgNoticia) {
+		this.imgNoticia = imgNoticia;
+	}
+	
 
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Inmueble;
+import fox.hound.spring.models.puente.TipoInmuebleServicio;
 
 @Entity
 @Table(name="uso_inmueble")
@@ -20,7 +21,11 @@ public class UsoInmueble extends Maestro {
 	@JsonManagedReference(value="inmueble-usoInmueble")
 	private List<Inmueble> inmueble;
 	
-	public UsoInmueble(Long id, String name, String estatusId) {
+	@OneToMany(mappedBy="usoInmueble")
+	@JsonManagedReference(value="tipoInmuebleServicio-usoInmueble")
+	private List<TipoInmuebleServicio> tipoInmuebleServicios;
+	
+	public UsoInmueble(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public UsoInmueble(String id) {
@@ -35,5 +40,12 @@ public class UsoInmueble extends Maestro {
 	public void setInmueble(List<Inmueble> inmueble) {
 		this.inmueble = inmueble;
 	}
+	public List<TipoInmuebleServicio> getTipoInmuebleServicios() {
+		return tipoInmuebleServicios;
+	}
+	public void setTipoInmuebleServicios(List<TipoInmuebleServicio> tipoInmuebleServicios) {
+		this.tipoInmuebleServicios = tipoInmuebleServicios;
+	}
+	
 	
 }

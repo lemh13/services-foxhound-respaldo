@@ -26,7 +26,7 @@ public class MotivoOrdenServicioEventualidad extends Puente {
 	@JsonBackReference(value="motivo-motivoOrdenServicioEventualidads")
 	private Motivo motivo;
 	
-	public MotivoOrdenServicioEventualidad(Long id, String estatusId, 
+	public MotivoOrdenServicioEventualidad(Long id, int estatusId, 
 			String ordenServicioEventualidad, String motivo) {
 		super(id, estatusId);
 		this.ordenServicioEventualidad = new OrdenServicioEventualidad(ordenServicioEventualidad);

@@ -14,8 +14,7 @@ public class NoticiaService implements ServiceGeneral<Noticia> {
 	 @Autowired
 	 private NoticiaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Noticia> getAll() {
@@ -36,7 +35,7 @@ public class NoticiaService implements ServiceGeneral<Noticia> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

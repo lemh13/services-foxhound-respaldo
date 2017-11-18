@@ -28,7 +28,7 @@ public class SolicitudEventualidad extends Puente {
 	public SolicitudEventualidad() {
 		super();
 	}
-	public SolicitudEventualidad(Long id, String estatusId, 
+	public SolicitudEventualidad(Long id, int estatusId, 
 			String solicitud, String eventualidad) {
 		super(id, estatusId);
 		this.solicitud = new Solicitud(solicitud);

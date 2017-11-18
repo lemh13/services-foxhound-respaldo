@@ -25,7 +25,7 @@ public class Cargo extends Maestro {
 	@JsonManagedReference(value="cargoTipoServicio-cargo")
 	private List<CargoTipoServicio> cargoTipoServicios;
 	
-	public Cargo(Long id, String name, String estatusId) {
+	public Cargo(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Cargo(String id) {

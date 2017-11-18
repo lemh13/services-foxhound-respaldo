@@ -14,8 +14,7 @@ public class PreferenciaClienteService implements ServiceGeneral<PreferenciaClie
 	 @Autowired
 	 private PreferenciaClienteRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<PreferenciaCliente> getAll() {
@@ -36,7 +35,7 @@ public class PreferenciaClienteService implements ServiceGeneral<PreferenciaClie
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

@@ -3,37 +3,40 @@ package fox.hound.spring.models;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import javax.persistence.Transient;
 
 @MappedSuperclass
 public class Base {
 	
-	@ManyToOne
-	@JoinColumn(name="estatusId", nullable = false)
-	@JsonIdentityReference(alwaysAsId = true)
-	private Estatus estatus;
+//	@ManyToOne
+//	@Transient
+////	@JsonIdentityReference(alwaysAsId = true)
+//	private Estatus estatus;
 	@Column(nullable = true)
 	private Date fecha_creacion;
 	@Column(nullable = true)
 	private Date fecha_modificacion;
+	@Column(nullable = false)
+	private int estatus;
+	// aqui coloco la descripcion del estatus
+	@Transient
+	private String descripcionEstatus;
 	
-	public Base(String estatus) {
+	public Base(int estatus) {
 		super();
-		this.estatus = new Estatus(estatus);
+		//this.estatus = Estatus.getEstatus(estatus);
+		this.estatus = estatus;
 	}
 	public Base() {
 		
 	}
-	public Estatus getEstatus() {
-		return estatus;
-	}
-	public void setEstatus(Estatus estatus) {
-		this.estatus = estatus;
-	}
+//	public Estatus getEstatus() {
+//		return estatus;
+//	}
+//	public void setEstatus(Estatus estatus) {
+//		this.estatus = estatus;
+//	}
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}
@@ -46,5 +49,19 @@ public class Base {
 	public void setFecha_modificacion(Date fecha_modificacion) {
 		this.fecha_modificacion = fecha_modificacion;
 	}
+	public int getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(int estatus) {
+		this.estatus = estatus;
+	}
+	public String getDescripcionEstatus() {
+		Estatus estado = new Estatus();
+		return estado.nombre(estatus);
+	}
+	public void setDescripcionEstatus(String descripcionEstatus) {
+		this.descripcionEstatus = descripcionEstatus;
+	}
+	
 
 }

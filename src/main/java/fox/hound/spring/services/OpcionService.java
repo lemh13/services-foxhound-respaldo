@@ -14,8 +14,7 @@ public class OpcionService implements ServiceGeneral<Opcion> {
 	 @Autowired
 	 private OpcionRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Opcion> getAll() {
@@ -36,7 +35,7 @@ public class OpcionService implements ServiceGeneral<Opcion> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

@@ -27,7 +27,7 @@ public class ComentarioExterno extends Maestro {
 	public ComentarioExterno() {
 		super();
 	}
-	public ComentarioExterno(Long id, String descripcion, String estatusId, String correoEmisor,
+	public ComentarioExterno(Long id, String descripcion, int estatusId, String correoEmisor,
 			String asuntoComentarioId) {
 		super(id, descripcion, estatusId);
 		this.correoEmisor = correoEmisor;

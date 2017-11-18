@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.maestros.Condicion;
 import fox.hound.spring.models.maestros.Maestro;
-import fox.hound.spring.models.puente.DetalleDiagnostico;
+import fox.hound.spring.models.puente.CondicionDiagnostico;
 
 @Entity
 @Table(name="condicion_inmueble")
@@ -28,9 +28,9 @@ public class CondicionInmueble extends Maestro {
 	
 	@OneToMany(mappedBy="condicionInmueble")
 	@JsonManagedReference(value="condicionInmueble-detalleDiagnosticos")
-	private List<DetalleDiagnostico> detalleDiagnosticos;
+	private List<CondicionDiagnostico> detalleDiagnosticos;
 
-	public CondicionInmueble(Long id, String name, String estatusId, String condicionId) {
+	public CondicionInmueble(Long id, String name, int estatusId, String condicionId) {
 		super(id, name, estatusId);
 		this.condicion = new Condicion(condicionId);
 	}
@@ -46,10 +46,10 @@ public class CondicionInmueble extends Maestro {
 	public void setCondicion(Condicion condicion) {
 		this.condicion = condicion;
 	}
-	public List<DetalleDiagnostico> getDetalleDiagnosticos() {
+	public List<CondicionDiagnostico> getDetalleDiagnosticos() {
 		return detalleDiagnosticos;
 	}
-	public void setDetalleDiagnosticos(List<DetalleDiagnostico> detalleDiagnosticos) {
+	public void setDetalleDiagnosticos(List<CondicionDiagnostico> detalleDiagnosticos) {
 		this.detalleDiagnosticos = detalleDiagnosticos;
 	}
 	

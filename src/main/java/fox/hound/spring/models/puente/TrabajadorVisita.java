@@ -29,7 +29,7 @@ public class TrabajadorVisita extends Puente {
 	public TrabajadorVisita() {
 		super();
 	}
-	public TrabajadorVisita(Long id, String estatusId, String visita, String trabajador) {
+	public TrabajadorVisita(Long id, int estatusId, String visita, String trabajador) {
 		super(id, estatusId);
 		this.visita = new Visita(visita);
 		this.trabajador = new Trabajador(trabajador);

@@ -14,8 +14,7 @@ public class PersonaService implements ServiceGeneral<Persona> {
 	 @Autowired
 	 private PersonaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Persona> getAll() {
@@ -40,7 +39,7 @@ public class PersonaService implements ServiceGeneral<Persona> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

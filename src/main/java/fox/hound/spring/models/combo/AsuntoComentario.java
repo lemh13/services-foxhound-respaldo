@@ -27,7 +27,7 @@ public class AsuntoComentario extends Maestro {
 	public AsuntoComentario() {
 		super();
 	}
-	public AsuntoComentario(Long id, String descripcion, String estatusId) {
+	public AsuntoComentario(Long id, String descripcion, int estatusId) {
 		super(id, descripcion, estatusId);
 	}
 	public AsuntoComentario(String id) {

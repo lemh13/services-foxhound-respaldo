@@ -14,9 +14,6 @@ public class TipoRespuestaService implements ServiceGeneral<TipoRespuesta> {
 	 @Autowired
 	 private TipoRespuestaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<TipoRespuesta> getAll() {
 		 List<TipoRespuesta> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class TipoRespuestaService implements ServiceGeneral<TipoRespuesta> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

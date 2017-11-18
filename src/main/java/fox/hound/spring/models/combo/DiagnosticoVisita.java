@@ -20,7 +20,7 @@ import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.Visita;
 import fox.hound.spring.models.maestros.Maestro;
 import fox.hound.spring.models.maestros.TipoDiagnosticoVisita;
-import fox.hound.spring.models.puente.DetalleDiagnostico;
+import fox.hound.spring.models.puente.CondicionDiagnostico;
 
 @Entity
 @Table(name="diagnostico_visita")
@@ -29,7 +29,7 @@ public class DiagnosticoVisita extends Maestro {
 	
 	@OneToMany(mappedBy="diagnosticoVisita")
 	@JsonManagedReference(value="diagnosticoVisita-detalleDiagnosticos")
-	private List<DetalleDiagnostico> detalleDiagnosticos;
+	private List<CondicionDiagnostico> detalleDiagnosticos;
 	
 	@ManyToOne
 	@JoinColumn(name="tipoDiagnosticoVisita_id")
@@ -50,7 +50,7 @@ public class DiagnosticoVisita extends Maestro {
 	@PrimaryKeyJoinColumn
 	private OrdenServicio ordenServicio;
 	
-	public DiagnosticoVisita(Long id, String name, String estatusId, String tipoDiagnosticoVisitaId) {
+	public DiagnosticoVisita(Long id, String name, int estatusId, String tipoDiagnosticoVisitaId) {
 		super(id, name, estatusId);
 		this.tipoDiagnosticoVisita = new TipoDiagnosticoVisita(tipoDiagnosticoVisitaId);
 	}
@@ -60,10 +60,10 @@ public class DiagnosticoVisita extends Maestro {
 	public DiagnosticoVisita() {
 		super();
 	}
-	public List<DetalleDiagnostico> getDetalleDiagnosticos() {
+	public List<CondicionDiagnostico> getDetalleDiagnosticos() {
 		return detalleDiagnosticos;
 	}
-	public void setDetalleDiagnosticos(List<DetalleDiagnostico> detalleDiagnosticos) {
+	public void setDetalleDiagnosticos(List<CondicionDiagnostico> detalleDiagnosticos) {
 		this.detalleDiagnosticos = detalleDiagnosticos;
 	}
 	public TipoDiagnosticoVisita getTipoDiagnosticoVisita() {

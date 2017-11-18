@@ -28,7 +28,7 @@ public class Parroquia extends Maestro {
 	@JsonManagedReference(value="sectores-parroquias")
 	private List<Sector> sectores;
 
-	public Parroquia(Long id, String name, String estatusId, String municipioId) {
+	public Parroquia(Long id, String name, int estatusId, String municipioId) {
 		super(id, name, estatusId);
 		this.municipio = new Municipio(municipioId);
 	}

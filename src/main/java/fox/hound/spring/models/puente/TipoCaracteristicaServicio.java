@@ -29,7 +29,7 @@ public class TipoCaracteristicaServicio extends Puente {
 	public TipoCaracteristicaServicio() {
 		super();
 	}
-	public TipoCaracteristicaServicio(Long id, String estatusId, String tipoCaracteristicaId
+	public TipoCaracteristicaServicio(Long id, int estatusId, String tipoCaracteristicaId
 			, String servicioId) {
 		super(id, estatusId);
 		this.tipoCaracteristica = new TipoCaracteristica(tipoCaracteristicaId);

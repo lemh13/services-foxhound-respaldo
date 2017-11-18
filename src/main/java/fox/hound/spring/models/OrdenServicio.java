@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.DiagnosticoVisita;
 import fox.hound.spring.models.combo.Respuesta;
-import fox.hound.spring.models.maestros.EstadoServicio;
+import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.puente.DetalleOrdenServicio;
 import fox.hound.spring.models.puente.OrdenServicioEventualidad;
 
@@ -44,10 +44,9 @@ public class OrdenServicio extends Base {
 	@JsonManagedReference(value="ordenServicio-detalleOrdenServicios")
 	private List<DetalleOrdenServicio> detalleOrdenServicios;
 	
-	@ManyToOne
-	@JoinColumn(name="estadoServicio_id")
-	@JsonBackReference(value="ordenServicio-estadoServicio")
-	private EstadoServicio estadoServicio;
+	@OneToMany(mappedBy="ordenServicio")
+	@JsonManagedReference(value="ordenServicio-visitas")
+	private List<Visita> visitas;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "ordenServicio", cascade = CascadeType.ALL)
 	private Respuesta respuesta;
@@ -59,12 +58,18 @@ public class OrdenServicio extends Base {
 	@JsonManagedReference(value="ordenServicio-ordenServicioEventualidads")
 	private List<OrdenServicioEventualidad> ordenServicioEventualidads;
 	
-	public OrdenServicio(Long id, Date fechaInicio, Date fechaCulminacion, String estatus, String estadoServicio) {
+	@ManyToOne
+	@JoinColumn(name="tipoOrdenServicio_id")
+	@JsonBackReference(value="ordenServicios-tipoOrdenServicio")
+	private TipoOrdenServicio tipoOrdenServicio;
+	
+	public OrdenServicio(Long id, Date fechaInicio, Date fechaCulminacion, int estatus,
+			String tipoOrdenServicio) {
 		super(estatus);
 		this.id = id;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
-		this.estadoServicio = new EstadoServicio(estadoServicio);
+		this.tipoOrdenServicio = new TipoOrdenServicio(tipoOrdenServicio);
 	}
 	public OrdenServicio(String id) {
 		this.id = Long.valueOf(id);
@@ -96,12 +101,6 @@ public class OrdenServicio extends Base {
 	public void setDetalleOrdenServicios(List<DetalleOrdenServicio> detalleOrdenServicios) {
 		this.detalleOrdenServicios = detalleOrdenServicios;
 	}
-	public EstadoServicio getEstadoServicio() {
-		return estadoServicio;
-	}
-	public void setEstadoServicio(EstadoServicio estadoServicio) {
-		this.estadoServicio = estadoServicio;
-	}
 	public Respuesta getRespuesta() {
 		return respuesta;
 	}
@@ -120,5 +119,18 @@ public class OrdenServicio extends Base {
 	public void setOrdenServicioEventualidads(List<OrdenServicioEventualidad> ordenServicioEventualidads) {
 		this.ordenServicioEventualidads = ordenServicioEventualidads;
 	}
+	public List<Visita> getVisitas() {
+		return visitas;
+	}
+	public void setVisitas(List<Visita> visitas) {
+		this.visitas = visitas;
+	}
+	public TipoOrdenServicio getTipoOrdenServicio() {
+		return tipoOrdenServicio;
+	}
+	public void setTipoOrdenServicio(TipoOrdenServicio tipoOrdenServicio) {
+		this.tipoOrdenServicio = tipoOrdenServicio;
+	}
+	
 	
 }

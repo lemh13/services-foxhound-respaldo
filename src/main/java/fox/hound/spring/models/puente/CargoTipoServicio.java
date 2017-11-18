@@ -27,7 +27,7 @@ public class CargoTipoServicio extends Puente {
 	@JsonBackReference(value="cargoTipoServicio-tipoServicio")
 	private TipoServicio tipoServicio;
 	
-	public CargoTipoServicio(Long id, String estatusId, String cargo, String tipoServicio) {
+	public CargoTipoServicio(Long id, int estatusId, String cargo, String tipoServicio) {
 		super(id, estatusId);
 		this.cargo = new Cargo(cargo);
 		this.tipoServicio = new TipoServicio(tipoServicio);

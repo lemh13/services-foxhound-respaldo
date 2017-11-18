@@ -14,8 +14,7 @@ public class TipoDiagnosticoVisitaService implements ServiceGeneral<TipoDiagnost
 	 @Autowired
 	 private TipoDiagnosticoVisitaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<TipoDiagnosticoVisita> getAll() {
@@ -36,7 +35,7 @@ public class TipoDiagnosticoVisitaService implements ServiceGeneral<TipoDiagnost
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

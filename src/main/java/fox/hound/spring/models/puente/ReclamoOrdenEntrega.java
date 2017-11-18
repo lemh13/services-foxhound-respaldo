@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.OrdenEntrega;
-import fox.hound.spring.models.combo.Reclamo;
+import fox.hound.spring.models.maestros.TipoReclamo;
 
 @Entity
 @Table(name="reclamo_orden_entrega")
@@ -21,9 +21,9 @@ import fox.hound.spring.models.combo.Reclamo;
 public class ReclamoOrdenEntrega extends Puente {
 	
 	@ManyToOne
-	@JoinColumn(name="reclamo_id")
+	@JoinColumn(name="tipoReclamo_id")
 	@JsonBackReference(value="reclamo-reclamoOrdenEntrega")
-	private Reclamo reclamo;
+	private TipoReclamo tipoReclamo;;
 	
 	@ManyToOne
 	@JoinColumn(name="motivoReclamo_id")
@@ -37,20 +37,21 @@ public class ReclamoOrdenEntrega extends Puente {
 	public ReclamoOrdenEntrega() {
 		super();
 	}
-	public ReclamoOrdenEntrega(Long id, String estatusId,
-			String reclamo, String motivoReclamo) {
+	public ReclamoOrdenEntrega(Long id, int estatusId,
+			String tipoReclamo, String motivoReclamo) {
 		super(id, estatusId);
-		this.reclamo = new Reclamo(reclamo);
+		this.tipoReclamo = new TipoReclamo(tipoReclamo);
 		this.motivoReclamo = new MotivoReclamo(motivoReclamo);
 	}
 	public ReclamoOrdenEntrega(String id) {
 		super(id);
 	}
-	public Reclamo getReclamo() {
-		return reclamo;
+	
+	public TipoReclamo getTipoReclamo() {
+		return tipoReclamo;
 	}
-	public void setReclamo(Reclamo reclamo) {
-		this.reclamo = reclamo;
+	public void setTipoReclamo(TipoReclamo tipoReclamo) {
+		this.tipoReclamo = tipoReclamo;
 	}
 	public MotivoReclamo getMotivoReclamo() {
 		return motivoReclamo;

@@ -14,9 +14,6 @@ public class TipoEventualidadService implements ServiceGeneral<TipoEventualidad>
 	 @Autowired
 	 private TipoEventualidadRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<TipoEventualidad> getAll() {
 		 List<TipoEventualidad> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class TipoEventualidadService implements ServiceGeneral<TipoEventualidad>
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

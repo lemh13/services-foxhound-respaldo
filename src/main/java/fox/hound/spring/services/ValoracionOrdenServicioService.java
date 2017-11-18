@@ -14,9 +14,6 @@ public class ValoracionOrdenServicioService implements ServiceGeneral<Valoracion
 	 @Autowired
 	 private ValoracionOrdenServicioRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<ValoracionOrdenServicio> getAll() {
 		 List<ValoracionOrdenServicio> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class ValoracionOrdenServicioService implements ServiceGeneral<Valoracion
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

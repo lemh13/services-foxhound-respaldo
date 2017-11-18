@@ -14,8 +14,7 @@ public class PresupuestoService implements ServiceGeneral<Presupuesto> {
 	 @Autowired
 	 private PresupuestoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Presupuesto> getAll() {
@@ -36,7 +35,7 @@ public class PresupuestoService implements ServiceGeneral<Presupuesto> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

@@ -14,8 +14,7 @@ public class MotivoPresupuestoService implements ServiceGeneral<MotivoPresupuest
 	 @Autowired
 	 private MotivoPresupuestoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<MotivoPresupuesto> getAll() {
@@ -36,7 +35,7 @@ public class MotivoPresupuestoService implements ServiceGeneral<MotivoPresupuest
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

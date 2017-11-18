@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import fox.hound.spring.models.puente.DetalleDiagnostico;
+import fox.hound.spring.models.puente.CondicionDiagnostico;
 import fox.hound.spring.services.DetalleDiagnosticoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -22,7 +22,7 @@ public class DetalleDiagnosticoController {
 	 @Autowired
 	 private DetalleDiagnosticoService service;
 
-	 private Class<?> CLASE = DetalleDiagnostico.class;
+	 private Class<?> CLASE = CondicionDiagnostico.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -35,14 +35,14 @@ public class DetalleDiagnosticoController {
 	 }
 
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody DetalleDiagnostico clase, @PathVariable String id, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@RequestBody CondicionDiagnostico clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody DetalleDiagnostico clase, HttpServletRequest request) {
+	 public ResponseEntity<?> modificar(@RequestBody CondicionDiagnostico clase, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 

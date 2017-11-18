@@ -14,8 +14,7 @@ public class EventualidadService implements ServiceGeneral<Eventualidad> {
 	 @Autowired
 	 private EventualidadRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Eventualidad> getAll() {
@@ -36,7 +35,7 @@ public class EventualidadService implements ServiceGeneral<Eventualidad> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

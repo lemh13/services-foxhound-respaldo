@@ -20,7 +20,7 @@ public class Turno extends Maestro {
 	@JsonManagedReference(value="visita-turno")
 	private List<Visita> visitas;
 	
-	public Turno(Long id, String name, String estatusId) {
+	public Turno(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Turno(String id) {

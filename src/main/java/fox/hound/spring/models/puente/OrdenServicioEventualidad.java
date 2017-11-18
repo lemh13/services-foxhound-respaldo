@@ -34,7 +34,7 @@ public class OrdenServicioEventualidad extends Puente {
 	@JsonBackReference(value="ordenServicio-ordenServicioEventualidads")
 	private OrdenServicio ordenServicio;
 	
-	public OrdenServicioEventualidad(Long id, String estatusId,
+	public OrdenServicioEventualidad(Long id, int estatusId,
 			String eventualidad, String ordenServicio) {
 		super(id, estatusId);
 		this.eventualidad = new Eventualidad(eventualidad);

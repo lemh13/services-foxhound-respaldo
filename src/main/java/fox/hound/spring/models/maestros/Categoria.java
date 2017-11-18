@@ -20,7 +20,7 @@ public class Categoria extends Maestro {
 	@JsonManagedReference(value="servicio-categoria")
 	private List<Servicio> servicios;
 	
-	public Categoria(Long id, String name, String estatusId) {
+	public Categoria(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Categoria(String id) {

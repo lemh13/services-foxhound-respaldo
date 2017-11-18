@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.Presupuesto;
-import fox.hound.spring.models.puente.DetalleDiagnostico;
+import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
 import fox.hound.spring.models.puente.SolicitudServicio;
 
 @Entity
@@ -30,9 +30,9 @@ public class DetallePresupuesto extends Base {
     private double costo;
 	
 	@ManyToOne
-	@JoinColumn(name="detalleDiagnostico_id")
-	@JsonBackReference(value="detallePresupuesto-detalleDiagnostico")
-	private DetalleDiagnostico detalleDiagnostico;
+	@JoinColumn(name="detalleDiagnosticoVisita_id")
+	@JsonBackReference(value="detallePresupuestos-detalleDiagnosticoVisita")
+	private DetalleDiagnosticoVisita detalleDiagnosticoVisita;
 	
 	@ManyToOne
 	@JoinColumn(name="presupuesto_id")
@@ -44,12 +44,12 @@ public class DetallePresupuesto extends Base {
 	@JsonBackReference(value="detallePresupuesto-solicitudServicio")
 	private SolicitudServicio solicitudServicio;
 	
-	public DetallePresupuesto(Long id, double costo, double area, String estatusId, String detalleDiagnosticoId,
+	public DetallePresupuesto(Long id, double costo, double area, int estatusId, String detalleDiagnosticoVisita,
 			String presupuesto, String solicitudServicio) {
 		super(estatusId);
 		this.id = id;
 		this.costo = costo;
-		this.detalleDiagnostico = new DetalleDiagnostico(detalleDiagnosticoId);
+		this.detalleDiagnosticoVisita = new DetalleDiagnosticoVisita(detalleDiagnosticoVisita);
 		this.presupuesto = new Presupuesto(presupuesto);
 		this.solicitudServicio = new SolicitudServicio(solicitudServicio);
 	}
@@ -77,14 +77,15 @@ public class DetallePresupuesto extends Base {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
-	public DetalleDiagnostico getDetalleDiagnostico() {
-		return detalleDiagnostico;
-	}
-	public void setDetalleDiagnostico(DetalleDiagnostico detalleDiagnostico) {
-		this.detalleDiagnostico = detalleDiagnostico;
-	}
+	
 	public Presupuesto getPresupuesto() {
 		return presupuesto;
+	}
+	public DetalleDiagnosticoVisita getDetalleDiagnosticoVisita() {
+		return detalleDiagnosticoVisita;
+	}
+	public void setDetalleDiagnosticoVisita(DetalleDiagnosticoVisita detalleDiagnosticoVisita) {
+		this.detalleDiagnosticoVisita = detalleDiagnosticoVisita;
 	}
 	public void setPresupuesto(Presupuesto presupuesto) {
 		this.presupuesto = presupuesto;

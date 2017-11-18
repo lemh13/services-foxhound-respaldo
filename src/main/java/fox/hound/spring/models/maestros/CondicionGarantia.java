@@ -20,7 +20,7 @@ public class CondicionGarantia extends Maestro {
 	@JsonBackReference(value="garantia-condicionGarantias")
 	private Garantia garantia;
 	
-	public CondicionGarantia(Long id, String name, String estatusId, String garantiaId) {
+	public CondicionGarantia(Long id, String name, int estatusId, String garantiaId) {
 		super(id, name, estatusId);
 		this.garantia = new Garantia(garantiaId);
 	}

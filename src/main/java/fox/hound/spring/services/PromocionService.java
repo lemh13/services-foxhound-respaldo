@@ -14,8 +14,7 @@ public class PromocionService implements ServiceGeneral<Promocion> {
 	 @Autowired
 	 private PromocionRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<Promocion> getAll() {
@@ -36,7 +35,7 @@ public class PromocionService implements ServiceGeneral<Promocion> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

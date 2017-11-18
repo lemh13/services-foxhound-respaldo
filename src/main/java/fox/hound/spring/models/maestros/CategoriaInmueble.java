@@ -19,7 +19,7 @@ public class CategoriaInmueble extends Maestro {
 	@JsonManagedReference(value="tipoInmueble-categoriaInmueble")
 	private List<TipoInmueble> tipoInmueble;
 	
-	public CategoriaInmueble(Long id, String name, String estatusId) {
+	public CategoriaInmueble(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public CategoriaInmueble(String id) {

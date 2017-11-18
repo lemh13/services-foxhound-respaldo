@@ -43,7 +43,7 @@ public class TipoCaracteristicaInmueble extends Puente {
 	public TipoCaracteristicaInmueble() {
 		super();
 	}
-	public TipoCaracteristicaInmueble(Long id, String estatusId, String tipoCaracteristicaId,
+	public TipoCaracteristicaInmueble(Long id, int estatusId, String tipoCaracteristicaId,
 			String tipoInmuebleId, String servicioId) {
 		super(id, estatusId);
 		this.tipoCaracteristica = new TipoCaracteristica(tipoCaracteristicaId);

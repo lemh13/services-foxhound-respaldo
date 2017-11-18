@@ -12,14 +12,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.DetallePresupuesto;
 import fox.hound.spring.models.combo.CondicionInmueble;
 import fox.hound.spring.models.combo.DiagnosticoVisita;
 
 @Entity
-@Table(name="detalle_diagnostico")
-@CustomJsonRootName(plural = "detalleDiagnostico", singular = "detalleDiagnostico")
-public class DetalleDiagnostico extends Puente {
+@Table(name="condicion_diagnostico")
+@CustomJsonRootName(plural = "condicionDiagnostico", singular = "condicionDiagnostico")
+public class CondicionDiagnostico extends Puente {
 
 	@ManyToOne
 	@JoinColumn(name="condicionInmueble_id")
@@ -36,21 +35,21 @@ public class DetalleDiagnostico extends Puente {
 	@JsonBackReference(value="diagnosticoVisita-detalleDiagnosticos")
 	private DiagnosticoVisita diagnosticoVisita;
 	
-	@OneToMany(mappedBy="detalleDiagnostico")
-	@JsonManagedReference(value="detallePresupuesto-detalleDiagnostico")
-	private List<DetallePresupuesto> detallePresupuestos;
+	@OneToMany(mappedBy="condicionDiagnostico")
+	@JsonManagedReference(value="detalleDiagnostico-detalleDiagnosticoVisita")
+	private List<DetalleDiagnosticoVisita> detalleDiagnosticoVisitas;
 	
-	public DetalleDiagnostico() {
+	public CondicionDiagnostico() {
 		super();
 	}
-	public DetalleDiagnostico(Long id, String estatusId, String condicionInmuebleId,
+	public CondicionDiagnostico(Long id, int estatusId, String condicionInmuebleId,
 			String caracteristicaInmuebleId, String diagnosticoVisitaId) {
 		super(id, estatusId);
 		this.condicionInmueble = new CondicionInmueble(condicionInmuebleId);
 		this.caracteristicaInmueble = new CaracteristicaInmueble(caracteristicaInmuebleId);
 		this.diagnosticoVisita = new DiagnosticoVisita(diagnosticoVisitaId);
 	}
-	public DetalleDiagnostico(String id) {
+	public CondicionDiagnostico(String id) {
 		super(id);
 	}
 	public CondicionInmueble getCondicionInmueble() {
@@ -71,12 +70,12 @@ public class DetalleDiagnostico extends Puente {
 	public void setDiagnosticoVisita(DiagnosticoVisita diagnosticoVisita) {
 		this.diagnosticoVisita = diagnosticoVisita;
 	}
-	public List<DetallePresupuesto> getDetallePresupuestos() {
-		return detallePresupuestos;
+	public List<DetalleDiagnosticoVisita> getDetalleDiagnosticoVisitas() {
+		return detalleDiagnosticoVisitas;
 	}
-	public void setDetallePresupuestos(List<DetallePresupuesto> detallePresupuestos) {
-		this.detallePresupuestos = detallePresupuestos;
+	public void setDetalleDiagnosticoVisitas(List<DetalleDiagnosticoVisita> detalleDiagnosticoVisitas) {
+		this.detalleDiagnosticoVisitas = detalleDiagnosticoVisitas;
 	}
-
+	
 	
 }

@@ -48,18 +48,19 @@ public class Trabajador extends Persona {
 	@JsonBackReference(value="empresa-trabajadores")
 	private Empresa empresa;
 	
-	public Trabajador(Long id, String nombre, char sexo, String direccion, int identificacion, Long estatus,
-			Date fecha_de_nacimiento, String telefono, String estatusId, String tipoPersonaId, String sectorId,
-			String email, String password, String rolId, Date fecha_ingreso, boolean disponibilidad, String cargoId,
+	public Trabajador(Long id, String nombre, char sexo, String direccion, int identificacion, Date fecha_de_nacimiento,
+			String telefono, int estatusId, String tipoPersonaId, String sectorId, String email, String password,
+			String rolId,Date fecha_ingreso, boolean disponibilidad, String cargoId,
 			String empresaId, String detalleOrdenServicio) {
-		super(id, nombre, sexo, direccion, identificacion, estatus, fecha_de_nacimiento, telefono, estatusId, tipoPersonaId,
-				sectorId, email, password, rolId);
+		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, tipoPersonaId, sectorId,
+				email, password, rolId);
 		this.fecha_ingreso = fecha_ingreso;
 		this.disponibilidad = disponibilidad;
 		this.cargo = new Cargo(cargoId);
 		this.empresa = new Empresa(empresaId);
 		this.detalleOrdenServicio = new DetalleOrdenServicio(detalleOrdenServicio);
-	}
+		}
+	
 	public Trabajador(String id) {
 		super(id);
 	}

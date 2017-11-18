@@ -20,7 +20,7 @@ public class TipoDiagnosticoVisita extends Maestro {
 	@JsonManagedReference(value="diagnosticoVisita-tipoDiagnosticoVisita")
 	private List<DiagnosticoVisita> diagnosticoVisitas;
 
-	public TipoDiagnosticoVisita(Long id, String name, String estatusId) {
+	public TipoDiagnosticoVisita(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public TipoDiagnosticoVisita(String id) {

@@ -38,12 +38,12 @@ public class CaracteristicaInmueble extends Puente {
 	
 	@OneToMany(mappedBy="caracteristicaInmueble")
 	@JsonManagedReference(value="caracteristicaInmueble-detalleDiagnostico")
-	private List<DetalleDiagnostico> detalleDiagnostico;
+	private List<CondicionDiagnostico> detalleDiagnostico;
 	
 	public CaracteristicaInmueble() {
 		super();
 	}
-	public CaracteristicaInmueble(Long id, String estatusId, String inmuebleId, String ubicacionId,
+	public CaracteristicaInmueble(Long id, int estatusId, String inmuebleId, String ubicacionId,
 			String caracteristicaId) {
 		super(id, estatusId);
 		this.inmueble = new Inmueble(inmuebleId);
@@ -71,10 +71,10 @@ public class CaracteristicaInmueble extends Puente {
 	public void setCaracteristica(Caracteristica caracteristica) {
 		this.caracteristica = caracteristica;
 	}
-	public List<DetalleDiagnostico> getDetalleDiagnostico() {
+	public List<CondicionDiagnostico> getDetalleDiagnostico() {
 		return detalleDiagnostico;
 	}
-	public void setDetalleDiagnostico(List<DetalleDiagnostico> detalleDiagnostico) {
+	public void setDetalleDiagnostico(List<CondicionDiagnostico> detalleDiagnostico) {
 		this.detalleDiagnostico = detalleDiagnostico;
 	}
 	

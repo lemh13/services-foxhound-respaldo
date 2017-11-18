@@ -43,7 +43,7 @@ public class Respuesta extends Maestro {
 	@PrimaryKeyJoinColumn
 	private OrdenServicio ordenServicio;
 
-	public Respuesta(Long id, String name, String estatusId, String parroquiaId, double costo,
+	public Respuesta(Long id, String name, int estatusId, String parroquiaId, double costo,
 			String tipoRespuestaId) {
 		super(id, name, estatusId);
 		this.costo = costo;

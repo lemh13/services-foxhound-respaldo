@@ -14,8 +14,7 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 	 @Autowired
 	 private AsuntoComentarioRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<AsuntoComentario> getAll() {
@@ -36,7 +35,7 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

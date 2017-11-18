@@ -14,9 +14,6 @@ public class ZonaService implements ServiceGeneral<Zona> {
 	 @Autowired
 	 private ZonaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<Zona> getAll() {
 		 List<Zona> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class ZonaService implements ServiceGeneral<Zona> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

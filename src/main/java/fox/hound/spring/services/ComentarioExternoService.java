@@ -14,8 +14,7 @@ public class ComentarioExternoService implements ServiceGeneral<ComentarioExtern
 	 @Autowired
 	 private ComentarioExternoRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<ComentarioExterno> getAll() {
@@ -36,7 +35,7 @@ public class ComentarioExternoService implements ServiceGeneral<ComentarioExtern
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

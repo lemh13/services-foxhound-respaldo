@@ -26,7 +26,7 @@ public class ValoracionOrdenServicio extends Puente {
 	public ValoracionOrdenServicio() {
 		super();
 	}
-	public ValoracionOrdenServicio(Long id, String estatusId) {
+	public ValoracionOrdenServicio(Long id, int estatusId) {
 		super(id, estatusId);
 	}
 	public ValoracionOrdenServicio(String id) {

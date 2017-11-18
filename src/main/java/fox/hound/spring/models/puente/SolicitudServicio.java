@@ -39,17 +39,13 @@ public class SolicitudServicio extends Puente {
 	private List<DetallePresupuesto> detallePresupuestos;
 	
 	@OneToMany(mappedBy="solicitudServicio")
-	@JsonManagedReference(value="solicitudServicio-reclamoSolicitudServicios")
-	private List<ReclamoSolicitudServicio> reclamoSolicitudServicios;
-	
-	@OneToMany(mappedBy="solicitudServicio")
 	@JsonManagedReference(value="solicitudServicio-detalleOrdenServicios")
 	private List<DetalleOrdenServicio> detalleOrdenServicios;
 	
 	public SolicitudServicio() {
 		super();
 	}
-	public SolicitudServicio(Long id, String estatusId, String servicioId, String solicitudId) {
+	public SolicitudServicio(Long id, int estatusId, String servicioId, String solicitudId) {
 		super(id, estatusId);
 		this.solicitud = new Solicitud(solicitudId);
 		this.servicio = new Servicio(servicioId);
@@ -80,12 +76,6 @@ public class SolicitudServicio extends Puente {
 	}
 	public void setDetallePresupuestos(List<DetallePresupuesto> detallePresupuestos) {
 		this.detallePresupuestos = detallePresupuestos;
-	}
-	public List<ReclamoSolicitudServicio> getReclamoSolicitudServicios() {
-		return reclamoSolicitudServicios;
-	}
-	public void setReclamoSolicitudServicios(List<ReclamoSolicitudServicio> reclamoSolicitudServicios) {
-		this.reclamoSolicitudServicios = reclamoSolicitudServicios;
 	}
 	public List<DetalleOrdenServicio> getDetalleOrdenServicios() {
 		return detalleOrdenServicios;

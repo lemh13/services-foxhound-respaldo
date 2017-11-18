@@ -14,9 +14,6 @@ public class UnidadMedidaService implements ServiceGeneral<UnidadMedida> {
 	 @Autowired
 	 private UnidadMedidaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<UnidadMedida> getAll() {
 		 List<UnidadMedida> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class UnidadMedidaService implements ServiceGeneral<UnidadMedida> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

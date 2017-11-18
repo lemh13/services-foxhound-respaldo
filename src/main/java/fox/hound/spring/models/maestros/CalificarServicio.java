@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Servicio;
+import fox.hound.spring.models.combo.OrdenEntrega;
 
 @Entity
 @Table(name="calificar_servicio")
@@ -24,10 +25,23 @@ public class CalificarServicio extends Maestro {
 	@JsonBackReference(value="servicio-calificarServicio")
 	private Servicio servicio;
 	
-	public CalificarServicio(Long id, String name, String estatusId, int valor, String servicioId) {
+	@ManyToOne
+	@JoinColumn(name="ordenEntrega_id")
+	@JsonBackReference(value="ordenEntrega-calificarServicio")
+	private OrdenEntrega ordenEntrega;
+	
+	@ManyToOne
+	@JoinColumn(name="categoriaCalificarServicio_id")
+	@JsonBackReference(value="categoriaCalificarServicio-calificarServicios")
+	private CategoriaCalificarServicio categoriaCalificarServicio;
+	
+	public CalificarServicio(Long id, String name, int estatusId, int valor, String servicioId,
+			String categoriaCalificarServicio, String ordenEntrega) {
 		super(id, name, estatusId);
 		this.valor = valor;
 		this.servicio = new Servicio(servicioId);
+		this.categoriaCalificarServicio = new CategoriaCalificarServicio(categoriaCalificarServicio);
+		this.ordenEntrega = new OrdenEntrega(ordenEntrega);
 	}
 	public CalificarServicio(String id) {
 		super(id);
@@ -47,6 +61,19 @@ public class CalificarServicio extends Maestro {
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
+	public CategoriaCalificarServicio getCategoriaCalificarServicio() {
+		return categoriaCalificarServicio;
+	}
+	public void setCategoriaCalificarServicio(CategoriaCalificarServicio categoriaCalificarServicio) {
+		this.categoriaCalificarServicio = categoriaCalificarServicio;
+	}
+	public OrdenEntrega getOrdenEntrega() {
+		return ordenEntrega;
+	}
+	public void setOrdenEntrega(OrdenEntrega ordenEntrega) {
+		this.ordenEntrega = ordenEntrega;
+	}
+	
 	
 	
 }

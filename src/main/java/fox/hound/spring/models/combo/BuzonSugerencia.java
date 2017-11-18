@@ -29,7 +29,7 @@ public class BuzonSugerencia extends Maestro {
 	public BuzonSugerencia() {
 		super();
 	}
-	public BuzonSugerencia(Long id, String descripcion, String estatusId, String correoEmisor,
+	public BuzonSugerencia(Long id, String descripcion, int estatusId, String correoEmisor,
 			String asuntoComentarioId, String personaId) {
 		super(id, descripcion, estatusId);
 		this.asuntoComentario = new AsuntoComentario(asuntoComentarioId);

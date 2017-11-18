@@ -26,7 +26,7 @@ public class Rol extends Maestro {
 	@JsonManagedReference(value="rolFuncions-rol")
 	private List<RolFuncion> rolFuncions;
 
-	public Rol(Long id, String name, String estatusId, String estadoId) {
+	public Rol(Long id, String name, int estatusId, String estadoId) {
 		super(id, name, estatusId);
 	}
 	public Rol(String id) {

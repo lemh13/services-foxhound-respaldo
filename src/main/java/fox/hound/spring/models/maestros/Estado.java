@@ -20,7 +20,7 @@ public class Estado extends Maestro {
 	@JsonManagedReference(value="ciudad-estado")
 	private List<Ciudad> ciudades;
 
-	public Estado(Long id, String name, String estatusId) {
+	public Estado(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Estado(String id) {

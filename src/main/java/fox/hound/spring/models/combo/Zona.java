@@ -26,7 +26,7 @@ public class Zona extends Maestro {
 	@JsonBackReference(value="servicio-zonas")
 	private Servicio servicio;
 
-	public Zona(Long id, String name, String estatusId, String sectorId, String servicioId) {
+	public Zona(Long id, String name, int estatusId, String sectorId, String servicioId) {
 		super(id, name, estatusId);
 		this.sector = new Sector(sectorId);
 		this.servicio = new Servicio(servicioId);

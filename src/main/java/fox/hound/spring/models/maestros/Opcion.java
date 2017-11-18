@@ -25,7 +25,7 @@ public class Opcion extends Maestro {
 	@JsonManagedReference(value="opcionCliente-opcion")
 	private List<OpcionCliente> opcionClientes;
 	
-	public Opcion(Long id, String name, String estatusId) {
+	public Opcion(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Opcion(String id) {

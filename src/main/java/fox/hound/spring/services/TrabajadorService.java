@@ -14,9 +14,6 @@ public class TrabajadorService implements ServiceGeneral<Trabajador> {
 	 @Autowired
 	 private TrabajadorRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<Trabajador> getAll() {
 		 List<Trabajador> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class TrabajadorService implements ServiceGeneral<Trabajador> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

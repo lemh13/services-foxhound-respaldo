@@ -14,8 +14,7 @@ public class SolicitudServicioService implements ServiceGeneral<SolicitudServici
 	 @Autowired
 	 private SolicitudServicioRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<SolicitudServicio> getAll() {
@@ -36,7 +35,7 @@ public class SolicitudServicioService implements ServiceGeneral<SolicitudServici
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

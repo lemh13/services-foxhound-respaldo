@@ -39,7 +39,7 @@ public class Presupuesto extends Maestro {
 	@JsonManagedReference(value="presupuesto-motivoPresupuestos")
 	private List<MotivoPresupuesto> motivoPresupuestos;
 
-	public Presupuesto(Long id, String name, String estatusId) {
+	public Presupuesto(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Presupuesto(String id) {

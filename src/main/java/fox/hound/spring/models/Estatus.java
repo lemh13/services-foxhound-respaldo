@@ -1,46 +1,33 @@
 package fox.hound.spring.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 
 //http://www.baeldung.com/jackson-annotations
 @CustomJsonRootName(plural = "estatus", singular = "estatus")
-@Entity
 public class Estatus {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(nullable = false)
-    private String descripcion;
-	
-	public Estatus(Long id, String descripcion) {
-		super();
-		this.id = id;
-		this.descripcion = descripcion;
-	}
-	public Estatus(String id) {
-		this.id = Long.valueOf(id);
-	}
-	public Estatus() {
-		
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	private ArrayList<String> estatus = new ArrayList<String>();
+
+	public ArrayList<String> getEstatus() {
+		return estatus;
 	}
 
+	public void setEstatus(ArrayList<String> estatus) {
+		this.estatus = estatus;
+	}
+
+	public Estatus() {
+		super();
+		estatus.add("Activo");
+		estatus.add("Suspendido");
+		estatus.add("Eliminado");
+	}
+	
+	public String nombre(int pos) {
+		
+	 return estatus.get(pos);
+	}
+	
 }

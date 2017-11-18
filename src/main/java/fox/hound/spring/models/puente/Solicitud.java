@@ -43,10 +43,14 @@ public class Solicitud extends Puente {
 	@JsonManagedReference(value="solicitudEventualidads-solicitudes")
 	private List<SolicitudEventualidad> solicitudEventualidads;
 	
+	@OneToMany(mappedBy="solicitud")
+	@JsonManagedReference(value="solicitud-motivoSolicitud")
+	private List<MotivoSolicitud> motivoSolicitud;
+	
 	public Solicitud() {
 		super();
 	}
-	public Solicitud(Long id, String estatusId, String motivoId, String inmuebleId) {
+	public Solicitud(Long id, int estatusId, String motivoId, String inmuebleId) {
 		super(id, estatusId);
 		this.motivo = new Motivo(motivoId);
 		this.inmueble = new Inmueble(inmuebleId);
@@ -83,6 +87,12 @@ public class Solicitud extends Puente {
 	}
 	public void setSolicitudEventualidads(List<SolicitudEventualidad> solicitudEventualidads) {
 		this.solicitudEventualidads = solicitudEventualidads;
+	}
+	public List<MotivoSolicitud> getMotivoSolicitud() {
+		return motivoSolicitud;
+	}
+	public void setMotivoSolicitud(List<MotivoSolicitud> motivoSolicitud) {
+		this.motivoSolicitud = motivoSolicitud;
 	}
 	
 	

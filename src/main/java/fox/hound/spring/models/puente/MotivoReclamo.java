@@ -31,7 +31,7 @@ public class MotivoReclamo extends Puente {
 	public MotivoReclamo() {
 		super();
 	}
-	public MotivoReclamo(Long id, String estatusId, String motivo) {
+	public MotivoReclamo(Long id, int estatusId, String motivo) {
 		super(id, estatusId);
 		this.motivo = new Motivo(motivo);
 	}

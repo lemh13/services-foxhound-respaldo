@@ -27,7 +27,7 @@ public class ClienteProfesion extends Puente {
 	@JsonBackReference(value="profesion-clienteProfesion")
 	private Profesion profesion;
 	
-	public ClienteProfesion(Long id, String estatusId, String clienteId, String profesionId) {
+	public ClienteProfesion(Long id, int estatusId, String clienteId, String profesionId) {
 		super(id, estatusId);
 		this.cliente = new Cliente(clienteId);
 		this.profesion = new Profesion(profesionId);

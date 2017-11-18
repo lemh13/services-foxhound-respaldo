@@ -68,8 +68,8 @@ public class Persona extends Base {
 	@JsonManagedReference(value="persona-buzonSugerencia")
 	private List<BuzonSugerencia> buzonSugerencia;
 	
-	public Persona(Long id, String nombre, char sexo, String direccion, int identificacion, Long estatus,
-			Date fecha_de_nacimiento, String telefono, String estatusId,
+	public Persona(Long id, String nombre, char sexo, String direccion, int identificacion,
+			Date fecha_de_nacimiento, String telefono, int estatusId,
 			String tipoPersonaId, String sectorId, String email, String password, String rolId) {
 		super(estatusId);
 		this.id = id;

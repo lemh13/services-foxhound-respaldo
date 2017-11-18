@@ -14,9 +14,6 @@ public class UsoInmuebleService implements ServiceGeneral<UsoInmueble> {
 	 @Autowired
 	 private UsoInmuebleRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
-
 	 @Override
 	 public List<UsoInmueble> getAll() {
 		 List<UsoInmueble> lista = new ArrayList<>();
@@ -36,7 +33,7 @@ public class UsoInmuebleService implements ServiceGeneral<UsoInmueble> {
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

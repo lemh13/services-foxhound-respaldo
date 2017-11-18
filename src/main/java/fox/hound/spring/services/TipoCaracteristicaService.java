@@ -14,8 +14,7 @@ public class TipoCaracteristicaService implements ServiceGeneral<TipoCaracterist
 	 @Autowired
 	 private TipoCaracteristicaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<TipoCaracteristica> getAll() {
@@ -36,7 +35,7 @@ public class TipoCaracteristicaService implements ServiceGeneral<TipoCaracterist
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

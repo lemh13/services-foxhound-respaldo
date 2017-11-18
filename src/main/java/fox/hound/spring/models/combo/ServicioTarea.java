@@ -36,7 +36,7 @@ public class ServicioTarea extends Maestro {
 	@JsonManagedReference(value="servicioTarea-detalleOrdenServicios")
 	private List<DetalleOrdenServicio> detalleOrdenServicios;
 
-	public ServicioTarea(Long id, String name, String estatusId, String estadoId, String tareaId, String servicioId) {
+	public ServicioTarea(Long id, String name, int estatusId, String estadoId, String tareaId, String servicioId) {
 		super(id, name, estatusId);
 		this.tarea = new Tarea(tareaId);
 		this.servicio = new Servicio(servicioId);

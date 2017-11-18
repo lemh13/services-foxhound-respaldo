@@ -14,8 +14,7 @@ public class DetalleOrdenServicioService implements ServiceGeneral<DetalleOrdenS
 	 @Autowired
 	 private DetalleOrdenServicioRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<DetalleOrdenServicio> getAll() {
@@ -36,7 +35,7 @@ public class DetalleOrdenServicioService implements ServiceGeneral<DetalleOrdenS
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

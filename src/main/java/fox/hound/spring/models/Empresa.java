@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.puente.RedSocialEmpresa;
+import fox.hound.spring.models.maestros.RedSocial;
 
 @Entity
 @Table(name="empresa")
@@ -49,14 +49,14 @@ public class Empresa extends Base {
 	
 	@OneToMany(mappedBy="empresa")
 	@JsonManagedReference(value="empresa-redSocialEmpresas")
-	private List<RedSocialEmpresa> redSocialEmpresas;
+	private List<RedSocial> redSocial;
 	
 	@OneToMany(mappedBy="empresa")
 	@JsonManagedReference(value="empresa-servicios")
 	private List<Servicio> servicios;
 	
 	public Empresa(Long id, String razonSocial, String rif, String quienesSomos, String mision, String vision,
-			String valores, String logo, String estatusId) {
+			String valores, String logo, int estatusId) {
 		super(estatusId);
 		this.id = id;
 		this.razonSocial = razonSocial;
@@ -133,11 +133,12 @@ public class Empresa extends Base {
 	public void setNoticias(List<Noticia> noticias) {
 		this.noticias = noticias;
 	}
-	public List<RedSocialEmpresa> getRedSocialEmpresas() {
-		return redSocialEmpresas;
+	
+	public List<RedSocial> getRedSocial() {
+		return redSocial;
 	}
-	public void setRedSocialEmpresas(List<RedSocialEmpresa> redSocialEmpresas) {
-		this.redSocialEmpresas = redSocialEmpresas;
+	public void setRedSocial(List<RedSocial> redSocial) {
+		this.redSocial = redSocial;
 	}
 	public List<Servicio> getServicios() {
 		return servicios;

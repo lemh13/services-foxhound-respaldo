@@ -65,7 +65,7 @@ public class Inmueble extends Base {
 	@JsonBackReference(value="cliente-inmueble")
 	private Cliente cliente;
 	
-	public Inmueble(Long id, String direccion, String descripcion, String estatusId, 
+	public Inmueble(Long id, String direccion, String descripcion, int estatusId, 
 			String clienteId, String tipoInmuebleId, String usoInmuebleId, String sectorId) {
 		super(estatusId);
 		this.id = id;

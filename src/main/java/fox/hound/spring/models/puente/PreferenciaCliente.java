@@ -28,7 +28,7 @@ public class PreferenciaCliente extends Puente {
 	public PreferenciaCliente() {
 		super();
 	}
-	public PreferenciaCliente(Long id, String estatusId, String tipoCaracteristicaInmuebleId,
+	public PreferenciaCliente(Long id, int estatusId, String tipoCaracteristicaInmuebleId,
 			String clienteId) {
 		super(id, estatusId);
 		this.tipoCaracteristicaInmueble = new TipoCaracteristicaInmueble(tipoCaracteristicaInmuebleId);

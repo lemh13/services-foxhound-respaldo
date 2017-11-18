@@ -14,8 +14,7 @@ public class ReclamoOrdenEntregaService implements ServiceGeneral<ReclamoOrdenEn
 	 @Autowired
 	 private ReclamoOrdenEntregaRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<ReclamoOrdenEntrega> getAll() {
@@ -36,7 +35,7 @@ public class ReclamoOrdenEntregaService implements ServiceGeneral<ReclamoOrdenEn
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

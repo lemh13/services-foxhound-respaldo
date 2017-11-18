@@ -29,7 +29,7 @@ public class Ciudad extends Maestro {
 	@JsonManagedReference(value="ciudad-municipios")
 	private List<Municipio> municipios;
 
-	public Ciudad(Long id, String name, String estatusId, String estadoId) {
+	public Ciudad(Long id, String name, int estatusId, String estadoId) {
 		super(id, name, estatusId);
 		this.estado = new Estado(estadoId);
 	}

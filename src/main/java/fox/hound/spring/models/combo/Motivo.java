@@ -17,6 +17,7 @@ import fox.hound.spring.models.maestros.TipoMotivo;
 import fox.hound.spring.models.puente.MotivoOrdenServicioEventualidad;
 import fox.hound.spring.models.puente.MotivoPresupuesto;
 import fox.hound.spring.models.puente.MotivoReclamo;
+import fox.hound.spring.models.puente.MotivoSolicitud;
 import fox.hound.spring.models.puente.Solicitud;
 import fox.hound.spring.models.puente.SolicitudServicioMotivo;
 
@@ -50,7 +51,11 @@ public class Motivo extends Maestro {
 	@JsonManagedReference(value="motivo-motivoPresupuestos")
 	private List<MotivoPresupuesto> motivoPresupuestos;
 	
-	public Motivo(Long id, String name, String estatusId, String tipoMotivoId) {
+	@OneToMany(mappedBy="motivo")
+	@JsonManagedReference(value="motivo-motivoSolicitud")
+	private List<MotivoSolicitud> motivoSolicitud;
+	
+	public Motivo(Long id, String name, int estatusId, String tipoMotivoId) {
 		super(id, name, estatusId);
 		this.tipoMotivo = new TipoMotivo(tipoMotivoId);
 	}
@@ -97,6 +102,12 @@ public class Motivo extends Maestro {
 	public void setMotivoPresupuestos(List<MotivoPresupuesto> motivoPresupuestos) {
 		this.motivoPresupuestos = motivoPresupuestos;
 	}
-	
+	public List<MotivoSolicitud> getMotivoSolicitud() {
+		return motivoSolicitud;
+	}
+	public void setMotivoSolicitud(List<MotivoSolicitud> motivoSolicitud) {
+		this.motivoSolicitud = motivoSolicitud;
+	}
+
 	
 }

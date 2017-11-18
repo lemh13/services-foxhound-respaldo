@@ -14,8 +14,7 @@ public class ClienteProfesionService implements ServiceGeneral<ClienteProfesion>
 	 @Autowired
 	 private ClienteProfesionRepository repository;
 
-	 @Autowired
-	 private EstatusService estatusService;
+	 
 
 	 @Override
 	 public List<ClienteProfesion> getAll() {
@@ -36,7 +35,7 @@ public class ClienteProfesionService implements ServiceGeneral<ClienteProfesion>
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
-		 clase.setEstatus( estatusService.getOne(clase.getEstatus().getId() ) );
+		 
 		 return repository.save(clase);
 	 }
 

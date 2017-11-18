@@ -30,7 +30,7 @@ public class Caracteristica extends Maestro {
 	@JsonManagedReference(value="caracteristica-caracteristicaInmuebles")
 	private List<CaracteristicaInmueble> caracteristicaInmuebles;
 	
-	public Caracteristica(Long id, String name, String estatusId, String tipoCaracteristicasId) {
+	public Caracteristica(Long id, String name, int estatusId, String tipoCaracteristicasId) {
 		super(id, name, estatusId);
 		this.tipoCaracteristica = new TipoCaracteristica(tipoCaracteristicasId);
 	}

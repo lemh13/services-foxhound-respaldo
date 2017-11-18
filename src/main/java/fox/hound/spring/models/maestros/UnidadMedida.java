@@ -20,7 +20,7 @@ public class UnidadMedida extends Maestro {
 	@JsonManagedReference(value="servicio-unidadMedida")
 	private List<Servicio> servicios;
 	
-	public UnidadMedida(Long id, String name, String estatusId) {
+	public UnidadMedida(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public UnidadMedida(String id) {

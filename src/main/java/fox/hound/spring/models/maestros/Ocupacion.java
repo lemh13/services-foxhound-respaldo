@@ -20,7 +20,7 @@ public class Ocupacion extends Maestro {
 	@JsonManagedReference(value="ocupacion-clienteOcupacion")
 	private List<ClienteOcupacion> clienteOcupacions;
 	
-	public Ocupacion(Long id, String name, String estatusId) {
+	public Ocupacion(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
 	}
 	public Ocupacion(String id) {

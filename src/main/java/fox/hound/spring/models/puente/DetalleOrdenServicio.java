@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.Trabajador;
-import fox.hound.spring.models.combo.ServicioHerramienta;
 import fox.hound.spring.models.combo.ServicioTarea;
 
 @Entity
@@ -25,11 +24,6 @@ public class DetalleOrdenServicio extends Puente {
 	@OneToMany(mappedBy="detalleOrdenServicio")
 	@JsonManagedReference(value="trabajador-detalleOrdenServicio")
 	private List<Trabajador> trabajadors;
-	
-	@ManyToOne
-	@JoinColumn(name="servicioHerramienta_id")
-	@JsonBackReference(value="servicioHerramienta-detalleOrdenServicios")
-	private ServicioHerramienta servicioHerramienta;
 	
 	@ManyToOne
 	@JoinColumn(name="servicioTarea_id")
@@ -49,10 +43,9 @@ public class DetalleOrdenServicio extends Puente {
 	public DetalleOrdenServicio() {
 		super();
 	}
-	public DetalleOrdenServicio(Long id, String estatusId, String servicioHerramienta,
+	public DetalleOrdenServicio(Long id, int estatusId,
 			String servicioTarea, String ordenServicio, String solicitudServicio) {
 		super(id, estatusId);
-		this.servicioHerramienta = new ServicioHerramienta(servicioHerramienta);
 		this.servicioTarea = new ServicioTarea(servicioTarea);
 		this.ordenServicio = new OrdenServicio(ordenServicio);
 		this.solicitudServicio = new SolicitudServicio(solicitudServicio);
@@ -65,12 +58,6 @@ public class DetalleOrdenServicio extends Puente {
 	}
 	public void setTrabajadors(List<Trabajador> trabajadors) {
 		this.trabajadors = trabajadors;
-	}
-	public ServicioHerramienta getServicioHerramienta() {
-		return servicioHerramienta;
-	}
-	public void setServicioHerramienta(ServicioHerramienta servicioHerramienta) {
-		this.servicioHerramienta = servicioHerramienta;
 	}
 	public ServicioTarea getServicioTarea() {
 		return servicioTarea;
