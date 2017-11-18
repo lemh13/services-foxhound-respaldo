@@ -13,8 +13,12 @@ public class PersonaService implements ServiceGeneral<Persona> {
 
 	 @Autowired
 	 private PersonaRepository repository;
-
 	 
+	 public List<Persona> getAll(String type) {
+		 List<Persona> lista = new ArrayList<>();
+		 repository.findByType(type).forEach(lista::add);
+		 return lista;
+	 }
 
 	 @Override
 	 public List<Persona> getAll() {

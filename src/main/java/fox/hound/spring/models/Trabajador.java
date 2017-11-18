@@ -97,4 +97,13 @@ public class Trabajador extends Persona {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+
+	public DetalleOrdenServicio getDetalleOrdenServicio() {
+		return detalleOrdenServicio;
+	}
+
+	public void setDetalleOrdenServicio(DetalleOrdenServicio detalleOrdenServicio) {
+		this.detalleOrdenServicio = detalleOrdenServicio;
+	}
+	
 }

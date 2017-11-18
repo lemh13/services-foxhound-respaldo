@@ -41,43 +41,70 @@ public class MenuController {
 		 List<Menu> lista = new ArrayList<>();
 		 lista.add(new Menu(9, "Mi Perfil", "fa fa-plus", "none", null));
 		 lista.add(new Menu(10, "Mis Inmuebles", "fa fa-plus", "none", null));
-		 lista.add(new Menu(11, "Segmentos", "fa fa-plus", "none", segmentos()));	
+		 lista.add(new Menu(10, "Datos de Servicio", "fa fa-plus", "none", servicio()));
+		 lista.add(new Menu(10, "Datos de Inmueble", "fa fa-plus", "none", inmueble()));
+		 lista.add(new Menu(10, "Datos de Visita", "fa fa-plus", "none", datosVisita()));
+		 lista.add(new Menu(11, "Datos de Segmentos", "fa fa-plus", "none", segmentos()));	
 		 return lista;
 	 }
-	 
-	 public List<Menu> segmentos() {
+
+	private List<Menu> servicio() {
 		List<Menu> lista = new ArrayList<>();
+		lista.add(new Menu(17, "Estado", "fa fa-plus", "none", null));
+		lista.add(new Menu(17, "Ciudad", "fa fa-plus", "none", null));	
+		lista.add(new Menu(17, "Municipio", "fa fa-plus", "none", null));
+		lista.add(new Menu(17, "Parroquia", "fa fa-plus", "none", null));
+		lista.add(new Menu(17, "Sector", "fa fa-plus", "none", null));
+		lista.add(new Menu(17, "Zona", "fa fa-plus", "none", null));
 		lista.add(new Menu(12, "Cargo", "fa fa-plus", "none", null));
+		lista.add(new Menu(24, "Tarea", "fa fa-plus", "none", null));
 		lista.add(new Menu(13, "Categoria", "fa fa-plus", "none", null));
-		lista.add(new Menu(14, "Categoria del Inmueble", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(15, "Categoria del Servicio", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(16, "Condición", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(17, "Estado", "fa fa-plus", "none", null));
 	 	lista.add(new Menu(18, "Estado del Servicio", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(19, "Herramienta", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(20, "Ocupación", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(21, "Opción", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(22, "Pregunta", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(23, "Profesión", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(24, "Tarea", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(25, "Tipo de Caracteristica", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(26, "Tipo Cliente", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(27, "Tipo Diagnostico Visita", "fa fa-plus", "none", null));
 	 	lista.add(new Menu(28, "Tipo de Eventualidad", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(29, "Tipo de Garantia", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(30, "Tipo de Inmueble", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(31, "Tipo de Motivo", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(32, "Tipo de Notificación", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(33, "Tipo de Promoción", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(28, "Respuesta", "fa fa-plus", "none", null));
 	 	lista.add(new Menu(34, "Tipo de Reclamo", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(35, "Tipo de Recurso", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(36, "Tipo de Respuesta", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(37, "Tipo de Servicio", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(38, "Tipo de Visita", "fa fa-plus", "none", null));
-	 	lista.add(new Menu(39, "Turno", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(34, "Reclamo", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(29, "Tipo de Garantia", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(33, "Tipo de Promoción", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(37, "Tipo de Servicio", "fa fa-plus", "none", null));		
+		return lista;
+	}
+	
+	 private List<Menu> inmueble() {
+		List<Menu> lista = new ArrayList<>();
 	 	lista.add(new Menu(40, "Ubicación", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(25, "Tipo de Caracteristica", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(25, "Caracteristica", "fa fa-plus", "none", null));
+		lista.add(new Menu(14, "Categoria del Inmueble", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(16, "Condición", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(30, "Tipo de Inmueble", "fa fa-plus", "none", null));
 	 	lista.add(new Menu(41, "Unidad de Medida", "fa fa-plus", "none", null));
 	 	lista.add(new Menu(42, "Uso del Inmueble", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(27, "Tipo Diagnostico Visita", "fa fa-plus", "none", null));
+
+		return lista;
+	}
+
+	private List<Menu> datosVisita() {
+		List<Menu> lista = new ArrayList<>();
+	 	lista.add(new Menu(38, "Tipo de Visita", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(39, "Turno", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(32, "Tipo de Diagnostico VIsita", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(32, "Tipo de Eventualidad", "fa fa-plus", "none", null));
+
+		return lista;
+	}
+	 
+	public List<Menu> segmentos() {
+		List<Menu> lista = new ArrayList<>();
+	 	lista.add(new Menu(23, "Profesión", "fa fa-plus", "none", null));	 	
+	 	lista.add(new Menu(20, "Ocupación", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(26, "Tipo Cliente", "fa fa-plus", "none", null));	 	
+	 	lista.add(new Menu(21, "Opción", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(21, "Opción Pregunta", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(22, "Pregunta", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(31, "Tipo de Motivo", "fa fa-plus", "none", null));
+	 	lista.add(new Menu(36, "Tipo de Respuesta", "fa fa-plus", "none", null));
 		 return lista;
 	 }
 	

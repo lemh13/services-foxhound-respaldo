@@ -1,5 +1,8 @@
 package fox.hound.spring.repositories;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import fox.hound.spring.models.Persona;
 
@@ -7,4 +10,8 @@ import fox.hound.spring.models.Persona;
 public interface PersonaRepository extends CrudRepository<Persona, Long> {
 
 	Persona findByEmailAndPassword(String email, String password);
+	
+	@Query("select p from Persona p where type = ?1")
+	List<Persona> findByType(String typeValue);
+
 }
