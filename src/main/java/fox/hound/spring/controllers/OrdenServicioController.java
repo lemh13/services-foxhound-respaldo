@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.OrdenServicio;
+import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.services.OrdenServicioService;
+import fox.hound.spring.services.TipoOrdenServicioService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
+import java.lang.Class;
 
 @RestController
 @RequestMapping("ordenservicio")
@@ -23,6 +26,8 @@ public class OrdenServicioController {
 	 private OrdenServicioService service;
 
 	 private Class<?> CLASE = OrdenServicio.class;
+	 @Autowired
+	 private TipoOrdenServicioService tipoOrdenServicioService;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -34,11 +39,15 @@ public class OrdenServicioController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="/tipoOrdenServicio/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody OrdenServicio clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 TipoOrdenServicio tipoOrdenServicio = tipoOrdenServicioService.getOne(Long.valueOf(id));
+		 if(tipoOrdenServicio!=null) {
+			 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 }else {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "TipoOrdenServicio");
+		 }
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

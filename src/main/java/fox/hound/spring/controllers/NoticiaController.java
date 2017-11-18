@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Empresa;
 import fox.hound.spring.models.Noticia;
+import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.NoticiaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -21,6 +24,7 @@ public class NoticiaController {
 
 	 @Autowired
 	 private NoticiaService service;
+	 private EmpresaService empresaService;
 
 	 private Class<?> CLASE = Noticia.class;
 
@@ -37,7 +41,8 @@ public class NoticiaController {
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Noticia clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
+		 Empresa empresa = empresaService.getOne(Long.valueOf(1));
+		 clase.setEmpresa(empresa);
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
