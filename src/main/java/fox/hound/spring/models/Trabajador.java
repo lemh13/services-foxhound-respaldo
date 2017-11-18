@@ -52,8 +52,8 @@ public class Trabajador extends Persona {
 			String telefono, int estatusId, String tipoPersonaId, String sectorId, String email, String password,
 			String rolId,Date fecha_ingreso, boolean disponibilidad, String cargoId,
 			String empresaId, String detalleOrdenServicio) {
-		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, tipoPersonaId, sectorId,
-				email, password, rolId);
+		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, sectorId,
+				email, password, rolId, Integer.valueOf(tipoPersonaId));
 		this.fecha_ingreso = fecha_ingreso;
 		this.disponibilidad = disponibilidad;
 		this.cargo = new Cargo(cargoId);

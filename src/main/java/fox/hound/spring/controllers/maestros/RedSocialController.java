@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fox.hound.spring.models.Empresa;
 import fox.hound.spring.models.maestros.RedSocial;
+import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.RedSocialService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -23,6 +25,9 @@ public class RedSocialController {
 
 	@Autowired
 	private RedSocialService service;
+	
+	@Autowired
+	private EmpresaService empresaService;
 	
 	private Class<?> CLASE = RedSocial.class;
 
@@ -36,11 +41,18 @@ public class RedSocialController {
 		return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	}
 
-	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> agregar(@RequestBody RedSocial clase, HttpServletRequest request) {
+	@RequestMapping(value="empresa/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> agregar(@RequestBody RedSocial clase, @PathVariable String id, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
-		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Red Social", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		Empresa empresa = empresaService.getOne(Long.valueOf(id));
+		
+		if (empresa != null) {
+			clase.setEmpresa(empresa);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Red Social", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		} else {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Empresa");
+		}		
 	}
 
 	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

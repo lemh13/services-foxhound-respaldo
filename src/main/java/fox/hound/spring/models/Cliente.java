@@ -54,8 +54,8 @@ public class Cliente extends Persona {
 	public Cliente(Long id, String nombre, char sexo, String direccion, int identificacion, Date fecha_de_nacimiento,
 			String telefono, int estatusId, String tipoPersonaId, String sectorId, String email, String password,
 			String rolId, String tipoClienteId) {
-		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, tipoPersonaId, sectorId,
-				email, password, rolId);
+		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, sectorId,
+				email, password, rolId, Integer.valueOf(tipoPersonaId));
 		this.tipoCliente = new TipoCliente(tipoClienteId);
 	}
 	public Cliente(String id) {

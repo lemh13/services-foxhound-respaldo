@@ -15,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -48,16 +49,15 @@ public class Persona extends Base {
 	private String password;
 	@Column(nullable = false)
 	private String email;
+	private int tipoPersona;
+	// aqui coloco la descripcion del tipoPersona
+	@Transient
+	private String descripcionTipoPersona;
 	
 	@ManyToOne
 	@JoinColumn(name="sector_id")
 	@JsonBackReference(value="personas-sector")
 	private Sector sector;
-	
-	@ManyToOne
-	@JoinColumn(name="tipoPersona_id")
-	@JsonBackReference(value="personas-tipoPersona")
-	private TipoPersona tipoPersona;
 	
 	@ManyToOne
 	@JoinColumn(name="rol_id")
@@ -70,18 +70,18 @@ public class Persona extends Base {
 	
 	public Persona(Long id, String nombre, char sexo, String direccion, int identificacion,
 			Date fecha_de_nacimiento, String telefono, int estatusId,
-			String tipoPersonaId, String sectorId, String email, String password, String rolId) {
+			String sectorId, String email, String password, String rolId, int tipoPersona) {
 		super(estatusId);
 		this.id = id;
 		this.nombre = nombre;
 		this.sexo = sexo;
+		this.tipoPersona = tipoPersona;
 		this.direccion = direccion;
 		this.identificacion = identificacion;
 		this.fecha_de_nacimiento = fecha_de_nacimiento;
 		this.telefono = telefono;
 		this.password = password;
 		this.email = email;
-		this.tipoPersona = new TipoPersona(tipoPersonaId);
 		this.sector = new Sector(sectorId);
 		this.rol = new Rol(rolId);
 	}
@@ -133,12 +133,6 @@ public class Persona extends Base {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public TipoPersona getTipoPersona() {
-		return tipoPersona;
-	}
-	public void setTipoPersona(TipoPersona tipoPersona) {
-		this.tipoPersona = tipoPersona;
-	}	
 	public Sector getSector() {
 		return sector;
 	}
@@ -169,5 +163,19 @@ public class Persona extends Base {
 	public void setBuzonSugerencia(List<BuzonSugerencia> buzonSugerencia) {
 		this.buzonSugerencia = buzonSugerencia;
 	}
+	public int getTipoPersona() {
+		return tipoPersona;
+	}
+	public void setTipoPersona(int tipoPersona) {
+		this.tipoPersona = tipoPersona;
+	}
+	public String getDescripcionTipoPersona() {
+		TipoPersona tipoPersonas = new TipoPersona();
+		return tipoPersonas.nombre(tipoPersona);
+	}
+	public void setDescripcionTipoPersona(String descripcionTipoPersona) {
+		this.descripcionTipoPersona = descripcionTipoPersona;
+	}
+	
 	
 }

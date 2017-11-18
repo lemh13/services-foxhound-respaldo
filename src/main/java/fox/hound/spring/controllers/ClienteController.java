@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.Cliente;
 import fox.hound.spring.services.ClienteService;
+import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -20,7 +21,7 @@ import fox.hound.spring.utils.ResponseDefault;
 public class ClienteController {
 
 	 @Autowired
-	 private ClienteService service;
+	 private PersonaService service;
 
 	 private Class<?> CLASE = Cliente.class;
 

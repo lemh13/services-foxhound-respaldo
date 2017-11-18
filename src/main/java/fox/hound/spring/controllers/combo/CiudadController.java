@@ -48,7 +48,7 @@ public class CiudadController {
 		
 		if (estado != null) {
 			clase.setEstado(estado);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Ciudad", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Estado");
 		}
@@ -63,6 +63,11 @@ public class CiudadController {
 	public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		service.delete(Long.valueOf(id));
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Ciudad");
+	}
+	
+	@RequestMapping(value="/estado/{id}/buscarPorEstado", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarPorEstado(@PathVariable String id, HttpServletRequest request) {
+		return ResponseDefault.ok(service.getCiudadPorEstado(id), CLASE, ResponseDefault.SINGULAR); 
 	}
 	
 }

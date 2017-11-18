@@ -14,7 +14,9 @@ public class CiudadService implements ServiceGeneral<Ciudad> {
 	 @Autowired
 	 private CiudadRepository repository;
 
-	 
+	 public List<Ciudad> getCiudadPorEstado(String id) {
+		 return repository.findByEstadoId(Long.valueOf(id));
+	 }
 
 	 @Override
 	 public List<Ciudad> getAll() {

@@ -22,6 +22,7 @@ public class Estado extends Maestro {
 
 	public Estado(Long id, String name, int estatusId) {
 		super(id, name, estatusId);
+		
 	}
 	public Estado(String id) {
 		super(id);
