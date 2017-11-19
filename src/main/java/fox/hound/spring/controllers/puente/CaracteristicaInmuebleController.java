@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Inmueble;
+import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.puente.CaracteristicaInmueble;
 import fox.hound.spring.services.CaracteristicaInmuebleService;
+import fox.hound.spring.services.CaracteristicaService;
+import fox.hound.spring.services.InmuebleService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,10 @@ public class CaracteristicaInmuebleController {
 
 	 @Autowired
 	 private CaracteristicaInmuebleService service;
+	 @Autowired
+	 private InmuebleService inmuebleService;
+	 @Autowired
+	 private CaracteristicaService caracteristicaService;
 
 	 private Class<?> CLASE = CaracteristicaInmueble.class;
 
@@ -34,11 +43,21 @@ public class CaracteristicaInmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody CaracteristicaInmueble clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="inmueble/{id_i}/caracteristica/{id_c}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody CaracteristicaInmueble clase, @PathVariable String id_i, @PathVariable String id_c, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Inmueble inmueble = inmuebleService.getOne(Long.valueOf(id_i));
+		 Caracteristica caracteristica = caracteristicaService.getOne(Long.valueOf(id_c));
+			
+		 if (inmueble != null && caracteristica != null) {
+				clase.setInmueble(inmueble);
+				clase.setCaracteristica(caracteristica);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else if (inmueble == null){
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Inmueble");
+			}else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Caracteristica");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

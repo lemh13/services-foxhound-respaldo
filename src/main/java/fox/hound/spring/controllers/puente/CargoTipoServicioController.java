@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.maestros.Cargo;
+import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.puente.CargoTipoServicio;
+import fox.hound.spring.services.CargoService;
 import fox.hound.spring.services.CargoTipoServicioService;
+import fox.hound.spring.services.TipoServicioService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,10 @@ public class CargoTipoServicioController {
 
 	 @Autowired
 	 private CargoTipoServicioService service;
+	 @Autowired
+	 private CargoService cargoService;
+	 @Autowired
+	 private TipoServicioService tipoServicioService;
 
 	 private Class<?> CLASE = CargoTipoServicio.class;
 
@@ -34,11 +43,22 @@ public class CargoTipoServicioController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody CargoTipoServicio clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="cargo/{id_c}/tipoServicio/{id_t}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody CargoTipoServicio clase, @PathVariable String id_t, @PathVariable String id_c, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Cargo cargo = cargoService.getOne(Long.valueOf(id_c));
+		 TipoServicio tipoServicio = tipoServicioService.getOne(Long.valueOf(id_t));
+		 
+		 if (cargo != null && tipoServicio != null) {
+			 clase.setCargo(cargo);
+			 clase.setTipoServicio(tipoServicio);
+			 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 } else if (cargo == null){
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Cargo");
+			}else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "TipoServicio");
+
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

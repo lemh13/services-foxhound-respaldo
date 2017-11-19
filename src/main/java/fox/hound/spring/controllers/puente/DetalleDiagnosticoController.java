@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.puente.CondicionDiagnostico;
-import fox.hound.spring.services.CondicionDiagnosticoService;
+import fox.hound.spring.services.DetalleDiagnosticoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -20,7 +20,7 @@ import fox.hound.spring.utils.ResponseDefault;
 public class DetalleDiagnosticoController {
 
 	 @Autowired
-	 private CondicionDiagnosticoService service;
+	 private DetalleDiagnosticoService service;
 
 	 private Class<?> CLASE = CondicionDiagnostico.class;
 

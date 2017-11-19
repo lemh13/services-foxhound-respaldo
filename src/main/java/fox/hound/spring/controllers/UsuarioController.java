@@ -21,7 +21,7 @@ import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("persona")
+@RequestMapping("usuario")
 public class UsuarioController {
 
 	 @Autowired
@@ -37,7 +37,7 @@ public class UsuarioController {
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
-		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
+		 return ResponseDefault.ok(service.getAll("Usuario"), CLASE, ResponseDefault.PLURAL);
 	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

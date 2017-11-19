@@ -14,6 +14,7 @@ import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
 import fox.hound.spring.models.puente.SolicitudServicio;
 import fox.hound.spring.services.*;
+import fox.hound.spring.services.DetalleDiagnosticoVisitaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;

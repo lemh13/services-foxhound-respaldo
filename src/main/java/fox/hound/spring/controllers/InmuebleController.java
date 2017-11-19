@@ -31,9 +31,7 @@ public class InmuebleController {
 	 private SectorService setorService;
 	 @Autowired
 	 private PersonaService personaService;
-	 
-	 
-	 @Autowired
+	 	 
 	 private Class<?> CLASE = Inmueble.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

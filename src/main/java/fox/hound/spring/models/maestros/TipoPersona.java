@@ -27,8 +27,9 @@ public class TipoPersona {
 		tipoPersonas.add("C");
 	}
 	
-	public String nombre(int pos) {
-		return tipoPersonas.get(pos);
+
+	public String nombre(int tipoPersona) {
+		return tipoPersonas.get(tipoPersona);
 	}
 
 }

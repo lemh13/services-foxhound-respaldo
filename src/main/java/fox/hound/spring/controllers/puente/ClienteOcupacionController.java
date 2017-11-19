@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Cliente;
+import fox.hound.spring.models.maestros.Ocupacion;
 import fox.hound.spring.models.puente.ClienteOcupacion;
 import fox.hound.spring.services.ClienteOcupacionService;
+import fox.hound.spring.services.OcupacionService;
+import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,10 @@ public class ClienteOcupacionController {
 
 	 @Autowired
 	 private ClienteOcupacionService service;
+	 @Autowired
+	 private PersonaService personaService;
+	 @Autowired
+	 private OcupacionService ocupacionService;
 
 	 private Class<?> CLASE = ClienteOcupacion.class;
 
@@ -34,12 +43,22 @@ public class ClienteOcupacionController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ClienteOcupacion clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="cliente/{id_c}/ocupacion/{id_o}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody ClienteOcupacion clase, @PathVariable String id_c, @PathVariable String id_o, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
+		 Cliente cliente = (Cliente) personaService.getOne(Long.valueOf(id_c));
+		 Ocupacion ocupacion = ocupacionService.getOne(Long.valueOf(id_o));
 		 // PENDIENTE -> @ManyToOne
+		 if (cliente != null && ocupacion != null) {
+			 clase.setCliente(cliente);
+			 clase.setOcupacion(ocupacion);
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	 }else if(cliente == null) {
+		 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Cliente");
+	 }else {
+		 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Ocupacion");
 	 }
+		 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody ClienteOcupacion clase, HttpServletRequest request) {
