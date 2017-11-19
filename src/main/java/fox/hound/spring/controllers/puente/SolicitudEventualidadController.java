@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.combo.Eventualidad;
+import fox.hound.spring.models.puente.Solicitud;
 import fox.hound.spring.models.puente.SolicitudEventualidad;
+import fox.hound.spring.services.EventualidadService;
 import fox.hound.spring.services.SolicitudEventualidadService;
+import fox.hound.spring.services.SolicitudService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,12 @@ public class SolicitudEventualidadController {
 
 	 @Autowired
 	 private SolicitudEventualidadService service;
+	 
+	 @Autowired
+	 private SolicitudService solicitudService;
+	 
+	 @Autowired 
+	 private EventualidadService eventualidadService;
 
 	 private Class<?> CLASE = SolicitudEventualidad.class;
 
@@ -34,11 +45,19 @@ public class SolicitudEventualidadController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody SolicitudEventualidad clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/solicitud/{solicitudid}/eventualidad/{eventualidadid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody SolicitudEventualidad clase, @PathVariable String solicitudid, @PathVariable String eventualidadid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Solicitud solicitud = solicitudService.getOne(Long.valueOf(solicitudid));
+		 Eventualidad eventualidad = eventualidadService.getOne(Long.valueOf(eventualidadid));
+		 
+		 if (solicitud != null && eventualidad != null) {
+				clase.setSolicitud(solicitud);
+				clase.setEventualidad(eventualidad);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Solicitud Eventualidad");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

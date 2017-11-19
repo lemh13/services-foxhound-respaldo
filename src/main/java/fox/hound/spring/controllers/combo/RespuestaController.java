@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.combo.Respuesta;
+import fox.hound.spring.models.maestros.TipoRespuesta;
 import fox.hound.spring.services.RespuestaService;
+import fox.hound.spring.services.TipoRespuestaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +23,9 @@ public class RespuestaController {
 
 	 @Autowired
 	 private RespuestaService service;
+	 
+	 @Autowired
+	 private TipoRespuestaService tiporespuestaservice;
 
 	 private Class<?> CLASE = Respuesta.class;
 
@@ -34,12 +39,18 @@ public class RespuestaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="tiporespuesta/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Respuesta clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+		 TipoRespuesta tiporespuesta = tiporespuestaservice.getOne(Long.valueOf(id));
+		 
+		 if (tiporespuesta != null) {
+				clase.setTipoRespuesta(tiporespuesta);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "TipoRespuesta");
+			}
+		 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody Respuesta clase, HttpServletRequest request) {

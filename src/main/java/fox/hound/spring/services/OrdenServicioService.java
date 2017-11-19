@@ -14,8 +14,6 @@ public class OrdenServicioService implements ServiceGeneral<OrdenServicio> {
 	 @Autowired
 	 private OrdenServicioRepository repository;
 
-	 
-
 	 @Override
 	 public List<OrdenServicio> getAll() {
 		 List<OrdenServicio> lista = new ArrayList<>();

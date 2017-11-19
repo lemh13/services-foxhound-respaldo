@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.combo.OpcionPregunta;
+import fox.hound.spring.models.maestros.Opcion;
+import fox.hound.spring.models.maestros.Pregunta;
 import fox.hound.spring.services.OpcionPreguntaService;
+import fox.hound.spring.services.OpcionService;
+import fox.hound.spring.services.PreguntaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +25,12 @@ public class OpcionPreguntaController {
 
 	 @Autowired
 	 private OpcionPreguntaService service;
+	 
+	 @Autowired
+	 private OpcionService opcionservice;
+	 
+	 @Autowired
+	 private PreguntaService preguntaservice;
 
 	 private Class<?> CLASE = OpcionPregunta.class;
 
@@ -34,11 +44,29 @@ public class OpcionPreguntaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody OpcionPregunta clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="opcion/{id}/pregunta/{id_p}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody OpcionPregunta clase, @PathVariable String id, @PathVariable String id_p, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Opcion opcion = opcionservice.getOne(Long.valueOf(id));
+		 Pregunta pregunta = preguntaservice.getOne(Long.valueOf(id_p));
+			
+			if (opcion != null && pregunta!=null) 
+			{
+				clase.setOpcion(opcion);
+				clase.setPregunta(pregunta);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} 
+			else if (opcion==null)
+			{
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Opcion");
+			}
+			else 
+			{
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "pregunta");
+			}
+			
+			
+			
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

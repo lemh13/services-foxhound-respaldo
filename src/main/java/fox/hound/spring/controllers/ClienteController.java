@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.Cliente;
 import fox.hound.spring.models.combo.Rol;
 import fox.hound.spring.models.combo.Sector;
-import fox.hound.spring.models.maestros.Estado;
 import fox.hound.spring.models.maestros.TipoCliente;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.RolService;

@@ -25,9 +25,10 @@ public class OrdenServicioController {
 	 @Autowired
 	 private OrdenServicioService service;
 
-	 private Class<?> CLASE = OrdenServicio.class;
 	 @Autowired
 	 private TipoOrdenServicioService tipoOrdenServicioService;
+	 
+	 private Class<?> CLASE = OrdenServicio.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -43,6 +44,7 @@ public class OrdenServicioController {
 	 public ResponseEntity<?> agregar(@RequestBody OrdenServicio clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoOrdenServicio tipoOrdenServicio = tipoOrdenServicioService.getOne(Long.valueOf(id));
+		 
 		 if(tipoOrdenServicio!=null) {
 			 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		 }else {

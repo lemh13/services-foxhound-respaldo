@@ -1,6 +1,5 @@
 package fox.hound.spring.models.combo;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -22,9 +21,6 @@ import fox.hound.spring.models.puente.ValoracionOrdenServicio;
 @CustomJsonRootName(plural = "respuesta", singular = "respuesta")
 public class Respuesta extends Maestro {
 	
-	@Column(nullable = false)
-    private double costo;
-	
 	@ManyToOne
 	@JoinColumn(name="tipoRecurso_id")
 	@JsonBackReference(value="respuesta-tipoRespuesta")
@@ -43,10 +39,9 @@ public class Respuesta extends Maestro {
 	@PrimaryKeyJoinColumn
 	private OrdenServicio ordenServicio;
 
-	public Respuesta(Long id, String name, int estatusId, String parroquiaId, double costo,
+	public Respuesta(Long id, String name, int estatusId, String parroquiaId,
 			String tipoRespuestaId) {
 		super(id, name, estatusId);
-		this.costo = costo;
 		this.tipoRespuesta = new TipoRespuesta(tipoRespuestaId);
 	}
 	public Respuesta(String id) {
@@ -55,12 +50,7 @@ public class Respuesta extends Maestro {
 	public Respuesta() {
 		super();
 	}
-	public double getCosto() {
-		return costo;
-	}
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+	
 	public Presupuesto getPresupuesto() {
 		return presupuesto;
 	}

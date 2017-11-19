@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Servicio;
+import fox.hound.spring.models.maestros.TipoCaracteristica;
 import fox.hound.spring.models.puente.TipoCaracteristicaServicio;
+import fox.hound.spring.services.ServicioService;
+import fox.hound.spring.services.TipoCaracteristicaService;
 import fox.hound.spring.services.TipoCaracteristicaServicioService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -21,6 +26,12 @@ public class TipoCaracteristicaServicioController {
 
 	 @Autowired
 	 private TipoCaracteristicaServicioService service;
+	 
+	 @Autowired
+	 private TipoCaracteristicaService tipoCaracteristicaService;
+	 
+	 @Autowired
+	 private ServicioService servicioService;
 
 	 private Class<?> CLASE = TipoCaracteristicaServicio.class;
 
@@ -34,11 +45,19 @@ public class TipoCaracteristicaServicioController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody TipoCaracteristicaServicio clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/tipoCaracteristica/{tipoCaracteristicaid}/servicio/{servicioid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody TipoCaracteristicaServicio clase, @PathVariable String tipoCaracteristicaid, @PathVariable String servicioid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 TipoCaracteristica tipoCaracteristica = tipoCaracteristicaService.getOne(Long.valueOf(tipoCaracteristicaid));
+		 Servicio servicio = servicioService.getOne(Long.valueOf(servicioid));
+		 
+		 if (tipoCaracteristica != null && servicio != null) {
+				clase.setTipoCaracteristica(tipoCaracteristica);
+				clase.setServicio(servicio);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo Caracteristica Servicio");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nimbusds.oauth2.sdk.GeneralException;
 
-import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.maestros.Estado;
-import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
-import fox.hound.spring.models.puente.SolicitudServicio;
 import fox.hound.spring.services.EstadoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -31,7 +28,6 @@ public class EstadoController {
 	
 	@Autowired
 	private EstadoService service;
-
 	
 	private Class<?> CLASE = Estado.class;
 

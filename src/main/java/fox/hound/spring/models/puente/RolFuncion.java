@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.Menu;
 import fox.hound.spring.models.combo.Rol;
 
 @Entity

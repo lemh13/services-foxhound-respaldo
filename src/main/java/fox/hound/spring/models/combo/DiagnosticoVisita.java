@@ -21,6 +21,7 @@ import fox.hound.spring.models.Visita;
 import fox.hound.spring.models.maestros.Maestro;
 import fox.hound.spring.models.maestros.TipoDiagnosticoVisita;
 import fox.hound.spring.models.puente.CondicionDiagnostico;
+import fox.hound.spring.models.puente.ValoracionOrdenServicio;
 
 @Entity
 @Table(name="diagnostico_visita")
@@ -30,6 +31,10 @@ public class DiagnosticoVisita extends Maestro {
 	@OneToMany(mappedBy="diagnosticoVisita")
 	@JsonManagedReference(value="diagnosticoVisita-detalleDiagnosticos")
 	private List<CondicionDiagnostico> detalleDiagnosticos;
+	
+	@OneToMany(mappedBy="diagnosticoVisita")
+	@JsonManagedReference(value="valoracionOrdenServicio-diagnosticoVisita")
+	private List<ValoracionOrdenServicio> valoracionOrdenServicio;
 	
 	@ManyToOne
 	@JoinColumn(name="tipoDiagnosticoVisita_id")
@@ -96,6 +101,13 @@ public class DiagnosticoVisita extends Maestro {
 	public void setOrdenServicio(OrdenServicio ordenServicio) {
 		this.ordenServicio = ordenServicio;
 	}
+	public List<ValoracionOrdenServicio> getValoracionOrdenServicio() {
+		return valoracionOrdenServicio;
+	}
+	public void setValoracionOrdenServicio(List<ValoracionOrdenServicio> valoracionOrdenServicio) {
+		this.valoracionOrdenServicio = valoracionOrdenServicio;
+	}
+	
 	
 	
 }

@@ -26,9 +26,10 @@ public class SolicitudServicioMotivo extends Puente {
 	private Motivo motivo;
 	
 	public SolicitudServicioMotivo(Long id, int estatusId, 
-			String solicitudServicioId, String servicioId) {
+			String solicitudServicioId, String motivoId) {
 		super(id, estatusId);
 		this.solicitudServicio = new SolicitudServicio(solicitudServicioId);
+		this.motivo = new Motivo(motivoId);
 	}
 	public SolicitudServicioMotivo(String id) {
 		super(id);

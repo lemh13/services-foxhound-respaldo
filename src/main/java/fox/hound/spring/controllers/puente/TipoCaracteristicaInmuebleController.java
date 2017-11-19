@@ -9,8 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Servicio;
+import fox.hound.spring.models.maestros.TipoCaracteristica;
+import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
+import fox.hound.spring.services.ServicioService;
 import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
+import fox.hound.spring.services.TipoCaracteristicaService;
+import fox.hound.spring.services.TipoInmuebleService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +28,15 @@ public class TipoCaracteristicaInmuebleController {
 
 	 @Autowired
 	 private TipoCaracteristicaInmuebleService service;
+	 
+	 @Autowired
+	 private TipoCaracteristicaService tipoCaracteristicaService;
+	 
+	 @Autowired
+	 private TipoInmuebleService tipoInmuebleService;
+	 
+	 @Autowired
+	 private ServicioService servicioService;
 
 	 private Class<?> CLASE = TipoCaracteristicaInmueble.class;
 
@@ -34,11 +50,21 @@ public class TipoCaracteristicaInmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody TipoCaracteristicaInmueble clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/tipoCaracteristica/{tipoCaracteristicaid}/tipoInmueble/{tipoInmuebleid}/servicio/{servicioid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody TipoCaracteristicaInmueble clase, @PathVariable String tipoCaracteristicaid, @PathVariable String tipoInmuebleid,@PathVariable String servicioid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 TipoCaracteristica tipoCaracteristica = tipoCaracteristicaService.getOne(Long.valueOf(tipoCaracteristicaid));
+		 TipoInmueble tipoInmueble = tipoInmuebleService.getOne(Long.valueOf(tipoInmuebleid));
+		 Servicio servicio = servicioService.getOne(Long.valueOf(servicioid));
+		 
+		 if (tipoCaracteristica != null && tipoInmueble != null && servicio != null) {
+				clase.setTipoCaracteristica(tipoCaracteristica);
+				clase.setTipoInmueble(tipoInmueble);
+				clase.setServicio(servicio);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Solicitud");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

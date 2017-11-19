@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Cliente;
 import fox.hound.spring.models.puente.PreferenciaCliente;
+import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
+import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.PreferenciaClienteService;
+import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,12 @@ public class PreferenciaClienteController {
 
 	 @Autowired
 	 private PreferenciaClienteService service;
+	 
+	 @Autowired
+	 private TipoCaracteristicaInmuebleService tipoCaracteristicaInmuebleService;
+	 
+	 @Autowired
+	 private PersonaService clienteService;
 
 	 private Class<?> CLASE = PreferenciaCliente.class;
 
@@ -34,11 +45,19 @@ public class PreferenciaClienteController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody PreferenciaCliente clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/tipoCaracteristicaInmueble/{tipoCaracteristicaInmuebleid}/cliente/{clienteid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody PreferenciaCliente clase, @PathVariable String clienteid, @PathVariable String tipoCaracteristicaInmuebleid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 TipoCaracteristicaInmueble tipoCaracteristicaInmueble = tipoCaracteristicaInmuebleService.getOne(Long.valueOf(tipoCaracteristicaInmuebleid));
+		 Cliente cliente = (Cliente) clienteService.getOne(Long.valueOf(clienteid));
+		 
+		 if (cliente != null && tipoCaracteristicaInmueble != null) {
+				clase.setCliente(cliente);
+				clase.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Preferencia Cliente");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

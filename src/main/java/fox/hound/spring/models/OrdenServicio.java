@@ -25,6 +25,7 @@ import fox.hound.spring.models.combo.Respuesta;
 import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.puente.DetalleOrdenServicio;
 import fox.hound.spring.models.puente.OrdenServicioEventualidad;
+import fox.hound.spring.models.puente.ValoracionOrdenServicio;
 
 @Entity
 @Table(name="orden_servicio")
@@ -62,6 +63,9 @@ public class OrdenServicio extends Base {
 	@JoinColumn(name="tipoOrdenServicio_id")
 	@JsonBackReference(value="ordenServicios-tipoOrdenServicio")
 	private TipoOrdenServicio tipoOrdenServicio;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "ordenServicio", cascade = CascadeType.ALL)
+	private ValoracionOrdenServicio valoracionOrdenServicio;
 	
 	public OrdenServicio(Long id, Date fechaInicio, Date fechaCulminacion, int estatus,
 			String tipoOrdenServicio) {
@@ -130,6 +134,12 @@ public class OrdenServicio extends Base {
 	}
 	public void setTipoOrdenServicio(TipoOrdenServicio tipoOrdenServicio) {
 		this.tipoOrdenServicio = tipoOrdenServicio;
+	}
+	public ValoracionOrdenServicio getValoracionOrdenServicio() {
+		return valoracionOrdenServicio;
+	}
+	public void setValoracionOrdenServicio(ValoracionOrdenServicio valoracionOrdenServicio) {
+		this.valoracionOrdenServicio = valoracionOrdenServicio;
 	}
 	
 	

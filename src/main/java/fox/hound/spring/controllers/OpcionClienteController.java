@@ -46,7 +46,7 @@ public class OpcionClienteController {
 		 Cliente cliente = (Cliente) personaService.getOne(Long.valueOf(id_c));
 		 Opcion opcion = opcionService.getOne(Long.valueOf(id_o));
 		 
-		 if(clase!= null) {
+		 if(cliente!= null) {
 			 clase.setCliente(cliente);
 			 if(opcion != null) {
 				 clase.setOpcion(opcion);

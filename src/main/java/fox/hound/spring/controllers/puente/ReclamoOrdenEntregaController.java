@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.maestros.TipoReclamo;
+import fox.hound.spring.models.puente.MotivoReclamo;
 import fox.hound.spring.models.puente.ReclamoOrdenEntrega;
 import fox.hound.spring.services.ReclamoOrdenEntregaService;
+import fox.hound.spring.services.MotivoReclamoService;
+import fox.hound.spring.services.TipoReclamoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,12 @@ public class ReclamoOrdenEntregaController {
 
 	 @Autowired
 	 private ReclamoOrdenEntregaService service;
+	 
+	 @Autowired
+	 private TipoReclamoService tipoReclamoService;
+	 
+	 @Autowired
+	 private MotivoReclamoService motivoReclamoService;
 
 	 private Class<?> CLASE = ReclamoOrdenEntrega.class;
 
@@ -34,11 +45,20 @@ public class ReclamoOrdenEntregaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/tipoReclamo/{tipoReclamoid}/motivoReclamo/{motivoReclamoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String tipoReclamoid, @PathVariable String motivoReclamoid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 TipoReclamo tipoReclamo = tipoReclamoService.getOne(Long.valueOf(tipoReclamoid));
+		 MotivoReclamo motivoReclamo = motivoReclamoService.getOne(Long.valueOf(motivoReclamoid));
+		 //Creo que falta la orden de entrega
+		 if (tipoReclamo != null && motivoReclamo != null) {
+				clase.setTipoReclamo(tipoReclamo);
+				clase.setMotivoReclamo(motivoReclamo);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Reclamo Orden de Entrega");
+			}
+		 
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
