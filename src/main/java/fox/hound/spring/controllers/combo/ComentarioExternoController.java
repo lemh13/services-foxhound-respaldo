@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.combo.AsuntoComentario;
 import fox.hound.spring.models.combo.ComentarioExterno;
+import fox.hound.spring.services.AsuntoComentarioService;
 import fox.hound.spring.services.ComentarioExternoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -21,7 +24,9 @@ public class ComentarioExternoController {
 
 	 @Autowired
 	 private ComentarioExternoService service;
-
+	 @Autowired
+	 private AsuntoComentarioService asuntoComentarioService;
+	 
 	 private Class<?> CLASE = ComentarioExterno.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -34,12 +39,18 @@ public class ComentarioExternoController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ComentarioExterno clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="asuntoComentario/{id_ac}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody ComentarioExterno clase, @PathVariable String id_ac, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+		 AsuntoComentario asuntoComentario = asuntoComentarioService.getOne(Long.valueOf(id_ac));
+			if (asuntoComentario != null) {
+				clase.setAsuntoComentario(asuntoComentario);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "AsuntoComentario");
+			}
+		}
+
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody ComentarioExterno clase, HttpServletRequest request) {

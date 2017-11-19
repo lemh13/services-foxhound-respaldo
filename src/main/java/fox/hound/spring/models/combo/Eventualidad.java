@@ -51,6 +51,12 @@ public class Eventualidad extends Maestro {
 	public void setOrdenServicioEventualidads(List<OrdenServicioEventualidad> ordenServicioEventualidads) {
 		this.ordenServicioEventualidads = ordenServicioEventualidads;
 	}
+	public void setTipoEventualidad(TipoEventualidad tipoEventualidad) {
+		this.tipoEventualidad = tipoEventualidad;
+	}
+	public TipoEventualidad getTipoEventualidad() {
+		return tipoEventualidad;
+	}
 	
 	
 }
