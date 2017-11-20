@@ -3,6 +3,7 @@ package fox.hound.spring.models.combo;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -21,18 +22,26 @@ import fox.hound.spring.models.maestros.Maestro;
 @CustomJsonRootName(plural = "garantia", singular = "garantia")
 public class Garantia extends Maestro {
 
+	@Column(nullable = false)
+    private String titulo;
+	@Column(nullable = false)
+    private int valido;
+	
 	@OneToMany(mappedBy="garantia")
 	@JsonManagedReference(value="garantia-condicionGarantias")
 	private List<CondicionGarantia> condicionGarantias;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "garantia", cascade = CascadeType.ALL)
-	private Servicio servicio;
+	@OneToMany(mappedBy="garantia")
+	@JsonManagedReference(value="garantia-servicios")
+	private List<Servicio> servicio;
 	
 	public Garantia() {
 		super();
 	}
-	public Garantia(Long id, String descripcion, int estatusId) {
+	public Garantia(Long id, String descripcion, int estatusId, String titulo, int valido) {
 		super(id, descripcion, estatusId);
+		this.titulo = titulo;
+		this.valido = valido;
 	}
 	public Garantia(String id) {
 		super(id);
@@ -43,12 +52,25 @@ public class Garantia extends Maestro {
 	public void setCondicionGarantias(List<CondicionGarantia> condicionGarantias) {
 		this.condicionGarantias = condicionGarantias;
 	}
-	public Servicio getServicio() {
+	public List<Servicio> getServicio() {
 		return servicio;
 	}
-	public void setServicio(Servicio servicio) {
+	public void setServicio(List<Servicio> servicio) {
 		this.servicio = servicio;
 	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public int getValido() {
+		return valido;
+	}
+	public void setValido(int valido) {
+		this.valido = valido;
+	}
+	
 	
 	
 }

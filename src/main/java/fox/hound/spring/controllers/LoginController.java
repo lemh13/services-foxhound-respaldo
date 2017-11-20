@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,9 +46,6 @@ public class LoginController {
     @RequestMapping(value = "/login/{user}/{passw}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> login(@PathVariable String user, @PathVariable String passw,
                                    Device device, HttpServletResponse response) {
-    	logger.info("usuario:" + user + " ,pass: " + passw);
-    	logger.info("usuario:" + user + " ,pass: " + encript.md5( passw ));
-
     	Persona persona = personaService.getByEmailAndPassword(user, encript.md5( passw ));
     	if (persona != null) {
     		ObjectMapper mapper = new ObjectMapper();

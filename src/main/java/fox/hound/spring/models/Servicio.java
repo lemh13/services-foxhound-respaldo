@@ -96,8 +96,9 @@ public class Servicio extends Base {
 	@JsonManagedReference(value="servicio-tipoCaracteristicaServicios")
 	private List<TipoCaracteristicaServicio> tipoCaracteristicaServicios;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="garantia_id")
+	@JsonBackReference(value="garantia-servicios")
 	private Garantia garantia;
 	
 	@ManyToOne
@@ -106,7 +107,7 @@ public class Servicio extends Base {
 	private Empresa empresa;
 	
 	public Servicio(Long id, String titulo, String descripcion, String imagenServicio, double costo, int estatusId,
-			String tipoServicioId, String categoriaId, String unidadMedidaId, String empresaId) {
+			String tipoServicioId, String categoriaId, String unidadMedidaId, String empresaId, String garantia) {
 		super(estatusId);
 		this.id = id;
 		this.titulo = titulo;
@@ -117,6 +118,7 @@ public class Servicio extends Base {
 		this.categoria = new Categoria(categoriaId);
 		this.unidadMedida = new UnidadMedida(unidadMedidaId);
 		this.empresa = new Empresa(empresaId);
+		this.garantia = new Garantia(garantia);
 	}
 	public Servicio(String id) {
 		this.id = Long.valueOf(id);

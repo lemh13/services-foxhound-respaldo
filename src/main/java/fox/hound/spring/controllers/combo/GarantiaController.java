@@ -35,7 +35,7 @@ public class GarantiaController {
 	 }
 
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody Garantia clase, @PathVariable String id, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@RequestBody Garantia clase, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
