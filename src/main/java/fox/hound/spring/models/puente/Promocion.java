@@ -25,6 +25,8 @@ public class Promocion extends Puente {
 
 	@Column(nullable = false)
 	private Date fecha_caducidad;
+	@Column(nullable = false)
+	private boolean prioridad;
 	
 	@ManyToOne
 	@JoinColumn(name="tipoPromocionId", nullable = false)
@@ -40,8 +42,10 @@ public class Promocion extends Puente {
 	@JsonManagedReference(value="promocionServicio-promociones")
 	private List<PromocionServicio> promocionServicios;
 	
-	public Promocion(Long id, int estatusId, Date fecha_caducidad, String tipoPromocionId, String descuentoId) {
+	public Promocion(Long id, int estatusId, Date fecha_caducidad, String tipoPromocionId, String descuentoId,
+			boolean prioridad) {
 		super(id, estatusId);
+		this.prioridad = prioridad;
 		this.tipoPromocion = new TipoPromocion(tipoPromocionId);
 		this.descuento = new Descuento(descuentoId);
 		this.fecha_caducidad = fecha_caducidad;
@@ -77,6 +81,13 @@ public class Promocion extends Puente {
 	public void setFecha_caducidad(Date fecha_caducidad) {
 		this.fecha_caducidad = fecha_caducidad;
 	}
+	public boolean isPrioridad() {
+		return prioridad;
+	}
+	public void setPrioridad(boolean prioridad) {
+		this.prioridad = prioridad;
+	}
+	
 	
 	
 }

@@ -44,7 +44,8 @@ public class CargoTipoServicioController {
 	 }
 
 	 @RequestMapping(value="cargo/{id_c}/tipoServicio/{id_t}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody CargoTipoServicio clase, @PathVariable String id_t, @PathVariable String id_c, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar( @PathVariable String id_t, @PathVariable String id_c, HttpServletRequest request) {
+		 CargoTipoServicio clase = new CargoTipoServicio();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Cargo cargo = cargoService.getOne(Long.valueOf(id_c));
 		 TipoServicio tipoServicio = tipoServicioService.getOne(Long.valueOf(id_t));

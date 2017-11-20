@@ -24,9 +24,9 @@ import fox.hound.spring.models.puente.TrabajadorVisita;
 @CustomJsonRootName(plural = "trabajadores", singular = "trabajador")
 public class Trabajador extends Persona {
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Date fecha_ingreso;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private boolean disponibilidad;
 	
 	@ManyToOne

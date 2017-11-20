@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.TipoCaracteristica;
 import fox.hound.spring.models.maestros.TipoInmueble;
 
@@ -31,10 +30,9 @@ public class TipoCaracteristicaInmueble extends Puente {
 	@JsonBackReference(value="tipoInmueble-tipoCaracteristicaInmueble")
 	private TipoInmueble tipoInmueble;
 	
-	@ManyToOne
-	@JoinColumn(name="servicio_id", nullable = false)
-	@JsonBackReference(value="servicio-tipoCaracteristicaInmueble")
-	private Servicio servicio;
+	@OneToMany(mappedBy="tipoCaracteristicaInmueble")
+	@JsonManagedReference(value="detalleServicioInmueble-tipoCaracteristicaInmueble")
+	private List<DetalleServicioInmueble> detalleServicioInmuebles;
 	
 	@OneToMany(mappedBy="tipoCaracteristicaInmueble")
 	@JsonManagedReference(value="tipoCaracteristicaInmueble-preferenciaCliente")
@@ -44,11 +42,10 @@ public class TipoCaracteristicaInmueble extends Puente {
 		super();
 	}
 	public TipoCaracteristicaInmueble(Long id, int estatusId, String tipoCaracteristicaId,
-			String tipoInmuebleId, String servicioId) {
+			String tipoInmuebleId) {
 		super(id, estatusId);
 		this.tipoCaracteristica = new TipoCaracteristica(tipoCaracteristicaId);
 		this.tipoInmueble = new TipoInmueble(tipoInmuebleId);
-		this.servicio = new Servicio(servicioId);
 	}
 	public TipoCaracteristicaInmueble(String id) {
 		super(id);
@@ -71,11 +68,12 @@ public class TipoCaracteristicaInmueble extends Puente {
 	public void setPreferenciaClientes(List<PreferenciaCliente> preferenciaClientes) {
 		this.preferenciaClientes = preferenciaClientes;
 	}
-	public Servicio getServicio() {
-		return servicio;
+	public List<DetalleServicioInmueble> getDetalleServicioInmuebles() {
+		return detalleServicioInmuebles;
 	}
-	public void setServicio(Servicio servicio) {
-		this.servicio = servicio;
+	public void setDetalleServicioInmuebles(List<DetalleServicioInmueble> detalleServicioInmuebles) {
+		this.detalleServicioInmuebles = detalleServicioInmuebles;
 	}
+
 	
 }

@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.combo.Motivo;
 import fox.hound.spring.models.puente.MotivoReclamo;
 import fox.hound.spring.services.MotivoReclamoService;
+import fox.hound.spring.services.MotivoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +24,9 @@ public class MotivoReclamoController {
 
 	 @Autowired
 	 private MotivoReclamoService service;
+	 
+	 @Autowired
+	 private MotivoService motivoService;
 
 	 private Class<?> CLASE = MotivoReclamo.class;
 
@@ -34,11 +40,18 @@ public class MotivoReclamoController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody MotivoReclamo clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="/motivo/{motivoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@PathVariable String motivoid, HttpServletRequest request) {
+		 MotivoReclamo clase = new MotivoReclamo();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Motivo motivo = motivoService.getOne(Long.valueOf(motivoid));
+		 
+		 if (motivo != null) {
+				clase.setMotivo(motivo);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo Reclamo");
+			}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

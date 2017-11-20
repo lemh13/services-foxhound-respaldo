@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.combo.Motivo;
+import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.puente.MotivoPresupuesto;
 import fox.hound.spring.services.MotivoPresupuestoService;
+import fox.hound.spring.services.MotivoService;
+import fox.hound.spring.services.PresupuestoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -21,6 +26,12 @@ public class MotivoPresupuestoController {
 
 	 @Autowired
 	 private MotivoPresupuestoService service;
+	 
+	 @Autowired
+	 private PresupuestoService PresupuestoService;
+	 
+	 @Autowired
+	 private MotivoService motivoService;
 
 	 private Class<?> CLASE = MotivoPresupuesto.class;
 
@@ -34,11 +45,21 @@ public class MotivoPresupuestoController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody MotivoPresupuesto clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="motivo{motivoid}/presupuesto{presupuestoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@PathVariable String motivoid,@PathVariable String presupuestoid, HttpServletRequest request) {
+		 MotivoPresupuesto clase = new MotivoPresupuesto();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
+		 Presupuesto presupuesto = PresupuestoService.getOne(Long.valueOf(presupuestoid));
+		 Motivo motivo = motivoService.getOne(Long.valueOf(motivoid));
 		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 if (presupuesto != null && motivo != null) {
+			 clase.setPresupuesto(presupuesto);
+			 clase.setMotivo(motivo);
+			 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo Presuspuesto");
+		 }
+		 
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

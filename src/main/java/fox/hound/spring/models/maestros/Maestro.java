@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import fox.hound.spring.models.Base;
 
 @MappedSuperclass

@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 import fox.hound.spring.models.Persona;
 import fox.hound.spring.repositories.PersonaRepository;
 import fox.hound.spring.utils.DateUtil;
+import fox.hound.spring.utils.EncryptionUtil;
 
 @Service
 public class PersonaService implements ServiceGeneral<Persona> {
 
 	 @Autowired
 	 private PersonaRepository repository;
+	 
+	 @Autowired
+	 private EncryptionUtil encript;
 	 
 	 public List<Persona> getAll(String type) {
 		 List<Persona> lista = new ArrayList<>();
@@ -41,6 +45,12 @@ public class PersonaService implements ServiceGeneral<Persona> {
 		 if (clase.getId() != null) {
 			 Persona claseAux = getOne( clase.getId() );
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
+			 
+			 if (!claseAux.getPassword().equals( encript.md5( clase.getPassword() ) )) {
+				 clase.setPassword( encript.md5( clase.getPassword() ) );
+			 }
+		 } else {
+			 clase.setPassword( encript.md5( clase.getPassword() ) );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
 		 

@@ -46,7 +46,8 @@ public class SolicitudEventualidadController {
 	 }
 
 	 @RequestMapping(value="/solicitud/{solicitudid}/eventualidad/{eventualidadid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody SolicitudEventualidad clase, @PathVariable String solicitudid, @PathVariable String eventualidadid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String solicitudid, @PathVariable String eventualidadid, HttpServletRequest request) {
+		 SolicitudEventualidad clase = new SolicitudEventualidad();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Solicitud solicitud = solicitudService.getOne(Long.valueOf(solicitudid));
 		 Eventualidad eventualidad = eventualidadService.getOne(Long.valueOf(eventualidadid));

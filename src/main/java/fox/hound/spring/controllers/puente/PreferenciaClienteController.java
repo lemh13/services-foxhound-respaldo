@@ -46,7 +46,8 @@ public class PreferenciaClienteController {
 	 }
 
 	 @RequestMapping(value="/tipoCaracteristicaInmueble/{tipoCaracteristicaInmuebleid}/cliente/{clienteid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody PreferenciaCliente clase, @PathVariable String clienteid, @PathVariable String tipoCaracteristicaInmuebleid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String clienteid, @PathVariable String tipoCaracteristicaInmuebleid, HttpServletRequest request) {
+		 PreferenciaCliente clase = new PreferenciaCliente();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoCaracteristicaInmueble tipoCaracteristicaInmueble = tipoCaracteristicaInmuebleService.getOne(Long.valueOf(tipoCaracteristicaInmuebleid));
 		 Cliente cliente = (Cliente) clienteService.getOne(Long.valueOf(clienteid));

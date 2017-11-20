@@ -44,22 +44,23 @@ public class ClienteProfesionController {
 	 }
 
 	 @RequestMapping(value="cliente/{id_c}/profesion/{id_p}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ClienteProfesion clase, @PathVariable String id_c, @PathVariable String id_p, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String id_c, @PathVariable String id_p, HttpServletRequest request) {
+		 ClienteProfesion clase = new ClienteProfesion();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Cliente cliente = (Cliente) personaService.getOne(Long.valueOf(id_c));
 		 Profesion profesion = profesionService.getOne(Long.valueOf(id_p));
-		 // PENDIENTE -> @ManyToOne
-		 if(cliente != null && profesion != null) {
-			 clase.setCliente(cliente);
-			 clase.setProfesion(profesion);
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }else if(cliente==null) {
-			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Cliente");
 
-	 }else {
+		 if(cliente != null && profesion != null) {
+			clase.setCliente(cliente);
+			clase.setProfesion(profesion);
+			 
+			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 } else if(cliente==null) {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Cliente");
+		 } else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Profesion");
-	 }
 		 }
+	}
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody ClienteProfesion clase, HttpServletRequest request) {

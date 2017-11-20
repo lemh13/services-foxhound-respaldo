@@ -46,7 +46,8 @@ public class ReclamoOrdenEntregaController {
 	 }
 
 	 @RequestMapping(value="/tipoReclamo/{tipoReclamoid}/motivoReclamo/{motivoReclamoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String tipoReclamoid, @PathVariable String motivoReclamoid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String tipoReclamoid, @PathVariable String motivoReclamoid, HttpServletRequest request) {
+		 ReclamoOrdenEntrega clase = new ReclamoOrdenEntrega();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoReclamo tipoReclamo = tipoReclamoService.getOne(Long.valueOf(tipoReclamoid));
 		 MotivoReclamo motivoReclamo = motivoReclamoService.getOne(Long.valueOf(motivoReclamoid));

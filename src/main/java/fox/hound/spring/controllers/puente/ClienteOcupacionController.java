@@ -44,7 +44,8 @@ public class ClienteOcupacionController {
 	 }
 
 	 @RequestMapping(value="cliente/{id_c}/ocupacion/{id_o}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ClienteOcupacion clase, @PathVariable String id_c, @PathVariable String id_o, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String id_c, @PathVariable String id_o, HttpServletRequest request) {
+		 ClienteOcupacion clase = new ClienteOcupacion();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Cliente cliente = (Cliente) personaService.getOne(Long.valueOf(id_c));
 		 Ocupacion ocupacion = ocupacionService.getOne(Long.valueOf(id_o));

@@ -44,7 +44,8 @@ public class CaracteristicaInmuebleController {
 	 }
 
 	 @RequestMapping(value="inmueble/{id_i}/caracteristica/{id_c}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody CaracteristicaInmueble clase, @PathVariable String id_i, @PathVariable String id_c, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String id_i, @PathVariable String id_c, HttpServletRequest request) {
+		 CaracteristicaInmueble clase = new CaracteristicaInmueble();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Inmueble inmueble = inmuebleService.getOne(Long.valueOf(id_i));
 		 Caracteristica caracteristica = caracteristicaService.getOne(Long.valueOf(id_c));

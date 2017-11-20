@@ -35,7 +35,8 @@ public class DetalleDiagnosticoController {
 	 }
 
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody CondicionDiagnostico clase, @PathVariable String id, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String id, HttpServletRequest request) {
+		 CondicionDiagnostico clase = new CondicionDiagnostico();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);

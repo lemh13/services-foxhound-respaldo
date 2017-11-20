@@ -46,7 +46,8 @@ public class SolicitudController {
 	 }
 
 	 @RequestMapping(value="/motivo/{motivoid}/inmueble/{inmuebleid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody Solicitud clase, @PathVariable String motivoid, @PathVariable String inmuebleid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String motivoid, @PathVariable String inmuebleid, HttpServletRequest request) {
+		 Solicitud clase = new Solicitud();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Motivo motivo = motivoService.getOne(Long.valueOf(motivoid));
 		 Inmueble inmueble = inmuebleService.getOne(Long.valueOf(inmuebleid));

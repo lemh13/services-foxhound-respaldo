@@ -26,9 +26,9 @@ import fox.hound.spring.models.maestros.CalificarServicio;
 import fox.hound.spring.models.maestros.Categoria;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.UnidadMedida;
+import fox.hound.spring.models.puente.DetalleServicioInmueble;
 import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.models.puente.SolicitudServicio;
-import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
 import fox.hound.spring.models.puente.TipoCaracteristicaServicio;
 import fox.hound.spring.models.puente.TipoInmuebleServicio;
 
@@ -76,8 +76,8 @@ public class Servicio extends Base {
 	private List<CalificarServicio> calificarServicio;
 	
 	@OneToMany(mappedBy="servicio")
-	@JsonManagedReference(value="servicio-tipoCaracteristicaInmueble")
-	private List<TipoCaracteristicaInmueble> tipoCaracteristicaInmueble;
+	@JsonManagedReference(value="detalleServicioInmueble-servicio")
+	private List<DetalleServicioInmueble> detalleServicioInmuebles;
 	
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="servicio-zonas")
@@ -191,12 +191,6 @@ public class Servicio extends Base {
 	public void setCalificarServicio(List<CalificarServicio> calificarServicio) {
 		this.calificarServicio = calificarServicio;
 	}
-	public List<TipoCaracteristicaInmueble> getTipoCaracteristicaInmueble() {
-		return tipoCaracteristicaInmueble;
-	}
-	public void setTipoCaracteristicaInmueble(List<TipoCaracteristicaInmueble> tipoCaracteristicaInmueble) {
-		this.tipoCaracteristicaInmueble = tipoCaracteristicaInmueble;
-	}
 	public List<Zona> getZonas() {
 		return zonas;
 	}
@@ -233,6 +227,13 @@ public class Servicio extends Base {
 	public void setTipoInmuebleServicio(List<TipoInmuebleServicio> tipoInmuebleServicio) {
 		this.tipoInmuebleServicio = tipoInmuebleServicio;
 	}
+	public List<DetalleServicioInmueble> getDetalleServicioInmuebles() {
+		return detalleServicioInmuebles;
+	}
+	public void setDetalleServicioInmuebles(List<DetalleServicioInmueble> detalleServicioInmuebles) {
+		this.detalleServicioInmuebles = detalleServicioInmuebles;
+	}
+	
 	
 	
 }

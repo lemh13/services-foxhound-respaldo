@@ -3,6 +3,7 @@ package fox.hound.spring.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +25,9 @@ import fox.hound.spring.models.puente.PreferenciaCliente;
 @CustomJsonRootName(plural = "clientes", singular = "cliente")
 public class Cliente extends Persona {
 
+	@Column(nullable = true)
+	private String tokenMovil;
+	
 	@ManyToOne
 	@JoinColumn(name="tipoCliente_id")
 	@JsonBackReference(value="cliente-tipoCliente")
@@ -49,13 +53,12 @@ public class Cliente extends Persona {
 	@JsonManagedReference(value="cliente-preferenciaCliente")
 	private List<PreferenciaCliente> preferenciaCliente;
 	
-	
-	
 	public Cliente(Long id, String nombre, char sexo, String direccion, int identificacion, Date fecha_de_nacimiento,
 			String telefono, int estatusId, String tipoPersonaId, String sectorId, String email, String password,
-			String rolId, String tipoClienteId) {
+			String rolId, String tipoClienteId, String tokenMovil) {
 		super(id, nombre, sexo, direccion, identificacion, fecha_de_nacimiento, telefono, estatusId, sectorId,
 				email, password, rolId, Integer.valueOf(tipoPersonaId));
+		this.tokenMovil = tokenMovil;
 		this.tipoCliente = new TipoCliente(tipoClienteId);
 	}
 	public Cliente(String id) {
@@ -100,6 +103,11 @@ public class Cliente extends Persona {
 	public void setPreferenciaCliente(List<PreferenciaCliente> preferenciaCliente) {
 		this.preferenciaCliente = preferenciaCliente;
 	}
-	
+	public String getTokenMovil() {
+		return tokenMovil;
+	}
+	public void setTokenMovil(String tokenMovil) {
+		this.tokenMovil = tokenMovil;
+	}
 	
 }

@@ -46,7 +46,8 @@ public class ValoracionOrdenServicioController {
 	 }
 
 	 @RequestMapping(value="/ordenEntrega/{ordenEntregaid}/ordenServicio/{ordenServicioid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody ValoracionOrdenServicio clase, @PathVariable String ordenEntregaid, @PathVariable String ordenServicioid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar( @PathVariable String ordenEntregaid, @PathVariable String ordenServicioid, HttpServletRequest request) {
+		 ValoracionOrdenServicio clase = new ValoracionOrdenServicio();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 OrdenEntrega ordenEntrega = ordenEntregaService.getOne(Long.valueOf(ordenEntregaid));
 		 OrdenServicio ordenServicio = ordenServicioService.getOne(Long.valueOf(ordenServicioid));

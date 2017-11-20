@@ -46,7 +46,8 @@ public class TrabajadorVisitaController {
 	 }
 
 	 @RequestMapping(value="/tabajador/{trabajadorid}/visita/{visitaid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody TrabajadorVisita clase, @PathVariable String trabajadorid, @PathVariable String visitaid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar( @PathVariable String trabajadorid, @PathVariable String visitaid, HttpServletRequest request) {
+		 TrabajadorVisita clase = new TrabajadorVisita();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Trabajador trabajador = trabajadorService.getOne(Long.valueOf(trabajadorid));
 		 Visita visita = visitaService.getOne(Long.valueOf(visitaid));

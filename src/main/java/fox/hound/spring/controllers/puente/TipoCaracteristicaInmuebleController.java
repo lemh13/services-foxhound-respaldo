@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.TipoCaracteristica;
 import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
-import fox.hound.spring.services.ServicioService;
 import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
 import fox.hound.spring.services.TipoCaracteristicaService;
 import fox.hound.spring.services.TipoInmuebleService;
@@ -34,9 +32,6 @@ public class TipoCaracteristicaInmuebleController {
 	 
 	 @Autowired
 	 private TipoInmuebleService tipoInmuebleService;
-	 
-	 @Autowired
-	 private ServicioService servicioService;
 
 	 private Class<?> CLASE = TipoCaracteristicaInmueble.class;
 
@@ -50,21 +45,22 @@ public class TipoCaracteristicaInmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/tipoCaracteristica/{tipoCaracteristicaid}/tipoInmueble/{tipoInmuebleid}/servicio/{servicioid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody TipoCaracteristicaInmueble clase, @PathVariable String tipoCaracteristicaid, @PathVariable String tipoInmuebleid,@PathVariable String servicioid, HttpServletRequest request) {
+	 @RequestMapping(value="/tipoCaracteristica/{tipoCaracteristicaid}/tipoInmueble/{tipoInmuebleid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@PathVariable String tipoCaracteristicaid, @PathVariable String tipoInmuebleid, HttpServletRequest request) {
+		 TipoCaracteristicaInmueble clase = new TipoCaracteristicaInmueble();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoCaracteristica tipoCaracteristica = tipoCaracteristicaService.getOne(Long.valueOf(tipoCaracteristicaid));
 		 TipoInmueble tipoInmueble = tipoInmuebleService.getOne(Long.valueOf(tipoInmuebleid));
-		 Servicio servicio = servicioService.getOne(Long.valueOf(servicioid));
 		 
-		 if (tipoCaracteristica != null && tipoInmueble != null && servicio != null) {
+		 if (tipoCaracteristica != null && tipoInmueble != null) {
 				clase.setTipoCaracteristica(tipoCaracteristica);
 				clase.setTipoInmueble(tipoInmueble);
-				clase.setServicio(servicio);
 				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else {
-				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Solicitud");
-			}
+		 } else if (tipoCaracteristica == null) {
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Caracteristica");
+		} else {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Inmueble");
+		}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

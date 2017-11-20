@@ -46,7 +46,8 @@ public class SolicitudServicioController {
 	 }
 
 	 @RequestMapping(value="/solicitud/{solicitudid}/servicio/{servicioid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody SolicitudServicio clase, @PathVariable String solicitudid, @PathVariable String servicioid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar( @PathVariable String solicitudid, @PathVariable String servicioid, HttpServletRequest request) {
+		 SolicitudServicio clase = new SolicitudServicio();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Solicitud solicitud = solicitudService.getOne(Long.valueOf(solicitudid));
 		 Servicio servicio = servicioService.getOne(Long.valueOf(servicioid));

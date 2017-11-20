@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -27,6 +28,9 @@ public class ClienteProfesion extends Puente {
 	@JsonBackReference(value="profesion-clienteProfesion")
 	private Profesion profesion;
 	
+	@Transient
+	private String profesionStr;
+	
 	public ClienteProfesion(Long id, int estatusId, String clienteId, String profesionId) {
 		super(id, estatusId);
 		this.cliente = new Cliente(clienteId);
@@ -49,6 +53,12 @@ public class ClienteProfesion extends Puente {
 	}
 	public void setProfesion(Profesion profesion) {
 		this.profesion = profesion;
+	}
+	public String getProfesionStr() {
+		return profesion.getDescripcion();
+	}
+	public void setProfesionStr(String profesionStr) {
+		this.profesionStr = profesionStr;
 	}
 	
 }

@@ -41,7 +41,8 @@ public class RolFuncionController {
 	 }
 
 	 @RequestMapping(value="/rol/{rolid]/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody RolFuncion clase, @PathVariable String rolid, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@PathVariable String rolid, HttpServletRequest request) {
+		 RolFuncion clase = new RolFuncion();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Rol rol = rolService.getOne(Long.valueOf(rolid));
 		 
