@@ -48,6 +48,8 @@ public class LoginController {
     public ResponseEntity<?> login(@PathVariable String user, @PathVariable String passw,
                                    Device device, HttpServletResponse response) {
     	logger.info("usuario:" + user + " ,pass: " + passw);
+    	logger.info("usuario:" + user + " ,pass: " + encript.md5( passw ));
+
     	Persona persona = personaService.getByEmailAndPassword(user, encript.md5( passw ));
     	if (persona != null) {
     		ObjectMapper mapper = new ObjectMapper();
@@ -76,7 +78,8 @@ public class LoginController {
     		return new ResponseEntity<>(new HttpResponseError(401, "Unauthorized", "Los datos introducidos son inválidos. Por favor intente de nuevo."), HttpStatus.NO_CONTENT);
     	}
     	logger.info("fin");
-    	return ResponseEntity.ok(persona);
+    	return ResponseDefault.ok(persona, Persona.class, ResponseDefault.PLURAL);
+    	//return ResponseEntity.ok(persona);
     }
 
 }

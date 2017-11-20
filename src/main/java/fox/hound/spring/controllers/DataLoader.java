@@ -139,7 +139,7 @@ public class DataLoader implements ApplicationRunner {
 		cliente.setTelefono("04120523025");
 		cliente.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
 		cliente.setEmail("josemiguelduin@gmail.com");
-		cliente.setPassword(  encript.md5("123") );
+		cliente.setPassword( "123" );
 		cliente.setRol(rol);
 		cliente.setTokenMovil("null");
 		cliente.setTipoCliente(tipoCliente);

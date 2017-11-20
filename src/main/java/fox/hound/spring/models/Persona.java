@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.BuzonSugerencia;
 import fox.hound.spring.models.combo.Rol;
 import fox.hound.spring.models.combo.Sector;
@@ -28,6 +29,7 @@ import fox.hound.spring.models.maestros.TipoPersona;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@CustomJsonRootName(plural = "usuario", singular = "usuario")
 public class Persona extends Base {
 	
 	@Id
