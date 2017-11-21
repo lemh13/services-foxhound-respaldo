@@ -14,8 +14,6 @@ public class ServicioService implements ServiceGeneral<Servicio> {
 	 @Autowired
 	 private ServicioRepository repository;
 
-	 
-
 	 @Override
 	 public List<Servicio> getAll() {
 		 List<Servicio> lista = new ArrayList<>();
@@ -26,6 +24,12 @@ public class ServicioService implements ServiceGeneral<Servicio> {
 	 @Override
 	 public Servicio getOne(Long id) {
 		 return repository.findOne(id);
+	 }
+	 
+	 public  List<Servicio> getAllActive() {
+		 List<Servicio> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista;
 	 }
 
 	 @Override

@@ -14,12 +14,16 @@ public class PromocionService implements ServiceGeneral<Promocion> {
 	 @Autowired
 	 private PromocionRepository repository;
 
-	 
-
 	 @Override
 	 public List<Promocion> getAll() {
 		 List<Promocion> lista = new ArrayList<>();
 		 repository.findAll().forEach(lista::add);
+		 return lista;
+	 }
+	 
+	 public List<Promocion> getAllActive() {
+		 List<Promocion> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
 		 return lista;
 	 }
 

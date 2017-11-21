@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -31,7 +32,7 @@ import fox.hound.spring.models.puente.TipoInmuebleServicio;
 
 @Entity
 @Table(name="servicio")
-@CustomJsonRootName(plural = "servicios", singular = "servicio")
+@CustomJsonRootName(plural = "servicio", singular = "servicio")
 public class Servicio extends Base {
 
 	@Id
@@ -58,11 +59,19 @@ public class Servicio extends Base {
 	@JoinColumn(name="tipoServicio_id")
 	@JsonBackReference(value="servicio-tipoServicio")
 	private TipoServicio tipoServicio;
+	@Transient
+	private Long tipoServicioId;
+	@Transient
+	private String tipoServicioDescripcion;
 	
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	@JsonBackReference(value="servicio-categoria")
 	private Categoria categoria;
+	@Transient
+	private Long categoriaId;
+	@Transient
+	private String categoriaDescripcion;
 	
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="servicio-promocionServicio")
@@ -231,6 +240,30 @@ public class Servicio extends Base {
 	}
 	public void setDetalleServicioInmuebles(List<DetalleServicioInmueble> detalleServicioInmuebles) {
 		this.detalleServicioInmuebles = detalleServicioInmuebles;
+	}
+	public Long getTipoServicioId() {
+		return tipoServicio.getId();
+	}
+	public void setTipoServicioId(Long tipoServicioId) {
+		this.tipoServicioId = tipoServicioId;
+	}
+	public String getTipoServicioDescripcion() {
+		return tipoServicio.getDescripcion();
+	}
+	public void setTipoServicioDescripcion(String tipoServicioDescripcion) {
+		this.tipoServicioDescripcion = tipoServicioDescripcion;
+	}
+	public Long getCategoriaId() {
+		return categoria.getId();
+	}
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
+	}
+	public String getCategoriaDescripcion() {
+		return categoria.getDescripcion();
+	}
+	public void setCategoriaDescripcion(String categoriaDescripcion) {
+		this.categoriaDescripcion = categoriaDescripcion;
 	}
 	
 	

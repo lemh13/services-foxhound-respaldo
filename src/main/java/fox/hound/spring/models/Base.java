@@ -9,10 +9,7 @@ import javax.persistence.Transient;
 @MappedSuperclass
 public class Base {
 	
-//	@ManyToOne
-//	@Transient
-////	@JsonIdentityReference(alwaysAsId = true)
-//	private Estatus estatus;
+
 	@Column(nullable = true)
 	private Date fecha_creacion;
 	@Column(nullable = true)
@@ -25,18 +22,11 @@ public class Base {
 	
 	public Base(int estatus) {
 		super();
-		//this.estatus = Estatus.getEstatus(estatus);
 		this.estatus = estatus;
 	}
 	public Base() {
 		
 	}
-//	public Estatus getEstatus() {
-//		return estatus;
-//	}
-//	public void setEstatus(Estatus estatus) {
-//		this.estatus = estatus;
-//	}
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}

@@ -30,6 +30,8 @@ public class PromocionServicio extends Puente {
 	private Servicio servicio;
 	@Transient
 	private Long servicio_id;
+	@Transient
+	private double costo;
 	
 	public PromocionServicio(Long id, int estatusId, String servicioId,
 			String promocion) {
@@ -66,6 +68,12 @@ public class PromocionServicio extends Puente {
 	}
 	public void setServicio_id(Long servicio_id) {
 		this.servicio_id = servicio_id;
+	}
+	public double getCosto() {
+		return servicio.getCosto();
+	}
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 	
 	

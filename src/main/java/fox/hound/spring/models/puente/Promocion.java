@@ -25,9 +25,15 @@ import fox.hound.spring.models.maestros.TipoPromocion;
 public class Promocion extends Puente {
 
 	@Column(nullable = false)
+	private String titulo;
+	@Column(nullable = false)
+	private String descripcion;
+	@Column(nullable = false)
+	private Date fecha_inicio;
+	@Column(nullable = false)
 	private Date fecha_caducidad;
 	@Column(nullable = false)
-	private boolean prioridad;
+    private String imagenServicio;
 	
 	@ManyToOne
 	@JoinColumn(name="tipoPromocionId", nullable = false)
@@ -35,6 +41,8 @@ public class Promocion extends Puente {
 	private TipoPromocion tipoPromocion;
 	@Transient
 	private Long tipoPromocion_id;
+	@Transient
+	private String tipoPromocion_descripcion;
 	
 	@ManyToOne
 	@JoinColumn(name="descuentoId", nullable = false)
@@ -42,17 +50,22 @@ public class Promocion extends Puente {
 	private Descuento descuento;
 	@Transient
 	private Long descuento_id;
+	@Transient
+	private double descuento_procentaje;
 	
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="promocionServicio-promociones")
 	private List<PromocionServicio> promocionServicios;
 	
 	public Promocion(Long id, int estatusId, Date fecha_caducidad, String tipoPromocionId, String descuentoId,
-			boolean prioridad) {
+			String titulo, String descripcion, Date fecha_inicio, String imagenServicio) {
 		super(id, estatusId);
-		this.prioridad = prioridad;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.imagenServicio = imagenServicio;
 		this.tipoPromocion = new TipoPromocion(tipoPromocionId);
 		this.descuento = new Descuento(descuentoId);
+		this.fecha_inicio = fecha_inicio;
 		this.fecha_caducidad = fecha_caducidad;
 	}
 	public Promocion(String id) {
@@ -86,12 +99,6 @@ public class Promocion extends Puente {
 	public void setFecha_caducidad(Date fecha_caducidad) {
 		this.fecha_caducidad = fecha_caducidad;
 	}
-	public boolean isPrioridad() {
-		return prioridad;
-	}
-	public void setPrioridad(boolean prioridad) {
-		this.prioridad = prioridad;
-	}
 	public Long getTipoPromocion_id() {
 		return tipoPromocion.getId();
 	}
@@ -103,6 +110,42 @@ public class Promocion extends Puente {
 	}
 	public void setDescuento_id(Long descuento_id) {
 		this.descuento_id = descuento_id;
+	}
+	public String getTipoPromocion_descripcion() {
+		return tipoPromocion.getDescripcion();
+	}
+	public void setTipoPromocion_descripcion(String tipoPromocion_descripcion) {
+		this.tipoPromocion_descripcion = tipoPromocion_descripcion;
+	}
+	public double getDescuento_procentaje() {
+		return descuento.getPorcentaje();
+	}
+	public void setDescuento_procentaje(double descuento_procentaje) {
+		this.descuento_procentaje = descuento_procentaje;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public Date getFecha_inicio() {
+		return fecha_inicio;
+	}
+	public void setFecha_inicio(Date fecha_inicio) {
+		this.fecha_inicio = fecha_inicio;
+	}
+	public String getImagenServicio() {
+		return imagenServicio;
+	}
+	public void setImagenServicio(String imagenServicio) {
+		this.imagenServicio = imagenServicio;
 	}
 	
 	

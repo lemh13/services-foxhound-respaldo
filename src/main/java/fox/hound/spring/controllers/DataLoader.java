@@ -1,5 +1,8 @@
 package fox.hound.spring.controllers;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -129,6 +132,18 @@ public class DataLoader implements ApplicationRunner {
 		categoria.setEstatus(0);
 		categoria.setFecha_creacion( DateUtil.getCurrentDate() );
 		categoriaService.saveOrUpdate(categoria);
+		
+		Categoria categoria2 = new Categoria();
+		categoria2.setDescripcion("Mantenimiento");
+		categoria2.setEstatus(0);
+		categoria2.setFecha_creacion( DateUtil.getCurrentDate() );
+		categoriaService.saveOrUpdate(categoria2);
+		
+		Categoria categoria3 = new Categoria();
+		categoria3.setDescripcion("Instalación");
+		categoria3.setEstatus(0);
+		categoria3.setFecha_creacion( DateUtil.getCurrentDate() );
+		categoriaService.saveOrUpdate(categoria3);
 		
 		// Estado
 		Estado estado = new Estado();
@@ -271,11 +286,18 @@ public class DataLoader implements ApplicationRunner {
 		
 		//Tipo Servicio
 		TipoServicio tipoServicio = new TipoServicio();
-		tipoServicio.setDescripcion("Servicio Chulito");
+		tipoServicio.setDescripcion("Jardineria");
 		tipoServicio.setImagenServicio("imagen/p4.jpg");
 		tipoServicio.setEstatus(0);
 		tipoServicio.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio);
+		
+		TipoServicio tipoServicio2 = new TipoServicio();
+		tipoServicio2.setDescripcion("Pintura");
+		tipoServicio2.setImagenServicio("imagen/p4.jpg");
+		tipoServicio2.setEstatus(0);
+		tipoServicio2.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoServicioService.saveOrUpdate(tipoServicio2);
 		
 		// Garantia
 		Garantia garantia = new Garantia();
@@ -307,12 +329,28 @@ public class DataLoader implements ApplicationRunner {
 		servicio.setTipoServicio(tipoServicio);
 		servicio.setUnidadMedida(unidadMedida);
 		servicio.setEmpresa(empresa);
+		servicio.setCategoria(categoria);
 		servicio.setTitulo("Reparacion de Pisos");
 		servicio.setImagenServicio("imagen/p4.jpg");
 		servicio.setDescripcion("Reparalo ya.");
 		servicio.setCosto(200.00);
 		servicio.setEstatus(0);
+		servicio.setFecha_creacion( DateUtil.getCurrentDate() );
 		servicioService.saveOrUpdate(servicio);
+		
+		Servicio servicio2 = new Servicio();
+		servicio2.setGarantia(garantia);
+		servicio2.setTipoServicio(tipoServicio);
+		servicio2.setUnidadMedida(unidadMedida);
+		servicio2.setEmpresa(empresa);
+		servicio2.setCategoria(categoria);
+		servicio2.setTitulo("Mantenimiento de Platabanda");
+		servicio2.setImagenServicio("imagen/p2.jpg");
+		servicio2.setDescripcion("Reparalo ya: filtros, grietas, rayones y mucho mas..");
+		servicio2.setCosto(200.00);
+		servicio2.setEstatus(0);
+		servicio2.setFecha_creacion( DateUtil.getCurrentDate() );
+		servicioService.saveOrUpdate(servicio2);
 		
 		// TipoPromocion
 		TipoPromocion tipoPromocion = new TipoPromocion();
@@ -332,8 +370,14 @@ public class DataLoader implements ApplicationRunner {
 		
 		// Promocion
 		Promocion promocion = new Promocion();
-		promocion.setFecha_caducidad( DateUtil.getCurrentDate() );
-		promocion.setPrioridad(true);
+		promocion.setTitulo("Promocíon del Pisos para el Dia de las Madres");
+		promocion.setDescripcion("Limpiamos rapidos sus pisos, tan limpios y puros como el corazon de sus seres queridos");
+		promocion.setFecha_inicio( DateUtil.getCurrentDate() );
+		
+		Calendar cal = Calendar.getInstance(); 
+		cal.add(Calendar.MONTH, 1);
+		promocion.setFecha_caducidad( cal.getTime() );
+		promocion.setImagenServicio("imagen/p2.jpg");
 		promocion.setTipoPromocion(tipoPromocion);
 		promocion.setDescuento(descuento);
 		promocion.setEstatus(0);
