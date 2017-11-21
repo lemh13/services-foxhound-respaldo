@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -20,11 +21,15 @@ public class PromocionServicio extends Puente {
 	@JoinColumn(name="promocion_id", nullable = false)
 	@JsonBackReference(value="promocionServicio-promociones")
 	private Promocion promocion;
+	@Transient
+	private Long promocion_id;
 	
 	@ManyToOne
 	@JoinColumn(name="servicio_id", nullable = false)
 	@JsonBackReference(value="servicio-promocionServicio")
 	private Servicio servicio;
+	@Transient
+	private Long servicio_id;
 	
 	public PromocionServicio(Long id, int estatusId, String servicioId,
 			String promocion) {
@@ -49,6 +54,18 @@ public class PromocionServicio extends Puente {
 	}
 	public void setPromocion(Promocion promocion) {
 		this.promocion = promocion;
+	}
+	public Long getPromocion_id() {
+		return promocion.getId();
+	}
+	public void setPromocion_id(Long promocion_id) {
+		this.promocion_id = promocion_id;
+	}
+	public Long getServicio_id() {
+		return servicio.getId();
+	}
+	public void setServicio_id(Long servicio_id) {
+		this.servicio_id = servicio_id;
 	}
 	
 	

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,11 +33,15 @@ public class Promocion extends Puente {
 	@JoinColumn(name="tipoPromocionId", nullable = false)
 	@JsonBackReference(value="tipoPromocion-promociones")
 	private TipoPromocion tipoPromocion;
+	@Transient
+	private Long tipoPromocion_id;
 	
 	@ManyToOne
 	@JoinColumn(name="descuentoId", nullable = false)
 	@JsonBackReference(value="descuento-promociones")
 	private Descuento descuento;
+	@Transient
+	private Long descuento_id;
 	
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="promocionServicio-promociones")
@@ -87,7 +92,18 @@ public class Promocion extends Puente {
 	public void setPrioridad(boolean prioridad) {
 		this.prioridad = prioridad;
 	}
-	
+	public Long getTipoPromocion_id() {
+		return tipoPromocion.getId();
+	}
+	public void setTipoPromocion_id(Long tipoPromocion_id) {
+		this.tipoPromocion_id = tipoPromocion_id;
+	}
+	public Long getDescuento_id() {
+		return descuento.getId();
+	}
+	public void setDescuento_id(Long descuento_id) {
+		this.descuento_id = descuento_id;
+	}
 	
 	
 }

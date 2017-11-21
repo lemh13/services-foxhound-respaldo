@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -24,6 +25,8 @@ public class Ciudad extends Maestro {
 	@JoinColumn(name="estado_id")
 	@JsonBackReference(value="ciudad-estado")
 	private Estado estado;
+	@Transient
+	private Long estado_id;
 	
 	@OneToMany(mappedBy="ciudad")
 	@JsonManagedReference(value="ciudad-municipios")
@@ -51,5 +54,12 @@ public class Ciudad extends Maestro {
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
 	}
+	public Long getEstado_id() {
+		return estado.getId();
+	}
+	public void setEstado_id(Long estado_id) {
+		this.estado_id = estado_id;
+	}
+	
 	
 }

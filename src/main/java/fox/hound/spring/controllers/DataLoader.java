@@ -10,6 +10,7 @@ import fox.hound.spring.models.Empresa;
 import fox.hound.spring.models.Inmueble;
 import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.combo.Ciudad;
+import fox.hound.spring.models.combo.Descuento;
 import fox.hound.spring.models.combo.Garantia;
 import fox.hound.spring.models.combo.Municipio;
 import fox.hound.spring.models.combo.Parroquia;
@@ -23,14 +24,18 @@ import fox.hound.spring.models.maestros.Estado;
 import fox.hound.spring.models.maestros.Profesion;
 import fox.hound.spring.models.maestros.TipoCliente;
 import fox.hound.spring.models.maestros.TipoInmueble;
+import fox.hound.spring.models.maestros.TipoPromocion;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.UnidadMedida;
 import fox.hound.spring.models.maestros.UsoInmueble;
+import fox.hound.spring.models.puente.Promocion;
+import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.services.CargoService;
 import fox.hound.spring.services.CategoriaInmuebleService;
 import fox.hound.spring.services.CategoriaService;
 import fox.hound.spring.services.CiudadService;
 import fox.hound.spring.services.CondicionGarantiaService;
+import fox.hound.spring.services.DescuentoService;
 import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.EstadoService;
 import fox.hound.spring.services.GarantiaService;
@@ -39,10 +44,14 @@ import fox.hound.spring.services.MunicipioService;
 import fox.hound.spring.services.ParroquiaService;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.ProfesionService;
+import fox.hound.spring.services.PromocionService;
+import fox.hound.spring.services.PromocionServicioService;
 import fox.hound.spring.services.RolService;
 import fox.hound.spring.services.SectorService;
+import fox.hound.spring.services.ServicioService;
 import fox.hound.spring.services.TipoClienteService;
 import fox.hound.spring.services.TipoInmuebleService;
+import fox.hound.spring.services.TipoPromocionService;
 import fox.hound.spring.services.TipoServicioService;
 import fox.hound.spring.services.UnidadMedidaService;
 import fox.hound.spring.services.UsoInmuebleService;
@@ -92,6 +101,17 @@ public class DataLoader implements ApplicationRunner {
 	private CondicionGarantiaService condicionGarantiaService;
 	@Autowired
 	private GarantiaService garantiaService;
+	@Autowired
+	private ServicioService servicioService;
+	@Autowired
+	private TipoPromocionService tipoPromocionService;
+	@Autowired
+	private DescuentoService descuentoService;
+	@Autowired
+	private PromocionService promocionService;
+	@Autowired
+	private PromocionServicioService promocionServicioService;
+	
 	
 	
 	@Override
@@ -292,8 +312,41 @@ public class DataLoader implements ApplicationRunner {
 		servicio.setDescripcion("Reparalo ya.");
 		servicio.setCosto(200.00);
 		servicio.setEstatus(0);
+		servicioService.saveOrUpdate(servicio);
 		
+		// TipoPromocion
+		TipoPromocion tipoPromocion = new TipoPromocion();
+		tipoPromocion.setDescripcion("Días de las Madres");
+		tipoPromocion.setEstatus(0);
+		tipoPromocion.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoPromocionService.saveOrUpdate(tipoPromocion);
 		
+		// Descuento
+		Descuento descuento = new Descuento();
+		descuento.setDescripcion("Días de las Madres");
+		descuento.setMonto(200);
+		descuento.setPorcentaje(0.43);
+		descuento.setEstatus(0);
+		descuento.setFecha_creacion( DateUtil.getCurrentDate() );
+		descuentoService.saveOrUpdate(descuento);
+		
+		// Promocion
+		Promocion promocion = new Promocion();
+		promocion.setFecha_caducidad( DateUtil.getCurrentDate() );
+		promocion.setPrioridad(true);
+		promocion.setTipoPromocion(tipoPromocion);
+		promocion.setDescuento(descuento);
+		promocion.setEstatus(0);
+		promocion.setFecha_creacion( DateUtil.getCurrentDate() );
+		promocionService.saveOrUpdate(promocion);
+		
+		// PromocionServicio
+		PromocionServicio promocionServicio = new PromocionServicio();
+		promocionServicio.setPromocion(promocion);
+		promocionServicio.setServicio(servicio);
+		promocion.setEstatus(0);
+		promocion.setFecha_creacion( DateUtil.getCurrentDate() );
+		promocionServicioService.saveOrUpdate(promocionServicio);
 		
 		
 	}
