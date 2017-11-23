@@ -15,6 +15,8 @@ import fox.hound.spring.models.Inmueble;
 import fox.hound.spring.models.Noticia;
 import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.Servicio;
+import fox.hound.spring.models.Trabajador;
+import fox.hound.spring.models.Visita;
 import fox.hound.spring.models.combo.Ciudad;
 import fox.hound.spring.models.combo.Descuento;
 import fox.hound.spring.models.combo.Eventualidad;
@@ -35,10 +37,14 @@ import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.maestros.TipoPromocion;
 import fox.hound.spring.models.maestros.TipoServicio;
+import fox.hound.spring.models.maestros.TipoVisita;
+import fox.hound.spring.models.maestros.Turno;
 import fox.hound.spring.models.maestros.UnidadMedida;
 import fox.hound.spring.models.maestros.UsoInmueble;
 import fox.hound.spring.models.puente.Promocion;
 import fox.hound.spring.models.puente.PromocionServicio;
+import fox.hound.spring.models.puente.Solicitud;
+import fox.hound.spring.models.puente.TrabajadorVisita;
 import fox.hound.spring.services.CargoService;
 import fox.hound.spring.services.CategoriaInmuebleService;
 import fox.hound.spring.services.CategoriaService;
@@ -62,14 +68,19 @@ import fox.hound.spring.services.PromocionServicioService;
 import fox.hound.spring.services.RolService;
 import fox.hound.spring.services.SectorService;
 import fox.hound.spring.services.ServicioService;
+import fox.hound.spring.services.SolicitudService;
 import fox.hound.spring.services.TipoClienteService;
 import fox.hound.spring.services.TipoEventualidadService;
 import fox.hound.spring.services.TipoInmuebleService;
 import fox.hound.spring.services.TipoOrdenServicioService;
 import fox.hound.spring.services.TipoPromocionService;
 import fox.hound.spring.services.TipoServicioService;
+import fox.hound.spring.services.TipoVisitaService;
+import fox.hound.spring.services.TrabajadorVisitaService;
+import fox.hound.spring.services.TurnoService;
 import fox.hound.spring.services.UnidadMedidaService;
 import fox.hound.spring.services.UsoInmuebleService;
+import fox.hound.spring.services.VisitaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.EncryptionUtil;
 
@@ -138,6 +149,17 @@ public class DataLoader implements ApplicationRunner {
 	private EventualidadService eventualidadService;
 	@Autowired
 	private OcupacionService ocupacionService;
+	@Autowired
+	private TurnoService turnoService;
+	@Autowired
+	private TipoVisitaService tipoVisitaService;
+	@Autowired
+	private SolicitudService solicitudService;
+	@Autowired
+	private VisitaService visitaService;
+	@Autowired
+	private TrabajadorVisitaService trabajadorVisitaService;
+	
 	
 	@Override
 	public void run(ApplicationArguments arg0) throws Exception {
@@ -524,7 +546,63 @@ public class DataLoader implements ApplicationRunner {
 		ocupacion2.setFecha_creacion( DateUtil.getCurrentDate() );
 		ocupacionService.saveOrUpdate(ocupacion2);
 		
-		//
+		// Turno
+		Turno turno = new Turno();
+		turno.setDescripcion("Mañana");
+		turno.setEstatus(0);
+		turno.setFecha_creacion( DateUtil.getCurrentDate() );
+		turnoService.saveOrUpdate(turno);
+		
+		// TipoVisita
+		TipoVisita tipoVisita = new TipoVisita();
+		tipoVisita.setDescripcion("Diagnostica");
+		tipoVisita.setEstatus(0);
+		tipoVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoVisitaService.saveOrUpdate(tipoVisita);
+		
+		// Solicitud
+		Solicitud solicitud = new Solicitud();
+		solicitud.setInmueble(inmueble);
+		solicitud.setEstatus(0);
+		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
+		solicitudService.saveOrUpdate(solicitud);
+		
+		// Visita
+		Visita visita = new Visita();
+		visita.setFechaVisita(DateUtil.getCurrentDate());
+		visita.setTurno(turno);
+		visita.setTipoVisita(tipoVisita);
+		visita.setSolicitud(solicitud);
+		visita.setOrdenServicio(ordenServicio);
+		visita.setEstatus(0);
+		visita.setFecha_creacion( DateUtil.getCurrentDate() );
+		visitaService.saveOrUpdate(visita);
+		
+		// Trabajador
+		Trabajador trabajador = new Trabajador();
+		trabajador.setNombre("Jose Duin");
+		trabajador.setSexo('M');
+		trabajador.setTipoPersona(0);
+		trabajador.setCargo(cargo);
+		trabajador.setIdentificacion(21526571);
+		trabajador.setDireccion("Carrera 13b");
+		trabajador.setSector(sector);
+		trabajador.setTelefono("04120523025");
+		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador.setEmail("jose@gmail.com");
+		trabajador.setPassword( "123" );
+		trabajador.setRol(rol);
+		trabajador.setEstatus(0);
+		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(trabajador);
+		
+		// TrabajadorVisita
+		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
+		trabajadorVisita.setTrabajador(trabajador);
+		trabajadorVisita.setVisita(visita);
+		trabajadorVisita.setEstatus(0);
+		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
 		
 	}
 

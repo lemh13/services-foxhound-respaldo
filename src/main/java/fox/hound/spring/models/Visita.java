@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -50,6 +51,12 @@ public class Visita extends Base {
 	@OneToMany(mappedBy="visita")
 	@JsonManagedReference(value="visita-trabajadorVisitas")
 	private List<TrabajadorVisita> trabajadorVisitas;
+	@Transient
+	private Long tecnico_id;
+	@Transient
+	private String tecnico_nombre;
+	@Transient
+	private String tecnico_tlf;
 	
 	@ManyToOne
 	@JoinColumn(name="solicitud_id")
@@ -129,5 +136,24 @@ public class Visita extends Base {
 	public void setOrdenServicio(OrdenServicio ordenServicio) {
 		this.ordenServicio = ordenServicio;
 	}
+	public Long getTecnico_id() {
+		return trabajadorVisitas.get(0).getTrabajador().getId();
+	}
+	public void setTecnico_id(Long tecnico_id) {
+		this.tecnico_id = tecnico_id;
+	}
+	public String getTecnico_nombre() {
+		return trabajadorVisitas.get(0).getTrabajador().getNombre();
+	}
+	public void setTecnico_nombre(String tecnico_nombre) {
+		this.tecnico_nombre = tecnico_nombre;
+	}
+	public String getTecnico_tlf() {
+		return trabajadorVisitas.get(0).getTrabajador().getTelefono();
+	}
+	public void setTecnico_tlf(String tecnico_tlf) {
+		this.tecnico_tlf = tecnico_tlf;
+	}
+	
 	
 }

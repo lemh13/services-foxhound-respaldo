@@ -38,11 +38,15 @@ public class Trabajador extends Persona {
 	@JsonManagedReference(value="trabajador-TrabajadorVisitas")
 	private List<TrabajadorVisita> TrabajadorVisitas;
 	
-	@ManyToOne
-	@JoinColumn(name="DetalleOrdenServicio_id")
-	@JsonBackReference(value="trabajador-detalleOrdenServicio")
-	private DetalleOrdenServicio detalleOrdenServicio;
-	
+	@OneToMany(mappedBy="trabajador")
+	@JsonManagedReference(value="trabajador-detalleOrdenServicio")
+	private List<DetalleOrdenServicio> detalleOrdenServicio;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="DetalleOrdenServicio_id")
+//	@JsonBackReference(value="trabajador-detalleOrdenServicio")
+//	private DetalleOrdenServicio detalleOrdenServicio;
+//	
 	@ManyToOne
 	@JoinColumn(name="empresa_id")
 	@JsonBackReference(value="empresa-trabajadores")
@@ -58,7 +62,7 @@ public class Trabajador extends Persona {
 		this.disponibilidad = disponibilidad;
 		this.cargo = new Cargo(cargoId);
 		this.empresa = new Empresa(empresaId);
-		this.detalleOrdenServicio = new DetalleOrdenServicio(detalleOrdenServicio);
+//		this.detalleOrdenServicio = new DetalleOrdenServicio(detalleOrdenServicio);
 		}
 	
 	public Trabajador(String id) {
@@ -98,12 +102,20 @@ public class Trabajador extends Persona {
 		this.empresa = empresa;
 	}
 
-	public DetalleOrdenServicio getDetalleOrdenServicio() {
+	public List<DetalleOrdenServicio> getDetalleOrdenServicio() {
 		return detalleOrdenServicio;
 	}
 
-	public void setDetalleOrdenServicio(DetalleOrdenServicio detalleOrdenServicio) {
+	public void setDetalleOrdenServicio(List<DetalleOrdenServicio> detalleOrdenServicio) {
 		this.detalleOrdenServicio = detalleOrdenServicio;
 	}
-	
+
+//	public DetalleOrdenServicio getDetalleOrdenServicio() {
+//		return detalleOrdenServicio;
+//	}
+//
+//	public void setDetalleOrdenServicio(DetalleOrdenServicio detalleOrdenServicio) {
+//		this.detalleOrdenServicio = detalleOrdenServicio;
+//	}
+
 }

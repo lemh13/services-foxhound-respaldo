@@ -37,7 +37,7 @@ public class OrdenServicio extends Base {
 	private Long id;
 	@Column(nullable = false)
 	private Date fechaInicio;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Date fechaCulminacion;
 	
 	@OneToMany(mappedBy="ordenServicio")

@@ -34,7 +34,7 @@ public class MenuController {
 		menu.add(new Menu(1200, "Difusión y Escucha al Cliente", "fa fa-plus", null, difusionYEscuchaAlcliente()));
 		menu.add(new Menu(1400, "Administración", "fa fa-plus", null, administracion()));
 		 		
-		 return ResponseDefault.ok(menu, CLASE, ResponseDefault.PLURAL);		 
+		return ResponseDefault.ok(menu, CLASE, ResponseDefault.PLURAL);		 
 	}
 
 	public List<Menu> configuracionGeneral() {

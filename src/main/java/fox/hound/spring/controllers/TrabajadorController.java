@@ -72,7 +72,8 @@ public class TrabajadorController {
 		 if (sector != null && rol != null && cargo != null && detalleOrdenServicio != null && empresa != null) {
 			 clase.setCargo(cargo);
 			 clase.setEmpresa(empresa);
-			 clase.setDetalleOrdenServicio(detalleOrdenServicio);
+			 clase.setSector(sector);
+			 //clase.setDetalleOrdenServicio(detalleOrdenServicio);
 			 
 			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Trabajador", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		 } else if (cargo == null) {

@@ -21,9 +21,14 @@ import fox.hound.spring.models.combo.ServicioTarea;
 @CustomJsonRootName(plural = "detalleOrdenServicio", singular = "detalleOrdenServicio")
 public class DetalleOrdenServicio extends Puente {
 
-	@OneToMany(mappedBy="detalleOrdenServicio")
-	@JsonManagedReference(value="trabajador-detalleOrdenServicio")
-	private List<Trabajador> trabajadors;
+//	@OneToMany(mappedBy="detalleOrdenServicio")
+//	@JsonManagedReference(value="trabajador-detalleOrdenServicio")
+//	private List<Trabajador> trabajadors;
+//	
+	@ManyToOne
+	@JoinColumn(name="trabajador_id")
+	@JsonBackReference(value="trabajador-detalleOrdenServicio")
+	private Trabajador trabajador;
 	
 	@ManyToOne
 	@JoinColumn(name="servicioTarea_id")
@@ -44,21 +49,22 @@ public class DetalleOrdenServicio extends Puente {
 		super();
 	}
 	public DetalleOrdenServicio(Long id, int estatusId,
-			String servicioTarea, String ordenServicio, String solicitudServicio) {
+			String servicioTarea, String ordenServicio, String solicitudServicio, String trabajador) {
 		super(id, estatusId);
 		this.servicioTarea = new ServicioTarea(servicioTarea);
 		this.ordenServicio = new OrdenServicio(ordenServicio);
 		this.solicitudServicio = new SolicitudServicio(solicitudServicio);
+		this.trabajador = new Trabajador(trabajador);
 	}
 	public DetalleOrdenServicio(String id) {
 		super(id);
 	}
-	public List<Trabajador> getTrabajadors() {
-		return trabajadors;
-	}
-	public void setTrabajadors(List<Trabajador> trabajadors) {
-		this.trabajadors = trabajadors;
-	}
+//	public List<Trabajador> getTrabajadors() {
+//		return trabajadors;
+//	}
+//	public void setTrabajadors(List<Trabajador> trabajadors) {
+//		this.trabajadors = trabajadors;
+//	}
 	public ServicioTarea getServicioTarea() {
 		return servicioTarea;
 	}
@@ -77,5 +83,12 @@ public class DetalleOrdenServicio extends Puente {
 	public void setSolicitudServicio(SolicitudServicio solicitudServicio) {
 		this.solicitudServicio = solicitudServicio;
 	}
+	public Trabajador getTrabajador() {
+		return trabajador;
+	}
+	public void setTrabajador(Trabajador trabajador) {
+		this.trabajador = trabajador;
+	}
+	
 	
 }
