@@ -48,7 +48,7 @@ public class MunicipioController {
 		
 		if (ciudad != null) {
 			clase.setCiudad(ciudad);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Municipio", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Ciudad");
 		}

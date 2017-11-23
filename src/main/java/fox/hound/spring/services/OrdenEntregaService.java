@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import fox.hound.spring.models.combo.OrdenEntrega;
+
+import fox.hound.spring.models.OrdenEntrega;
 import fox.hound.spring.repositories.OrdenEntregaRepository;
 import fox.hound.spring.utils.DateUtil;
 

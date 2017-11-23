@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -54,6 +55,10 @@ public class Inmueble extends Base {
 	@JoinColumn(name="usoInmueble_id", nullable = false)
 	@JsonBackReference(value="inmueble-usoInmueble")
 	private UsoInmueble usoInmueble;
+	@Transient
+	private Long usoInmueble_id;
+	@Transient
+	private String usoInmueble_descripcion;
 	
 	@ManyToOne
 	@JoinColumn(name="sector_id", nullable = false)
@@ -136,5 +141,18 @@ public class Inmueble extends Base {
 	public void setSolicitudes(List<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
+	public Long getUsoInmueble_id() {
+		return usoInmueble.getId();
+	}
+	public void setUsoInmueble_id(Long usoInmueble_id) {
+		this.usoInmueble_id = usoInmueble_id;
+	}
+	public String getUsoInmueble_descripcion() {
+		return usoInmueble.getDescripcion();
+	}
+	public void setUsoInmueble_descripcion(String usoInmueble_descripcion) {
+		this.usoInmueble_descripcion = usoInmueble_descripcion;
+	}
+	
 	
 }

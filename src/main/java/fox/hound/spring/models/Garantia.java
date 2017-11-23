@@ -1,19 +1,15 @@
-package fox.hound.spring.models.combo;
+package fox.hound.spring.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.CondicionGarantia;
 import fox.hound.spring.models.maestros.Maestro;
 

@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.Garantia;
 import fox.hound.spring.models.combo.ServicioTarea;
 import fox.hound.spring.models.combo.Zona;
 import fox.hound.spring.models.maestros.CalificarServicio;

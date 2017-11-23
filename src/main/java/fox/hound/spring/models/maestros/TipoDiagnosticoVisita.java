@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.DiagnosticoVisita;
+import fox.hound.spring.models.DiagnosticoVisita;
 
 @Entity
 @Table(name="tipo_diagnostico_visita")

@@ -48,7 +48,7 @@ public class ZonaController {
 		
 		if (sector != null) {
 			clase.setSector(sector);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Zona", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Sector");
 		}

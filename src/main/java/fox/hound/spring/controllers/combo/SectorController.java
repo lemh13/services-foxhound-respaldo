@@ -48,7 +48,7 @@ public class SectorController {
 		
 		if (parroquia != null) {
 			clase.setParroquia(parroquia);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Sector", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Parroquia");
 		}

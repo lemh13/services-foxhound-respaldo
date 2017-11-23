@@ -11,9 +11,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
+import fox.hound.spring.models.DiagnosticoVisita;
+import fox.hound.spring.models.OrdenEntrega;
 import fox.hound.spring.models.OrdenServicio;
-import fox.hound.spring.models.combo.DiagnosticoVisita;
-import fox.hound.spring.models.combo.OrdenEntrega;
 
 @Entity
 @Table(name="valoracion_orden_servicio")

@@ -48,7 +48,7 @@ public class MotivoController {
 		 	TipoMotivo tipomotivo = tipomotivoservice.getOne(Long.valueOf(id));
 		 if (tipomotivo != null) {
 				clase.setTipoMotivo(tipomotivo);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Motivo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Motivo");
 			}

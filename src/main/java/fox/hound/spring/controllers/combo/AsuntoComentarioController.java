@@ -38,7 +38,7 @@ public class AsuntoComentarioController {
 	 public ResponseEntity<?> agregar(@RequestBody AsuntoComentario clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Asunto Comentario", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

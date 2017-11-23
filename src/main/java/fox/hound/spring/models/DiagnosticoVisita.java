@@ -1,4 +1,4 @@
-package fox.hound.spring.models.combo;
+package fox.hound.spring.models;
 
 import java.util.List;
 
@@ -16,8 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.OrdenServicio;
-import fox.hound.spring.models.Visita;
+import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.maestros.Maestro;
 import fox.hound.spring.models.maestros.TipoDiagnosticoVisita;
 import fox.hound.spring.models.puente.CondicionDiagnostico;

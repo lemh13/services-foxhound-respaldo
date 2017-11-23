@@ -56,7 +56,7 @@ public class ServicioTareaController {
 			{
 				clase.setServicio(servicio);
 				clase.setTarea(tarea);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Servicio Tarea", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} 
 			else if (tarea==null)
 			{

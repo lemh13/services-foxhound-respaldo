@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,6 +26,10 @@ public class Caracteristica extends Maestro {
 	@JoinColumn(name="tipoCaracteristica_id")
 	@JsonBackReference(value="caracteristica-tipoCaracteristica")
 	private TipoCaracteristica tipoCaracteristica;
+	@Transient
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	@OneToMany(mappedBy="caracteristica")
 	@JsonManagedReference(value="caracteristica-caracteristicaInmuebles")
@@ -51,6 +56,18 @@ public class Caracteristica extends Maestro {
 	}
 	public void setCaracteristicaInmuebles(List<CaracteristicaInmueble> caracteristicaInmuebles) {
 		this.caracteristicaInmuebles = caracteristicaInmuebles;
+	}
+	public Long getPadre_id() {
+		return tipoCaracteristica.getId();
+	}
+	public void setPadre_id(Long padre_id) {
+		this.padre_id = padre_id;
+	}
+	public String getPadre_descripcion() {
+		return tipoCaracteristica.getDescripcion();
+	}
+	public void setPadre_descripcion(String padre_descripcion) {
+		this.padre_descripcion = padre_descripcion;
 	}
 	
 }

@@ -15,13 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.DiagnosticoVisita;
-import fox.hound.spring.models.combo.Respuesta;
 import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.puente.DetalleOrdenServicio;
 import fox.hound.spring.models.puente.OrdenServicioEventualidad;
@@ -63,6 +62,10 @@ public class OrdenServicio extends Base {
 	@JoinColumn(name="tipoOrdenServicio_id")
 	@JsonBackReference(value="ordenServicios-tipoOrdenServicio")
 	private TipoOrdenServicio tipoOrdenServicio;
+	@Transient
+	private Long tipoOrdenServicio_id;
+	@Transient
+	private String tipoOrdenServicio_descripcion;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "ordenServicio", cascade = CascadeType.ALL)
 	private ValoracionOrdenServicio valoracionOrdenServicio;
@@ -141,6 +144,19 @@ public class OrdenServicio extends Base {
 	public void setValoracionOrdenServicio(ValoracionOrdenServicio valoracionOrdenServicio) {
 		this.valoracionOrdenServicio = valoracionOrdenServicio;
 	}
+	public Long getTipoOrdenServicio_id() {
+		return tipoOrdenServicio.getId();
+	}
+	public void setTipoOrdenServicio_id(Long tipoOrdenServicio_id) {
+		this.tipoOrdenServicio_id = tipoOrdenServicio_id;
+	}
+	public String getTipoOrdenServicio_descripcion() {
+		return tipoOrdenServicio.getDescripcion();
+	}
+	public void setTipoOrdenServicio_descripcion(String tipoOrdenServicio_descripcion) {
+		this.tipoOrdenServicio_descripcion = tipoOrdenServicio_descripcion;
+	}
+	
 	
 	
 }

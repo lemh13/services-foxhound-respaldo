@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.OrdenEntrega;
+import fox.hound.spring.models.OrdenEntrega;
 import fox.hound.spring.models.maestros.TipoReclamo;
 
 @Entity

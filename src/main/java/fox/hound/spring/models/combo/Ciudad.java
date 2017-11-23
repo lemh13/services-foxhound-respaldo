@@ -26,7 +26,9 @@ public class Ciudad extends Maestro {
 	@JsonBackReference(value="ciudad-estado")
 	private Estado estado;
 	@Transient
-	private Long estado_id;
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	@OneToMany(mappedBy="ciudad")
 	@JsonManagedReference(value="ciudad-municipios")
@@ -58,7 +60,13 @@ public class Ciudad extends Maestro {
 		return estado.getId();
 	}
 	public void setEstado_id(Long estado_id) {
-		this.estado_id = estado_id;
+		this.padre_id = estado_id;
+	}
+	public String getEstado_descripcion() {
+		return estado.getDescripcion();
+	}
+	public void setEstado_descripcion(String estado_descripcion) {
+		this.padre_descripcion = estado_descripcion;
 	}
 	
 	

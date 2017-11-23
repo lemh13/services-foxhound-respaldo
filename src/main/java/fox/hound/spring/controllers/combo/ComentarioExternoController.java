@@ -45,7 +45,7 @@ public class ComentarioExternoController {
 		 AsuntoComentario asuntoComentario = asuntoComentarioService.getOne(Long.valueOf(id_ac));
 			if (asuntoComentario != null) {
 				clase.setAsuntoComentario(asuntoComentario);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Comentario Externo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "AsuntoComentario");
 			}

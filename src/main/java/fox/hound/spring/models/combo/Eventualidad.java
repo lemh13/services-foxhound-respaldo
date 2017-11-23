@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,6 +31,10 @@ public class Eventualidad extends Maestro {
 	@JoinColumn(name="tipoEventualidad_id")
 	@JsonBackReference(value="eventualidad-tipoEventualidad")
 	private TipoEventualidad tipoEventualidad;
+	@Transient
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	@OneToMany(mappedBy="eventualidad")
 	@JsonManagedReference(value="eventualidad-solicitudEventualidads")
@@ -57,6 +62,25 @@ public class Eventualidad extends Maestro {
 	public TipoEventualidad getTipoEventualidad() {
 		return tipoEventualidad;
 	}
+	public Long getPadre_id() {
+		return tipoEventualidad.getId();
+	}
+	public void setPadre_id(Long padre_id) {
+		this.padre_id = padre_id;
+	}
+	public String getPadre_descripcion() {
+		return tipoEventualidad.getDescripcion();
+	}
+	public void setPadre_descripcion(String padre_descripcion) {
+		this.padre_descripcion = padre_descripcion;
+	}
+	public List<SolicitudEventualidad> getSolicitudEventualidads() {
+		return solicitudEventualidads;
+	}
+	public void setSolicitudEventualidads(List<SolicitudEventualidad> solicitudEventualidads) {
+		this.solicitudEventualidads = solicitudEventualidads;
+	}
+	
 	
 	
 }

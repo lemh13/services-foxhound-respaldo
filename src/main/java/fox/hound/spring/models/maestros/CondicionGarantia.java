@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.combo.Garantia;
+import fox.hound.spring.models.Garantia;
 
 @Entity
 @Table(name="condicion_garantia")

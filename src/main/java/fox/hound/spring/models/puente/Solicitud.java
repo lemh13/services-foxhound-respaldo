@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Inmueble;
 import fox.hound.spring.models.Visita;
-import fox.hound.spring.models.combo.Motivo;
 
 @Entity
 @Table(name="solicitud")
@@ -29,11 +28,6 @@ public class Solicitud extends Puente {
 	@JoinColumn(name="inmueble_id")
 	@JsonBackReference(value="inmueble-solicitudes")
 	private Inmueble inmueble;
-	
-	@ManyToOne
-	@JoinColumn(name="motivo_id")
-	@JsonBackReference(value="motivo-solicitudes")
-	private Motivo motivo;
 	
 	@OneToMany(mappedBy="solicitud")
 	@JsonManagedReference(value="visita-solicitud")
@@ -50,9 +44,8 @@ public class Solicitud extends Puente {
 	public Solicitud() {
 		super();
 	}
-	public Solicitud(Long id, int estatusId, String motivoId, String inmuebleId) {
+	public Solicitud(Long id, int estatusId, String inmuebleId) {
 		super(id, estatusId);
-		this.motivo = new Motivo(motivoId);
 		this.inmueble = new Inmueble(inmuebleId);
 	}
 	public Solicitud(String id)  {
@@ -69,12 +62,6 @@ public class Solicitud extends Puente {
 	}
 	public void setInmueble(Inmueble inmueble) {
 		this.inmueble = inmueble;
-	}
-	public Motivo getMotivo() {
-		return motivo;
-	}
-	public void setMotivo(Motivo motivo) {
-		this.motivo = motivo;
 	}
 	public List<Visita> getVisitas() {
 		return visitas;

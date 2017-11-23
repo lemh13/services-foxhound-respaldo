@@ -54,9 +54,16 @@ public class CiudadController {
 		}
 	}
 
-	@RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> modificar(@RequestBody Ciudad clase, HttpServletRequest request) {
-		return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	@RequestMapping(value="estado/{id}//modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> modificar(@RequestBody Ciudad clase, @PathVariable String id,HttpServletRequest request) {
+		Estado estado = estadoService.getOne(Long.valueOf(id));
+		
+		if (estado != null) {
+			clase.setEstado(estado);
+			return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Ciudad", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		} else {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Estado");
+		}
 	}
 
 	@RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

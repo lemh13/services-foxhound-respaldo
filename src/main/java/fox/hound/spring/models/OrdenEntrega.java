@@ -1,4 +1,4 @@
-package fox.hound.spring.models.combo;
+package fox.hound.spring.models;
 
 import java.util.List;
 

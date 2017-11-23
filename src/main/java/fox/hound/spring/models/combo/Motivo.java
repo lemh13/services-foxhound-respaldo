@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -18,7 +19,6 @@ import fox.hound.spring.models.puente.MotivoOrdenServicioEventualidad;
 import fox.hound.spring.models.puente.MotivoPresupuesto;
 import fox.hound.spring.models.puente.MotivoReclamo;
 import fox.hound.spring.models.puente.MotivoSolicitud;
-import fox.hound.spring.models.puente.Solicitud;
 import fox.hound.spring.models.puente.SolicitudServicioMotivo;
 
 @Entity
@@ -30,14 +30,14 @@ public class Motivo extends Maestro {
 	@JoinColumn(name="tipoMotivo_id")
 	@JsonBackReference(value="motivo-tipoMotivo")
 	private TipoMotivo tipoMotivo;
+	@Transient
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	@OneToMany(mappedBy="motivo")
 	@JsonManagedReference(value="motivo-solicitudServicioMotivos")
 	private List<SolicitudServicioMotivo> solicitudServicioMotivos;
-	
-	@OneToMany(mappedBy="motivo")
-	@JsonManagedReference(value="motivo-solicitudes")
-	private List<Solicitud> solicitudes;
 	
 	@OneToMany(mappedBy="motivo")
 	@JsonManagedReference(value="motivo-motivoReclamos")
@@ -77,12 +77,6 @@ public class Motivo extends Maestro {
 	public void setSolicitudServicioMotivos(List<SolicitudServicioMotivo> solicitudServicioMotivos) {
 		this.solicitudServicioMotivos = solicitudServicioMotivos;
 	}
-	public List<Solicitud> getSolicitudes() {
-		return solicitudes;
-	}
-	public void setSolicitudes(List<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
-	}
 	public List<MotivoReclamo> getMotivoReclamos() {
 		return motivoReclamos;
 	}
@@ -107,6 +101,18 @@ public class Motivo extends Maestro {
 	}
 	public void setMotivoSolicitud(List<MotivoSolicitud> motivoSolicitud) {
 		this.motivoSolicitud = motivoSolicitud;
+	}
+	public Long getPadre_id() {
+		return tipoMotivo.getId();
+	}
+	public void setPadre_id(Long padre_id) {
+		this.padre_id = padre_id;
+	}
+	public String getPadre_descripcion() {
+		return tipoMotivo.getDescripcion();
+	}
+	public void setPadre_descripcion(String padre_descripcion) {
+		this.padre_descripcion = padre_descripcion;
 	}
 
 	

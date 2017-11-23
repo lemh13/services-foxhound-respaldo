@@ -48,7 +48,7 @@ public class CaracteristicaController {
 		
 		if (padre != null) {
 			clase.setTipoCaracteristica(padre);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Caracteristica", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else {
 			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Caracteristica");
 		}

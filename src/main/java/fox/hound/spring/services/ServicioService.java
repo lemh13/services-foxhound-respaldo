@@ -31,6 +31,12 @@ public class ServicioService implements ServiceGeneral<Servicio> {
 		 repository.findByEstatus(0).forEach(lista::add);
 		 return lista;
 	 }
+	 
+	 public List<Servicio> getAllUltimas() {
+		 List<Servicio> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista.subList(Math.max(lista.size() - 6, 0), lista.size());
+	 }
 
 	 @Override
 	 public Servicio saveOrUpdate(Servicio clase) {

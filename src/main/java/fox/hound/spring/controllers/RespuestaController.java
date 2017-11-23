@@ -1,4 +1,4 @@
-package fox.hound.spring.controllers.combo;
+package fox.hound.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +9,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import fox.hound.spring.models.combo.OrdenEntrega;
-import fox.hound.spring.services.OrdenEntregaService;
+
+import fox.hound.spring.models.Respuesta;
+import fox.hound.spring.models.maestros.TipoRespuesta;
+import fox.hound.spring.services.RespuestaService;
+import fox.hound.spring.services.TipoRespuestaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("ordenentrega")
-public class OrdenEntregaController {
+@RequestMapping("respuesta")
+public class RespuestaController {
 
 	 @Autowired
-	 private OrdenEntregaService service;
+	 private RespuestaService service;
+	 
+	 @Autowired
+	 private TipoRespuestaService tiporespuestaservice;
 
-	 private Class<?> CLASE = OrdenEntrega.class;
+	 private Class<?> CLASE = Respuesta.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -34,22 +40,28 @@ public class OrdenEntregaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody OrdenEntrega clase, @PathVariable String id, HttpServletRequest request) {
+	 @RequestMapping(value="tiporespuesta/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody Respuesta clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 // PENDIENTE -> @ManyToOne
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+		 TipoRespuesta tiporespuesta = tiporespuestaservice.getOne(Long.valueOf(id));
+		 
+		 if (tiporespuesta != null) {
+				clase.setTipoRespuesta(tiporespuesta);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Respuesta", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "TipoRespuesta");
+			}
+		 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody OrdenEntrega clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+	 public ResponseEntity<?> modificar(@RequestBody Respuesta clase, HttpServletRequest request) {
+			return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Respuesta", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		 service.delete(Long.valueOf(id));
-		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "OrdenEntrega");
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Respuesta");
 	 }
 
 }

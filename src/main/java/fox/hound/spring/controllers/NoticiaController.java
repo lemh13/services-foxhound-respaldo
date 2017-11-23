@@ -24,6 +24,7 @@ public class NoticiaController {
 
 	 @Autowired
 	 private NoticiaService service;
+	 @Autowired
 	 private EmpresaService empresaService;
 
 	 private Class<?> CLASE = Noticia.class;
@@ -32,23 +33,35 @@ public class NoticiaController {
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarActivos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getActivos(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAllActive(), CLASE, ResponseDefault.PLURAL);
+	 }
 
+	 @RequestMapping(value="/buscarUltimas", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getUltimas(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAllUltimas(), CLASE, ResponseDefault.PLURAL);
+	 }
+	 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="empresa/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Noticia clase, @PathVariable String id, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 Empresa empresa = empresaService.getOne(Long.valueOf(1));
+		 Empresa empresa = empresaService.getOne(Long.valueOf(id));
 		 clase.setEmpresa(empresa);
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody Noticia clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 Empresa empresa = empresaService.getOne(Long.valueOf(1));
+		 clase.setEmpresa(empresa);
+			return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Noticia", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

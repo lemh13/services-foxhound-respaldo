@@ -60,11 +60,19 @@ public class Persona extends Base {
 	@JoinColumn(name="sector_id")
 	@JsonBackReference(value="personas-sector")
 	private Sector sector;
+	@Transient
+	private Long sector_id;
+	@Transient
+	private String sector_descripcion;
 	
 	@ManyToOne
 	@JoinColumn(name="rol_id")
 	@JsonBackReference(value="persona-rol")
 	private Rol rol;
+	@Transient
+	private Long rol_id;
+	@Transient
+	private String rol_descripcion;
 	
 	@OneToMany(mappedBy="persona")
 	@JsonManagedReference(value="persona-buzonSugerencia")
@@ -178,6 +186,31 @@ public class Persona extends Base {
 	public void setDescripcionTipoPersona(String descripcionTipoPersona) {
 		this.descripcionTipoPersona = descripcionTipoPersona;
 	}
+	public Long getSector_id() {
+		return sector.getId();
+	}
+	public void setSector_id(Long sector_id) {
+		this.sector_id = sector_id;
+	}
+	public String getSector_descripcion() {
+		return sector.getDescripcion();
+	}
+	public void setSector_descripcion(String sector_descripcion) {
+		this.sector_descripcion = sector_descripcion;
+	}
+	public Long getRol_id() {
+		return rol.getId();
+	}
+	public void setRol_id(Long rol_id) {
+		this.rol_id = rol_id;
+	}
+	public String getRol_descripcion() {
+		return rol.getDescripcion();
+	}
+	public void setRol_descripcion(String rol_descripcion) {
+		this.rol_descripcion = rol_descripcion;
+	}
+	
 	
 	
 }

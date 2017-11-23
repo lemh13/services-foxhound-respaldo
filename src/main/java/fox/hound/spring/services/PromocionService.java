@@ -26,6 +26,12 @@ public class PromocionService implements ServiceGeneral<Promocion> {
 		 repository.findByEstatus(0).forEach(lista::add);
 		 return lista;
 	 }
+	 
+	 public List<Promocion> getAllUltimas() {
+		 List<Promocion> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista.subList(Math.max(lista.size() - 3, 0), lista.size());
+	 }
 
 	 @Override
 	 public Promocion getOne(Long id) {

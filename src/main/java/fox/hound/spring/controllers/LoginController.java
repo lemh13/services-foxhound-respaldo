@@ -46,6 +46,9 @@ public class LoginController {
     @RequestMapping(value = "/login/{user}/{passw}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> login(@PathVariable String user, @PathVariable String passw,
                                    Device device, HttpServletResponse response) {
+    	
+    	logger.info("user: " + user + " ,passw: " + passw);
+    	
     	Persona persona = personaService.getByEmailAndPassword(user, encript.md5( passw ));
     	if (persona != null) {
     		ObjectMapper mapper = new ObjectMapper();

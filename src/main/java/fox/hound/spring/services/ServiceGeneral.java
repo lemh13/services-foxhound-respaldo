@@ -9,4 +9,6 @@ public interface ServiceGeneral<T> {
 	public T saveOrUpdate(T clase);
 	public void delete(Long id);
 	
+	public void deleteLogic(String id);
+	
 }

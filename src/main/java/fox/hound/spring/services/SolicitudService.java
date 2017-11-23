@@ -14,8 +14,6 @@ public class SolicitudService implements ServiceGeneral<Solicitud> {
 	 @Autowired
 	 private SolicitudRepository repository;
 
-	 
-
 	 @Override
 	 public List<Solicitud> getAll() {
 		 List<Solicitud> lista = new ArrayList<>();
@@ -43,4 +41,12 @@ public class SolicitudService implements ServiceGeneral<Solicitud> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+
+	@Override
+	public void deleteLogic(String id) {
+		Solicitud clase = getOne(Long.valueOf(id));
+		clase.setEstatus(2);
+		repository.save(clase);
+	}
+	
 }

@@ -14,14 +14,25 @@ public class NoticiaService implements ServiceGeneral<Noticia> {
 	 @Autowired
 	 private NoticiaRepository repository;
 
-	 
-
 	 @Override
 	 public List<Noticia> getAll() {
 		 List<Noticia> lista = new ArrayList<>();
 		 repository.findAll().forEach(lista::add);
 		 return lista;
 	 }
+	 
+	 public List<Noticia> getAllActive() {
+		 List<Noticia> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista;
+	 }
+	 
+	 public List<Noticia> getAllUltimas() {
+		 List<Noticia> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista.subList(Math.max(lista.size() - 3, 0), lista.size());
+	 }
+
 
 	 @Override
 	 public Noticia getOne(Long id) {
@@ -33,6 +44,13 @@ public class NoticiaService implements ServiceGeneral<Noticia> {
 		 if (clase.getId() != null) {
 			 Noticia claseAux = getOne( clase.getId() );
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
+			 
+			 if (clase.getFecha_caducidad() == null) {
+				 clase.setFecha_caducidad( claseAux.getFecha_caducidad() );
+			 }
+			 if (clase.getImgNoticia() == null) {
+				 clase.setImgNoticia( claseAux.getImgNoticia() );
+			 }
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
 		 

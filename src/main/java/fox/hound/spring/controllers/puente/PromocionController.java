@@ -44,6 +44,11 @@ public class PromocionController {
 	 public ResponseEntity<?> getActivos(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAllActive(), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarUltimas", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getUltimas(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAllUltimas(), CLASE, ResponseDefault.PLURAL);
+	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {

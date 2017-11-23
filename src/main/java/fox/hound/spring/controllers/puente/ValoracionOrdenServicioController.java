@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fox.hound.spring.models.OrdenEntrega;
 import fox.hound.spring.models.OrdenServicio;
-import fox.hound.spring.models.combo.OrdenEntrega;
 import fox.hound.spring.models.puente.ValoracionOrdenServicio;
 import fox.hound.spring.services.OrdenEntregaService;
 import fox.hound.spring.services.OrdenServicioService;

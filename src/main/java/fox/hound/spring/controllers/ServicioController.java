@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.Empresa;
+import fox.hound.spring.models.Garantia;
 import fox.hound.spring.models.Servicio;
-import fox.hound.spring.models.combo.Garantia;
 import fox.hound.spring.models.maestros.Categoria;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.UnidadMedida;
@@ -59,6 +59,11 @@ public class ServicioController {
 	 public ResponseEntity<?> getAllActivos(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAllActive(), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarUltimas", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getUltimas(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAllUltimas(), CLASE, ResponseDefault.PLURAL);
+	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
@@ -98,7 +103,7 @@ public class ServicioController {
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody Servicio clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Servicio", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

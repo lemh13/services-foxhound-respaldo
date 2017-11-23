@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.DetallePresupuesto;
+import fox.hound.spring.models.DiagnosticoVisita;
+import fox.hound.spring.models.Respuesta;
 import fox.hound.spring.models.maestros.Maestro;
 import fox.hound.spring.models.puente.MotivoPresupuesto;
 

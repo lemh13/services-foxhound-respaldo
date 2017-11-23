@@ -1,4 +1,4 @@
-package fox.hound.spring.models.combo;
+package fox.hound.spring.models;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
-import fox.hound.spring.models.OrdenServicio;
+import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.maestros.Maestro;
 import fox.hound.spring.models.maestros.TipoRespuesta;
 import fox.hound.spring.models.puente.ValoracionOrdenServicio;

@@ -54,7 +54,7 @@ public class OpcionPreguntaController {
 			{
 				clase.setOpcion(opcion);
 				clase.setPregunta(pregunta);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Opcion Pregunta", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} 
 			else if (opcion==null)
 			{

@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,6 +26,10 @@ public class CondicionInmueble extends Maestro {
 	@JoinColumn(name="condicion_id")
 	@JsonBackReference(value="condicionInmueble-condicion")
 	private Condicion condicion;
+	@Transient
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	@OneToMany(mappedBy="condicionInmueble")
 	@JsonManagedReference(value="condicionInmueble-detalleDiagnosticos")
@@ -51,6 +56,18 @@ public class CondicionInmueble extends Maestro {
 	}
 	public void setDetalleDiagnosticos(List<CondicionDiagnostico> detalleDiagnosticos) {
 		this.detalleDiagnosticos = detalleDiagnosticos;
+	}
+	public Long getPadre_id() {
+		return condicion.getId();
+	}
+	public void setPadre_id(Long padre_id) {
+		this.padre_id = padre_id;
+	}
+	public String getPadre_descripcion() {
+		return condicion.getDescripcion();
+	}
+	public void setPadre_descripcion(String padre_descripcion) {
+		this.padre_descripcion = padre_descripcion;
 	}
 	
 	

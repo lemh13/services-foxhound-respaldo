@@ -46,7 +46,7 @@ public class CondicionInmuebleController {
 		 Condicion condicion = condicionService.getOne(Long.valueOf(id_condicion));
 		 if (condicion != null) {
 				clase.setCondicion(condicion);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Condicion Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Condicion");
 			}

@@ -47,7 +47,7 @@ public class EventualidadController {
 		 
 		 if (tipoEventualidad != null) {
 				clase.setTipoEventualidad(tipoEventualidad);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Eventualidad", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "TipoEventualidad");
 			}

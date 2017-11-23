@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
+import fox.hound.spring.models.DiagnosticoVisita;
 import fox.hound.spring.models.combo.CondicionInmueble;
-import fox.hound.spring.models.combo.DiagnosticoVisita;
 
 @Entity
 @Table(name="condicion_diagnostico")

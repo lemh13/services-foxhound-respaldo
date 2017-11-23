@@ -10,11 +10,14 @@ import org.springframework.stereotype.Component;
 
 import fox.hound.spring.models.Cliente;
 import fox.hound.spring.models.Empresa;
+import fox.hound.spring.models.Garantia;
 import fox.hound.spring.models.Inmueble;
+import fox.hound.spring.models.Noticia;
+import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.combo.Ciudad;
 import fox.hound.spring.models.combo.Descuento;
-import fox.hound.spring.models.combo.Garantia;
+import fox.hound.spring.models.combo.Eventualidad;
 import fox.hound.spring.models.combo.Municipio;
 import fox.hound.spring.models.combo.Parroquia;
 import fox.hound.spring.models.combo.Rol;
@@ -24,9 +27,12 @@ import fox.hound.spring.models.maestros.Categoria;
 import fox.hound.spring.models.maestros.CategoriaInmueble;
 import fox.hound.spring.models.maestros.CondicionGarantia;
 import fox.hound.spring.models.maestros.Estado;
+import fox.hound.spring.models.maestros.Ocupacion;
 import fox.hound.spring.models.maestros.Profesion;
 import fox.hound.spring.models.maestros.TipoCliente;
+import fox.hound.spring.models.maestros.TipoEventualidad;
 import fox.hound.spring.models.maestros.TipoInmueble;
+import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.maestros.TipoPromocion;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.UnidadMedida;
@@ -41,9 +47,13 @@ import fox.hound.spring.services.CondicionGarantiaService;
 import fox.hound.spring.services.DescuentoService;
 import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.EstadoService;
+import fox.hound.spring.services.EventualidadService;
 import fox.hound.spring.services.GarantiaService;
 import fox.hound.spring.services.InmuebleService;
 import fox.hound.spring.services.MunicipioService;
+import fox.hound.spring.services.NoticiaService;
+import fox.hound.spring.services.OcupacionService;
+import fox.hound.spring.services.OrdenServicioService;
 import fox.hound.spring.services.ParroquiaService;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.ProfesionService;
@@ -53,7 +63,9 @@ import fox.hound.spring.services.RolService;
 import fox.hound.spring.services.SectorService;
 import fox.hound.spring.services.ServicioService;
 import fox.hound.spring.services.TipoClienteService;
+import fox.hound.spring.services.TipoEventualidadService;
 import fox.hound.spring.services.TipoInmuebleService;
+import fox.hound.spring.services.TipoOrdenServicioService;
 import fox.hound.spring.services.TipoPromocionService;
 import fox.hound.spring.services.TipoServicioService;
 import fox.hound.spring.services.UnidadMedidaService;
@@ -114,8 +126,18 @@ public class DataLoader implements ApplicationRunner {
 	private PromocionService promocionService;
 	@Autowired
 	private PromocionServicioService promocionServicioService;
-	
-	
+	@Autowired
+	private NoticiaService noticiaService;
+	@Autowired
+	private TipoOrdenServicioService tipoOrdenServicioService;
+	@Autowired
+	private OrdenServicioService ordenServicioService;
+	@Autowired
+	private TipoEventualidadService tipoEventualidadService;
+	@Autowired
+	private EventualidadService eventualidadService;
+	@Autowired
+	private OcupacionService ocupacionService;
 	
 	@Override
 	public void run(ApplicationArguments arg0) throws Exception {
@@ -217,6 +239,24 @@ public class DataLoader implements ApplicationRunner {
 		cliente.setFecha_creacion( DateUtil.getCurrentDate() );
 		personaService.saveOrUpdate(cliente);
 		
+		Cliente cliente2 = new Cliente();
+		cliente2.setNombre("Fox Hound");
+		cliente2.setSexo('M');
+		cliente2.setTipoPersona(0);
+		cliente2.setIdentificacion(21526571);
+		cliente2.setDireccion("Carrera 13b");
+		cliente2.setSector(sector);
+		cliente2.setTelefono("04120523025");
+		cliente2.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		cliente2.setEmail("foxhound@gmail.com");
+		cliente2.setPassword( "123" );
+		cliente2.setRol(rol);
+		cliente2.setTokenMovil("null");
+		cliente2.setTipoCliente(tipoCliente);
+		cliente2.setEstatus(0);
+		cliente2.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(cliente2);
+		
 		// Profesion
 		Profesion profesion = new Profesion();
 		profesion.setDescripcion("Ingeniero en Informatica");
@@ -299,6 +339,13 @@ public class DataLoader implements ApplicationRunner {
 		tipoServicio2.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio2);
 		
+		TipoServicio tipoServicio3 = new TipoServicio();
+		tipoServicio3.setDescripcion("Electricidad");
+		tipoServicio3.setImagenServicio("imagen/p4.jpg");
+		tipoServicio3.setEstatus(0);
+		tipoServicio3.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoServicioService.saveOrUpdate(tipoServicio3);
+		
 		// Garantia
 		Garantia garantia = new Garantia();
 		garantia.setTitulo("Garantia Pisos");
@@ -329,7 +376,7 @@ public class DataLoader implements ApplicationRunner {
 		servicio.setTipoServicio(tipoServicio);
 		servicio.setUnidadMedida(unidadMedida);
 		servicio.setEmpresa(empresa);
-		servicio.setCategoria(categoria);
+		servicio.setCategoria(categoria2);
 		servicio.setTitulo("Reparacion de Pisos");
 		servicio.setImagenServicio("imagen/p4.jpg");
 		servicio.setDescripcion("Reparalo ya.");
@@ -392,6 +439,92 @@ public class DataLoader implements ApplicationRunner {
 		promocion.setFecha_creacion( DateUtil.getCurrentDate() );
 		promocionServicioService.saveOrUpdate(promocionServicio);
 		
+		// Noticia
+		Noticia noticia = new Noticia();
+		noticia.setTitulo("Mañana habra mantenimiento del sistema");
+		noticia.setDescripcion("Por cuestiones de mantenimiento del ascensor no prestaremos servicios, pedimos disculpas por las molestias ocacionadas");
+		noticia.setImgNoticia("imagen/p2.jpg");
+		noticia.setEmpresa(empresa);
+		noticia.setEstatus(0);
+		noticia.setFecha_caducidad(cal.getTime());
+		noticia.setFecha_creacion( DateUtil.getCurrentDate() );
+		noticiaService.saveOrUpdate(noticia);
+		
+		Noticia noticia2 = new Noticia();
+		noticia2.setTitulo("Fulano consigue record Guiness de barredor.");
+		noticia2.setDescripcion("Por cuestiones de mantenimiento del ascensor no prestaremos servicios, pedimos disculpas por las molestias ocacionadas");
+		noticia2.setImgNoticia("imagen/p2.jpg");
+		noticia2.setEmpresa(empresa);
+		noticia2.setEstatus(0);
+		noticia2.setFecha_caducidad(cal.getTime());
+		noticia2.setFecha_creacion( DateUtil.getCurrentDate() );
+		noticiaService.saveOrUpdate(noticia2);
+		
+		Noticia noticia3 = new Noticia();
+		noticia3.setTitulo("Conoce a nuestra aplicación móvil");
+		noticia3.setDescripcion("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleni.");
+		noticia3.setImgNoticia("imagen/p2.jpg");
+		noticia3.setEmpresa(empresa);
+		noticia3.setEstatus(0);
+		noticia3.setFecha_caducidad(cal.getTime());
+		noticia3.setFecha_creacion( DateUtil.getCurrentDate() );
+		noticiaService.saveOrUpdate(noticia3);
+		
+		Noticia noticia4 = new Noticia();
+		noticia4.setTitulo("Fulano consigue record Guiness de albaliñeria");
+		noticia4.setDescripcion("Por cuestiones de mantenimiento del ascensor no prestaremos servicios, pedimos disculpas por las molestias ocacionadas");
+		noticia4.setImgNoticia("imagen/p2.jpg");
+		noticia4.setEmpresa(empresa);
+		noticia4.setEstatus(0);
+		noticia4.setFecha_caducidad(cal.getTime());
+		noticia4.setFecha_creacion( DateUtil.getCurrentDate() );
+		noticiaService.saveOrUpdate(noticia4);
+		
+		// Tipo Orden Servicio
+		TipoOrdenServicio tipoOrdenServicio = new TipoOrdenServicio();
+		tipoOrdenServicio.setDescripcion("Servicios");
+		tipoOrdenServicio.setEstatus(0);
+		tipoOrdenServicio.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoOrdenServicioService.saveOrUpdate(tipoOrdenServicio);
+		
+		// Orden de servicio
+		OrdenServicio ordenServicio = new OrdenServicio();
+		ordenServicio.setFechaInicio( DateUtil.getCurrentDate()  );
+		ordenServicio.setFechaCulminacion(cal.getTime());
+		ordenServicio.setTipoOrdenServicio(tipoOrdenServicio);
+		ordenServicio.setEstatus(0);
+		ordenServicio.setFecha_creacion( DateUtil.getCurrentDate() );
+		ordenServicioService.saveOrUpdate(ordenServicio);
+
+		// Tipo Eventualidad
+		TipoEventualidad tipoEventualidad = new TipoEventualidad();
+		tipoEventualidad.setDescripcion("Daños");
+		tipoEventualidad.setEstatus(0);
+		tipoEventualidad.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoEventualidadService.saveOrUpdate(tipoEventualidad);
+		
+		// Eventualidad
+		Eventualidad eventualidad = new Eventualidad();
+		eventualidad.setDescripcion("Daños");
+		eventualidad.setTipoEventualidad(tipoEventualidad);
+		eventualidad.setEstatus(0);
+		eventualidad.setFecha_creacion( DateUtil.getCurrentDate() );
+		eventualidadService.saveOrUpdate(eventualidad);
+		
+		// Ocupacion
+		Ocupacion ocupacion = new Ocupacion();
+		ocupacion.setDescripcion("Docente");
+		ocupacion.setEstatus(0);
+		ocupacion.setFecha_creacion( DateUtil.getCurrentDate() );
+		ocupacionService.saveOrUpdate(ocupacion);
+		
+		Ocupacion ocupacion2 = new Ocupacion();
+		ocupacion2.setDescripcion("Ama de Casa");
+		ocupacion2.setEstatus(0);
+		ocupacion2.setFecha_creacion( DateUtil.getCurrentDate() );
+		ocupacionService.saveOrUpdate(ocupacion2);
+		
+		//
 		
 	}
 
