@@ -151,7 +151,7 @@ public class MenuController {
 		 lista.add(new Menu(1005, "Comparativos de Inmuebles", "fa fa-plus", "comparativo_inmuebles_path", null));
 		 lista.add(new Menu(1006, "Comparativos de Reclamos", "fa fa-plus", "comparativo_reclamos_path", null));
 		 lista.add(new Menu(1007, "Reporte Solicitudes", "fa fa-plus", "reporte_solicitudes_path", null));
-		 lista.add(new Menu(1008, "Reporte Valoraciones", "fa fa-plus", "reporte_valoraciones_solicitudes_path", null));
+		 lista.add(new Menu(1008, "Reporte Valoraciones", "fa fa-plus", "reporte_valoraciones_path", null));
 		 lista.add(new Menu(1009, "Reporte Inmuebles", "fa fa-plus", "reporte_inmuebles_path", null));
 		 lista.add(new Menu(1010, "Reporte Reclamos", "fa fa-plus", "reporte_reclamos_path", null));
 		return lista;
