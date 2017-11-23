@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import fox.hound.spring.models.combo.Sector;
 import fox.hound.spring.repositories.SectorRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -13,7 +14,10 @@ public class SectorService implements ServiceGeneral<Sector> {
 
 	 @Autowired
 	 private SectorRepository repository;
-
+	 
+	 public List<Sector> getSectorPorParroquia(String id) { 
+		 return repository.findByParroquiaId(Long.valueOf(id));
+	 }
 	 
 
 	 @Override

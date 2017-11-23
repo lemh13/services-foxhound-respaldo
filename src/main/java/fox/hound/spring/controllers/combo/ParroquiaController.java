@@ -65,4 +65,8 @@ public class ParroquiaController {
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Parroquia");
 	}
 	
+	@RequestMapping(value="/municipio/{id}/buscarPorMunicipio", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarPorMunicipio(@PathVariable String id, HttpServletRequest request) {
+		return ResponseDefault.ok(service.getParroquiaPorMunicipio(id), CLASE, ResponseDefault.SINGULAR); 
+	}
 }

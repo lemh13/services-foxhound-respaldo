@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import fox.hound.spring.models.combo.Parroquia;
 import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.repositories.TipoInmuebleRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -13,7 +15,11 @@ public class TipoInmuebleService implements ServiceGeneral<TipoInmueble> {
 
 	 @Autowired
 	 private TipoInmuebleRepository repository;
-
+	 	
+	 public List<TipoInmueble> getTipoInmueblePorCategoria(String id) { 
+		 return repository.findByCategoriaInmuebleId(Long.valueOf(id));
+	 }	
+	 
 	 @Override
 	 public List<TipoInmueble> getAll() {
 		 List<TipoInmueble> lista = new ArrayList<>();

@@ -65,4 +65,8 @@ public class SectorController {
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Sector");
 	}
 	
+	@RequestMapping(value="/parroquia/{id}/buscarPorParroquia", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarPorParroquia(@PathVariable String id, HttpServletRequest request) {
+		return ResponseDefault.ok(service.getSectorPorParroquia(id), CLASE, ResponseDefault.SINGULAR); 
+	}
 }

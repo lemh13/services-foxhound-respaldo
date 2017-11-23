@@ -40,21 +40,21 @@ public class RolFuncionController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/rol/{rolid]/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="/rol/{rolid}/menu/{menu}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@PathVariable String rolid, HttpServletRequest request) {
 		 RolFuncion clase = new RolFuncion();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Rol rol = rolService.getOne(Long.valueOf(rolid));
 		 
 		 if (rol != null ) {
-				clase.setRol(rol);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else {
-				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Rol Funcion");
-			}
+			clase.setRol(rol);
+			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		} else {
+			return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Rol Funcion");
+		}
 	 }
 
-	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="/rol/{rolid}/menu/{menu}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody RolFuncion clase, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }

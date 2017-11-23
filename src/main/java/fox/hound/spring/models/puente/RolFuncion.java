@@ -1,5 +1,7 @@
 package fox.hound.spring.models.puente;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,10 +27,13 @@ public class RolFuncion extends Puente {
 	@JsonBackReference(value="rolFuncions-rol")
 	private Rol rol;
 	
-	public RolFuncion(Long id, int estatusId, String rolId) {
+	private int menu;
+	
+	public RolFuncion(Long id, int estatusId, String rolId, int menu) {
 		super(id, estatusId);
 //		this.menu = new Menu(menuId);
 		this.rol = new Rol(rolId);
+		this.menu = menu;
 	}
 	public RolFuncion(String id) {
 		super(id);
@@ -47,6 +52,12 @@ public class RolFuncion extends Puente {
 	}
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	public int getMenu() {
+		return menu;
+	}
+	public void setMenu(int menu) {
+		this.menu = menu;
 	}
 	
 }

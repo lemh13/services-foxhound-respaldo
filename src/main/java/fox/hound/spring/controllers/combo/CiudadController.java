@@ -54,7 +54,7 @@ public class CiudadController {
 		}
 	}
 
-	@RequestMapping(value="estado/{id}//modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="estado/{id}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> modificar(@RequestBody Ciudad clase, @PathVariable String id,HttpServletRequest request) {
 		Estado estado = estadoService.getOne(Long.valueOf(id));
 		

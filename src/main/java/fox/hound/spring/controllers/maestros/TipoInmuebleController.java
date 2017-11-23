@@ -65,6 +65,9 @@ public class TipoInmuebleController {
 		service.delete(Long.valueOf(id));
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Tipo de Inmueble");
 	}
-	
+	@RequestMapping(value="/categoria/{id}/buscarPorCategoria", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarPorCategoria(@PathVariable String id, HttpServletRequest request) {
+		return ResponseDefault.ok(service.getTipoInmueblePorCategoria(id), CLASE, ResponseDefault.SINGULAR); 
+	}
 	
 }

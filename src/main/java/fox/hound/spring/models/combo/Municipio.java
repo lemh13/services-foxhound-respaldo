@@ -50,7 +50,7 @@ public class Municipio extends Maestro {
 		this.ciudad = ciudad;
 	}
 	public Long getPadre_id() {
-		return ciudad.getEstado_id();
+		return ciudad.getPadre_id();
 	}
 	public void setPadre_id(Long padre_id) {
 		this.padre_id = padre_id;

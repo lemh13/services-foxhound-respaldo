@@ -56,16 +56,16 @@ public class Ciudad extends Maestro {
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
 	}
-	public Long getEstado_id() {
+	public Long getPadre_id() {
 		return estado.getId();
 	}
-	public void setEstado_id(Long estado_id) {
+	public void setPadre_id(Long estado_id) {
 		this.padre_id = estado_id;
 	}
-	public String getEstado_descripcion() {
+	public String getPadre_descripcion() {
 		return estado.getDescripcion();
 	}
-	public void setEstado_descripcion(String estado_descripcion) {
+	public void setPadre_descripcion(String estado_descripcion) {
 		this.padre_descripcion = estado_descripcion;
 	}
 	

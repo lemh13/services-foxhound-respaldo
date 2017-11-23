@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Persona;
 import fox.hound.spring.models.maestros.Maestro;
-import fox.hound.spring.models.puente.RolFuncion;
 
 @Entity
 @Table(name="rol")
@@ -22,11 +21,13 @@ public class Rol extends Maestro {
 	@JsonManagedReference(value="persona-rol")
 	private List<Persona> personas;
 	
-	@OneToMany(mappedBy="rol")
-	@JsonManagedReference(value="rolFuncions-rol")
-	private List<RolFuncion> rolFuncions;
+//	@OneToMany(mappedBy="rol")
+//	@JsonManagedReference(value="rolFuncions-rol")
+//	private List<RolFuncion> rolFuncions;
+	
+	private String menu;
 
-	public Rol(Long id, String name, int estatusId, String estadoId) {
+	public Rol(Long id, String name, int estatusId, String estadoId, String menu) {
 		super(id, name, estatusId);
 	}
 	public Rol(String id) {
@@ -41,11 +42,19 @@ public class Rol extends Maestro {
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
 	}
-	public List<RolFuncion> getRolFuncions() {
-		return rolFuncions;
+	public String getMenu() {
+		return menu;
 	}
-	public void setRolFuncions(List<RolFuncion> rolFuncions) {
-		this.rolFuncions = rolFuncions;
+	public void setMenu(String menu) {
+		this.menu = menu;
 	}
+	
+	
+//	public List<RolFuncion> getRolFuncions() {
+//		return rolFuncions;
+//	}
+//	public void setRolFuncions(List<RolFuncion> rolFuncions) {
+//		this.rolFuncions = rolFuncions;
+//	}
 	
 }

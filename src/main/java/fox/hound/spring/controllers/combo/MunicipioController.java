@@ -64,5 +64,8 @@ public class MunicipioController {
 		service.delete(Long.valueOf(id));
 		return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Municipio");
 	}
-	
+	@RequestMapping(value="/ciudad/{id}/buscarPorCiudad", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarPorCiudad(@PathVariable String id, HttpServletRequest request) {
+		return ResponseDefault.ok(service.getMunicipioPorCiudad(id), CLASE, ResponseDefault.SINGULAR); 
+	}
 }

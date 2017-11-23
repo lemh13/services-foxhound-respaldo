@@ -231,6 +231,7 @@ public class DataLoader implements ApplicationRunner {
 		// Rol
 		Rol rol = new Rol();
 		rol.setDescripcion("Cliente Simple");
+		rol.setMenu("-1-2-4");
 		rol.setEstatus(0);
 		rol.setFecha_creacion( DateUtil.getCurrentDate() );
 		rolService.saveOrUpdate(rol);
