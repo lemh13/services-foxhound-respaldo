@@ -52,24 +52,6 @@ public class TokenUtil {
 
 	/**
 	 *  A partir de los datos del token,
-	 *  obtenemos el nombre de usuario
-	 *
-	 *  @params token
-	 *  @return nombre usuario
-	 **/
-	public String getUsernameFromToken(String token) {
-	    String username;
-	    try {
-	      final Claims claims = this.getClaimsFromToken(token);
-	      username = claims.getSubject();
-	    } catch (Exception e) {
-	      username = null;
-	    }
-	    return username;
-	}
-
-	/**
-	 *  A partir de los datos del token,
 	 *  obtenemos su fecha de creacion
 	 *
 	 *  @params token

@@ -2,6 +2,8 @@ package fox.hound.spring.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fox.hound.spring.models.combo.Rol;
@@ -14,13 +16,12 @@ public class RolService implements ServiceGeneral<Rol> {
 	 @Autowired
 	 private RolRepository repository;
 
-	 
-
 	 @Override
 	 public List<Rol> getAll() {
 		 List<Rol> lista = new ArrayList<>();
 		 repository.findAll().forEach(lista::add);
-		 return lista;
+		 
+		 return lista.stream().filter(c -> c.getEstatus() != 2).collect(Collectors.toList());
 	 }
 
 	 @Override
@@ -41,13 +42,20 @@ public class RolService implements ServiceGeneral<Rol> {
 
 	 @Override
 	 public void delete(Long id) {
-		 repository.delete(id);
+ 		repository.delete(id);
 	 }
 	 
 	 @Override
-		public void deleteLogic(String id) {
-		 	Rol clase = getOne(Long.valueOf(id));
-			clase.setEstatus(2);
-			repository.save(clase);
-		}
+	 public void deleteLogic(String id) {
+	  	Rol clase = getOne(Long.valueOf(id));
+		clase.setEstatus(2);
+		repository.save(clase);
+	 }
+	 
+	 public Rol activeDesactiveEstatus(String id) {
+	  	Rol clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	 }
+	 
 }

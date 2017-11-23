@@ -1,9 +1,7 @@
 package fox.hound.spring.controllers.combo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,13 +53,25 @@ public class RolController {
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody Rol clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 clase.setMenu("-" + clase.getMenu()); 
+		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
 		 service.delete(Long.valueOf(id));
 		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Rol");
+	 }
+	 
+	 @RequestMapping(value="/borrarLogico/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> borrarLogico(@PathVariable String id, HttpServletRequest request) {
+		 service.deleteLogic(id);
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Rol");
+	 }
+	 
+	 @RequestMapping(value="/activeDesactiveEstatus/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
+		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
 	 
 	 private List<RolPrint> buscarMenusId(List<Rol> roles) {
