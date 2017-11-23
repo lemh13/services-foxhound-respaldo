@@ -50,4 +50,11 @@ public class ReclamoOrdenEntregaService implements ServiceGeneral<ReclamoOrdenEn
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public ReclamoOrdenEntrega activeDesactiveEstatus(String id) {
+		ReclamoOrdenEntrega clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

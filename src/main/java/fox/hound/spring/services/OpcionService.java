@@ -50,4 +50,11 @@ public class OpcionService implements ServiceGeneral<Opcion> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Opcion activeDesactiveEstatus(String id) {
+		Opcion clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

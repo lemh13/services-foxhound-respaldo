@@ -52,6 +52,7 @@ public class RolService implements ServiceGeneral<Rol> {
 		repository.save(clase);
 	 }
 	 
+	 @Override
 	 public Rol activeDesactiveEstatus(String id) {
 	  	Rol clase = getOne(Long.valueOf(id));
 		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );

@@ -50,4 +50,11 @@ public class CaracteristicaInmuebleService implements ServiceGeneral<Caracterist
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CaracteristicaInmueble activeDesactiveEstatus(String id) {
+		CaracteristicaInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

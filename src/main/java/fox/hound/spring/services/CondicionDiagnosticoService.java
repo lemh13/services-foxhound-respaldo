@@ -50,4 +50,11 @@ public class CondicionDiagnosticoService implements ServiceGeneral<CondicionDiag
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CondicionDiagnostico activeDesactiveEstatus(String id) {
+		CondicionDiagnostico clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

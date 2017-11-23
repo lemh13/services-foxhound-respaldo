@@ -48,4 +48,11 @@ public class TurnoService implements ServiceGeneral<Turno> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Turno activeDesactiveEstatus(String id) {
+		Turno clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

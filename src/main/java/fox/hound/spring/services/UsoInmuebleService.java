@@ -48,4 +48,11 @@ public class UsoInmuebleService implements ServiceGeneral<UsoInmueble> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public UsoInmueble activeDesactiveEstatus(String id) {
+		UsoInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

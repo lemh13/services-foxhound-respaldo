@@ -48,4 +48,11 @@ public class DetalleDiagnosticoVisitaService implements ServiceGeneral<DetalleDi
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public DetalleDiagnosticoVisita activeDesactiveEstatus(String id) {
+		DetalleDiagnosticoVisita clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

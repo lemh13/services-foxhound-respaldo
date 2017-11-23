@@ -48,4 +48,11 @@ public class TipoVisitaService implements ServiceGeneral<TipoVisita> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public TipoVisita activeDesactiveEstatus(String id) {
+		TipoVisita clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

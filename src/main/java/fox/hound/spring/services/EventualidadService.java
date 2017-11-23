@@ -50,4 +50,11 @@ public class EventualidadService implements ServiceGeneral<Eventualidad> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Eventualidad activeDesactiveEstatus(String id) {
+		Eventualidad clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

@@ -50,4 +50,11 @@ public class DetallePresupuestoService implements ServiceGeneral<DetallePresupue
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public DetallePresupuesto activeDesactiveEstatus(String id) {
+		DetallePresupuesto clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

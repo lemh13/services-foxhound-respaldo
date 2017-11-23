@@ -48,4 +48,13 @@ public class TipoServicioService implements ServiceGeneral<TipoServicio> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public TipoServicio activeDesactiveEstatus(String id) {
+		TipoServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
+	 
+	 
 }

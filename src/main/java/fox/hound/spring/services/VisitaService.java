@@ -48,4 +48,11 @@ public class VisitaService implements ServiceGeneral<Visita> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+	 
+	 @Override
+	 public Visita activeDesactiveEstatus(String id) {
+	  	Visita clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	 }
 }

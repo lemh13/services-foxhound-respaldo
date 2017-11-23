@@ -50,4 +50,11 @@ public class SolicitudEventualidadService implements ServiceGeneral<SolicitudEve
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public SolicitudEventualidad activeDesactiveEstatus(String id) {
+		SolicitudEventualidad clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

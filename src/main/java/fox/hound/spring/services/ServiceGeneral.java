@@ -10,5 +10,6 @@ public interface ServiceGeneral<T> {
 	public void delete(Long id);
 	
 	public void deleteLogic(String id);
+	public T activeDesactiveEstatus(String id);
 	
 }

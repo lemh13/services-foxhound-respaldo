@@ -68,4 +68,11 @@ public class PersonaService implements ServiceGeneral<Persona> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Persona activeDesactiveEstatus(String id) {
+		Persona clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

@@ -50,4 +50,11 @@ public class OrdenServicioEventualidadService implements ServiceGeneral<OrdenSer
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public OrdenServicioEventualidad activeDesactiveEstatus(String id) {
+		OrdenServicioEventualidad clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fox.hound.spring.models.combo.Parroquia;
 import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.repositories.TipoInmuebleRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -54,4 +53,11 @@ public class TipoInmuebleService implements ServiceGeneral<TipoInmueble> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public TipoInmueble activeDesactiveEstatus(String id) {
+		TipoInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

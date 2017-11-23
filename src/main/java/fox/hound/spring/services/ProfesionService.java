@@ -50,4 +50,11 @@ public class ProfesionService implements ServiceGeneral<Profesion> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Profesion activeDesactiveEstatus(String id) {
+		Profesion clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

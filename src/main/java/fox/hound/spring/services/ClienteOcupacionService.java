@@ -50,4 +50,11 @@ public class ClienteOcupacionService implements ServiceGeneral<ClienteOcupacion>
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public ClienteOcupacion activeDesactiveEstatus(String id) {
+		ClienteOcupacion clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

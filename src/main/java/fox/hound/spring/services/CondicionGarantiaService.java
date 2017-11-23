@@ -50,4 +50,11 @@ public class CondicionGarantiaService implements ServiceGeneral<CondicionGaranti
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CondicionGarantia activeDesactiveEstatus(String id) {
+		CondicionGarantia clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

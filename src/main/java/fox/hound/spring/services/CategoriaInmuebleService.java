@@ -50,4 +50,11 @@ public class CategoriaInmuebleService implements ServiceGeneral<CategoriaInmuebl
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CategoriaInmueble activeDesactiveEstatus(String id) {
+		CategoriaInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

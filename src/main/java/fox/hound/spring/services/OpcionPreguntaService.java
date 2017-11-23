@@ -50,4 +50,11 @@ public class OpcionPreguntaService implements ServiceGeneral<OpcionPregunta> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public OpcionPregunta activeDesactiveEstatus(String id) {
+		OpcionPregunta clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

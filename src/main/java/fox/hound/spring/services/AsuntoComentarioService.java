@@ -48,4 +48,11 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 		clase.setEstatus(2);
 		repository.save(clase);
 	}
+
+	@Override
+	public AsuntoComentario activeDesactiveEstatus(String id) {
+		AsuntoComentario clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

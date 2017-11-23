@@ -48,4 +48,11 @@ public class TipoOrdenServicioService implements ServiceGeneral<TipoOrdenServici
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public TipoOrdenServicio activeDesactiveEstatus(String id) {
+		TipoOrdenServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

@@ -50,4 +50,11 @@ public class MotivoReclamoService implements ServiceGeneral<MotivoReclamo> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public MotivoReclamo activeDesactiveEstatus(String id) {
+		MotivoReclamo clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

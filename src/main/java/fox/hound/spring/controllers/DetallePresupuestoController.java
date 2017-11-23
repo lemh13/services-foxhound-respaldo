@@ -78,5 +78,16 @@ public class DetallePresupuestoController {
 		 service.delete(Long.valueOf(id));
 		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "DetallePresupuesto");
 	 }
+	 
+	 @RequestMapping(value="/borrarLogico/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> borrarLogico(@PathVariable String id, HttpServletRequest request) {
+		 service.deleteLogic(id);
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Rol");
+	 }
+	 
+	 @RequestMapping(value="/activeDesactiveEstatus/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
+		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
+	 }
 
 }

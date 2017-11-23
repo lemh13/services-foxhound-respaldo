@@ -54,4 +54,11 @@ public class InmuebleService implements ServiceGeneral<Inmueble> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Inmueble activeDesactiveEstatus(String id) {
+		Inmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

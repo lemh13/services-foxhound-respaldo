@@ -48,4 +48,11 @@ public class TrabajadorVisitaService implements ServiceGeneral<TrabajadorVisita>
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public TrabajadorVisita activeDesactiveEstatus(String id) {
+		TrabajadorVisita clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

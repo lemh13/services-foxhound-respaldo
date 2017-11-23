@@ -50,4 +50,11 @@ public class ComentarioExternoService implements ServiceGeneral<ComentarioExtern
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public ComentarioExterno activeDesactiveEstatus(String id) {
+		ComentarioExterno clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

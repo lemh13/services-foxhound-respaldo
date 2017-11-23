@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import fox.hound.spring.models.combo.Zona;
 import fox.hound.spring.repositories.ZonaRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -48,4 +49,11 @@ public class ZonaService implements ServiceGeneral<Zona> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+	 
+	 @Override
+	 public Zona activeDesactiveEstatus(String id) {
+	  	Zona clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	 }
 }

@@ -50,4 +50,11 @@ public class DetalleOrdenServicioService implements ServiceGeneral<DetalleOrdenS
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public DetalleOrdenServicio activeDesactiveEstatus(String id) {
+		DetalleOrdenServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

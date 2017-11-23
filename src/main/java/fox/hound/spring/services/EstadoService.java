@@ -50,4 +50,11 @@ public class EstadoService implements ServiceGeneral<Estado> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Estado activeDesactiveEstatus(String id) {
+		Estado clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

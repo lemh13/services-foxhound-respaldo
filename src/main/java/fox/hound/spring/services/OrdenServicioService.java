@@ -48,4 +48,11 @@ public class OrdenServicioService implements ServiceGeneral<OrdenServicio> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public OrdenServicio activeDesactiveEstatus(String id) {
+		OrdenServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

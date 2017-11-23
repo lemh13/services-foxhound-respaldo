@@ -50,4 +50,11 @@ public class CondicionInmuebleService implements ServiceGeneral<CondicionInmuebl
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CondicionInmueble activeDesactiveEstatus(String id) {
+		CondicionInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

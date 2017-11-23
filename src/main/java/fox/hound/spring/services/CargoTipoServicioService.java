@@ -50,4 +50,11 @@ public class CargoTipoServicioService implements ServiceGeneral<CargoTipoServici
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public CargoTipoServicio activeDesactiveEstatus(String id) {
+		CargoTipoServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

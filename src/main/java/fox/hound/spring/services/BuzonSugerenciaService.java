@@ -51,4 +51,11 @@ public class BuzonSugerenciaService implements ServiceGeneral<BuzonSugerencia> {
 		clase.setEstatus(2);
 		repository.save(clase);
 	}
+
+	@Override
+	public BuzonSugerencia activeDesactiveEstatus(String id) {
+		BuzonSugerencia clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

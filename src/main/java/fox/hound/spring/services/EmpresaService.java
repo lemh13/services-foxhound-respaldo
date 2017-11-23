@@ -50,4 +50,11 @@ public class EmpresaService implements ServiceGeneral<Empresa> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Empresa activeDesactiveEstatus(String id) {
+		Empresa clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

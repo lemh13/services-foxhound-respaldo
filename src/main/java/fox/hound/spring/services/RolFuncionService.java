@@ -50,4 +50,10 @@ public class RolFuncionService implements ServiceGeneral<RolFuncion> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public RolFuncion activeDesactiveEstatus(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

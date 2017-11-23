@@ -52,4 +52,11 @@ public class CiudadService implements ServiceGeneral<Ciudad> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Ciudad activeDesactiveEstatus(String id) {
+		Ciudad clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

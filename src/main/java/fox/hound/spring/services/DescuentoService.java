@@ -50,4 +50,11 @@ public class DescuentoService implements ServiceGeneral<Descuento> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Descuento activeDesactiveEstatus(String id) {
+		Descuento clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

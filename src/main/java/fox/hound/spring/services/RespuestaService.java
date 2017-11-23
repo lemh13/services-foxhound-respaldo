@@ -51,4 +51,11 @@ public class RespuestaService implements ServiceGeneral<Respuesta> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Respuesta activeDesactiveEstatus(String id) {
+		Respuesta clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

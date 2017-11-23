@@ -54,4 +54,12 @@ public class SectorService implements ServiceGeneral<Sector> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+
+	@Override
+	public Sector activeDesactiveEstatus(String id) {
+		Sector clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

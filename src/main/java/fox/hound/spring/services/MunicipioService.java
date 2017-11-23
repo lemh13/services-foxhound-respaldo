@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fox.hound.spring.models.combo.Ciudad;
 import fox.hound.spring.models.combo.Municipio;
 import fox.hound.spring.repositories.MunicipioRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -54,4 +53,11 @@ public class MunicipioService implements ServiceGeneral<Municipio> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Municipio activeDesactiveEstatus(String id) {
+		Municipio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

@@ -48,4 +48,11 @@ public class ValoracionOrdenServicioService implements ServiceGeneral<Valoracion
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+	 
+	 @Override
+	 public ValoracionOrdenServicio activeDesactiveEstatus(String id) {
+	  	ValoracionOrdenServicio clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	 }
 }

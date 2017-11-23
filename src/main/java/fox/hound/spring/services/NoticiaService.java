@@ -68,4 +68,11 @@ public class NoticiaService implements ServiceGeneral<Noticia> {
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public Noticia activeDesactiveEstatus(String id) {
+		Noticia clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }

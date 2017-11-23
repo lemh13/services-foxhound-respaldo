@@ -48,4 +48,11 @@ public class DetalleServicioInmuebleService implements ServiceGeneral<DetalleSer
 			clase.setEstatus(2);
 			repository.save(clase);
 		}
+
+	@Override
+	public DetalleServicioInmueble activeDesactiveEstatus(String id) {
+		DetalleServicioInmueble clase = getOne(Long.valueOf(id));
+		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
+		return repository.save(clase);
+	}
 }
