@@ -43,4 +43,11 @@ public class DetallePresupuestoService implements ServiceGeneral<DetallePresupue
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	DetallePresupuesto clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

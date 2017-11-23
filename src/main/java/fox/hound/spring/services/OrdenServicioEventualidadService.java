@@ -43,4 +43,11 @@ public class OrdenServicioEventualidadService implements ServiceGeneral<OrdenSer
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	OrdenServicioEventualidad clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

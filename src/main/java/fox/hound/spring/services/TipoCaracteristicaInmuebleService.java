@@ -43,4 +43,11 @@ public class TipoCaracteristicaInmuebleService implements ServiceGeneral<TipoCar
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	TipoCaracteristicaInmueble clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

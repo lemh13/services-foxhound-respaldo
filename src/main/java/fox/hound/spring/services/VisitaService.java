@@ -41,4 +41,11 @@ public class VisitaService implements ServiceGeneral<Visita> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	Visita clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

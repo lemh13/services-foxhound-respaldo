@@ -43,4 +43,11 @@ public class CargoTipoServicioService implements ServiceGeneral<CargoTipoServici
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	CargoTipoServicio clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

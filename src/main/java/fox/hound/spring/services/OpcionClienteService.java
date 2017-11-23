@@ -43,4 +43,11 @@ public class OpcionClienteService implements ServiceGeneral<OpcionCliente> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	OpcionCliente clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

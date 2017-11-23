@@ -41,4 +41,11 @@ public class TipoVisitaService implements ServiceGeneral<TipoVisita> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	TipoVisita clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

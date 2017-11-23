@@ -43,4 +43,11 @@ public class CondicionGarantiaService implements ServiceGeneral<CondicionGaranti
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	CondicionGarantia clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import fox.hound.spring.models.combo.BuzonSugerencia;
 import fox.hound.spring.repositories.BuzonSugerenciaRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -43,4 +44,11 @@ public class BuzonSugerenciaService implements ServiceGeneral<BuzonSugerencia> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	@Override
+	public void deleteLogic(String id) {
+	 	BuzonSugerencia clase = getOne(Long.valueOf(id));
+		clase.setEstatus(2);
+		repository.save(clase);
+	}
 }

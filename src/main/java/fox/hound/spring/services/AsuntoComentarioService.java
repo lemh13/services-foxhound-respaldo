@@ -14,8 +14,6 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 	 @Autowired
 	 private AsuntoComentarioRepository repository;
 
-	 
-
 	 @Override
 	 public List<AsuntoComentario> getAll() {
 		 List<AsuntoComentario> lista = new ArrayList<>();
@@ -43,4 +41,11 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+
+	@Override
+	public void deleteLogic(String id) {
+	 	AsuntoComentario clase = getOne(Long.valueOf(id));
+		clase.setEstatus(2);
+		repository.save(clase);
+	}
 }

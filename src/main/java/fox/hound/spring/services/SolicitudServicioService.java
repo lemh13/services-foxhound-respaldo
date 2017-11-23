@@ -43,4 +43,11 @@ public class SolicitudServicioService implements ServiceGeneral<SolicitudServici
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	SolicitudServicio clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

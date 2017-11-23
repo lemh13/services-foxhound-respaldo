@@ -43,4 +43,11 @@ public class SolicitudEventualidadService implements ServiceGeneral<SolicitudEve
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	SolicitudEventualidad clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

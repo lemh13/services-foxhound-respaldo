@@ -43,4 +43,11 @@ public class CategoriaInmuebleService implements ServiceGeneral<CategoriaInmuebl
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	CategoriaInmueble clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

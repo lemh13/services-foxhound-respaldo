@@ -41,4 +41,11 @@ public class TipoMotivoService implements ServiceGeneral<TipoMotivo> {
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	TipoMotivo clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

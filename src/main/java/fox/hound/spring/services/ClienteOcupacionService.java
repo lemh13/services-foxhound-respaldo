@@ -43,4 +43,11 @@ public class ClienteOcupacionService implements ServiceGeneral<ClienteOcupacion>
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	ClienteOcupacion clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

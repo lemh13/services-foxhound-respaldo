@@ -43,4 +43,11 @@ public class MotivoOrdenServicioEventualidadService implements ServiceGeneral<Mo
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	MotivoOrdenServicioEventualidad clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

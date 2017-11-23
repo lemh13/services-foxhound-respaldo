@@ -43,4 +43,11 @@ public class DetalleDiagnosticoService implements ServiceGeneral<CondicionDiagno
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	CondicionDiagnostico clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

@@ -41,4 +41,11 @@ public class DetalleServicioInmuebleService implements ServiceGeneral<DetalleSer
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	DetalleServicioInmueble clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }

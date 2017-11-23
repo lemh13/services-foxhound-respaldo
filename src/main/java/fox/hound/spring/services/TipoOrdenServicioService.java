@@ -41,4 +41,11 @@ public class TipoOrdenServicioService implements ServiceGeneral<TipoOrdenServici
 	 public void delete(Long id) {
 		 repository.delete(id);
 	 }
+	 
+	 @Override
+		public void deleteLogic(String id) {
+		 	TipoOrdenServicio clase = getOne(Long.valueOf(id));
+			clase.setEstatus(2);
+			repository.save(clase);
+		}
 }
