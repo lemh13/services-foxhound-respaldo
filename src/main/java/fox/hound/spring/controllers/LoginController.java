@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fox.hound.spring.models.Persona;
 import fox.hound.spring.models.response.HttpResponseError;
+import fox.hound.spring.print.PersonaGlobal;
 import fox.hound.spring.security.TokenUtil;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.utils.EncryptionUtil;
@@ -54,10 +55,17 @@ public class LoginController {
     		ObjectMapper mapper = new ObjectMapper();
             String userJson = null;
             
-            // Meter los permisos y dashboard
+            PersonaGlobal p = new PersonaGlobal();
+            p.setId( persona.getId() );
+            p.setNombre( persona.getNombre() );
+            p.setIdentificacion( persona.getIdentificacion() );
+            p.setTipoPersona( persona.getTipoPersona() );
+            p.setEmail( persona.getEmail() );
+            p.setPassword( persona.getPassword() );
+            p.setRol( persona.getRol_id() );
             
             try {
-                userJson = mapper.writeValueAsString(persona);
+                userJson = mapper.writeValueAsString(p);
             } catch (JsonProcessingException ex) {
                 logger.error("Error Transformando Usuario a JSON ", ex);
                 return ResponseEntity.ok(new HttpResponseError(500, "Error Interno", "Error Interno del Servidor"));

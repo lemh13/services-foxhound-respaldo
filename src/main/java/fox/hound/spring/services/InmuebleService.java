@@ -13,8 +13,12 @@ public class InmuebleService implements ServiceGeneral<Inmueble> {
 
 	 @Autowired
 	 private InmuebleRepository repository;
-
 	 
+	 public List<Inmueble> getAllByClienteId(Long id) {
+		 List<Inmueble> lista = new ArrayList<>();
+		 repository.findByClienteId(id).forEach(lista::add);
+		 return lista;
+	 }
 
 	 @Override
 	 public List<Inmueble> getAll() {

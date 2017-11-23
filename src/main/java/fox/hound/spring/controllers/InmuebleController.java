@@ -1,7 +1,10 @@
 package fox.hound.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import fox.hound.spring.models.*;
 import fox.hound.spring.models.combo.Sector;
 import fox.hound.spring.models.maestros.*;
+import fox.hound.spring.print.PersonaGlobal;
+import fox.hound.spring.security.TokenUtil;
 import fox.hound.spring.services.*;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -20,7 +25,15 @@ import fox.hound.spring.utils.ResponseDefault;
 @RestController
 @RequestMapping("inmueble")
 public class InmuebleController {
+	
+    private final Logger logger = Logger.getLogger(this.getClass());
 
+
+	 @Value("${foxhound.token.header}")
+	 private String tokenHeader;
+	 @Autowired
+	 private TokenUtil tokenUtils;
+	
 	 @Autowired
 	 private InmuebleService service;
 	 @Autowired
@@ -39,6 +52,13 @@ public class InmuebleController {
 		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	 }
 
+	 @RequestMapping(value="/buscarTodosCliente", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAllCliente(HttpServletRequest request) {
+		 PersonaGlobal p = tokenUtils.getUserFromToken(request.getHeader(tokenHeader));
+		 logger.info(p.getId());
+		 return ResponseDefault.ok(service.getAllByClienteId(p.getId()), CLASE, ResponseDefault.PLURAL);
+	 }
+	 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);

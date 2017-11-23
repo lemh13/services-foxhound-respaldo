@@ -5,16 +5,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
-import fox.hound.spring.models.Persona;
+import fox.hound.spring.print.PersonaGlobal;
 
 @Component
 public class TokenUtil {
+	
+    private final Logger logger = Logger.getLogger(this.getClass());
+
 		
 	private final String AUDIENCE_UNKNOWN   = "unknown";
 	private final String AUDIENCE_MOBILE = "mobile";
@@ -32,13 +36,15 @@ public class TokenUtil {
 	 *  @params token: token generado segun el rol
 	 *  @return Useruario
 	 **/
-	public Persona getUserFromToken(String token) {
+	public PersonaGlobal getUserFromToken(String token) {
 		ObjectMapper mapper = new ObjectMapper();
 	    String user;
 	    try {
 	      final Claims claims = this.getClaimsFromToken(token);
 	      user = claims.getSubject();
-	      return mapper.readValue(new StringReader(user), Persona.class);
+	      logger.info("EPAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	      logger.info(user);
+	      return mapper.readValue(new StringReader(user), PersonaGlobal.class);
 	    } catch (Exception e) {
 	      return null;
 	    }
