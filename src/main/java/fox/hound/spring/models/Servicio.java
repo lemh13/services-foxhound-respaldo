@@ -62,16 +62,7 @@ public class Servicio extends Base {
 	private Long tipoServicioId;
 	@Transient
 	private String tipoServicioDescripcion;
-	
-	@ManyToOne
-	@JoinColumn(name="categoria_id")
-	@JsonBackReference(value="servicio-categoria")
-	private Categoria categoria;
-	@Transient
-	private Long categoriaId;
-	@Transient
-	private String categoriaDescripcion;
-	
+
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="servicio-promocionServicio")
 	private List<PromocionServicio> promocionServicios;
@@ -120,7 +111,6 @@ public class Servicio extends Base {
 		this.imagenServicio = imagenServicio;
 		this.costo = costo;
 		this.tipoServicio = new TipoServicio(tipoServicioId);
-		this.categoria = new Categoria(categoriaId);
 		this.unidadMedida = new UnidadMedida(unidadMedidaId);
 		this.empresa = new Empresa(empresaId);
 		this.garantia = new Garantia(garantia);
@@ -173,12 +163,7 @@ public class Servicio extends Base {
 	public void setTipoServicio(TipoServicio tipoServicio) {
 		this.tipoServicio = tipoServicio;
 	}
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+
 	public UnidadMedida getUnidadMedida() {
 		return unidadMedida;
 	}
@@ -251,18 +236,6 @@ public class Servicio extends Base {
 	}
 	public void setTipoServicioDescripcion(String tipoServicioDescripcion) {
 		this.tipoServicioDescripcion = tipoServicioDescripcion;
-	}
-	public Long getCategoriaId() {
-		return categoria.getId();
-	}
-	public void setCategoriaId(Long categoriaId) {
-		this.categoriaId = categoriaId;
-	}
-	public String getCategoriaDescripcion() {
-		return categoria.getDescripcion();
-	}
-	public void setCategoriaDescripcion(String categoriaDescripcion) {
-		this.categoriaDescripcion = categoriaDescripcion;
 	}
 	
 	

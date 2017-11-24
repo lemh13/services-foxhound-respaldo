@@ -20,6 +20,12 @@ public class AsuntoComentarioService implements ServiceGeneral<AsuntoComentario>
 		 repository.findAll().forEach(lista::add);
 		 return lista;
 	 }
+	 
+	 public List<AsuntoComentario> getAllActive() {
+		 List<AsuntoComentario> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista;
+	 }
 
 	 @Override
 	 public AsuntoComentario getOne(Long id) {

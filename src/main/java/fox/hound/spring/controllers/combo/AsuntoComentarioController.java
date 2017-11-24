@@ -28,6 +28,11 @@ public class AsuntoComentarioController {
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarActivos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAllActive(HttpServletRequest request) {
+		 return ResponseDefault.ok(service.getAllActive(), CLASE, ResponseDefault.PLURAL);
+	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {

@@ -63,7 +63,6 @@ public class MenuController {
 		 List<Menu> menu = new ArrayList<>();
 		 List<Menu> menuHijo = new ArrayList<>();
 		 List<Menu> menuNieto = new ArrayList<>();
-		 logger.info("for padre");
 		 for (Menu m :  buildMenu()) { 
 			
 			 if (m.getChild() != null) {

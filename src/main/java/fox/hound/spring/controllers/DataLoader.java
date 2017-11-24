@@ -17,6 +17,7 @@ import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.Trabajador;
 import fox.hound.spring.models.Visita;
+import fox.hound.spring.models.combo.AsuntoComentario;
 import fox.hound.spring.models.combo.Ciudad;
 import fox.hound.spring.models.combo.Descuento;
 import fox.hound.spring.models.combo.Eventualidad;
@@ -45,6 +46,7 @@ import fox.hound.spring.models.puente.Promocion;
 import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.models.puente.Solicitud;
 import fox.hound.spring.models.puente.TrabajadorVisita;
+import fox.hound.spring.services.AsuntoComentarioService;
 import fox.hound.spring.services.CargoService;
 import fox.hound.spring.services.CategoriaInmuebleService;
 import fox.hound.spring.services.CategoriaService;
@@ -159,6 +161,8 @@ public class DataLoader implements ApplicationRunner {
 	private VisitaService visitaService;
 	@Autowired
 	private TrabajadorVisitaService trabajadorVisitaService;
+	@Autowired
+	 private AsuntoComentarioService asuntoComentarioService;
 	
 	
 	@Override
@@ -307,6 +311,12 @@ public class DataLoader implements ApplicationRunner {
 		categoriaInmueble.setFecha_creacion( DateUtil.getCurrentDate() );
 		categoriaInmuebleService.saveOrUpdate(categoriaInmueble);
 		
+		CategoriaInmueble categoriaInmueble1 = new CategoriaInmueble();
+		categoriaInmueble1.setDescripcion("Edificio");
+		categoriaInmueble1.setEstatus(0);
+		categoriaInmueble1.setFecha_creacion( DateUtil.getCurrentDate() );
+		categoriaInmuebleService.saveOrUpdate(categoriaInmueble1);
+		
 		// Tipo Inmueble
 		TipoInmueble tipoInmueble = new TipoInmueble();
 		tipoInmueble.setDescripcion("Casa");
@@ -351,6 +361,7 @@ public class DataLoader implements ApplicationRunner {
 		TipoServicio tipoServicio = new TipoServicio();
 		tipoServicio.setDescripcion("Jardineria");
 		tipoServicio.setImagenServicio("imagen/p4.jpg");
+		tipoServicio.setCategoria(categoria);
 		tipoServicio.setEstatus(0);
 		tipoServicio.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio);
@@ -358,6 +369,7 @@ public class DataLoader implements ApplicationRunner {
 		TipoServicio tipoServicio2 = new TipoServicio();
 		tipoServicio2.setDescripcion("Pintura");
 		tipoServicio2.setImagenServicio("imagen/p4.jpg");
+		tipoServicio2.setCategoria(categoria2);
 		tipoServicio2.setEstatus(0);
 		tipoServicio2.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio2);
@@ -365,6 +377,7 @@ public class DataLoader implements ApplicationRunner {
 		TipoServicio tipoServicio3 = new TipoServicio();
 		tipoServicio3.setDescripcion("Electricidad");
 		tipoServicio3.setImagenServicio("imagen/p4.jpg");
+		tipoServicio3.setCategoria(categoria3);
 		tipoServicio3.setEstatus(0);
 		tipoServicio3.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio3);
@@ -399,7 +412,6 @@ public class DataLoader implements ApplicationRunner {
 		servicio.setTipoServicio(tipoServicio);
 		servicio.setUnidadMedida(unidadMedida);
 		servicio.setEmpresa(empresa);
-		servicio.setCategoria(categoria2);
 		servicio.setTitulo("Reparacion de Pisos");
 		servicio.setImagenServicio("imagen/p4.jpg");
 		servicio.setDescripcion("Reparalo ya.");
@@ -410,10 +422,9 @@ public class DataLoader implements ApplicationRunner {
 		
 		Servicio servicio2 = new Servicio();
 		servicio2.setGarantia(garantia);
-		servicio2.setTipoServicio(tipoServicio);
+		servicio2.setTipoServicio(tipoServicio2);
 		servicio2.setUnidadMedida(unidadMedida);
 		servicio2.setEmpresa(empresa);
-		servicio2.setCategoria(categoria);
 		servicio2.setTitulo("Mantenimiento de Platabanda");
 		servicio2.setImagenServicio("imagen/p2.jpg");
 		servicio2.setDescripcion("Reparalo ya: filtros, grietas, rayones y mucho mas..");
@@ -421,6 +432,19 @@ public class DataLoader implements ApplicationRunner {
 		servicio2.setEstatus(0);
 		servicio2.setFecha_creacion( DateUtil.getCurrentDate() );
 		servicioService.saveOrUpdate(servicio2);
+		
+		Servicio servicio3 = new Servicio();
+		servicio3.setGarantia(garantia);
+		servicio3.setTipoServicio(tipoServicio3);
+		servicio3.setUnidadMedida(unidadMedida);
+		servicio3.setEmpresa(empresa);
+		servicio3.setTitulo("Mantenimiento de Platabanda");
+		servicio3.setImagenServicio("imagen/p2.jpg");
+		servicio3.setDescripcion("Reparalo ya: filtros, grietas, rayones y mucho mas..");
+		servicio3.setCosto(200.00);
+		servicio3.setEstatus(0);
+		servicio3.setFecha_creacion( DateUtil.getCurrentDate() );
+		servicioService.saveOrUpdate(servicio3);
 		
 		// TipoPromocion
 		TipoPromocion tipoPromocion = new TipoPromocion();
@@ -604,6 +628,26 @@ public class DataLoader implements ApplicationRunner {
 		trabajadorVisita.setEstatus(0);
 		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+		
+		// AsuntoComentario
+		AsuntoComentario asuntoComentario = new AsuntoComentario();
+		asuntoComentario.setDescripcion("Sugerencia");
+		asuntoComentario.setEstatus(0);
+		asuntoComentario.setFecha_creacion( DateUtil.getCurrentDate() );
+		asuntoComentarioService.saveOrUpdate(asuntoComentario);
+		
+		AsuntoComentario asuntoComentario2 = new AsuntoComentario();
+		asuntoComentario2.setDescripcion("Queja");
+		asuntoComentario2.setEstatus(0);
+		asuntoComentario2.setFecha_creacion( DateUtil.getCurrentDate() );
+		asuntoComentarioService.saveOrUpdate(asuntoComentario2);
+		
+		AsuntoComentario asuntoComentario3 = new AsuntoComentario();
+		asuntoComentario3.setDescripcion("Opiniòn");
+		asuntoComentario3.setEstatus(0);
+		asuntoComentario3.setFecha_creacion( DateUtil.getCurrentDate() );
+		asuntoComentarioService.saveOrUpdate(asuntoComentario3);
+		
 		
 	}
 
