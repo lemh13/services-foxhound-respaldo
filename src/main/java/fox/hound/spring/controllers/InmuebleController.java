@@ -28,7 +28,6 @@ public class InmuebleController {
 	
     private final Logger logger = Logger.getLogger(this.getClass());
 
-
 	 @Value("${foxhound.token.header}")
 	 private String tokenHeader;
 	 @Autowired

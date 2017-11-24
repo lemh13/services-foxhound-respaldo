@@ -34,6 +34,8 @@ public class Promocion extends Puente {
 	private Date fecha_caducidad;
 	@Column(nullable = false)
     private String imagenServicio;
+	@Transient
+	private Long dias_caducidad; 
 	
 	@ManyToOne
 	@JoinColumn(name="tipoPromocionId", nullable = false)
@@ -146,6 +148,14 @@ public class Promocion extends Puente {
 	}
 	public void setImagenServicio(String imagenServicio) {
 		this.imagenServicio = imagenServicio;
+	}
+	public Long getDias_caducidad() {
+		long diff = Math.abs(getFecha_creacion().getTime() - getFecha_caducidad().getTime());
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		return diffDays;
+	}
+	public void setDias_caducidad(Long dias_caducidad) {
+		this.dias_caducidad = dias_caducidad;
 	}
 	
 	

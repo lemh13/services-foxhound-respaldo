@@ -42,7 +42,6 @@ public class TokenUtil {
 	    try {
 	      final Claims claims = this.getClaimsFromToken(token);
 	      user = claims.getSubject();
-	      logger.info("EPAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	      logger.info(user);
 	      return mapper.readValue(new StringReader(user), PersonaGlobal.class);
 	    } catch (Exception e) {

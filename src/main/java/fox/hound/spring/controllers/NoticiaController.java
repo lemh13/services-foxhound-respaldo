@@ -73,12 +73,12 @@ public class NoticiaController {
 	 @RequestMapping(value="/borrarLogico/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrarLogico(@PathVariable String id, HttpServletRequest request) {
 		 service.deleteLogic(id);
-		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Rol");
+		 return ResponseDefault.message(MessageUtil.ELIMINAR_REGISTRO, "Noticia");
 	 }
 	 
 	 @RequestMapping(value="/activeDesactiveEstatus/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
-		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
+		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Noticia", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
 
 }

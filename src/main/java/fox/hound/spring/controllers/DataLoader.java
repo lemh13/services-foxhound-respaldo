@@ -231,7 +231,7 @@ public class DataLoader implements ApplicationRunner {
 		// Rol
 		Rol rol = new Rol();
 		rol.setDescripcion("Cliente Simple");
-		rol.setMenu("-1-2-4");
+		rol.setMenu("-2-5-201-203-");
 		rol.setEstatus(0);
 		rol.setFecha_creacion( DateUtil.getCurrentDate() );
 		rolService.saveOrUpdate(rol);
@@ -440,7 +440,7 @@ public class DataLoader implements ApplicationRunner {
 		
 		// Promocion
 		Promocion promocion = new Promocion();
-		promocion.setTitulo("Promocíon del Pisos para el Dia de las Madres");
+		promocion.setTitulo("Promoción del Pisos para el Dia de las Madres");
 		promocion.setDescripcion("Limpiamos rapidos sus pisos, tan limpios y puros como el corazon de sus seres queridos");
 		promocion.setFecha_inicio( DateUtil.getCurrentDate() );
 		
