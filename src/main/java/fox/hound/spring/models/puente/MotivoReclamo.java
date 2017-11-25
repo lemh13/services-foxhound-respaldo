@@ -13,11 +13,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.combo.Motivo;
+import fox.hound.spring.models.maestros.Maestro;
 
 @Entity
 @Table(name="motivo_reclamo")
 @CustomJsonRootName(plural = "motivoReclamo", singular = "motivoReclamo")
-public class MotivoReclamo extends Puente {
+public class MotivoReclamo extends Maestro {
 
 	@OneToMany(mappedBy="motivoReclamo")
 	@JsonManagedReference(value="reclamoOrdenEntregas-motivoReclamos")
@@ -31,8 +32,8 @@ public class MotivoReclamo extends Puente {
 	public MotivoReclamo() {
 		super();
 	}
-	public MotivoReclamo(Long id, int estatusId, String motivo) {
-		super(id, estatusId);
+	public MotivoReclamo(Long id, String descripcion, int estatusId, String motivo) {
+		super(id, descripcion, estatusId);
 		this.motivo = new Motivo(motivo);
 	}
 	public MotivoReclamo(String id) {

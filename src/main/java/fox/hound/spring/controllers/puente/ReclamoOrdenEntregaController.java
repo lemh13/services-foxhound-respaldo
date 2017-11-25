@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fox.hound.spring.models.OrdenEntrega;
 import fox.hound.spring.models.maestros.TipoReclamo;
 import fox.hound.spring.models.puente.MotivoReclamo;
 import fox.hound.spring.models.puente.ReclamoOrdenEntrega;
 import fox.hound.spring.services.ReclamoOrdenEntregaService;
 import fox.hound.spring.services.MotivoReclamoService;
+import fox.hound.spring.services.OrdenEntregaService;
+import fox.hound.spring.services.ReclamoOrdenEntregaService;
 import fox.hound.spring.services.TipoReclamoService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
@@ -28,10 +31,13 @@ public class ReclamoOrdenEntregaController {
 	 private ReclamoOrdenEntregaService service;
 	 
 	 @Autowired
-	 private TipoReclamoService tipoReclamoService;
+	 private OrdenEntregaService ordenentregaService;
 	 
 	 @Autowired
-	 private MotivoReclamoService motivoReclamoService;
+	 private TipoReclamoService tiporeclamoService;
+	 
+	 @Autowired
+	 private MotivoReclamoService motivoreclamoService;
 
 	 private Class<?> CLASE = ReclamoOrdenEntrega.class;
 
@@ -45,21 +51,31 @@ public class ReclamoOrdenEntregaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/tipoReclamo/{tipoReclamoid}/motivoReclamo/{motivoReclamoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@PathVariable String tipoReclamoid, @PathVariable String motivoReclamoid, HttpServletRequest request) {
-		 ReclamoOrdenEntrega clase = new ReclamoOrdenEntrega();
+	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id}/motivoReclamo/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id,  @PathVariable String id_t,  @PathVariable String id_m, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 TipoReclamo tipoReclamo = tipoReclamoService.getOne(Long.valueOf(tipoReclamoid));
-		 MotivoReclamo motivoReclamo = motivoReclamoService.getOne(Long.valueOf(motivoReclamoid));
-		 //Creo que falta la orden de entrega
-		 if (tipoReclamo != null && motivoReclamo != null) {
-				clase.setTipoReclamo(tipoReclamo);
-				clase.setMotivoReclamo(motivoReclamo);
+		 OrdenEntrega ordenentrega = ordenentregaService.getOne(Long.valueOf(id));
+		 TipoReclamo tiporeclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
+		 MotivoReclamo motivoreclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
+			
+			if (ordenentrega != null && tiporeclamo != null && motivoreclamo !=null) {
+				clase.setOrdenEntrega(ordenentrega);
+				clase.setTipoReclamo(tiporeclamo);
+				clase.setMotivoReclamo(motivoreclamo);
+				
 				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else {
-				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Reclamo Orden de Entrega");
+			} else if (ordenentrega == null )
+			{
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Orden de Entrega");
 			}
-		 
+			 else if (tiporeclamo == null )
+				{
+					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Reclamo");
+				}
+			 else
+			 {
+				 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");
+			 }
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

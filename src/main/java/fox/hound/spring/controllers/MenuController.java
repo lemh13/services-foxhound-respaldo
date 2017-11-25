@@ -230,8 +230,9 @@ public class MenuController {
 	 public List<Menu> serviciosYPromociones() {
 		 List<Menu> lista = new ArrayList<>();
 		 lista.add(new Menu(201, "Mis Servicios", "fa fa-plus", "ordenes_servicio_path", null));
-		 lista.add(new Menu(202, "Nuevo Servicio", "fa fa-plus", "registrar_servicio_path", null));
+		 //lista.add(new Menu(202, "Nuevo Servicio", "fa fa-plus", "registrar_servicio_path", null));
 		 lista.add(new Menu(203, "Catalogo de Servicios", "fa fa-plus", "catalogo_servicios_path", null));
+		 lista.add(new Menu(204, "Promociones", "fa fa-plus", "promociones_activas_path", null));
 		 return lista;
 	 }
 	 

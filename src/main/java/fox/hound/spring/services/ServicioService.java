@@ -67,4 +67,17 @@ public class ServicioService implements ServiceGeneral<Servicio> {
 		clase.setEstatus( clase.getEstatus() == 0 ? 1 : 0 );
 		return repository.save(clase);
 	}
+	
+	public List<Servicio> getAllTipoServicio(Long id) {
+		 return repository.findByTipoServicioId(id);
+	}
+	
+	public List<Servicio> getAllCategoria(Long id) {
+		 return repository.findByCategoriaId(id);
+	}
+	
+	public List<Servicio> getAllTipoInmueble(Long id) {
+		 return repository.findByTipoInmuebleId(id);
+	}
+	
 }

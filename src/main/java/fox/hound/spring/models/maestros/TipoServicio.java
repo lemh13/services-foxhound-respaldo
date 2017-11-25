@@ -22,6 +22,8 @@ import fox.hound.spring.models.puente.CargoTipoServicio;
 @CustomJsonRootName(plural = "tipoServicio", singular = "tipoServicio")
 public class TipoServicio extends Maestro {
 	
+	// SELECT s FROM servicio s, tipo_servicio t, categoria c WHERE s.tipo_servicio.id == t.id AND t.categoria.id = :id
+	
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	@JsonBackReference(value="tiposervicio-categoria")

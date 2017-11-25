@@ -1,5 +1,9 @@
 package fox.hound.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -120,11 +124,57 @@ public class ServicioController {
 	 }
 	 
 	 @RequestMapping(value="/tribago", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public String activeDesactiveEstatus(@RequestBody TribagoRequest clase, HttpServletRequest request) {
+	 public ResponseEntity<?> activeDesactiveEstatus(@RequestBody TribagoRequest clase, HttpServletRequest request) {
 		 
 		 logger.info(clase.getTipoCategoria() + " " + clase.getTipoInmueble() + " " + clase.getTipoServicio());
 		 
-		 return "String";
+		 // Todos los Servicios Activos
+		 List<Servicio> servicios = service.getAllActive();
+		 List<Servicio> serviciosAux = new ArrayList<>();
+		 logger.info("servicios:" + servicios.size());
+		 
+		 if (clase.getTipoInmueble() != null) {
+			 for (Servicio s : service.getAllTipoInmueble(clase.getTipoInmueble())) {
+				 logger.info(s.getTitulo() + " is in " + servicios.contains(s));
+				 
+				 if (servicios.contains(s)) {
+					 logger.info("agregar");
+					 serviciosAux.add(s);
+				 }
+			 }
+			 servicios = serviciosAux;
+			 logger.info("Tipo Inmueble servicios:" + servicios.size());
+			 serviciosAux = new ArrayList<>();
+			 logger.info("Tipo Inmueble servicios:" + servicios.size());
+		 }
+		 if (clase.getTipoCategoria() != null) {
+			 for (Servicio s : service.getAllCategoria(clase.getTipoCategoria())) {
+				 logger.info(s.getTitulo() + " is in " + servicios.contains(s));
+				 
+				 if (servicios.contains(s)) {
+					 serviciosAux.add(s);
+				 }
+			 }
+			 servicios = serviciosAux;
+			 serviciosAux = new ArrayList<>();
+			 logger.info("Categoria servicios:" + servicios.size());
+		 }
+		 if (clase.getTipoServicio() != null) {			 
+			 for (Servicio s : service.getAllTipoServicio(clase.getTipoServicio())) {
+				 logger.info(s.getTitulo() + " is in " + servicios.contains(s));
+				 
+				 if (servicios.contains(s)) {
+					 logger.info("agregar");
+					 serviciosAux.add(s);
+				 }
+			 }
+			 servicios = serviciosAux;
+			 logger.info("Tipo Servicio servicios:" + servicios.size());
+			 serviciosAux = new ArrayList<>();
+			 logger.info("Tipo Servicio servicios:" + servicios.size());
+		 }
+		 
+		 return ResponseDefault.ok(servicios, CLASE, ResponseDefault.PLURAL);
 	 }
 
 }

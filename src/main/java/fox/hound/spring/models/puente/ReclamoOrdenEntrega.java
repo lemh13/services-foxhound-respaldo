@@ -30,18 +30,20 @@ public class ReclamoOrdenEntrega extends Puente {
 	@JsonBackReference(value="reclamoOrdenEntregas-motivoReclamos")
 	private MotivoReclamo motivoReclamo;
 	
-	@OneToMany(mappedBy="reclamoOrdenEntrega")
-	@JsonManagedReference(value="ordenEntrega-reclamoOrdenEntrega")
-	private List<OrdenEntrega> ordenEntregas;
+	@ManyToOne
+	@JoinColumn(name="ordenEntrega_id")
+	@JsonBackReference(value="ordenEntrega-reclamoOrdenEntrega")
+	private OrdenEntrega ordenEntrega;
 	
 	public ReclamoOrdenEntrega() {
 		super();
 	}
 	public ReclamoOrdenEntrega(Long id, int estatusId,
-			String tipoReclamo, String motivoReclamo) {
+			String tipoReclamo, String motivoReclamo, String ordenEntrega, String descripcion) {
 		super(id, estatusId);
 		this.tipoReclamo = new TipoReclamo(tipoReclamo);
 		this.motivoReclamo = new MotivoReclamo(motivoReclamo);
+		this.ordenEntrega = new OrdenEntrega(ordenEntrega);
 	}
 	public ReclamoOrdenEntrega(String id) {
 		super(id);
@@ -59,11 +61,11 @@ public class ReclamoOrdenEntrega extends Puente {
 	public void setMotivoReclamo(MotivoReclamo motivoReclamo) {
 		this.motivoReclamo = motivoReclamo;
 	}
-	public List<OrdenEntrega> getOrdenEntregas() {
-		return ordenEntregas;
+	public OrdenEntrega getOrdenEntrega() {
+		return ordenEntrega;
 	}
-	public void setOrdenEntregas(List<OrdenEntrega> ordenEntregas) {
-		this.ordenEntregas = ordenEntregas;
+	public void setOrdenEntrega(OrdenEntrega ordenEntrega) {
+		this.ordenEntrega = ordenEntrega;
 	}
 	
 }

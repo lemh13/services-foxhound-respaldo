@@ -61,9 +61,12 @@ import fox.hound.spring.models.puente.ClienteOcupacion;
 import fox.hound.spring.models.puente.ClienteProfesion;
 import fox.hound.spring.models.puente.CondicionDiagnostico;
 import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
+import fox.hound.spring.models.puente.DetalleServicioInmueble;
 import fox.hound.spring.models.puente.Promocion;
 import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.models.puente.Solicitud;
+import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
+import fox.hound.spring.models.puente.TipoCaracteristicaServicio;
 import fox.hound.spring.models.puente.TrabajadorVisita;
 import fox.hound.spring.services.AsuntoComentarioService;
 import fox.hound.spring.services.BuzonSugerenciaService;
@@ -129,6 +132,7 @@ import fox.hound.spring.services.SolicitudServicioService;
 import fox.hound.spring.services.TareaService;
 import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
 import fox.hound.spring.services.TipoCaracteristicaService;
+import fox.hound.spring.services.TipoCaracteristicaServicioService;
 import fox.hound.spring.services.TipoClienteService;
 import fox.hound.spring.services.TipoDiagnosticoVisitaService;
 import fox.hound.spring.services.TipoEventualidadService;
@@ -329,7 +333,8 @@ public class DataLoader implements ApplicationRunner {
 	private DetalleDiagnosticoVisitaService detalleDiagnosticoVisitaService;
 	@Autowired
 	private PresupuestoService presupuestoService;
-	
+	@Autowired
+	private TipoCaracteristicaServicioService tipoCaracteristicaServicioService;
 	
 	
 	
@@ -508,6 +513,20 @@ public class DataLoader implements ApplicationRunner {
 		tipoInmueble.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoInmuebleService.saveOrUpdate(tipoInmueble);
 		
+		TipoInmueble tipoInmueble2 = new TipoInmueble();
+		tipoInmueble2.setDescripcion("Edificio");
+		tipoInmueble2.setEstatus(0);
+		tipoInmueble2.setCategoriaInmueble(categoriaInmueble);
+		tipoInmueble2.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoInmuebleService.saveOrUpdate(tipoInmueble2);
+		
+		TipoInmueble tipoInmueble3 = new TipoInmueble();
+		tipoInmueble3.setDescripcion("Apartamento");
+		tipoInmueble3.setEstatus(0);
+		tipoInmueble3.setCategoriaInmueble(categoriaInmueble);
+		tipoInmueble3.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoInmuebleService.saveOrUpdate(tipoInmueble3);
+		
 		// Inmueble
 		Inmueble inmueble = new Inmueble();
 		inmueble.setCliente(cliente);
@@ -565,6 +584,14 @@ public class DataLoader implements ApplicationRunner {
 		tipoServicio3.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoServicioService.saveOrUpdate(tipoServicio3);
 		
+		TipoServicio tipoServicio4 = new TipoServicio();
+		tipoServicio4.setDescripcion("Limpieza");
+		tipoServicio4.setImagenServicio("imagen/p4.jpg");
+		tipoServicio4.setCategoria(categoria);
+		tipoServicio4.setEstatus(0);
+		tipoServicio4.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoServicioService.saveOrUpdate(tipoServicio4);
+		
 		// Garantia
 		Garantia garantia = new Garantia();
 		garantia.setTitulo("Garantia Pisos");
@@ -605,7 +632,7 @@ public class DataLoader implements ApplicationRunner {
 		
 		Servicio servicio2 = new Servicio();
 		servicio2.setGarantia(garantia);
-		servicio2.setTipoServicio(tipoServicio2);
+		servicio2.setTipoServicio(tipoServicio4);
 		servicio2.setUnidadMedida(unidadMedida);
 		servicio2.setEmpresa(empresa);
 		servicio2.setTitulo("Mantenimiento de Platabanda");
@@ -628,6 +655,99 @@ public class DataLoader implements ApplicationRunner {
 		servicio3.setEstatus(0);
 		servicio3.setFecha_creacion( DateUtil.getCurrentDate() );
 		servicioService.saveOrUpdate(servicio3);
+		
+		Servicio servicio4 = new Servicio();
+		servicio4.setGarantia(garantia);
+		servicio4.setTipoServicio(tipoServicio2);
+		servicio4.setUnidadMedida(unidadMedida);
+		servicio4.setEmpresa(empresa);
+		servicio4.setTitulo("Reparacion de Pisos");
+		servicio4.setImagenServicio("imagen/p4.jpg");
+		servicio4.setDescripcion("Reparalo ya.");
+		servicio4.setCosto(200.00);
+		servicio4.setEstatus(0);
+		servicio4.setFecha_creacion( DateUtil.getCurrentDate() );
+		servicioService.saveOrUpdate(servicio4);
+		
+		Servicio servicio5 = new Servicio();
+		servicio5.setGarantia(garantia);
+		servicio5.setTipoServicio(tipoServicio3);
+		servicio5.setUnidadMedida(unidadMedida);
+		servicio5.setEmpresa(empresa);
+		servicio5.setTitulo("Reparacion de Pisos");
+		servicio5.setImagenServicio("imagen/p4.jpg");
+		servicio5.setDescripcion("Reparalo ya.");
+		servicio5.setCosto(200.00);
+		servicio5.setEstatus(0);
+		servicio5.setFecha_creacion( DateUtil.getCurrentDate() );
+		servicioService.saveOrUpdate(servicio5);
+		
+		Servicio servicio6 = new Servicio();
+		servicio6.setGarantia(garantia);
+		servicio6.setTipoServicio(tipoServicio4);
+		servicio6.setUnidadMedida(unidadMedida);
+		servicio6.setEmpresa(empresa);
+		servicio6.setTitulo("Reparacion de Pisos");
+		servicio6.setImagenServicio("imagen/p4.jpg");
+		servicio6.setDescripcion("Reparalo ya.");
+		servicio6.setCosto(200.00);
+		servicio6.setEstatus(0);
+		servicio6.setFecha_creacion( DateUtil.getCurrentDate() );
+		servicioService.saveOrUpdate(servicio6);
+		
+		// tipoCaracteristica
+		TipoCaracteristica tipoCaracteristica = new TipoCaracteristica();
+		tipoCaracteristica.setDescripcion("Edificio");
+		tipoCaracteristica.setEstatus(0);
+		tipoCaracteristica.setFecha_creacion( DateUtil.getCurrentDate() );
+		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica);
+		
+		//tipoCaracteristicaInmueble
+		TipoCaracteristicaInmueble tipoCaracteristicaInmueble = new TipoCaracteristicaInmueble();
+		tipoCaracteristicaInmueble.setTipoInmueble(tipoInmueble);
+		tipoCaracteristicaInmueble.setTipoCaracteristica(tipoCaracteristica);
+		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble);
+		
+		TipoCaracteristicaInmueble tipoCaracteristicaInmueble2 = new TipoCaracteristicaInmueble();
+		tipoCaracteristicaInmueble2.setTipoInmueble(tipoInmueble2);
+		tipoCaracteristicaInmueble2.setTipoCaracteristica(tipoCaracteristica);
+		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble2);
+		
+		TipoCaracteristicaInmueble tipoCaracteristicaInmueble3 = new TipoCaracteristicaInmueble();
+		tipoCaracteristicaInmueble3.setTipoInmueble(tipoInmueble);
+		tipoCaracteristicaInmueble3.setTipoCaracteristica(tipoCaracteristica);
+		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble3);
+		
+		// DetalleServicioInmueble
+		DetalleServicioInmueble detalleServicioInmueble = new DetalleServicioInmueble();
+		detalleServicioInmueble.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
+		detalleServicioInmueble.setServicio(servicio);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble);
+		
+		DetalleServicioInmueble detalleServicioInmueble2 = new DetalleServicioInmueble();
+		detalleServicioInmueble2.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble2);
+		detalleServicioInmueble2.setServicio(servicio2);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble2);
+		
+		DetalleServicioInmueble detalleServicioInmueble3 = new DetalleServicioInmueble();
+		detalleServicioInmueble3.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble3);
+		detalleServicioInmueble3.setServicio(servicio3);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble3);
+		
+		DetalleServicioInmueble detalleServicioInmueble4 = new DetalleServicioInmueble();
+		detalleServicioInmueble4.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
+		detalleServicioInmueble4.setServicio(servicio4);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble4);
+		
+		DetalleServicioInmueble detalleServicioInmueble5 = new DetalleServicioInmueble();
+		detalleServicioInmueble5.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble2);
+		detalleServicioInmueble5.setServicio(servicio5);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble5);
+		
+		DetalleServicioInmueble detalleServicioInmueble6 = new DetalleServicioInmueble();
+		detalleServicioInmueble6.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
+		detalleServicioInmueble6.setServicio(servicio6);
+		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble6);
 		
 		// TipoPromocion
 		TipoPromocion tipoPromocion = new TipoPromocion();
@@ -936,12 +1056,19 @@ public class DataLoader implements ApplicationRunner {
 		calificarServicioService.saveOrUpdate(calificarServicio);
 		
 		// Tipo Caracteristica
-		TipoCaracteristica tipoCaracteristica = new TipoCaracteristica();
-		tipoCaracteristica.setDescripcion("Piso");
-		tipoCaracteristica.setEstatus(0);
-		tipoCaracteristica.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristica.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica);
+		TipoCaracteristica tipoCaracteristica1 = new TipoCaracteristica();
+		tipoCaracteristica1.setDescripcion("PenHouse");
+		tipoCaracteristica1.setEstatus(0);
+		tipoCaracteristica1.setFecha_creacion(DateUtil.getCurrentDate());
+		tipoCaracteristica1.setFecha_modificacion(cal.getTime());
+		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica1);
+		
+		TipoCaracteristica tipoCaracteristica2 = new TipoCaracteristica();
+		tipoCaracteristica2.setDescripcion("Cabaña");
+		tipoCaracteristica2.setEstatus(0);
+		tipoCaracteristica2.setFecha_creacion(DateUtil.getCurrentDate());
+		tipoCaracteristica2.setFecha_modificacion(cal.getTime());
+		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica2);
 		
 		// caracteristica
 		
@@ -951,7 +1078,7 @@ public class DataLoader implements ApplicationRunner {
 		caracteristica.setFecha_creacion(DateUtil.getCurrentDate());
 		caracteristica.setFecha_modificacion(cal.getTime());
 		caracteristica.setPadre_descripcion("padre descripcion");
-		caracteristica.setTipoCaracteristica(tipoCaracteristica);
+		caracteristica.setTipoCaracteristica(tipoCaracteristica1);
 		caracteristicaService.saveOrUpdate(caracteristica);
 		
 		// Ubicacion
@@ -961,6 +1088,36 @@ public class DataLoader implements ApplicationRunner {
 		ubicacion.setFecha_creacion(DateUtil.getCurrentDate());
 		ubicacion.setFecha_modificacion(cal.getTime());
 		ubicacionService.saveOrUpdate(ubicacion);
+		
+		// TipoCaracteristicaServicio
+		TipoCaracteristicaServicio tipoCaracteristicaServicio = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio.setServicio(servicio);
+		tipoCaracteristicaServicio.setTipoCaracteristica(tipoCaracteristica1);
+		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio);
+		
+		TipoCaracteristicaServicio tipoCaracteristicaServicio2 = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio2.setServicio(servicio);
+		tipoCaracteristicaServicio2.setTipoCaracteristica(tipoCaracteristica2);
+		
+		TipoCaracteristicaServicio tipoCaracteristicaServicio3 = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio3.setServicio(servicio2);
+		tipoCaracteristicaServicio3.setTipoCaracteristica(tipoCaracteristica1);
+		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio3);
+		
+		TipoCaracteristicaServicio tipoCaracteristicaServicio4 = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio4.setServicio(servicio3);
+		tipoCaracteristicaServicio4.setTipoCaracteristica(tipoCaracteristica2);
+		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio4);
+		
+		TipoCaracteristicaServicio tipoCaracteristicaServicio5 = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio5.setServicio(servicio4);
+		tipoCaracteristicaServicio5.setTipoCaracteristica(tipoCaracteristica1);
+		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio5);
+		
+		TipoCaracteristicaServicio tipoCaracteristicaServicio6 = new TipoCaracteristicaServicio();
+		tipoCaracteristicaServicio6.setServicio(servicio5);
+		tipoCaracteristicaServicio6.setTipoCaracteristica(tipoCaracteristica1);
+		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio6);
 		
 		//caracteristicaInmueble
 		

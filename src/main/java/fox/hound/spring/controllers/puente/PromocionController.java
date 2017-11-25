@@ -72,9 +72,17 @@ public class PromocionController {
 	}
 
 	 @RequestMapping(value="/tipoPromocion/{tipoPromocionid}/descuento/{descuentoid}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody Promocion clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+	 public ResponseEntity<?> modificar(@RequestBody Promocion clase, @PathVariable String tipoPromocionid, @PathVariable String descuentoid, HttpServletRequest request) {
+		 TipoPromocion tipoPromocion = tipoPromocionService.getOne(Long.valueOf(tipoPromocionid));
+		 Descuento descuento = descuentoService.getOne(Long.valueOf(descuentoid));
+
+		 if (tipoPromocion != null && descuento != null) {
+				clase.setTipoPromocion(tipoPromocion);
+				clase.setDescuento(descuento);
+				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Promocion");
+			}		 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {

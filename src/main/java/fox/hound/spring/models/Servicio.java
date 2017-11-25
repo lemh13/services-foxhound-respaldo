@@ -59,9 +59,9 @@ public class Servicio extends Base {
 	@JsonBackReference(value="servicio-tipoServicio")
 	private TipoServicio tipoServicio;
 	@Transient
-	private Long tipoServicioId;
+	private Long tipoServicio_id;
 	@Transient
-	private String tipoServicioDescripcion;
+	private String tipoServicio_descripcion;
 
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference(value="servicio-promocionServicio")
@@ -225,17 +225,17 @@ public class Servicio extends Base {
 	public void setDetalleServicioInmuebles(List<DetalleServicioInmueble> detalleServicioInmuebles) {
 		this.detalleServicioInmuebles = detalleServicioInmuebles;
 	}
-	public Long getTipoServicioId() {
+	public Long getTipoServicio_id() {
 		return tipoServicio.getId();
 	}
-	public void setTipoServicioId(Long tipoServicioId) {
-		this.tipoServicioId = tipoServicioId;
+	public void setTipoServicio_id(Long tipoServicioId) {
+		this.tipoServicio_id = tipoServicioId;
 	}
-	public String getTipoServicioDescripcion() {
+	public String getTipoServicio_descripcion() {
 		return tipoServicio.getDescripcion();
 	}
-	public void setTipoServicioDescripcion(String tipoServicioDescripcion) {
-		this.tipoServicioDescripcion = tipoServicioDescripcion;
+	public void setTipoServicio_descripcion(String tipoServicioDescripcion) {
+		this.tipoServicio_descripcion = tipoServicioDescripcion;
 	}
 	
 	
