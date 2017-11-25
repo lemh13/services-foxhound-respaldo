@@ -58,6 +58,7 @@ public class PromocionController {
 	 @RequestMapping(value="/tipoPromocion/{tipoPromocionid}/descuento/{descuentoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Promocion clase, @PathVariable String tipoPromocionid, @PathVariable String descuentoid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
+		 
 		 TipoPromocion tipoPromocion = tipoPromocionService.getOne(Long.valueOf(tipoPromocionid));
 		 Descuento descuento = descuentoService.getOne(Long.valueOf(descuentoid));
 
@@ -70,7 +71,7 @@ public class PromocionController {
 			}	 
 	}
 
-	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="/tipoPromocion/{tipoPromocionid}/descuento/{descuentoid}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody Promocion clase, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 	 }

@@ -9,80 +9,146 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import fox.hound.spring.models.Cliente;
+import fox.hound.spring.models.DiagnosticoVisita;
 import fox.hound.spring.models.Empresa;
 import fox.hound.spring.models.Garantia;
 import fox.hound.spring.models.Inmueble;
 import fox.hound.spring.models.Noticia;
 import fox.hound.spring.models.OrdenServicio;
+import fox.hound.spring.models.Respuesta;
 import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.Trabajador;
 import fox.hound.spring.models.Visita;
 import fox.hound.spring.models.combo.AsuntoComentario;
+import fox.hound.spring.models.combo.BuzonSugerencia;
+import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.combo.Ciudad;
+import fox.hound.spring.models.combo.ComentarioExterno;
+import fox.hound.spring.models.combo.CondicionInmueble;
 import fox.hound.spring.models.combo.Descuento;
 import fox.hound.spring.models.combo.Eventualidad;
 import fox.hound.spring.models.combo.Municipio;
 import fox.hound.spring.models.combo.Parroquia;
+import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.combo.Rol;
 import fox.hound.spring.models.combo.Sector;
+import fox.hound.spring.models.maestros.CalificarServicio;
 import fox.hound.spring.models.maestros.Cargo;
 import fox.hound.spring.models.maestros.Categoria;
 import fox.hound.spring.models.maestros.CategoriaInmueble;
+import fox.hound.spring.models.maestros.Condicion;
 import fox.hound.spring.models.maestros.CondicionGarantia;
 import fox.hound.spring.models.maestros.Estado;
 import fox.hound.spring.models.maestros.Ocupacion;
 import fox.hound.spring.models.maestros.Profesion;
+import fox.hound.spring.models.maestros.TipoCaracteristica;
 import fox.hound.spring.models.maestros.TipoCliente;
+import fox.hound.spring.models.maestros.TipoDiagnosticoVisita;
 import fox.hound.spring.models.maestros.TipoEventualidad;
 import fox.hound.spring.models.maestros.TipoInmueble;
 import fox.hound.spring.models.maestros.TipoOrdenServicio;
 import fox.hound.spring.models.maestros.TipoPromocion;
+import fox.hound.spring.models.maestros.TipoRespuesta;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.TipoVisita;
 import fox.hound.spring.models.maestros.Turno;
+import fox.hound.spring.models.maestros.Ubicacion;
 import fox.hound.spring.models.maestros.UnidadMedida;
 import fox.hound.spring.models.maestros.UsoInmueble;
+import fox.hound.spring.models.puente.CaracteristicaInmueble;
+import fox.hound.spring.models.puente.CargoTipoServicio;
+import fox.hound.spring.models.puente.ClienteOcupacion;
+import fox.hound.spring.models.puente.ClienteProfesion;
+import fox.hound.spring.models.puente.CondicionDiagnostico;
+import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
 import fox.hound.spring.models.puente.Promocion;
 import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.models.puente.Solicitud;
 import fox.hound.spring.models.puente.TrabajadorVisita;
 import fox.hound.spring.services.AsuntoComentarioService;
+import fox.hound.spring.services.BuzonSugerenciaService;
+import fox.hound.spring.services.CalificarServicioService;
+import fox.hound.spring.services.CaracteristicaInmuebleService;
+import fox.hound.spring.services.CaracteristicaService;
 import fox.hound.spring.services.CargoService;
+import fox.hound.spring.services.CargoTipoServicioService;
 import fox.hound.spring.services.CategoriaInmuebleService;
 import fox.hound.spring.services.CategoriaService;
 import fox.hound.spring.services.CiudadService;
+import fox.hound.spring.services.ClienteOcupacionService;
+import fox.hound.spring.services.ClienteProfesionService;
+import fox.hound.spring.services.ClienteService;
+import fox.hound.spring.services.ComentarioExternoService;
+import fox.hound.spring.services.CondicionDiagnosticoService;
 import fox.hound.spring.services.CondicionGarantiaService;
+import fox.hound.spring.services.CondicionInmuebleService;
+import fox.hound.spring.services.CondicionService;
 import fox.hound.spring.services.DescuentoService;
+import fox.hound.spring.services.DetalleDiagnosticoVisitaService;
+import fox.hound.spring.services.DetalleOrdenServicioService;
+import fox.hound.spring.services.DetallePresupuestoService;
+import fox.hound.spring.services.DetalleServicioInmuebleService;
+import fox.hound.spring.services.DiagnosticoVisitaService;
 import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.EstadoService;
 import fox.hound.spring.services.EventualidadService;
 import fox.hound.spring.services.GarantiaService;
 import fox.hound.spring.services.InmuebleService;
+import fox.hound.spring.services.MotivoOrdenServicioEventualidadService;
+import fox.hound.spring.services.MotivoPresupuestoService;
+import fox.hound.spring.services.MotivoReclamoService;
+import fox.hound.spring.services.MotivoService;
 import fox.hound.spring.services.MunicipioService;
 import fox.hound.spring.services.NoticiaService;
 import fox.hound.spring.services.OcupacionService;
+import fox.hound.spring.services.OpcionClienteService;
+import fox.hound.spring.services.OpcionPreguntaService;
+import fox.hound.spring.services.OpcionService;
+import fox.hound.spring.services.OrdenEntregaService;
 import fox.hound.spring.services.OrdenServicioService;
 import fox.hound.spring.services.ParroquiaService;
 import fox.hound.spring.services.PersonaService;
+import fox.hound.spring.services.PreferenciaClienteService;
+import fox.hound.spring.services.PreguntaService;
+import fox.hound.spring.services.PresupuestoService;
 import fox.hound.spring.services.ProfesionService;
 import fox.hound.spring.services.PromocionService;
 import fox.hound.spring.services.PromocionServicioService;
+import fox.hound.spring.services.ReclamoOrdenEntregaService;
+import fox.hound.spring.services.RedSocialService;
+import fox.hound.spring.services.RespuestaService;
+import fox.hound.spring.services.RolFuncionService;
 import fox.hound.spring.services.RolService;
 import fox.hound.spring.services.SectorService;
 import fox.hound.spring.services.ServicioService;
+import fox.hound.spring.services.ServicioTareaService;
+import fox.hound.spring.services.SolicitudEventualidadService;
 import fox.hound.spring.services.SolicitudService;
+import fox.hound.spring.services.SolicitudServicioMotivoService;
+import fox.hound.spring.services.SolicitudServicioService;
+import fox.hound.spring.services.TareaService;
+import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
+import fox.hound.spring.services.TipoCaracteristicaService;
 import fox.hound.spring.services.TipoClienteService;
+import fox.hound.spring.services.TipoDiagnosticoVisitaService;
 import fox.hound.spring.services.TipoEventualidadService;
 import fox.hound.spring.services.TipoInmuebleService;
+import fox.hound.spring.services.TipoMotivoService;
 import fox.hound.spring.services.TipoOrdenServicioService;
 import fox.hound.spring.services.TipoPromocionService;
+import fox.hound.spring.services.TipoReclamoService;
+import fox.hound.spring.services.TipoRespuestaService;
 import fox.hound.spring.services.TipoServicioService;
 import fox.hound.spring.services.TipoVisitaService;
+import fox.hound.spring.services.TrabajadorService;
 import fox.hound.spring.services.TrabajadorVisitaService;
 import fox.hound.spring.services.TurnoService;
+import fox.hound.spring.services.UbicacionService;
 import fox.hound.spring.services.UnidadMedidaService;
 import fox.hound.spring.services.UsoInmuebleService;
+import fox.hound.spring.services.ValoracionOrdenServicioService;
 import fox.hound.spring.services.VisitaService;
+import fox.hound.spring.services.ZonaService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.EncryptionUtil;
 
@@ -162,7 +228,110 @@ public class DataLoader implements ApplicationRunner {
 	@Autowired
 	private TrabajadorVisitaService trabajadorVisitaService;
 	@Autowired
-	 private AsuntoComentarioService asuntoComentarioService;
+	private AsuntoComentarioService asuntoComentarioService;
+	@Autowired
+	private BuzonSugerenciaService buzonSugerenciaService;
+	@Autowired
+	private CalificarServicioService calificarServicioService;
+	@Autowired
+	private CaracteristicaInmuebleService caracteristicaInmuebleService;
+	@Autowired
+	private CargoTipoServicioService cargoTipoServicioService;
+	@Autowired
+	private ClienteService clienteService;
+	@Autowired
+	private ClienteOcupacionService clienteOcupacionService;
+	@Autowired
+	private ClienteProfesionService clienteProfesionService;
+	@Autowired
+	private ComentarioExternoService comentarioExternoService;
+	@Autowired
+	private CondicionDiagnosticoService condicioDiagnosticoSevice;
+	@Autowired
+	private CondicionInmuebleService condicionInmuebleService;
+	@Autowired
+	private CondicionService condicionService;
+	@Autowired
+	private DetalleDiagnosticoVisitaService detalleDiagnosticoVisita;
+	@Autowired
+	private DetalleOrdenServicioService detalleOrdenService;
+	@Autowired
+	private DetallePresupuestoService detallePresupuesto;
+	@Autowired
+	private DetalleServicioInmuebleService detalleServicioInmuebleService;
+	@Autowired
+	private DiagnosticoVisitaService diagnosticoVisitaService;
+	@Autowired
+	private MotivoOrdenServicioEventualidadService motivoOrdenServicioEventualidadService;
+	@Autowired
+	private MotivoPresupuestoService motivoPresupuestoService;
+	@Autowired
+	private MotivoReclamoService motivoReclamoService;
+	@Autowired
+	private MotivoService motivoService;
+	@Autowired
+	private OpcionClienteService opcionClienteService;
+	@Autowired
+	private OpcionPreguntaService opcionPreguntaService;
+	@Autowired
+	private OpcionService opcionService;
+	@Autowired
+	private OrdenEntregaService ordenEntregaService;
+	@Autowired
+	private PreferenciaClienteService preferenciaClienteService;
+	@Autowired
+	private PreguntaService preguntaService;
+	@Autowired
+	private PresupuestoService presupuestoClienteService;
+	@Autowired
+	private ReclamoOrdenEntregaService reclamoOrdenEntregaService;
+	@Autowired
+	private RedSocialService redSocialService;
+	@Autowired
+	private RespuestaService respuestaService;
+	@Autowired
+	private RolFuncionService rolFuncionesService;
+	@Autowired
+	private ServicioTareaService servicioTareaService;
+	@Autowired
+	private SolicitudEventualidadService solicitudEventualidadService;
+	@Autowired
+	private SolicitudServicioMotivoService solicitusServicioMotivoService;
+	@Autowired
+	private SolicitudServicioService solicitudServicioService;
+	@Autowired
+	private TareaService tareaService;
+	@Autowired
+	private TipoCaracteristicaInmuebleService tipoCaracteristicaInmuebleService;
+	@Autowired
+	private TipoCaracteristicaService tipoCaracteristicaService;
+	@Autowired
+	private TipoDiagnosticoVisitaService tipoDiagnosticoVisitaService;
+	@Autowired
+	private TipoMotivoService tipoMotivoService;
+	@Autowired
+	private TipoReclamoService tipoReclamoService;
+	@Autowired
+	private TipoRespuestaService tipoRespuestaService;
+	@Autowired
+	private TrabajadorService trabajadorService;
+	@Autowired
+	private UbicacionService ubicacionService;
+	@Autowired
+	private ValoracionOrdenServicioService valoracionOrdenServicioService;
+	@Autowired
+	private ZonaService zonaService;
+	@Autowired
+	private CaracteristicaService caracteristicaService;
+	@Autowired
+	private CondicionDiagnosticoService condicionDiagnosticoService;
+	@Autowired
+	private DetalleDiagnosticoVisitaService detalleDiagnosticoVisitaService;
+	@Autowired
+	private PresupuestoService presupuestoService;
+	
+	
+	
 	
 	
 	@Override
@@ -470,7 +639,6 @@ public class DataLoader implements ApplicationRunner {
 		// Descuento
 		Descuento descuento = new Descuento();
 		descuento.setDescripcion("Días de las Madres");
-		descuento.setMonto(200);
 		descuento.setPorcentaje(0.43);
 		descuento.setEstatus(0);
 		descuento.setFecha_creacion( DateUtil.getCurrentDate() );
@@ -729,8 +897,193 @@ public class DataLoader implements ApplicationRunner {
 		asuntoComentario3.setEstatus(0);
 		asuntoComentario3.setFecha_creacion( DateUtil.getCurrentDate() );
 		asuntoComentarioService.saveOrUpdate(asuntoComentario3);
+
+/*
+		 * ******************************************
+		 *          Aqui trabaja Mahola             *
+		 * ******************************************
+		 */
 		
+		// BUZON DE SUGERENCIA 
 		
+		BuzonSugerencia buzonSugerencia = new BuzonSugerencia();
+		buzonSugerencia.setAsuntoComentario(asuntoComentario);
+		buzonSugerencia.setDescripcion("Descripcion del buzon");
+		buzonSugerencia.setEstatus(0);
+		buzonSugerencia.setFecha_creacion(DateUtil.getCurrentDate());
+		buzonSugerencia.setFecha_modificacion(cal.getTime());
+		buzonSugerencia.setPersona(cliente2);
+		buzonSugerenciaService.saveOrUpdate(buzonSugerencia);		
+
+		
+		//ASUNTO  COMENTARIO
+		AsuntoComentario asuntoComentario4 = new AsuntoComentario();
+		asuntoComentario4.setDescripcion("descripcion del comentario externo");
+		asuntoComentario4.setEstatus(0);
+		asuntoComentario4.setFecha_creacion(DateUtil.getCurrentDate());
+		asuntoComentario4.setFecha_modificacion(cal.getTime());
+		asuntoComentarioService.saveOrUpdate(asuntoComentario4);
+
+		// CALIFICAR SERVICIO
+		
+		CalificarServicio calificarServicio = new CalificarServicio();
+		calificarServicio.setDescripcion("Excelente");
+		calificarServicio.setEstatus(0);
+		calificarServicio.setFecha_creacion(DateUtil.getCurrentDate());
+		calificarServicio.setFecha_modificacion(cal.getTime());
+		calificarServicio.setServicio(servicio2);
+		calificarServicio.setValor(5);
+		calificarServicioService.saveOrUpdate(calificarServicio);
+		
+		// Tipo Caracteristica
+		TipoCaracteristica tipoCaracteristica = new TipoCaracteristica();
+		tipoCaracteristica.setDescripcion("Piso");
+		tipoCaracteristica.setEstatus(0);
+		tipoCaracteristica.setFecha_creacion(DateUtil.getCurrentDate());
+		tipoCaracteristica.setFecha_modificacion(cal.getTime());
+		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica);
+		
+		// caracteristica
+		
+		Caracteristica caracteristica = new Caracteristica();
+		caracteristica.setDescripcion("piso");
+		caracteristica.setEstatus(0);
+		caracteristica.setFecha_creacion(DateUtil.getCurrentDate());
+		caracteristica.setFecha_modificacion(cal.getTime());
+		caracteristica.setPadre_descripcion("padre descripcion");
+		caracteristica.setTipoCaracteristica(tipoCaracteristica);
+		caracteristicaService.saveOrUpdate(caracteristica);
+		
+		// Ubicacion
+		Ubicacion ubicacion = new Ubicacion();
+		ubicacion.setDescripcion("Oeste");
+		ubicacion.setEstatus(0);
+		ubicacion.setFecha_creacion(DateUtil.getCurrentDate());
+		ubicacion.setFecha_modificacion(cal.getTime());
+		ubicacionService.saveOrUpdate(ubicacion);
+		
+		//caracteristicaInmueble
+		
+//		CaracteristicaInmueble caracteristicaInmueble = new CaracteristicaInmueble();
+//		caracteristicaInmueble.setCaracteristica(caracteristica);
+//		caracteristicaInmueble.setEstatus(0);
+//		caracteristicaInmueble.setFecha_creacion(DateUtil.getCurrentDate());
+//		caracteristicaInmueble.setFecha_modificacion(cal.getTime());
+//		caracteristicaInmueble.setInmueble(inmueble);
+//		caracteristicaInmueble.setUbicacion(ubicacion);
+//		caracteristicaInmuebleService.saveOrUpdate(caracteristicaInmueble);
+		
+//		// cargo tipo servicio
+//		CargoTipoServicio cargoTipoServicio = new CargoTipoServicio();
+//		cargoTipoServicio.setCargo(cargo);
+//		cargoTipoServicio.setEstatus(0);
+//		cargoTipoServicio.setFecha_creacion(DateUtil.getCurrentDate());
+//		cargoTipoServicio.setFecha_modificacion(cal.getTime());
+//		cargoTipoServicio.setTipoServicio(tipoServicio3);
+//		cargoTipoServicioService.saveOrUpdate(cargoTipoServicio);
+//		
+//		//cliente profesion
+//		
+//		ClienteProfesion clienteProfesion = new ClienteProfesion();
+//		clienteProfesion.setCliente(cliente2);
+//		clienteProfesion.setEstatus(0);
+//		clienteProfesion.setFecha_creacion(DateUtil.getCurrentDate());
+//		clienteProfesion.setProfesion(profesion);
+//		clienteProfesion.setFecha_modificacion(cal.getTime());
+//		clienteProfesion.setProfesionStr("ingeniero");
+//		clienteProfesionService.saveOrUpdate(clienteProfesion);
+//				
+//		//comentario externo
+//		
+//		ComentarioExterno comentarioExterno = new ComentarioExterno();
+//		comentarioExterno.setAsuntoComentario(asuntoComentario);
+//		comentarioExterno.setCorreoEmisor("mhlyrda@gmail.com");
+//		comentarioExterno.setDescripcion("descripcion del comentario");
+//		comentarioExterno.setEstatus(0);
+//		comentarioExterno.setFecha_creacion(DateUtil.getCurrentDate());
+//		comentarioExterno.setFecha_modificacion(cal.getTime());
+//		comentarioExternoService.saveOrUpdate(comentarioExterno);
+//		
+//		// condicion
+//		Condicion condicion = new Condicion();
+//		condicion.setDescripcion("Buena");
+//		condicion.setEstatus(0);
+//		condicion.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicion.setFecha_modificacion(cal.getTime());
+//		condicionService.saveOrUpdate(condicion);
+//		
+//		// condicionInmueble
+//		CondicionInmueble condicionInmueble = new CondicionInmueble();
+//		condicionInmueble.setDescripcion("Buena");
+//		condicionInmueble.setEstatus(0);
+//		condicionInmueble.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicionInmueble.setFecha_modificacion(cal.getTime());
+//		condicionInmueble.setCondicion(condicion);
+//		condicionInmuebleService.saveOrUpdate(condicionInmueble);
+//		
+//		// tipoRespuesta
+//		TipoRespuesta tipoRespuesta = new TipoRespuesta();
+//		tipoRespuesta.setDescripcion("SI");
+//		tipoRespuesta.setEstatus(0);
+//		tipoRespuesta.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoRespuesta.setFecha_modificacion(cal.getTime());
+//		tipoRespuestaService.saveOrUpdate(tipoRespuesta);
+//		
+//		// respuesta
+//		Respuesta respuesta = new Respuesta();
+//		respuesta.setDescripcion("Buena");
+//		respuesta.setEstatus(0);
+//		respuesta.setFecha_creacion(DateUtil.getCurrentDate());
+//		respuesta.setFecha_modificacion(cal.getTime());
+//		respuesta.setTipoRespuesta(tipoRespuesta);
+//		respuesta.setOrdenServicio(ordenServicio);
+//		
+//		// presupuesto
+//		Presupuesto presupuesto = new Presupuesto();
+//		presupuesto.setDescripcion("Presupuesto");
+//		presupuesto.setEstatus(0);
+//		presupuesto.setFecha_creacion(DateUtil.getCurrentDate());
+//		presupuesto.setFecha_modificacion(cal.getTime());
+//		presupuesto.setMontoTotal(200.00);
+//		presupuesto.setRespuesta(respuesta);	
+//		
+//		//tipoDiagnosticoVisita
+//		TipoDiagnosticoVisita tipoDiagnosticoVisita = new TipoDiagnosticoVisita();
+//		tipoDiagnosticoVisita.setDescripcion("Garantia");
+//		tipoDiagnosticoVisita.setEstatus(0);
+//		tipoDiagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoDiagnosticoVisita.setFecha_modificacion(cal.getTime());
+//		tipoDiagnosticoVisitaService.saveOrUpdate(tipoDiagnosticoVisita);
+//		
+//		// DiagnosticoVisita
+//		DiagnosticoVisita diagnosticoVisitas = new DiagnosticoVisita();
+//		diagnosticoVisitas.setDescripcion("Detalle diagnostico 1");
+//		diagnosticoVisitas.setEstatus(0);
+//		diagnosticoVisitas.setFecha_creacion(DateUtil.getCurrentDate());
+//		diagnosticoVisitas.setFecha_modificacion(cal.getTime());
+//		diagnosticoVisitas.setTipoDiagnosticoVisita(tipoDiagnosticoVisita);
+//		diagnosticoVisitas.setPresupuesto(presupuesto);
+//		diagnosticoVisitas.setOrdenServicio(ordenServicio);
+//		diagnosticoVisitaService.saveOrUpdate(diagnosticoVisitas);
+//		
+//		presupuesto.setDiagnosticoVisita(diagnosticoVisitas);
+//		presupuestoService.saveOrUpdate(presupuesto);
+//		
+//		respuesta.setDiagnosticoVisita(diagnosticoVisitas);
+//		respuesta.setPresupuesto(presupuesto);
+//		respuestaService.saveOrUpdate(respuesta);
+//
+//		//condicion diagnostico
+//		
+//		CondicionDiagnostico condicionDiagnostico = new CondicionDiagnostico();
+//		condicionDiagnostico.setCaracteristicaInmueble(caracteristicaInmueble);
+//		condicionDiagnostico.setCondicionInmueble(condicionInmueble);
+//		condicionDiagnostico.setDiagnosticoVisita(diagnosticoVisitas);
+//		condicionDiagnostico.setEstatus(0);
+//		condicionDiagnostico.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicionDiagnostico.setFecha_modificacion(cal.getTime());
+//		condicionDiagnosticoService.saveOrUpdate(condicionDiagnostico);
+//		
 	}
 
 }

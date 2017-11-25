@@ -19,17 +19,14 @@ import fox.hound.spring.models.puente.Promocion;
 public class Descuento extends Maestro {
 	
 	@Column(nullable = false)
-	private double monto;
-	@Column(nullable = false)
 	private double porcentaje;
 	
 	@OneToMany(mappedBy="descuento")
 	@JsonManagedReference(value="descuento-promociones")
 	private List<Promocion> promociones;
 	
-	public Descuento(Long id, String name, int estatusId, double monto, double porcentaje) {
+	public Descuento(Long id, String name, int estatusId, double porcentaje) {
 		super(id, name, estatusId);
-		this.monto = monto;
 		this.porcentaje = porcentaje;
 	}
 	public Descuento(String id) {
@@ -43,12 +40,6 @@ public class Descuento extends Maestro {
 	}
 	public void setPromociones(List<Promocion> promociones) {
 		this.promociones = promociones;
-	}
-	public double getMonto() {
-		return monto;
-	}
-	public void setMonto(double monto) {
-		this.monto = monto;
 	}
 	public double getPorcentaje() {
 		return porcentaje;
