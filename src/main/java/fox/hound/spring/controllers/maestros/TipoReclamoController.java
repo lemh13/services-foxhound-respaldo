@@ -37,7 +37,7 @@ public class TipoReclamoController {
 	}
 
 	@RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> agregar(@RequestBody TipoReclamo clase,@PathVariable String id, HttpServletRequest request) {
+	public ResponseEntity<?> agregar(@RequestBody TipoReclamo clase, HttpServletRequest request) {
 		clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		
 		return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Tipo de Reclamo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);

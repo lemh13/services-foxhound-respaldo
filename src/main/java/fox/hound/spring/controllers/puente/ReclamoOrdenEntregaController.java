@@ -51,7 +51,7 @@ public class ReclamoOrdenEntregaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id}/motivoReclamo/{id}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id,  @PathVariable String id_t,  @PathVariable String id_m, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 OrdenEntrega ordenentrega = ordenentregaService.getOne(Long.valueOf(id));
@@ -63,25 +63,37 @@ public class ReclamoOrdenEntregaController {
 				clase.setTipoReclamo(tiporeclamo);
 				clase.setMotivoReclamo(motivoreclamo);
 				
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Reclamo Orden Entrega", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else if (ordenentrega == null )
 			{
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Orden de Entrega");
-			}
-			 else if (tiporeclamo == null )
-				{
+			}else if (tiporeclamo == null ){
 					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Reclamo");
-				}
-			 else
-			 {
-				 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");
-			 }
+			}else{
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");
+			}
 	 }
 
-	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody ReclamoOrdenEntrega clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> modificar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id,  @PathVariable String id_t,  @PathVariable String id_m, HttpServletRequest request) {
+		 OrdenEntrega ordenentrega = ordenentregaService.getOne(Long.valueOf(id));
+		 TipoReclamo tiporeclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
+		 MotivoReclamo motivoreclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
+			
+			if (ordenentrega != null && tiporeclamo != null && motivoreclamo !=null) {
+				clase.setOrdenEntrega(ordenentrega);
+				clase.setTipoReclamo(tiporeclamo);
+				clase.setMotivoReclamo(motivoreclamo);
+				
+				return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Reclamo Orden Entrega", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else if (ordenentrega == null )
+			{
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Orden de Entrega");
+			}else if (tiporeclamo == null ){
+					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Reclamo");
+			}else{
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");
+			}	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {

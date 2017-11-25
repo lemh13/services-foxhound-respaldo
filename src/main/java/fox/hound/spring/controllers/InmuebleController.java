@@ -63,13 +63,16 @@ public class InmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="tipoInmueble/{id_t}/uso/{id_u}/sector/{id_s}/cliente/{id_c}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody Inmueble clase, @PathVariable String id_t,@PathVariable String id_u, @PathVariable String id_s, @PathVariable String id_c, HttpServletRequest request) {
+	 @RequestMapping(value="tipoInmueble/{id_t}/uso/{id_u}/sector/{id_s}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody Inmueble clase, @PathVariable String id_t,@PathVariable String id_u, @PathVariable String id_s, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoInmueble tipoInmueble = tipoInmuebleService.getOne(Long.valueOf(id_t));
 		 UsoInmueble usoInmueble = usoInmuebleService.getOne(Long.valueOf(id_u));
 		 Sector sector = setorService.getOne(Long.valueOf(id_s));
-		 Cliente cliente = (Cliente) personaService.getOne(Long.valueOf(id_c));
+		 
+		 PersonaGlobal p = tokenUtils.getUserFromToken(request.getHeader(tokenHeader));
+		 logger.info(p.getId());
+		 Cliente cliente = (Cliente) personaService.getOne(p.getId());
 		 
 		 if(cliente !=null) {
 			 clase.setCliente(cliente);
@@ -79,7 +82,7 @@ public class InmuebleController {
 					 clase.setUsoInmueble(usoInmueble);
 					 if(sector != null) {
 						 clase.setSector(sector);
-						return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+							return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 					 }else {
 						return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Sector");
 					 }
@@ -94,10 +97,37 @@ public class InmuebleController {
 		 }
 	 }
 
-	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody Inmueble clase, HttpServletRequest request) {
-			return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+	 @RequestMapping(value="tipoInmueble/{id_t}/uso/{id_u}/sector/{id_s}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> modificar(@RequestBody Inmueble clase,  @PathVariable String id_t,@PathVariable String id_u, @PathVariable String id_s, HttpServletRequest request) {
+		 TipoInmueble tipoInmueble = tipoInmuebleService.getOne(Long.valueOf(id_t));
+		 UsoInmueble usoInmueble = usoInmuebleService.getOne(Long.valueOf(id_u));
+		 Sector sector = setorService.getOne(Long.valueOf(id_s));
+		 
+		 PersonaGlobal p = tokenUtils.getUserFromToken(request.getHeader(tokenHeader));
+		 logger.info(p.getId());
+		 Cliente cliente = (Cliente) personaService.getOne(p.getId());
+		 
+		 if(cliente !=null) {
+			 clase.setCliente(cliente);
+			 if(tipoInmueble!= null) {
+				 clase.setTipoInmueble(tipoInmueble);
+				 if(usoInmueble != null ) {
+					 clase.setUsoInmueble(usoInmueble);
+					 if(sector != null) {
+						 clase.setSector(sector);
+							return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Inmueble", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+					 }else {
+						return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Sector");
+					 }
+				  }else {
+					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Uso Inmueble");
+			      }
+			 }else {
+					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo Inmueble");
+				 }
+		 }else{
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Persona_cliente");
+		 }	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
