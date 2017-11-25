@@ -1,6 +1,8 @@
 package fox.hound.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import fox.hound.spring.models.Garantia;
 import fox.hound.spring.models.Servicio;
 import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.maestros.UnidadMedida;
+import fox.hound.spring.print.TribagoRequest;
 import fox.hound.spring.services.EmpresaService;
 import fox.hound.spring.services.GarantiaService;
 import fox.hound.spring.services.ServicioService;
@@ -27,6 +30,8 @@ import fox.hound.spring.utils.ResponseDefault;
 @RestController
 @RequestMapping("servicio")
 public class ServicioController {
+	
+	private final Logger logger = Logger.getLogger(this.getClass());
 
 	 @Autowired
 	 private ServicioService service;
@@ -112,6 +117,14 @@ public class ServicioController {
 	 @RequestMapping(value="/activeDesactiveEstatus/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
+	 }
+	 
+	 @RequestMapping(value="/tribago", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public String activeDesactiveEstatus(@RequestBody TribagoRequest clase, HttpServletRequest request) {
+		 
+		 logger.info(clase.getTipoCategoria() + " " + clase.getTipoInmueble() + " " + clase.getTipoServicio());
+		 
+		 return "String";
 	 }
 
 }

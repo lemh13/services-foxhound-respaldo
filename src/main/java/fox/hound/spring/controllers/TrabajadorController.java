@@ -54,6 +54,13 @@ public class TrabajadorController {
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAll("Trabajador"), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarTecnicos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAllTecnicos(HttpServletRequest request) {
+		 // tipo inmueble - categoria y tipo servicio
+		 
+		 return ResponseDefault.ok(service.getAll("Trabajador"), CLASE, ResponseDefault.PLURAL);
+	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {

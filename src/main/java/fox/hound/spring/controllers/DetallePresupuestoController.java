@@ -1,5 +1,10 @@
 package fox.hound.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import fox.hound.spring.models.Cliente;
 import fox.hound.spring.models.DetallePresupuesto;
 import fox.hound.spring.models.combo.Presupuesto;
 import fox.hound.spring.models.puente.DetalleDiagnosticoVisita;
@@ -36,12 +43,27 @@ public class DetallePresupuestoController {
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
-		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
+		 
+		 List<Map<String, Object>> maps = new ArrayList<>();
+		 for (DetallePresupuesto d : service.getAll()) {
+			 maps.add(buscarCliente(d));
+		 }
+		 
+		 return ResponseDefault.ok(maps, CLASE, ResponseDefault.PLURAL);
 	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
+	 }
+	 
+	 private Map<String, Object> buscarCliente(DetallePresupuesto d) {
+		 Map<String, Object> result = new HashMap<>();
+		 Cliente cliente = d.getPresupuesto().getDiagnosticoVisita().getVisita().getSolicitud().getInmueble().getCliente();
+		 
+		 result.put("detallePresupuesto", d);
+		 result.put("cliente", cliente);
+		 return result;
 	 }
 
 	 @RequestMapping(value="/presupuesto/{id_p}/detalleDiagnosticoVisita/{id_d}/SolicitudServicio/{id_s}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
