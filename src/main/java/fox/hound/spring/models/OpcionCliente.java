@@ -18,7 +18,7 @@ import fox.hound.spring.models.puente.Puente;
 public class OpcionCliente extends Puente {
 
 	@ManyToOne
-	@JoinColumn(name="clienteId", nullable = false)
+	@JoinColumn(name="cliente_id", nullable = false)
 	@JsonBackReference(value="cliente-opcionCliente")
 	private Cliente cliente;
 	

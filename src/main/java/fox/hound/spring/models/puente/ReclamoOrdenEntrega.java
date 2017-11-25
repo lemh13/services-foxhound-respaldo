@@ -23,7 +23,7 @@ public class ReclamoOrdenEntrega extends Puente {
 	@ManyToOne
 	@JoinColumn(name="tipoReclamo_id")
 	@JsonBackReference(value="reclamo-reclamoOrdenEntrega")
-	private TipoReclamo tipoReclamo;;
+	private TipoReclamo tipoReclamo;
 	
 	@ManyToOne
 	@JoinColumn(name="motivoReclamo_id")

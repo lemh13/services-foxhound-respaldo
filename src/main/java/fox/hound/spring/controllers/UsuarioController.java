@@ -1,7 +1,10 @@
 package fox.hound.spring.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,8 @@ import fox.hound.spring.models.Persona;
 import fox.hound.spring.models.Usuario;
 import fox.hound.spring.models.combo.Rol;
 import fox.hound.spring.models.combo.Sector;
+import fox.hound.spring.print.PersonaGlobal;
+import fox.hound.spring.security.TokenUtil;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.RolService;
 import fox.hound.spring.services.SectorService;
@@ -23,13 +28,17 @@ import fox.hound.spring.utils.ResponseDefault;
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController {
-
+	private final Logger logger = Logger.getLogger(this.getClass());
 	 @Autowired
 	 private PersonaService service;
-	 
+	 @Value("${foxhound.token.header}")
+	 private String tokenHeader;
+	 @Autowired
+	 private TokenUtil tokenUtils;
 	 @Autowired
 	 private SectorService sectorService;
-	 
+	 @Autowired
+	 private PersonaService personaService;
 	 @Autowired
 	 private RolService rolService;
 	 
@@ -84,5 +93,11 @@ public class UsuarioController {
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
-
+	 @RequestMapping(value="/buscarClienteLoggeado", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getLogged(@PathVariable String id, HttpServletRequest request) {
+		 PersonaGlobal p = tokenUtils.getUserFromToken(request.getHeader(tokenHeader));
+		 logger.info(p.getId());
+		 
+		 return ResponseDefault.ok(personaService.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
+	 }
 }

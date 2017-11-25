@@ -14,7 +14,9 @@ public class MotivoService implements ServiceGeneral<Motivo> {
 	 @Autowired
 	 private MotivoRepository repository;
 
-	 
+	 public List<Motivo> getMotivoPorTipo(String id) { 
+		 return repository.findByTipoMotivoId(Long.valueOf(id));
+	 }
 
 	 @Override
 	 public List<Motivo> getAll() {

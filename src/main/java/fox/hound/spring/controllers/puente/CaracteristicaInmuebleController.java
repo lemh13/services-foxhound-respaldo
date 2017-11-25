@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.Inmueble;
 import fox.hound.spring.models.combo.Caracteristica;
+import fox.hound.spring.models.maestros.Ubicacion;
 import fox.hound.spring.models.puente.CaracteristicaInmueble;
 import fox.hound.spring.services.CaracteristicaInmuebleService;
 import fox.hound.spring.services.CaracteristicaService;
 import fox.hound.spring.services.InmuebleService;
+import fox.hound.spring.services.UbicacionService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -30,6 +32,8 @@ public class CaracteristicaInmuebleController {
 	 private InmuebleService inmuebleService;
 	 @Autowired
 	 private CaracteristicaService caracteristicaService;
+	 @Autowired
+	 private UbicacionService ubicacionService;
 
 	 private Class<?> CLASE = CaracteristicaInmueble.class;
 
@@ -43,22 +47,28 @@ public class CaracteristicaInmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="inmueble/{id_i}/caracteristica/{id_c}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@PathVariable String id_i, @PathVariable String id_c, HttpServletRequest request) {
+	 @RequestMapping(value="inmueble/{id_i}/caracteristica/{id_c}/ubicacion/{id_u}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@PathVariable String id_i, @PathVariable String id_c, @PathVariable String id_u, HttpServletRequest request) {
 		 CaracteristicaInmueble clase = new CaracteristicaInmueble();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Inmueble inmueble = inmuebleService.getOne(Long.valueOf(id_i));
 		 Caracteristica caracteristica = caracteristicaService.getOne(Long.valueOf(id_c));
+		 Ubicacion ubicacion = ubicacionService.getOne(Long.valueOf(id_u));
 			
-		 if (inmueble != null && caracteristica != null) {
+		 if (inmueble != null && caracteristica != null && ubicacion != null) {
 				clase.setInmueble(inmueble);
 				clase.setCaracteristica(caracteristica);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else if (inmueble == null){
+				clase.setUbicacion(ubicacion);
+				
+			 	 
+			 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		} else if (inmueble == null){
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Inmueble");
-			}else {
+		} else if (ubicacion == null){
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Ubicacion");
+		}else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Caracteristica");
-			}
+		}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)

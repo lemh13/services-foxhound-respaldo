@@ -55,7 +55,7 @@ public class PromocionServicioController {
 		if (promocion != null && servicio != null) {
 			clase.setPromocion(promocion);
 			clase.setServicio(servicio);
-			return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Promoción", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 		} else if (servicio == null) {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Servicio");			 
 		} else {
@@ -63,10 +63,22 @@ public class PromocionServicioController {
 		}	 
 	}
 
-	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> modificar(@RequestBody PromocionServicio clase, HttpServletRequest request) {
-		 return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-	 }
+	 @RequestMapping(value="/promocion/{promocionId}/servicio/{servicioId}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> modificar(@PathVariable String promocionId, @PathVariable String servicioId, HttpServletRequest request) {
+		 PromocionServicio clase = new PromocionServicio();
+			clase.setFecha_creacion( DateUtil.getCurrentDate() );
+			Promocion promocion = promocionService.getOne(Long.valueOf(promocionId));
+			Servicio servicio = servicioService.getOne(Long.valueOf(servicioId));
+
+			if (promocion != null && servicio != null) {
+				clase.setPromocion(promocion);
+				clase.setServicio(servicio);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Promoción", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else if (servicio == null) {
+					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Servicio");			 
+			} else {
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Promocion");
+			}		 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {
@@ -84,5 +96,10 @@ public class PromocionServicioController {
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
+	 
+	 @RequestMapping(value="/servicio/{id}/buscarPorServicio", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<?> buscarPorServicio(@PathVariable String id, HttpServletRequest request) {
+			return ResponseDefault.ok(service.getPromocionPorServicio(id), CLASE, ResponseDefault.SINGULAR); 
+		}
 
 }

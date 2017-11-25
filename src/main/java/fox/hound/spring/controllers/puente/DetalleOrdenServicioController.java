@@ -90,5 +90,10 @@ public class DetalleOrdenServicioController {
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
+	 
+	 @RequestMapping(value="/trabajador/{id}/buscarPorTrabajador", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<?> buscarPorTrabajador(@PathVariable String id, HttpServletRequest request) {
+			return ResponseDefault.ok(service.getOrdenServicioPorTrabajador(id), CLASE, ResponseDefault.SINGULAR); 
+		}
 
 }

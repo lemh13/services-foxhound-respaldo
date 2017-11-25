@@ -36,7 +36,7 @@ public class OrdenEntregaController {
 	 }
 
 	 @RequestMapping(value="/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@RequestBody OrdenEntrega clase, @PathVariable String id, HttpServletRequest request) {
+	 public ResponseEntity<?> agregar(@RequestBody OrdenEntrega clase, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 // PENDIENTE -> @ManyToOne
 			return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Orden Entrega", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);

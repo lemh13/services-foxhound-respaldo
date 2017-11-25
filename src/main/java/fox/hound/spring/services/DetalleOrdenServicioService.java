@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import fox.hound.spring.models.OrdenServicio;
 import fox.hound.spring.models.puente.DetalleOrdenServicio;
 import fox.hound.spring.repositories.DetalleOrdenServicioRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -15,7 +17,9 @@ public class DetalleOrdenServicioService implements ServiceGeneral<DetalleOrdenS
 	 private DetalleOrdenServicioRepository repository;
 
 	 
-
+	 public List<OrdenServicio> getOrdenServicioPorTrabajador(String id) { 
+		 return repository.findByTrabajadorId(Long.valueOf(id));
+	 }
 	 @Override
 	 public List<DetalleOrdenServicio> getAll() {
 		 List<DetalleOrdenServicio> lista = new ArrayList<>();

@@ -59,8 +59,8 @@ public class SolicitudServicio extends Puente {
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
-	public List<SolicitudServicioMotivo> getSolicitudServicioMotivos() {
-		return solicitudServicioMotivos;
+	public SolicitudServicioMotivo getSolicitudServicioMotivos() {
+		return solicitudServicioMotivos.get(0);
 	}
 	public void setSolicitudServicioMotivos(List<SolicitudServicioMotivo> solicitudServicioMotivos) {
 		this.solicitudServicioMotivos = solicitudServicioMotivos;

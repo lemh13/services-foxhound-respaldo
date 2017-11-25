@@ -75,5 +75,8 @@ public class MotivoController {
 	 public ResponseEntity<?> activeDesactiveEstatus(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Rol", service.activeDesactiveEstatus(id), CLASE, ResponseDefault.SINGULAR);
 	 }
-
+	 @RequestMapping(value="/tipoMotivo/{id}/buscarPorTipoMotivo", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<?> buscarPorEstado(@PathVariable String id, HttpServletRequest request) {
+			return ResponseDefault.ok(service.getMotivoPorTipo(id), CLASE, ResponseDefault.SINGULAR); 
+		}
 }

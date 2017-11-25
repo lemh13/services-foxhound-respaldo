@@ -11,8 +11,8 @@ import fox.hound.spring.beans.CustomJsonRootName;
 import fox.hound.spring.models.Cliente;
 
 @Entity
-@Table(name="caracteristica_inmueble")
-@CustomJsonRootName(plural = "caracteristicaInmueble", singular = "caracteristicaInmueble")
+@Table(name="preferencia_cliente")
+@CustomJsonRootName(plural = "preferenciaCliente", singular = "preferenciaCliente")
 public class PreferenciaCliente extends Puente {
 	
 	@ManyToOne

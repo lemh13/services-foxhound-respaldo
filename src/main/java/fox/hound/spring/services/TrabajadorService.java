@@ -20,6 +20,9 @@ public class TrabajadorService implements ServiceGeneral<Trabajador> {
 		 repository.findAll().forEach(lista::add);
 		 return lista;
 	 }
+	 public List<Trabajador> getTrabajadorPorCargo(String id) { 
+		 return repository.findByCargoId(Long.valueOf(id));
+	 }
 
 	 @Override
 	 public Trabajador getOne(Long id) {

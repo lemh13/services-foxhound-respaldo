@@ -23,6 +23,10 @@ public class Estatus {
 		estatus.add("Activo");
 		estatus.add("Suspendido");
 		estatus.add("Eliminado");
+		estatus.add("Aprobado");
+		estatus.add("Rechazado");
+		estatus.add("Pendiente");
+
 	}
 	
 	public String nombre(int pos) {

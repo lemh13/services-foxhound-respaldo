@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import fox.hound.spring.models.puente.Promocion;
 import fox.hound.spring.models.puente.PromocionServicio;
 import fox.hound.spring.repositories.PromocionServicioRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -13,7 +15,11 @@ public class PromocionServicioService implements ServiceGeneral<PromocionServici
 
 	 @Autowired
 	 private PromocionServicioRepository repository;
-
+	 
+	 public List<Promocion> getPromocionPorServicio(String id) { 
+		 return repository.findByServicioId(Long.valueOf(id));
+	 }
+	 
 	 @Override
 	 public List<PromocionServicio> getAll() {
 		 List<PromocionServicio> lista = new ArrayList<>();

@@ -66,7 +66,7 @@ public class Inmueble extends Base {
 	private Sector sector;
 	
 	@ManyToOne
-	@JoinColumn(name="clienteId", nullable = false)
+	@JoinColumn(name="cliente_id", nullable = false)
 	@JsonBackReference(value="cliente-inmueble")
 	private Cliente cliente;
 	
