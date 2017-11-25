@@ -240,6 +240,20 @@ public class DataLoader implements ApplicationRunner {
 		rol.setFecha_creacion( DateUtil.getCurrentDate() );
 		rolService.saveOrUpdate(rol);
 		
+		Rol rol2 = new Rol();
+		rol2.setDescripcion("Tecnico");
+		rol2.setMenu("-2-5-201-203-403-");
+		rol2.setEstatus(0);
+		rol2.setFecha_creacion( DateUtil.getCurrentDate() );
+		rolService.saveOrUpdate(rol2);
+		
+		Rol rol3 = new Rol();
+		rol3.setDescripcion("Tecnico");
+		rol3.setMenu("-2-5-201-203-803-");
+		rol3.setEstatus(0);
+		rol3.setFecha_creacion( DateUtil.getCurrentDate() );
+		rolService.saveOrUpdate(rol3);
+		
 		// Tipo Cliente
 		TipoCliente tipoCliente = new TipoCliente();
 		tipoCliente.setDescripcion("Propietario");
@@ -620,6 +634,74 @@ public class DataLoader implements ApplicationRunner {
 		trabajador.setEstatus(0);
 		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
 		personaService.saveOrUpdate(trabajador);
+		
+		Trabajador trabajador2 = new Trabajador();
+		trabajador2.setNombre("Jose Miguel");
+		trabajador2.setSexo('M');
+		trabajador2.setTipoPersona(0);
+		trabajador2.setCargo(cargo);
+		trabajador2.setIdentificacion(21526571);
+		trabajador2.setDireccion("Carrera 13b");
+		trabajador2.setSector(sector);
+		trabajador2.setTelefono("04120523025");
+		trabajador2.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador2.setEmail("jose@gmail.com");
+		trabajador2.setPassword( "123" );
+		trabajador2.setRol(rol2);
+		trabajador2.setEstatus(0);
+		trabajador2.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(trabajador2);
+		
+		Trabajador trabajador3 = new Trabajador();
+		trabajador3.setNombre("Luis Medina");
+		trabajador3.setSexo('M');
+		trabajador3.setTipoPersona(0);
+		trabajador3.setCargo(cargo);
+		trabajador3.setIdentificacion(21526571);
+		trabajador3.setDireccion("Carrera 13b");
+		trabajador3.setSector(sector);
+		trabajador3.setTelefono("04120523025");
+		trabajador3.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador3.setEmail("jose@gmail.com");
+		trabajador3.setPassword( "123" );
+		trabajador3.setRol(rol2);
+		trabajador3.setEstatus(0);
+		trabajador3.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(trabajador3);
+		
+		Trabajador trabajador4 = new Trabajador();
+		trabajador4.setNombre("Pedro Medina");
+		trabajador4.setSexo('M');
+		trabajador4.setTipoPersona(0);
+		trabajador4.setCargo(cargo);
+		trabajador4.setIdentificacion(21526571);
+		trabajador4.setDireccion("Carrera 13b");
+		trabajador4.setSector(sector);
+		trabajador4.setTelefono("04120523025");
+		trabajador4.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador4.setEmail("jose@gmail.com");
+		trabajador4.setPassword( "123" );
+		trabajador4.setRol(rol3);
+		trabajador4.setEstatus(0);
+		trabajador4.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(trabajador4);
+		
+		Trabajador trabajador5 = new Trabajador();
+		trabajador5.setNombre("Alfredo Medina");
+		trabajador5.setSexo('M');
+		trabajador5.setTipoPersona(0);
+		trabajador5.setCargo(cargo);
+		trabajador5.setIdentificacion(21526571);
+		trabajador5.setDireccion("Carrera 13b");
+		trabajador5.setSector(sector);
+		trabajador5.setTelefono("04120523025");
+		trabajador5.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador5.setEmail("jose@gmail.com");
+		trabajador5.setPassword( "123" );
+		trabajador5.setRol(rol3);
+		trabajador5.setEstatus(0);
+		trabajador5.setFecha_creacion( DateUtil.getCurrentDate() );
+		personaService.saveOrUpdate(trabajador5);
 		
 		// TrabajadorVisita
 		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();

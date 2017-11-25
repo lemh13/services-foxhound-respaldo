@@ -1,5 +1,8 @@
 package fox.hound.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.Empresa;
+import fox.hound.spring.models.Persona;
 import fox.hound.spring.models.Trabajador;
 import fox.hound.spring.models.combo.Rol;
 import fox.hound.spring.models.combo.Sector;
@@ -57,9 +61,26 @@ public class TrabajadorController {
 	 
 	 @RequestMapping(value="/buscarTecnicos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getAllTecnicos(HttpServletRequest request) {
-		 // tipo inmueble - categoria y tipo servicio
+		 List<Persona> personas = new ArrayList<>();
+		 for (Persona t : service.getAll("Trabajador") ) {
+			 if (t.getRol().getMenu().contains("-" + 403 +"-") && t.getEstatus() == 0) {
+				 personas.add(t);
+			 }
+		 }
 		 
-		 return ResponseDefault.ok(service.getAll("Trabajador"), CLASE, ResponseDefault.PLURAL);
+		 return ResponseDefault.ok(personas, CLASE, ResponseDefault.PLURAL);
+	 }
+	 
+	 @RequestMapping(value="/buscarSupervisor", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAllSupervisor(HttpServletRequest request) {
+		 List<Persona> personas = new ArrayList<>();
+		 for (Persona t : service.getAll("Trabajador") ) {
+			 if (t.getRol().getMenu().contains("-" + 803 +"-") && t.getEstatus() == 0) {
+				 personas.add(t);
+			 }
+		 }
+		 
+		 return ResponseDefault.ok(personas, CLASE, ResponseDefault.PLURAL);
 	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
