@@ -63,7 +63,7 @@ public class InmuebleController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="tipoInmueble/{id_t}/usoInmueble/{id_u}/sector/{id_s}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="tipoInmueble/{id_t}/uso/{id_u}/sector/{id_s}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Inmueble clase, @PathVariable String id_t,@PathVariable String id_u, @PathVariable String id_s, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 TipoInmueble tipoInmueble = tipoInmuebleService.getOne(Long.valueOf(id_t));
