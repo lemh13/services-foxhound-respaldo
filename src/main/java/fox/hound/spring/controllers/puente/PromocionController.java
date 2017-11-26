@@ -80,9 +80,12 @@ public class PromocionController {
 				clase.setTipoPromocion(tipoPromocion);
 				clase.setDescuento(descuento);
 				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+			} else if (tipoPromocion == null){
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo Promocion");
 			} else {
-				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Promocion");
-			}		 }
+				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Descuento");
+			}
+	 }
 
 	 @RequestMapping(value="/borrar/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> borrar(@PathVariable String id, HttpServletRequest request) {

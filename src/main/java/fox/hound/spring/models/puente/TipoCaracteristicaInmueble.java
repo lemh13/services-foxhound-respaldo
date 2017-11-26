@@ -34,9 +34,9 @@ public class TipoCaracteristicaInmueble extends Puente {
 	@JsonManagedReference(value="detalleServicioInmueble-tipoCaracteristicaInmueble")
 	private List<DetalleServicioInmueble> detalleServicioInmuebles;
 	
-	@OneToMany(mappedBy="tipoCaracteristicaInmueble")
-	@JsonManagedReference(value="tipoCaracteristicaInmueble-preferenciaCliente")
-	private List<PreferenciaCliente> preferenciaClientes;
+//	@OneToMany(mappedBy="tipoCaracteristicaInmueble")
+//	@JsonManagedReference(value="tipoCaracteristicaInmueble-preferenciaCliente")
+//	private List<PreferenciaCliente> preferenciaClientes;
 	
 	public TipoCaracteristicaInmueble() {
 		super();
@@ -61,12 +61,12 @@ public class TipoCaracteristicaInmueble extends Puente {
 	}
 	public void setTipoInmueble(TipoInmueble tipoInmueble) {
 		this.tipoInmueble = tipoInmueble;
-	}
-	public List<PreferenciaCliente> getPreferenciaClientes() {
-		return preferenciaClientes;
-	}
-	public void setPreferenciaClientes(List<PreferenciaCliente> preferenciaClientes) {
-		this.preferenciaClientes = preferenciaClientes;
+//	}
+//	public List<PreferenciaCliente> getPreferenciaClientes() {
+//		return preferenciaClientes;
+//	}
+//	public void setPreferenciaClientes(List<PreferenciaCliente> preferenciaClientes) {
+//		this.preferenciaClientes = preferenciaClientes;
 	}
 	public List<DetalleServicioInmueble> getDetalleServicioInmuebles() {
 		return detalleServicioInmuebles;

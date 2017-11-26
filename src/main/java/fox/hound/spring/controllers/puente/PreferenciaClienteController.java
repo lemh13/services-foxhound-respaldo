@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fox.hound.spring.models.Cliente;
+import fox.hound.spring.models.maestros.Categoria;
+import fox.hound.spring.models.maestros.TipoServicio;
 import fox.hound.spring.models.puente.PreferenciaCliente;
-import fox.hound.spring.models.puente.TipoCaracteristicaInmueble;
+import fox.hound.spring.models.maestros.TipoCaracteristica;
+import fox.hound.spring.services.CategoriaService;
 import fox.hound.spring.services.PersonaService;
 import fox.hound.spring.services.PreferenciaClienteService;
-import fox.hound.spring.services.TipoCaracteristicaInmuebleService;
+import fox.hound.spring.services.TipoCaracteristicaService;
+import fox.hound.spring.services.TipoServicioService;
 import fox.hound.spring.utils.DateUtil;
 import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
@@ -28,7 +32,13 @@ public class PreferenciaClienteController {
 	 private PreferenciaClienteService service;
 	 
 	 @Autowired
-	 private TipoCaracteristicaInmuebleService tipoCaracteristicaInmuebleService;
+	 private CategoriaService categoriaService;
+	 
+	 @Autowired
+	 private TipoServicioService tipoServicioService;
+	 
+	 @Autowired
+	 private TipoCaracteristicaService tipoCaracteristicaService;
 	 
 	 @Autowired
 	 private PersonaService clienteService;
@@ -45,20 +55,32 @@ public class PreferenciaClienteController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/tipoCaracteristicaInmueble/{tipoCaracteristicaInmuebleid}/cliente/{clienteid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@PathVariable String clienteid, @PathVariable String tipoCaracteristicaInmuebleid, HttpServletRequest request) {
+	 @RequestMapping(value="/categoria/{categoriaid}/tipoServicio/{tipoServicioid}/tipoCaracteristica/{tipoCaracteristicaid}/cliente/{clienteid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@PathVariable String clienteid, @PathVariable String tipoCaracteristicaid, 
+			 @PathVariable String tipoServicioid, @PathVariable String categoriaid, HttpServletRequest request) {
+		 
 		 PreferenciaCliente clase = new PreferenciaCliente();
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 TipoCaracteristicaInmueble tipoCaracteristicaInmueble = tipoCaracteristicaInmuebleService.getOne(Long.valueOf(tipoCaracteristicaInmuebleid));
-		 Cliente cliente = (Cliente) clienteService.getOne(Long.valueOf(clienteid));
 		 
-		 if (cliente != null && tipoCaracteristicaInmueble != null) {
+		 TipoCaracteristica tipoCaracteristica = tipoCaracteristicaService.getOne(Long.valueOf(tipoCaracteristicaid));
+		 Cliente cliente = (Cliente) clienteService.getOne(Long.valueOf(clienteid));
+		 Categoria categoria = categoriaService.getOne(Long.valueOf(categoriaid));
+		 TipoServicio tipoServicio = tipoServicioService.getOne(Long.valueOf(tipoServicioid));
+		 
+		 if (cliente != null && tipoCaracteristica != null || categoria != null || tipoServicio != null) {
 				clase.setCliente(cliente);
-				clase.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else {
-				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Preferencia Cliente");
-			}
+				clase.setTipoCaracteristica(tipoCaracteristica);
+				clase.setCategoria(categoria);
+				clase.setTipoServicio(tipoServicio);
+				
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Preferencia Cliente", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+		 } else if (cliente == null) {
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Cliente");		
+		 } else if (tipoCaracteristica == null) {
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo Categoria");
+		 } else {
+			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Otras");		
+		 }
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
