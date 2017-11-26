@@ -48,6 +48,7 @@ public class BuzonSugerenciaController {
 	 @RequestMapping(value="persona/{id_persona}/asuntoComentario/{id_ac}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody BuzonSugerencia clase, @PathVariable String id_persona, @PathVariable String id_ac, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
+		 clase.setEstatus(5);
 		 Persona persona = personaService.getOne(Long.valueOf(id_persona));
 		 AsuntoComentario asuntoComentario = asuntoComentarioService.getOne(Long.valueOf(id_ac));
 			
@@ -55,7 +56,7 @@ public class BuzonSugerenciaController {
 				clase.setPersona(persona);
 				if(asuntoComentario != null) {
 					clase.setAsuntoComentario(asuntoComentario);
-					return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Buzon de Sugerencia", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+					return ResponseDefault.messageAndObject(MessageUtil.BUZON_SUGENRENCIA, "", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 				} else {
 					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "AsuntoComentario");
 				}

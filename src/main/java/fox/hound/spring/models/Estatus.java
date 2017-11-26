@@ -20,12 +20,12 @@ public class Estatus {
 
 	public Estatus() {
 		super();
-		estatus.add("Activo");
-		estatus.add("Suspendido");
-		estatus.add("Eliminado");
-		estatus.add("Aprobado");
-		estatus.add("Rechazado");
-		estatus.add("Pendiente");
+		estatus.add("Activo");		// 1
+		estatus.add("Suspendido");	// 2
+		estatus.add("Eliminado");	// 3
+		estatus.add("Aprobado");	// 4
+		estatus.add("Rechazado");	// 5
+		estatus.add("Pendiente");	// 6
 
 	}
 	

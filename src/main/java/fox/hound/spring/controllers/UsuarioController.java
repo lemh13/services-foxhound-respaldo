@@ -38,8 +38,6 @@ public class UsuarioController {
 	 @Autowired
 	 private SectorService sectorService;
 	 @Autowired
-	 private PersonaService personaService;
-	 @Autowired
 	 private RolService rolService;
 	 
 	 private Class<?> CLASE = Persona.class;
@@ -98,6 +96,6 @@ public class UsuarioController {
 		 PersonaGlobal p = tokenUtils.getUserFromToken(request.getHeader(tokenHeader));
 		 logger.info(p.getId());
 		 
-		 return ResponseDefault.ok(personaService.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
+		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 }

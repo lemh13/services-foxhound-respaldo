@@ -10,7 +10,7 @@ import fox.hound.spring.models.Persona;
 public interface PersonaRepository extends CrudRepository<Persona, Long> {
 
 	Persona findByEmailAndPassword(String email, String password);
-	
+		
 	@Query("select p from Persona p where type = ?1")
 	List<Persona> findByType(String typeValue);
 

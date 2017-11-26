@@ -16,7 +16,7 @@ import fox.hound.spring.utils.MessageUtil;
 import fox.hound.spring.utils.ResponseDefault;
 
 @RestController
-@RequestMapping("asuntocomentario")
+@RequestMapping("asuntoComentario")
 public class AsuntoComentarioController {
 
 	 @Autowired

@@ -10,5 +10,5 @@ public class MessageUtil {
 	public static String ELIMINAR_REGISTRO = "%s eliminado exitosamente"; 
 	public static String ERROR_ASOCIACION = "Falta asociacion con %s"; 
 	
-	
+	public static String BUZON_SUGENRENCIA = "En breve un Administrador atenderá su mensaje"; 
 }

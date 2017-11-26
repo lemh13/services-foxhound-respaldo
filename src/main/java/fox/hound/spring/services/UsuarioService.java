@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import fox.hound.spring.models.Trabajador;
+
+import fox.hound.spring.models.Persona;
 import fox.hound.spring.models.Usuario;
 import fox.hound.spring.repositories.UsuarioRepository;
 import fox.hound.spring.utils.DateUtil;
+import fox.hound.spring.utils.EncryptionUtil;
 
 @Service
 public class UsuarioService implements ServiceGeneral<Usuario> {
@@ -15,6 +17,10 @@ public class UsuarioService implements ServiceGeneral<Usuario> {
 	 @Autowired
 	 private UsuarioRepository repository;
 
+	 @Autowired
+	 private EncryptionUtil encript;
+	 
+	 
 	 @Override
 	 public List<Usuario> getAll() {
 		 List<Usuario> lista = new ArrayList<>();
@@ -30,8 +36,14 @@ public class UsuarioService implements ServiceGeneral<Usuario> {
 	 @Override
 	 public Usuario saveOrUpdate(Usuario clase) {
 		 if (clase.getId() != null) {
-			 Usuario claseAux = getOne( clase.getId() );
+			 Persona claseAux = getOne( clase.getId() );
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
+			 
+			 if (!claseAux.getPassword().equals( encript.md5( clase.getPassword() ) )) {
+				 clase.setPassword( encript.md5( clase.getPassword() ) );
+			 }
+		 } else {
+			 clase.setPassword( encript.md5( clase.getPassword() ) );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
 		 

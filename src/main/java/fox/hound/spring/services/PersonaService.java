@@ -23,7 +23,7 @@ public class PersonaService implements ServiceGeneral<Persona> {
 		 repository.findByType(type).forEach(lista::add);
 		 return lista;
 	 }
-
+	 
 	 @Override
 	 public List<Persona> getAll() {
 		 List<Persona> lista = new ArrayList<>();

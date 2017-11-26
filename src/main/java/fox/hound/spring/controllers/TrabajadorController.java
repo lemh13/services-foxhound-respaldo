@@ -91,10 +91,12 @@ public class TrabajadorController {
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
+	
 	 @RequestMapping(value="/cargo/{id}/buscarPorCargo", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 		public ResponseEntity<?> buscarPorParroquia(@PathVariable String id, HttpServletRequest request) {
 			return ResponseDefault.ok(trabajadorService.getTrabajadorPorCargo(id), CLASE, ResponseDefault.SINGULAR); 
-		}
+	}
+	 
 	 @RequestMapping(value="sector/{sectorId}/rol/{rolId}/cargo/{cargoId}/empresa/{empresaId}/detalleOrdenServicio/{detalleOrdenServicioId}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody Trabajador clase, @PathVariable String sectorId, @PathVariable String rolId, @PathVariable String cargoId, @PathVariable String empresaId, @PathVariable String detalleOrdenServicioId,  HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );

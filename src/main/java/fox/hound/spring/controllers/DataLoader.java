@@ -179,7 +179,6 @@ import fox.hound.spring.services.TurnoService;
 import fox.hound.spring.services.UbicacionService;
 import fox.hound.spring.services.UnidadMedidaService;
 import fox.hound.spring.services.UsoInmuebleService;
-import fox.hound.spring.services.UsuarioService;
 import fox.hound.spring.services.ValoracionOrdenServicioService;
 import fox.hound.spring.services.VisitaService;
 import fox.hound.spring.services.ZonaService;
@@ -843,31 +842,31 @@ public class DataLoader implements ApplicationRunner {
 		servicio4.setFecha_creacion( DateUtil.getCurrentDate() );
 		servicioService.saveOrUpdate(servicio4);
 		
-		Servicio servicio5 = new Servicio();
-		servicio5.setGarantia(garantia);
-		servicio5.setTipoServicio(tipoServicio3);
-		servicio5.setUnidadMedida(unidadMedida);
-		servicio5.setEmpresa(empresa);
-		servicio5.setTitulo("Reparacion de Pisos");
-		servicio5.setImagenServicio("imagen/p4.jpg");
-		servicio5.setDescripcion("Reparalo ya.");
-		servicio5.setCosto(200.00);
-		servicio5.setEstatus(0);
-		servicio5.setFecha_creacion( DateUtil.getCurrentDate() );
-		servicioService.saveOrUpdate(servicio5);
-		
-		Servicio servicio6 = new Servicio();
-		servicio6.setGarantia(garantia);
-		servicio6.setTipoServicio(tipoServicio4);
-		servicio6.setUnidadMedida(unidadMedida);
-		servicio6.setEmpresa(empresa);
-		servicio6.setTitulo("Reparacion de Pisos");
-		servicio6.setImagenServicio("imagen/p4.jpg");
-		servicio6.setDescripcion("Reparalo ya.");
-		servicio6.setCosto(200.00);
-		servicio6.setEstatus(0);
-		servicio6.setFecha_creacion( DateUtil.getCurrentDate() );
-		servicioService.saveOrUpdate(servicio6);
+//		Servicio servicio5 = new Servicio();
+//		servicio5.setGarantia(garantia);
+//		servicio5.setTipoServicio(tipoServicio3);
+//		servicio5.setUnidadMedida(unidadMedida);
+//		servicio5.setEmpresa(empresa);
+//		servicio5.setTitulo("Reparacion de Pisos");
+//		servicio5.setImagenServicio("imagen/p4.jpg");
+//		servicio5.setDescripcion("Reparalo ya.");
+//		servicio5.setCosto(200.00);
+//		servicio5.setEstatus(0);
+//		servicio5.setFecha_creacion( DateUtil.getCurrentDate() );
+//		servicioService.saveOrUpdate(servicio5);
+//		
+//		Servicio servicio6 = new Servicio();
+//		servicio6.setGarantia(garantia);
+//		servicio6.setTipoServicio(tipoServicio4);
+//		servicio6.setUnidadMedida(unidadMedida);
+//		servicio6.setEmpresa(empresa);
+//		servicio6.setTitulo("Reparacion de Pisos");
+//		servicio6.setImagenServicio("imagen/p4.jpg");
+//		servicio6.setDescripcion("Reparalo ya.");
+//		servicio6.setCosto(200.00);
+//		servicio6.setEstatus(0);
+//		servicio6.setFecha_creacion( DateUtil.getCurrentDate() );
+//		servicioService.saveOrUpdate(servicio6);
 		
 		// tipoCaracteristica
 		TipoCaracteristica tipoCaracteristica = new TipoCaracteristica();
@@ -915,12 +914,12 @@ public class DataLoader implements ApplicationRunner {
 		
 		DetalleServicioInmueble detalleServicioInmueble5 = new DetalleServicioInmueble();
 		detalleServicioInmueble5.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble2);
-		detalleServicioInmueble5.setServicio(servicio5);
+		detalleServicioInmueble5.setServicio(servicio);
 		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble5);
 		
 		DetalleServicioInmueble detalleServicioInmueble6 = new DetalleServicioInmueble();
 		detalleServicioInmueble6.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble);
-		detalleServicioInmueble6.setServicio(servicio6);
+		detalleServicioInmueble6.setServicio(servicio2);
 		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble6);
 		
 		// TipoPromocion
@@ -1061,19 +1060,19 @@ public class DataLoader implements ApplicationRunner {
 		tipoVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoVisitaService.saveOrUpdate(tipoVisita);
 		
-		// Solicitud
-		Solicitud solicitud = new Solicitud();
-		solicitud.setInmueble(inmueble);
-		solicitud.setEstatus(0);
-		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
-		solicitudService.saveOrUpdate(solicitud);
-		
-		Solicitud solicitud1 = new Solicitud();
-		solicitud1.setInmueble(inmueble);
-		solicitud1.setEstatus(0);
-		solicitud1.setFecha_creacion( DateUtil.getCurrentDate() );
-		solicitudService.saveOrUpdate(solicitud1);
-		
+//		// Solicitud
+//		Solicitud solicitud = new Solicitud();
+//		solicitud.setInmueble(inmueble);
+//		solicitud.setEstatus(0);
+//		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
+//		solicitudService.saveOrUpdate(solicitud);
+//		
+//		Solicitud solicitud1 = new Solicitud();
+//		solicitud1.setInmueble(inmueble);
+//		solicitud1.setEstatus(0);
+//		solicitud1.setFecha_creacion( DateUtil.getCurrentDate() );
+//		solicitudService.saveOrUpdate(solicitud1);
+//		
 		//TipoMotivo
 		TipoMotivo tipomotivo = new TipoMotivo();
 		tipomotivo.setEstatus(0);
@@ -1091,139 +1090,150 @@ public class DataLoader implements ApplicationRunner {
 		motivo.setFecha_creacion( DateUtil.getCurrentDate() );
 		motivoService.saveOrUpdate(motivo);		
 		
-		//SolicitudServicio
-		SolicitudServicio solicitudServicio= new SolicitudServicio();
-		solicitudServicio.setEstatus(0);
-		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudServicio.setServicio(servicio);
-		solicitudServicio.setSolicitud(solicitud);
-		solicitudservicioservice.saveOrUpdate(solicitudServicio);
-		
-
-		//SolicitudServicioMotivo
-		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
-		solicitudServicioMotivo.setEstatus(0);
-		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudServicioMotivo.setMotivo(motivo);
-		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
-		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
-		
-		//DetallePresupuesto
-		
-		DetallePresupuesto d= new DetallePresupuesto();
-	    d.setEstatus(0);
-	    d.setFecha_creacion(DateUtil.getCurrentDate());
-	    d.setCosto(3000);
-		d.setDetalleDiagnosticoVisita(dd);
-		d.setPresupuesto(p);
-		d.setSolicitudServicio(solicitudServicio);
-		detallePresupuestoService.saveOrUpdate(d);
-		
-		// Visita
-		Visita visita = new Visita();
-		visita.setFechaVisita(DateUtil.getCurrentDate());
-		visita.setTurno(turno);
-		visita.setTipoVisita(tipoVisita);
-		visita.setSolicitud(solicitud);
-		visita.setOrdenServicio(ordenServicio);
-		visita.setEstatus(0);
-		visita.setFecha_creacion( DateUtil.getCurrentDate() );
-		visitaService.saveOrUpdate(visita);
-		
-		// Trabajador
-		Trabajador trabajador = new Trabajador();
-		trabajador.setNombre("Jose Duin");
-		trabajador.setSexo('M');
-		trabajador.setTipoPersona(0);
-		trabajador.setCargo(cargo);
-		trabajador.setIdentificacion(21526571);
-		trabajador.setDireccion("Carrera 13b");
-		trabajador.setSector(sector);
-		trabajador.setTelefono("04120523025");
-		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-		trabajador.setEmail("jose@gmail.com");
-		trabajador.setPassword( "123" );
-		trabajador.setRol(rol);
-		trabajador.setEstatus(0);
-		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorService.saveOrUpdate(trabajador);
-		
-		Trabajador trabajador2 = new Trabajador();
-		trabajador2.setNombre("Jose Miguel");
-		trabajador2.setSexo('M');
-		trabajador2.setTipoPersona(0);
-		trabajador2.setCargo(cargo);
-		trabajador2.setIdentificacion(21526571);
-		trabajador2.setDireccion("Carrera 13b");
-		trabajador2.setSector(sector);
-		trabajador2.setTelefono("04120523025");
-		trabajador2.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-		trabajador2.setEmail("jose@gmail.com");
-		trabajador2.setPassword( "123" );
-		trabajador2.setRol(rol2);
-		trabajador2.setEstatus(0);
-		trabajador2.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorService.saveOrUpdate(trabajador2);
-		
-		Trabajador trabajador3 = new Trabajador();
-		trabajador3.setNombre("Luis Medina");
-		trabajador3.setSexo('M');
-		trabajador3.setTipoPersona(0);
-		trabajador3.setCargo(cargo);
-		trabajador3.setIdentificacion(21526571);
-		trabajador3.setDireccion("Carrera 13b");
-		trabajador3.setSector(sector);
-		trabajador3.setTelefono("04120523025");
-		trabajador3.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-		trabajador3.setEmail("jose@gmail.com");
-		trabajador3.setPassword( "123" );
-		trabajador3.setRol(rol2);
-		trabajador3.setEstatus(0);
-		trabajador3.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorService.saveOrUpdate(trabajador3);
-		
-		Trabajador trabajador4 = new Trabajador();
-		trabajador4.setNombre("Pedro Medina");
-		trabajador4.setSexo('M');
-		trabajador4.setTipoPersona(0);
-		trabajador4.setCargo(cargo);
-		trabajador4.setIdentificacion(21526571);
-		trabajador4.setDireccion("Carrera 13b");
-		trabajador4.setSector(sector);
-		trabajador4.setTelefono("04120523025");
-		trabajador4.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-		trabajador4.setEmail("jose@gmail.com");
-		trabajador4.setPassword( "123" );
-		trabajador4.setRol(rol3);
-		trabajador4.setEstatus(0);
-		trabajador4.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorService.saveOrUpdate(trabajador4);
-		
-		Trabajador trabajador5 = new Trabajador();
-		trabajador5.setNombre("Alfredo Medina");
-		trabajador5.setSexo('M');
-		trabajador5.setTipoPersona(0);
-		trabajador5.setCargo(cargo);
-		trabajador5.setIdentificacion(21526571);
-		trabajador5.setDireccion("Carrera 13b");
-		trabajador5.setSector(sector);
-		trabajador5.setTelefono("04120523025");
-		trabajador5.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-		trabajador5.setEmail("jose@gmail.com");
-		trabajador5.setPassword( "123" );
-		trabajador5.setRol(rol3);
-		trabajador5.setEstatus(0);
-		trabajador5.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorService.saveOrUpdate(trabajador5);
-		
-		// TrabajadorVisita
-		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
-		trabajadorVisita.setTrabajador(trabajador);
-		trabajadorVisita.setVisita(visita);
-		trabajadorVisita.setEstatus(0);
-		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
-		
+//		//SolicitudServicio
+//		SolicitudServicio solicitudServicio= new SolicitudServicio();
+//		solicitudServicio.setEstatus(0);
+//		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
+//		solicitudServicio.setServicio(servicio);
+//		solicitudServicio.setSolicitud(solicitud);
+//		solicitudservicioservice.saveOrUpdate(solicitudServicio);
+//		
+//
+//		//SolicitudServicioMotivo
+//		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
+//		solicitudServicioMotivo.setEstatus(0);
+//		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
+//		solicitudServicioMotivo.setMotivo(motivo);
+//		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
+//		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
+//		
+//		//DetallePresupuesto
+//		
+//		DetallePresupuesto d= new DetallePresupuesto();
+//	    d.setEstatus(0);
+//	    d.setFecha_creacion(DateUtil.getCurrentDate());
+//	    d.setCosto(3000);
+//		d.setDetalleDiagnosticoVisita(dd);
+//		d.setPresupuesto(p);
+//		d.setSolicitudServicio(solicitudServicio);
+//		detallePresupuestoService.saveOrUpdate(d);
+//		
+//		// Visita
+//		Visita visita = new Visita();
+//		visita.setFechaVisita(DateUtil.getCurrentDate());
+//		visita.setTurno(turno);
+//		visita.setTipoVisita(tipoVisita);
+//		visita.setSolicitud(solicitud);
+//		visita.setOrdenServicio(ordenServicio);
+//		visita.setEstatus(0);
+//		visita.setFecha_creacion( DateUtil.getCurrentDate() );
+//		visitaService.saveOrUpdate(visita);
+//		
+//		
+//		// Trabajador
+//		Trabajador trabajador = new Trabajador();
+//		trabajador.setNombre("Jose Duin");
+//		trabajador.setSexo('M');
+//		trabajador.setTipoPersona(0);
+//		trabajador.setCargo(cargo);
+//		trabajador.setIdentificacion(21526571);
+//		trabajador.setDireccion("Carrera 13b");
+//		trabajador.setSector(sector);
+//		trabajador.setTelefono("04120523025");
+//		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+//		trabajador.setEmail("jose@duin.com");
+//		trabajador.setPassword( "123" );
+//		trabajador.setRol(rol);
+//		trabajador.setEstatus(0);
+//		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajador.setEmpresa(empresa);
+//		trabajador.setFecha_ingreso(DateUtil.getCurrentDate());
+//		trabajadorService.saveOrUpdate(trabajador);
+//		
+//		Trabajador trabajador2 = new Trabajador();
+//		trabajador2.setNombre("Jose Miguel");
+//		trabajador2.setSexo('M');
+//		trabajador2.setTipoPersona(0);
+//		trabajador2.setCargo(cargo);
+//		trabajador2.setIdentificacion(21526571);
+//		trabajador2.setDireccion("Carrera 13b");
+//		trabajador2.setSector(sector);
+//		trabajador2.setTelefono("04120523025");
+//		trabajador2.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+//		trabajador2.setEmail("jose@miguel.com");
+//		trabajador2.setPassword( "123" );
+//		trabajador2.setRol(rol2);
+//		trabajador2.setEstatus(0);
+//		trabajador2.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajador2.setEmpresa(empresa);
+//		trabajador2.setFecha_ingreso(DateUtil.getCurrentDate());
+//		trabajadorService.saveOrUpdate(trabajador2);
+//		
+//		Trabajador trabajador3 = new Trabajador();
+//		trabajador3.setNombre("Luis Medina");
+//		trabajador3.setSexo('M');
+//		trabajador3.setTipoPersona(0);
+//		trabajador3.setCargo(cargo);
+//		trabajador3.setIdentificacion(21526571);
+//		trabajador3.setDireccion("Carrera 13b");
+//		trabajador3.setSector(sector);
+//		trabajador3.setTelefono("04120523025");
+//		trabajador3.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+//		trabajador3.setEmail("luis@medina.com");
+//		trabajador3.setPassword( "123" );
+//		trabajador3.setRol(rol2);
+//		trabajador3.setEstatus(0);
+//		trabajador3.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajador3.setEmpresa(empresa);
+//		trabajador3.setFecha_ingreso(DateUtil.getCurrentDate());
+//		trabajadorService.saveOrUpdate(trabajador3);
+//		
+//		Trabajador trabajador4 = new Trabajador();
+//		trabajador4.setNombre("Pedro Medina");
+//		trabajador4.setSexo('M');
+//		trabajador4.setTipoPersona(0);
+//		trabajador4.setCargo(cargo);
+//		trabajador4.setIdentificacion(21526571);
+//		trabajador4.setDireccion("Carrera 13b");
+//		trabajador4.setSector(sector);
+//		trabajador4.setTelefono("04120523025");
+//		trabajador4.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+//		trabajador4.setEmail("pedro@medina.com");
+//		trabajador4.setPassword( "123" );
+//		trabajador4.setRol(rol3);
+//		trabajador4.setEstatus(0);
+//		trabajador4.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajador4.setEmpresa(empresa);
+//		trabajador4.setFecha_ingreso(DateUtil.getCurrentDate());
+//		trabajadorService.saveOrUpdate(trabajador4);
+//		
+//		Trabajador trabajador5 = new Trabajador();
+//		trabajador5.setNombre("Alfredo Medina");
+//		trabajador5.setSexo('M');
+//		trabajador5.setTipoPersona(0);
+//		trabajador5.setCargo(cargo);
+//		trabajador5.setIdentificacion(21526571);
+//		trabajador5.setDireccion("Carrera 13b");
+//		trabajador5.setSector(sector);
+//		trabajador5.setTelefono("04120523025");
+//		trabajador5.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+//		trabajador5.setEmail("alfredo@medina.com");
+//		trabajador5.setPassword( "123" );
+//		trabajador5.setRol(rol3);
+//		trabajador5.setEstatus(0);
+//		trabajador5.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajador5.setEmpresa(empresa);
+//		trabajador5.setFecha_ingreso(DateUtil.getCurrentDate());
+//		trabajadorService.saveOrUpdate(trabajador5);
+//		
+//		// TrabajadorVisita
+//		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
+//		trabajadorVisita.setTrabajador(trabajador);
+//		trabajadorVisita.setVisita(visita);
+//		trabajadorVisita.setEstatus(0);
+//		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+//		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
 		asuntoComentario.setDescripcion("Sugerencia");
@@ -1238,749 +1248,750 @@ public class DataLoader implements ApplicationRunner {
 		asuntoComentarioService.saveOrUpdate(asuntoComentario2);
 		
 		AsuntoComentario asuntoComentario3 = new AsuntoComentario();
-		asuntoComentario3.setDescripcion("Opiniòn");
+		asuntoComentario3.setDescripcion("Opinión");
 		asuntoComentario3.setEstatus(0);
 		asuntoComentario3.setFecha_creacion( DateUtil.getCurrentDate() );
 		asuntoComentarioService.saveOrUpdate(asuntoComentario3);
-
-/*
-		 * ******************************************
-		 *          Aqui trabaja Mahola             *
-		 * ******************************************
-		 */
-		
-		//ASUNTO  COMENTARIO
-		AsuntoComentario asuntoComentario1 = new AsuntoComentario();
-		//asuntoComentario.setBuzonSugerencias(buzonSugerencias);;// PREGUNTAR A CHEMI
-		//asuntoComentario.setComentarioExternos(comentarioExternos);//  PREGUNTAR A CHEMI
-		asuntoComentario1.setDescripcion("descripcion del comentario externo");
-		asuntoComentario1.setEstatus(0);
-		asuntoComentario1.setFecha_creacion(DateUtil.getCurrentDate());
-		asuntoComentario1.setFecha_modificacion(cal.getTime());
-		asuntoComentarioService.saveOrUpdate(asuntoComentario1);
-		
-		// BUZON DE SUGERENCIA 
-		
-		BuzonSugerencia buzonSugerencia = new BuzonSugerencia();
-		buzonSugerencia.setAsuntoComentario(asuntoComentario1);
-		buzonSugerencia.setDescripcion("Descripcion del buzon");
-		buzonSugerencia.setEstatus(0);
-		buzonSugerencia.setFecha_creacion(DateUtil.getCurrentDate());
-		buzonSugerencia.setFecha_modificacion(cal.getTime());
-		buzonSugerencia.setPersona(cliente);
-		buzonSugerenciaService.saveOrUpdate(buzonSugerencia);		
-
-		
-		//ASUNTO  COMENTARIO
-		AsuntoComentario asuntoComentario4 = new AsuntoComentario();
-		asuntoComentario4.setDescripcion("descripcion del comentario externo");
-		asuntoComentario4.setEstatus(0);
-		asuntoComentario4.setFecha_creacion(DateUtil.getCurrentDate());
-		asuntoComentario4.setFecha_modificacion(cal.getTime());
-		asuntoComentarioService.saveOrUpdate(asuntoComentario4);
-
-		// CALIFICAR SERVICIO
-		
-		CalificarServicio calificarServicio = new CalificarServicio();
-		calificarServicio.setDescripcion("Excelente");
-		calificarServicio.setEstatus(0);
-		calificarServicio.setFecha_creacion(DateUtil.getCurrentDate());
-		calificarServicio.setFecha_modificacion(cal.getTime());
-		calificarServicio.setServicio(servicio2);
-		calificarServicio.setValor(5);
-		calificarServicioService.saveOrUpdate(calificarServicio);
-		
-		// Tipo Caracteristica
-		TipoCaracteristica tipoCaracteristica1 = new TipoCaracteristica();
-		tipoCaracteristica1.setDescripcion("PenHouse");
-		tipoCaracteristica1.setEstatus(0);
-		tipoCaracteristica1.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristica1.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica1);
-		
-		TipoCaracteristica tipoCaracteristica2 = new TipoCaracteristica();
-		tipoCaracteristica2.setDescripcion("Cabaña");
-		tipoCaracteristica2.setEstatus(0);
-		tipoCaracteristica2.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristica2.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica2);
-		
-		// caracteristica
-		
-		Caracteristica caracteristica1 = new Caracteristica();
-		caracteristica1.setDescripcion("piso");
-		caracteristica1.setEstatus(0);
-		caracteristica1.setFecha_creacion(DateUtil.getCurrentDate());
-		caracteristica1.setFecha_modificacion(cal.getTime());
-//		caracteristica.setPadre_descripcion("padre descripcion");
-//		caracteristica.setTipoCaracteristica(tipoCaracteristica1);
-		caracteristicaService.saveOrUpdate(caracteristica1);
-		
-		// Ubicacion
-		Ubicacion ubicacion2 = new Ubicacion();
-		ubicacion2.setDescripcion("Cocina");
-		ubicacion2.setEstatus(0);
-		ubicacion2.setFecha_creacion(DateUtil.getCurrentDate());
-		ubicacion2.setFecha_modificacion(cal.getTime());
-		ubicacionService.saveOrUpdate(ubicacion2);
-		
-		// TipoCaracteristicaServicio
-		TipoCaracteristicaServicio tipoCaracteristicaServicio = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio.setServicio(servicio);
-		tipoCaracteristicaServicio.setTipoCaracteristica(tipoCaracteristica1);
-		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio);
-		
-		TipoCaracteristicaServicio tipoCaracteristicaServicio2 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio2.setServicio(servicio);
-		tipoCaracteristicaServicio2.setTipoCaracteristica(tipoCaracteristica2);
-		
-		TipoCaracteristicaServicio tipoCaracteristicaServicio3 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio3.setServicio(servicio2);
-		tipoCaracteristicaServicio3.setTipoCaracteristica(tipoCaracteristica1);
-		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio3);
-		
-		TipoCaracteristicaServicio tipoCaracteristicaServicio4 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio4.setServicio(servicio3);
-		tipoCaracteristicaServicio4.setTipoCaracteristica(tipoCaracteristica2);
-		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio4);
-		
-		TipoCaracteristicaServicio tipoCaracteristicaServicio5 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio5.setServicio(servicio4);
-		tipoCaracteristicaServicio5.setTipoCaracteristica(tipoCaracteristica1);
-		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio5);
-		
-		TipoCaracteristicaServicio tipoCaracteristicaServicio6 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio6.setServicio(servicio5);
-		tipoCaracteristicaServicio6.setTipoCaracteristica(tipoCaracteristica1);
-		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio6);
-		
-		//caracteristicaInmueble
-		
-		CaracteristicaInmueble caracteristicaInmueble = new CaracteristicaInmueble();
-		caracteristicaInmueble.setCaracteristica(caracteristica1);
-		caracteristicaInmueble.setEstatus(0);
-		caracteristicaInmueble.setFecha_creacion(DateUtil.getCurrentDate());
-		caracteristicaInmueble.setFecha_modificacion(cal.getTime());
-		caracteristicaInmueble.setInmueble(inmueble);
-		caracteristicaInmueble.setUbicacion(ubicacion2);
-		caracteristicaInmuebleService.saveOrUpdate(caracteristicaInmueble);
-		
-		// cargo tipo servicio
-		CargoTipoServicio cargoTipoServicio = new CargoTipoServicio();
-		cargoTipoServicio.setCargo(cargo);
-		cargoTipoServicio.setEstatus(0);
-		cargoTipoServicio.setFecha_creacion(DateUtil.getCurrentDate());
-		cargoTipoServicio.setFecha_modificacion(cal.getTime());
-		cargoTipoServicio.setTipoServicio(tipoServicio3);
-		cargoTipoServicioService.saveOrUpdate(cargoTipoServicio);
-		
-		//cliente profesion
-		
-		ClienteProfesion clienteProfesion = new ClienteProfesion();
-		clienteProfesion.setCliente(cliente2);
-		clienteProfesion.setEstatus(0);
-		clienteProfesion.setFecha_creacion(DateUtil.getCurrentDate());
-		clienteProfesion.setProfesion(profesion);
-		clienteProfesion.setFecha_modificacion(cal.getTime());
-		clienteProfesion.setProfesionStr("ingeniero");
-		clienteProfesionService.saveOrUpdate(clienteProfesion);
-				
-		//comentario externo
-		
-		ComentarioExterno comentarioExterno = new ComentarioExterno();
-		comentarioExterno.setAsuntoComentario(asuntoComentario1);
-		comentarioExterno.setCorreoEmisor("mhlyrda@gmail.com");
-		comentarioExterno.setDescripcion("descripcion del comentario");
-		comentarioExterno.setEstatus(0);
-		comentarioExterno.setFecha_creacion(DateUtil.getCurrentDate());
-		comentarioExterno.setFecha_modificacion(cal.getTime());
-		comentarioExternoService.saveOrUpdate(comentarioExterno);
-		
-		// condicion
-		Condicion condicion1 = new Condicion();
-		condicion1.setDescripcion("Buena");
-		condicion1.setEstatus(0);
-		condicion1.setFecha_creacion(DateUtil.getCurrentDate());
-		condicion1.setFecha_modificacion(cal.getTime());
-		condicionService.saveOrUpdate(condicion1);
-		
-		// condicionInmueble
-		//condicion 
-		
-		Condicion condicion11 = new Condicion();
-		//condicion.setCondicionInmueble(condicionInmueble);
-		condicion11.setDescripcion("condicion del inmueble");
-		condicion11.setEstatus(0);
-		condicion11.setFecha_creacion(DateUtil.getCurrentDate());
-		condicion11.setFecha_modificacion(cal.getTime());
-		condicionService.saveOrUpdate(condicion11);
-		
-		// condicion inmueble
-		CondicionInmueble condicionInmueble = new CondicionInmueble();
-		condicionInmueble.setDescripcion("Buena");
-		condicionInmueble.setEstatus(0);
-		condicionInmueble.setFecha_creacion(DateUtil.getCurrentDate());
-		condicionInmueble.setFecha_modificacion(cal.getTime());
-		condicionInmueble.setCondicion(condicion11);
-		condicionInmuebleService.saveOrUpdate(condicionInmueble);
-		
-		// tipoRespuesta
-		
-		// opcion
-		Opcion opcion = new Opcion();
-		opcion.setDescripcion("descripcion de la opcion");
-		opcion.setEstatus(0);
-		opcion.setFecha_creacion(DateUtil.getCurrentDate());
-		opcion.setFecha_modificacion(cal.getTime());
-		//opcion.setOpcionClientes(opcionClientes);
-		//opcion.setOpcionPreguntas(opcionPreguntas);
-		opcionService.saveOrUpdate(opcion);
-		
-		//opcion clientes
-		OpcionCliente opcionCliente = new OpcionCliente();
-		opcionCliente.setCliente(cliente);
-		opcionCliente.setEstatus(0);
-		opcionCliente.setFecha_creacion(DateUtil.getCurrentDate());
-		opcionCliente.setFecha_modificacion(cal.getTime());
-		opcionCliente.setOpcion(opcion);
-		
-		
-		
-		
-		
-		//pregunta
-		
-		Pregunta pregunta = new Pregunta();
-		pregunta.setDescripcion("descripcion Pregunta");
-		pregunta.setEstatus(0);
-		pregunta.setFecha_creacion(DateUtil.getCurrentDate());
-		pregunta.setFecha_modificacion(cal.getTime());
-		//pregunta.setOpcionPreguntas(opcionPreguntas);
-		preguntaService.saveOrUpdate(pregunta);
-		
-		// red social
-		
-		RedSocial redSocial = new RedSocial();
-		redSocial.setDescripcion("facebook");
-		redSocial.setEmpresa(empresa);
-		redSocial.setEstatus(0);
-		redSocial.setFecha_creacion(DateUtil.getCurrentDate());
-		redSocial.setFecha_modificacion(cal.getTime());
-		redSocialService.saveOrUpdate(redSocial);
-	
-		// rol funcion
-		
-		RolFuncion rolFuncion = new RolFuncion();
-		rolFuncion.setEstatus(0);
-		rolFuncion.setFecha_creacion(DateUtil.getCurrentDate());
-		rolFuncion.setRol(rol);
-		///rolFuncion.setMenu(menu);
-		rolFuncionesService.saveOrUpdate(rolFuncion);
-		
-		//solicitud eventualdad
-		
-		SolicitudEventualidad solicitudEventualidad = new SolicitudEventualidad();
-		solicitudEventualidad.setEstatus(0);
-		solicitudEventualidad.setEventualidad(eventualidad);
-		solicitudEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudEventualidad.setFecha_modificacion(cal.getTime());
-		solicitudEventualidad.setSolicitud(solicitud);
-		solicitudEventualidadService.saveOrUpdate(solicitudEventualidad);
-		
-		// solicitud servicio
-		
-		SolicitudServicio solicitudServicio1 = new SolicitudServicio();
-		//solicitudServicio.setDetalleOrdenServicios(detalleOrdenServicios);
-		solicitudServicio1.setEstatus(0);
-		solicitudServicio1.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudServicio1.setFecha_modificacion(cal.getTime());
-		solicitudServicio1.setServicio(servicio2);
-		solicitudServicio1.setSolicitud(solicitud);
-		solicitudServicioService.saveOrUpdate(solicitudServicio1);
-
-		
-		// tarea
-		Tarea tarea = new Tarea();
-		tarea.setDescripcion("limpiar piso");
-		tarea.setEstatus(0);
-		tarea.setFecha_creacion(DateUtil.getCurrentDate());
-		tarea.setFecha_modificacion(cal.getTime());
-		tareaService.saveOrUpdate(tarea);
-		
-		// servicio tarea
-		
-		ServicioTarea servicioTarea = new ServicioTarea();
-		servicioTarea.setDescripcion("descripcion de sevicio tarea");
-		servicioTarea.setEstatus(0);
-		servicioTarea.setFecha_creacion(DateUtil.getCurrentDate());
-		servicioTarea.setFecha_modificacion(cal.getTime());
-		servicioTarea.setServicio(servicio2);
-		servicioTarea.setTarea(tarea);
-		servicioTareaService.saveOrUpdate(servicioTarea);
-		
-		// tipo Catactristica
-		
-		TipoCaracteristica tipoCaracteristica11 = new TipoCaracteristica();
-		tipoCaracteristica11.setDescripcion("piso");
-		tipoCaracteristica11.setEstatus(0);
-		tipoCaracteristica11.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristica11.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica11);
-		
-		//tipoCaracteristica inmueble
-		TipoCaracteristicaInmueble tipoCaracteristicaInmueble1 = new TipoCaracteristicaInmueble();
-		tipoCaracteristicaInmueble1.setEstatus(0);
-		tipoCaracteristicaInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristicaInmueble1.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaInmueble1.setTipoCaracteristica(tipoCaracteristica11);
-		tipoCaracteristicaInmueble1.setTipoInmueble(tipoInmueble);
-		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble1);
-		
-		//tipo caracteristica servicio
-		TipoCaracteristicaServicio tipoCaracteristicaServicio1 = new TipoCaracteristicaServicio();
-		tipoCaracteristicaServicio1.setEstatus(0);
-		tipoCaracteristicaServicio1.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoCaracteristicaServicio1.setFecha_modificacion(cal.getTime());
-		tipoCaracteristicaServicio1.setServicio(servicio);
-		tipoCaracteristicaServicio1.setTipoCaracteristica(tipoCaracteristica11);
-		tipoCaracteristcaServicioService.saveOrUpdate(tipoCaracteristicaServicio1);
-		
-		//tipo diagnostico visita
-		TipoDiagnosticoVisita tipoDiagnosticoVisita = new TipoDiagnosticoVisita();
-		tipoDiagnosticoVisita.setDescripcion("Reclamo");
-		tipoDiagnosticoVisita.setEstatus(0);
-		tipoDiagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoDiagnosticoVisita.setFecha_modificacion(cal.getTime());
-		tipoDiagnosticoVisitaService.saveOrUpdate(tipoDiagnosticoVisita);
-		
-		// tipo motivo
-		TipoMotivo tipoMotivo = new TipoMotivo();
-		tipoMotivo.setDescripcion("descripcion del motivo");
-		tipoMotivo.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoMotivo.setFecha_modificacion(cal.getTime());
-		tipoMotivoService.saveOrUpdate(tipoMotivo);
-		
-		//tipo reclammo
-		TipoReclamo tipoReclamo = new TipoReclamo();
-		tipoReclamo.setDescripcion("descripcion del reclamo");
-		tipoReclamo.setEstatus(0);
-		tipoReclamo.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoReclamo.setFecha_modificacion(cal.getTime());
-		tipoReclamoService.saveOrUpdate(tipoReclamo);
-		
-		// tipo respuesta
-		
-		TipoRespuesta tipoRespuesta = new TipoRespuesta();
-		tipoRespuesta.setDescripcion("SI");
-		tipoRespuesta.setEstatus(0);
-		tipoRespuesta.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoRespuesta.setFecha_modificacion(cal.getTime());
-		tipoRespuestaService.saveOrUpdate(tipoRespuesta);
-		
-		//ubicacion 
-		Ubicacion ubicacion11 = new Ubicacion();
-		ubicacion11.setDescripcion("descripcion de la ubicacion");
-		ubicacion11.setEstatus(0);
-		ubicacion11.setFecha_creacion(DateUtil.getCurrentDate());
-		ubicacion11.setFecha_modificacion(cal.getTime());
-		ubicacionService.saveOrUpdate(ubicacion11);
-		
-		
-		//respuestas
-		
-		// respuesta
-		Respuesta respuesta = new Respuesta();
-		respuesta.setDescripcion("Buena");
-		respuesta.setEstatus(0);
-		respuesta.setFecha_creacion(DateUtil.getCurrentDate());
-		respuesta.setFecha_modificacion(cal.getTime());
-		respuesta.setTipoRespuesta(tipoRespuesta);
-		respuesta.setOrdenServicio(ordenServicio);
-		
-		// presupuesto
-		Presupuesto presupuesto = new Presupuesto();
-		presupuesto.setDescripcion("Presupuesto");
-		presupuesto.setEstatus(0);
-		presupuesto.setFecha_creacion(DateUtil.getCurrentDate());
-		presupuesto.setFecha_modificacion(cal.getTime());
-		presupuesto.setMontoTotal(200.00);
-		presupuesto.setRespuesta(respuesta);	
-		presupuestoService.saveOrUpdate(presupuesto);
-		
-		//tipoDiagnosticoVisita
-		TipoDiagnosticoVisita tipoDiagnosticoVisita1 = new TipoDiagnosticoVisita();
-		tipoDiagnosticoVisita1.setDescripcion("Garantia");
-		tipoDiagnosticoVisita1.setEstatus(0);
-		tipoDiagnosticoVisita1.setFecha_creacion(DateUtil.getCurrentDate());
-		tipoDiagnosticoVisita1.setFecha_modificacion(cal.getTime());
-		tipoDiagnosticoVisitaService.saveOrUpdate(tipoDiagnosticoVisita1);
-		
-		// DiagnosticoVisita
-		DiagnosticoVisita diagnosticoVisitas = new DiagnosticoVisita();
-		diagnosticoVisitas.setDescripcion("Detalle diagnostico 1");
-		diagnosticoVisitas.setEstatus(0);
-		diagnosticoVisitas.setFecha_creacion(DateUtil.getCurrentDate());
-		diagnosticoVisitas.setFecha_modificacion(cal.getTime());
-		diagnosticoVisitas.setTipoDiagnosticoVisita(tipoDiagnosticoVisita1);
-		//diagnosticoVisitas.setPresupuesto(presupuesto);
-		diagnosticoVisitas.setOrdenServicio(ordenServicio);
-		diagnosticoVisitaService.saveOrUpdate(diagnosticoVisitas);
-		
-		//presupuesto.setDiagnosticoVisita(diagnosticoVisitas);
-		presupuestoService.saveOrUpdate(presupuesto);
-		
-		// diagnostico visita
-		DiagnosticoVisita diagnosticoVisita = new DiagnosticoVisita();
-		diagnosticoVisita.setDescripcion("descripcion de la visita");
-		//diagnosticoVisita.setDetalleDiagnosticos(detalleDiagnosticos);
-		diagnosticoVisita.setEstatus(0);
-		diagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
-		diagnosticoVisita.setFecha_modificacion(cal.getTime());
-		diagnosticoVisita.setOrdenServicio(ordenServicio);
-		diagnosticoVisita.setPresupuesto(presupuesto);
-		//diagnosticoVisita.setRespuesta(respuesta);
-		diagnosticoVisita.setTipoDiagnosticoVisita(tipoDiagnosticoVisita1);
-		//diagnosticoVisita.setValoracionOrdenServicio(valoracionOrdenServicio);
-		//diagnosticoVisita.setVisita(visita);
-		diagnosticoVisitaService.saveOrUpdate(diagnosticoVisita);		
-		
-		respuesta.setDiagnosticoVisita(diagnosticoVisitas);
-		respuesta.setPresupuesto(presupuesto);
-		respuestaService.saveOrUpdate(respuesta);
-
-		//condicion diagnostico
-		
-		CondicionDiagnostico condicionDiagnostico = new CondicionDiagnostico();
-		condicionDiagnostico.setCaracteristicaInmueble(caracteristicaInmueble);
-		condicionDiagnostico.setCondicionInmueble(condicionInmueble);
-		condicionDiagnostico.setDiagnosticoVisita(diagnosticoVisitas);
-		condicionDiagnostico.setEstatus(0);
-		condicionDiagnostico.setFecha_creacion(DateUtil.getCurrentDate());
-		condicionDiagnostico.setFecha_modificacion(cal.getTime());
-		condicionDiagnosticoService.saveOrUpdate(condicionDiagnostico);
-		//zona
-		
-		Zona zona = new Zona();
-		zona.setDescripcion("descripcion de la zona");
-		zona.setEstatus(0);
-		zona.setFecha_creacion(DateUtil.getCurrentDate());
-		zona.setFecha_modificacion(cal.getTime());
-		zona.setSector(sector);
-		zona.setServicio(servicio);
-		zonaService.saveOrUpdate(zona);
-		
-		// motivo
-		
-		Motivo motivo1 = new Motivo();
-		motivo1.setDescripcion("descripcion del motivo");
-		motivo1.setEstatus(0);
-		motivo1.setFecha_creacion(DateUtil.getCurrentDate());
-		motivo1.setFecha_modificacion(cal.getTime());
-		//motivo.setMotivoOrdenServicioEventualidads(motivoOrdenServicioEventualidads);
-		motivo1.setTipoMotivo(tipoMotivo);
-		motivoService.saveOrUpdate(motivo1);
-		//motivo presupuesto
-				
-		MotivoPresupuesto motivoPresupuesto = new MotivoPresupuesto();
-		motivoPresupuesto.setEstatus(0);
-		motivoPresupuesto.setFecha_creacion(DateUtil.getCurrentDate());
-		motivoPresupuesto.setFecha_modificacion(cal.getTime());
-		motivoPresupuesto.setMotivo(motivo1);
-		motivoPresupuesto.setPresupuesto(presupuesto);
-		motivoPresupuestoService.saveOrUpdate(motivoPresupuesto);
-				
-		//solicitud servicio motivo
-				
-		SolicitudServicioMotivo solicitudServicioMotivo1 = new SolicitudServicioMotivo();
-		solicitudServicioMotivo1.setEstatus(0);
-		solicitudServicioMotivo1.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudServicioMotivo1.setFecha_modificacion(cal.getTime());
-		solicitudServicioMotivo1.setMotivo(motivo1);
-		solicitudServicioMotivo1.setSolicitudServicio(solicitudServicio1);
-		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo1);
-				
-		//ordenServicio eventualidad
-//				
-//		OrdenServicioEventualidad ordenServicioEventualidad = new OrdenServicioEventualidad();
-//		ordenServicioEventualidad.setDescripcionEstatus("descripcion orden servicio eventualidad");
-//		ordenServicioEventualidad.setEstatus(0);
-//		ordenServicioEventualidad.setEventualidad(eventualidad);
-//		ordenServicioEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
-//		ordenServicioEventualidad.setFecha_modificacion(cal.getTime());
-//		//ordenServicioEventualidad.setMotivoOrdenServicioEventualidads(motivoOrdenServicioEventualidads);
-//		ordenServicioEventualidad.setOrdenServicio(ordenServicio);
-//		ordenServicioEventualidadService.saveOrUpdate(ordenServicioEventualidad);			
-//				
-//		//motivo orden de servicio eventualidad
-						
-//		MotivoOrdenServicioEventualidad motivoOrdenEventualidad = new MotivoOrdenServicioEventualidad();
-//		motivoOrdenEventualidad.setEstatus(0);
-//		motivoOrdenEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
-//		motivoOrdenEventualidad.setFecha_modificacion(cal.getTime());
-//		motivoOrdenEventualidad.setMotivo(motivo1);
-//		motivoOrdenEventualidad.setOrdenServicioEventualidad(ordenServicioEventualidad);
-//		motivoOrdenServicioEventualidadService.saveOrUpdate(motivoOrdenEventualidad);
-//						
-			
-		//motivo reclamo
-						
-		MotivoReclamo motivoReclamo = new MotivoReclamo();
-		motivoReclamo.setEstatus(0);
-		motivoReclamo.setFecha_creacion(DateUtil.getCurrentDate());
-		motivoReclamo.setFecha_modificacion(cal.getTime());
-		motivoReclamo.setMotivo(motivo1);
-		motivoReclamo.setDescripcion("Queja");
-		//motivoReclamo.setReclamoOrdenEntregas(reclamoOrdenEntregas);
-		motivoReclamoService.saveOrUpdate(motivoReclamo);
-						
-		//reclamo orden entrega
-						
-		ReclamoOrdenEntrega reclamoOrdenEntrega = new ReclamoOrdenEntrega();
-		reclamoOrdenEntrega.setEstatus(0);
-		reclamoOrdenEntrega.setFecha_creacion(DateUtil.getCurrentDate());
-		reclamoOrdenEntrega.setFecha_modificacion(cal.getTime());
-		reclamoOrdenEntrega.setMotivoReclamo(motivoReclamo);
-		//reclamoOrdenEntrega.setOrdenEntregas(ordenEntregas);
-		reclamoOrdenEntrega.setTipoReclamo(tipoReclamo);
-		reclamoOrdenEntregaService.saveOrUpdate(reclamoOrdenEntrega);
-						
-		
-		// detalle orden servicio
-//				
-//		DetalleOrdenServicio detalleOrdenServicio = new DetalleOrdenServicio();
-//		detalleOrdenServicio.setEstatus(0);
-//		detalleOrdenServicio.setFecha_creacion(DateUtil.getCurrentDate());
-//		detalleOrdenServicio.setFecha_modificacion(cal.getTime());
-//		detalleOrdenServicio.setOrdenServicio(ordenServicio);
-//		detalleOrdenServicio.setServicioTarea(servicioTarea);
-//		detalleOrdenServicio.setSolicitudServicio(solicitudServicio1);
-//		detalleOrdenServicio.setTrabajador(trabajador);
-//		detalleOrdenServicioService.saveOrUpdate(detalleOrdenServicio);
-//				
-		//opcion pregunta
-		OpcionPregunta opcionPregunta = new OpcionPregunta();
-		opcionPregunta.setDescripcion("esta de acuerdo con el precio del servicio");
-		opcionPregunta.setEstatus(0);
-		opcionPregunta.setFecha_creacion(DateUtil.getCurrentDate());
-		opcionPregunta.setFecha_modificacion(cal.getTime());
-		opcionPregunta.setOpcion(opcion);
-		opcionPregunta.setPregunta(pregunta);
-		opcionPreguntaService.saveOrUpdate(opcionPregunta);
-	
-				
-				
-		//************** la cagada **************			
-		//valoracion orden servicio
-				
-		ValoracionOrdenServicio valoracionOrdenServico = new ValoracionOrdenServicio();
-		valoracionOrdenServico.setDiagnosticoVisita(diagnosticoVisita);
-		valoracionOrdenServico.setEstatus(0);
-		valoracionOrdenServico.setFecha_creacion(DateUtil.getCurrentDate());
-		valoracionOrdenServico.setFecha_modificacion(cal.getTime());
-		//valoracionOrdenServico.setOrdenEntrega(ordenEntrega);
-		valoracionOrdenServico.setOrdenServicio(ordenServicio);
-		valoracionOrdenServicioService.saveOrUpdate(valoracionOrdenServico);
-				
-		//orden de entrega
-				
-		OrdenEntrega ordenEntrega = new OrdenEntrega();
-		//ordenEntrega.setCalificarServicios(calificarServicios)
-		ordenEntrega.setDescripcion("descripcion de la orden de entrega");
-		ordenEntrega.setEstatus(0);
-		ordenEntrega.setFecha_creacion(DateUtil.getCurrentDate());
-		ordenEntrega.setFecha_modificacion(cal.getTime());
-		//ordenEntrega.setValoracionOrdenServicio(valoracionOrdenServico);
-		ordenEntregaService.saveOrUpdate(ordenEntrega);
-				
-				
-				
-		// CALIFICAR SERVICIO
-				
-		CalificarServicio calificarServicio1 = new CalificarServicio();
-		calificarServicio1.setDescripcion("Excelente");
-		calificarServicio1.setEstatus(0);
-		calificarServicio1.setFecha_creacion(DateUtil.getCurrentDate());
-		calificarServicio1.setFecha_modificacion(cal.getTime());
-		calificarServicio1.setOrdenEntrega(ordenEntrega);
-		calificarServicio1.setServicio(servicio2);
-		calificarServicio1.setValor(5);
-		calificarServicioService.saveOrUpdate(calificarServicio1);
-				
-		// caracteristica
-				
-		Caracteristica caracteristica11 = new Caracteristica();
-		//caracteristica.setCaracteristicaInmuebles(caracteristicaInmuebles);
-		caracteristica11.setDescripcion("piso");
-		caracteristica11.setEstatus(0);
-		caracteristica11.setFecha_creacion(DateUtil.getCurrentDate());
-		caracteristica11.setFecha_modificacion(cal.getTime());
-		caracteristica11.setPadre_descripcion("padre descripcion");
-		//caracteristica.setPadre_id(padre_id);
-		caracteristica11.setTipoCaracteristica(tipoCaracteristica11);
-		caracteristicaService.saveOrUpdate(caracteristica11);
-				
-		//caracteristicaInmueble
-				
-		CaracteristicaInmueble caracteristicaInmueble1 = new CaracteristicaInmueble();
-		caracteristicaInmueble1.setCaracteristica(caracteristica11);
-		//caracteristicaInmueble.setDetalleDiagnostico(detalleDiagnostico);
-		caracteristicaInmueble1.setEstatus(0);
-		caracteristicaInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
-		caracteristicaInmueble1.setFecha_modificacion(cal.getTime());
-		caracteristicaInmueble1.setInmueble(inmueble);
-		caracteristicaInmueble1.setUbicacion(ubicacion11);
-		caracteristicaInmuebleService.saveOrUpdate(caracteristicaInmueble1);
-				
-				
-		//preferencia cliente
-				
-//		PreferenciaCliente preferenciaCliente = new PreferenciaCliente();
-//		preferenciaCliente.setCliente(cliente);
-//		preferenciaCliente.setEstatus(0);
-//		preferenciaCliente.setFecha_creacion(DateUtil.getCurrentDate());
-//		preferenciaCliente.setFecha_modificacion(cal.getTime());
-//		preferenciaCliente.setCategoria(categoria);
-//		preferenciaCliente.setTipoServicio(tipoServicio);
-//		preferenciaCliente.setTipoCaracteristica(tipocaracteristica);;
-//		preferenciaClienteService.saveOrUpdate(preferenciaCliente);
-//				
-				
-		//detalle servicio inmueble
-				
-		DetalleServicioInmueble detalleServicioInmueble1 = new DetalleServicioInmueble();
-		detalleServicioInmueble1.setEstatus(0);
-		detalleServicioInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
-		detalleServicioInmueble1.setFecha_modificacion(cal.getTime());
-		detalleServicioInmueble1.setServicio(servicio);
-		detalleServicioInmueble1.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble1);
-		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble1);
-				
-		//condicion diagnostico
-				
-		CondicionDiagnostico condicionDiagnostico1 = new CondicionDiagnostico();
-		condicionDiagnostico1.setCaracteristicaInmueble(caracteristicaInmueble1);
-		condicionDiagnostico1.setCondicionInmueble(condicionInmueble);
-				
-		//condicionDiagnostico.setDetalleDiagnosticoVisitas(detalleDiagnosticoVisitas);
-		condicionDiagnostico1.setDiagnosticoVisita(diagnosticoVisita);
-		condicionDiagnostico1.setEstatus(0);
-		condicionDiagnostico1.setFecha_creacion(DateUtil.getCurrentDate());
-		condicionDiagnostico1.setFecha_modificacion(cal.getTime());
-		condicionDiagnosticoService.saveOrUpdate(condicionDiagnostico1);
-				
-		// detalle diagnostico visita
-//				
-//		DetalleDiagnosticoVisita detalleDiagnosticoVisita = new DetalleDiagnosticoVisita();
-//		detalleDiagnosticoVisita.setArea(12.2);
-//		detalleDiagnosticoVisita.setCondicionDiagnostico(condicionDiagnostico1);
-//		//detalleDiagnosticoVisita.setDetallePresupuestos(0);
-//		detalleDiagnosticoVisita.setEstatus(0);
-//		detalleDiagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
-//		detalleDiagnosticoVisita.setFecha_modificacion(cal.getTime());
-//		detalleDiagnosticoVisitaService.saveOrUpdate(detalleDiagnosticoVisita);
-				
-		//detalle presupuesto
-				
-//		DetallePresupuesto detallePresupuesto = new DetallePresupuesto();
-//		detallePresupuesto.setArea(12.6);
-//		detallePresupuesto.setCosto(1000.00);
-//		detallePresupuesto.setDetalleDiagnosticoVisita(detalleDiagnosticoVisita);
-//		detallePresupuesto.setEstatus(0);
-//		detallePresupuesto.setFecha_creacion(DateUtil.getCurrentDate());
-//		detallePresupuesto.setFecha_modificacion(cal.getTime());
-//		detallePresupuesto.setPresupuesto(presupuesto);
-//		detallePresupuesto.setSolicitudServicio(solicitudServicio1);
-//		detallePresupuestoService.saveOrUpdate(detallePresupuesto);
-		
-		Tarea tarea1 = new Tarea();
-		tarea1.setDescripcion("Limpiar pisos");
-		tarea1.setEstatus(0);
-		tarea1.setFecha_creacion( DateUtil.getCurrentDate() );
-		tareaService.saveOrUpdate(tarea1);
-		
-
-		//Tipo Caracteristica
-		TipoCaracteristica tipoCaracteristica21 = new TipoCaracteristica();
-		tipoCaracteristica21.setDescripcion("techo de platabanda");
-		tipoCaracteristica21.setEstatus(0);
-		tipoCaracteristica21.setFecha_creacion( DateUtil.getCurrentDate() );
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica21);
-		
-		TipoCaracteristica tipoCaracteristica111 = new TipoCaracteristica();
-		tipoCaracteristica111.setDescripcion("Piso de madera");
-		tipoCaracteristica111.setEstatus(0);
-		tipoCaracteristica111.setFecha_creacion( DateUtil.getCurrentDate() );
-		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica111);
-		
-		//Tipo Caracteristica Inmueble
-		TipoCaracteristicaInmueble tipoCaracteristicaInmueble31 = new TipoCaracteristicaInmueble();
-		tipoCaracteristicaInmueble31.setTipoCaracteristica(tipoCaracteristica111);
-		tipoCaracteristicaInmueble31.setTipoInmueble(tipoInmueble);
-		tipoCaracteristicaInmueble31.setEstatus(0);
-		tipoCaracteristicaInmueble31.setFecha_creacion( DateUtil.getCurrentDate() );
-		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble31);
-		
-		TipoCaracteristicaInmueble tipoCaracteristicaInmueble13 = new TipoCaracteristicaInmueble();
-		tipoCaracteristicaInmueble13.setTipoCaracteristica(tipoCaracteristica11);
-		tipoCaracteristicaInmueble13.setTipoInmueble(tipoInmueble);
-		tipoCaracteristicaInmueble13.setEstatus(0);
-		tipoCaracteristicaInmueble13.setFecha_creacion( DateUtil.getCurrentDate() );
-		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble13);
-		
-		// Preferencia Cliente
-//		PreferenciaCliente preferenciaCliente1 = new PreferenciaCliente();
-//		preferenciaCliente1.setTipoCaracteristica(tipoCaracteristica);
-//		preferenciaCliente1.setCliente(cliente);
-//		preferenciaCliente1.setCategoria(categoria);
-//		preferenciaCliente1.setTipoServicio(tipoServicio);
-//		preferenciaCliente1.setEstatus(0);
-//		preferenciaCliente1.setFecha_creacion( DateUtil.getCurrentDate() );
-//		preferenciaClienteService.saveOrUpdate(preferenciaCliente1);
+//
+///*
+//		 * ******************************************
+//		 *          Aqui trabaja Mahola             *
+//		 * ******************************************
+//		 */
+//		
+//		//ASUNTO  COMENTARIO
+//		AsuntoComentario asuntoComentario1 = new AsuntoComentario();
+//		//asuntoComentario.setBuzonSugerencias(buzonSugerencias);;// PREGUNTAR A CHEMI
+//		//asuntoComentario.setComentarioExternos(comentarioExternos);//  PREGUNTAR A CHEMI
+//		asuntoComentario1.setDescripcion("descripcion del comentario externo");
+//		asuntoComentario1.setEstatus(0);
+//		asuntoComentario1.setFecha_creacion(DateUtil.getCurrentDate());
+//		asuntoComentario1.setFecha_modificacion(cal.getTime());
+//		asuntoComentarioService.saveOrUpdate(asuntoComentario1);
+//		
+//		// BUZON DE SUGERENCIA 
+//		
+//		BuzonSugerencia buzonSugerencia = new BuzonSugerencia();
+//		buzonSugerencia.setAsuntoComentario(asuntoComentario1);
+//		buzonSugerencia.setAsunto("Mal trato del personal");
+//		buzonSugerencia.setDescripcion("No me gusta el personal que mandaron");
+//		buzonSugerencia.setEstatus(0);
+//		buzonSugerencia.setFecha_creacion(DateUtil.getCurrentDate());
+//		buzonSugerencia.setFecha_modificacion(cal.getTime());
+//		buzonSugerencia.setPersona(cliente);
+//		buzonSugerenciaService.saveOrUpdate(buzonSugerencia);		
 //
 //		
-//		PreferenciaCliente preferenciaCliente2 = new PreferenciaCliente();
-//		preferenciaCliente2.setEstatus(0);
-//		preferenciaCliente2.setFecha_creacion( DateUtil.getCurrentDate() );
-//		preferenciaCliente2.setCategoria(categoria2);
-//		preferenciaCliente2.setCliente(cliente2);
-//		preferenciaCliente2.setTipoCaracteristica(tipoCaracteristica111);
-//		preferenciaCliente2.setTipoServicio(tipoServicio2);
-//		preferenciaClienteService.saveOrUpdate(preferenciaCliente2);
-		
-		//Solicitud Servicio
-		SolicitudServicio solserv = new SolicitudServicio();
-		solserv.setServicio(servicio6);
-		solserv.setSolicitud(solicitud);
-		solserv.setEstatus(0);
-		solserv.setFecha_creacion(DateUtil.getCurrentDate());
-		solicitudServicioService.saveOrUpdate(solserv);
-		
-		//Servicio Tarea
-		ServicioTarea servtar = new ServicioTarea();
-		servtar.setDescripcion("Una cosa ahi");
-		servtar.setServicio(servicio6);
-		servtar.setTarea(tarea1);
-		servicioTareaService.saveOrUpdate(servtar);
-		
-//		//Detalle orden de servicio
-//		DetalleOrdenServicio detOrdenServ1 = new DetalleOrdenServicio();
-//		detOrdenServ1.setOrdenServicio(ordenServicio);
-//		detOrdenServ1.setTrabajador(trabajador3);
-//		detOrdenServ1.setServicioTarea(servtar);
-//		detOrdenServ1.setSolicitudServicio(solserv);
-//		detalleOrdenServicioService.saveOrUpdate(detOrdenServ1);
+//		//ASUNTO  COMENTARIO
+//		AsuntoComentario asuntoComentario4 = new AsuntoComentario();
+//		asuntoComentario4.setDescripcion("descripcion del comentario externo");
+//		asuntoComentario4.setEstatus(0);
+//		asuntoComentario4.setFecha_creacion(DateUtil.getCurrentDate());
+//		asuntoComentario4.setFecha_modificacion(cal.getTime());
+//		asuntoComentarioService.saveOrUpdate(asuntoComentario4);
+//
+//		// CALIFICAR SERVICIO
 //		
-		//TipoDiagnosticoVisita
-		TipoDiagnosticoVisita tdvta1 = new TipoDiagnosticoVisita();
-		tdvta1.setDescripcion("Diagnostico");
-		tipoDiagnosticoVisitaService.saveOrUpdate(tdvta1);
-		
-		//DiagnosticoVisita
-		DiagnosticoVisita diagv1 = new DiagnosticoVisita();
-		diagv1.setDescripcion("Diagnostico Interesante");
-		diagv1.setTipoDiagnosticoVisita(tdvta1);
-		diagnosticoVisitaService.saveOrUpdate(diagv1);
-		
+//		CalificarServicio calificarServicio = new CalificarServicio();
+//		calificarServicio.setDescripcion("Excelente");
+//		calificarServicio.setEstatus(0);
+//		calificarServicio.setFecha_creacion(DateUtil.getCurrentDate());
+//		calificarServicio.setFecha_modificacion(cal.getTime());
+//		calificarServicio.setServicio(servicio2);
+//		calificarServicio.setValor(5);
+//		calificarServicioService.saveOrUpdate(calificarServicio);
+//		
+//		// Tipo Caracteristica
+//		TipoCaracteristica tipoCaracteristica1 = new TipoCaracteristica();
+//		tipoCaracteristica1.setDescripcion("PenHouse");
+//		tipoCaracteristica1.setEstatus(0);
+//		tipoCaracteristica1.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoCaracteristica1.setFecha_modificacion(cal.getTime());
+//		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica1);
+//		
+//		TipoCaracteristica tipoCaracteristica2 = new TipoCaracteristica();
+//		tipoCaracteristica2.setDescripcion("Cabaña");
+//		tipoCaracteristica2.setEstatus(0);
+//		tipoCaracteristica2.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoCaracteristica2.setFecha_modificacion(cal.getTime());
+//		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica2);
+//		
+//		// caracteristica
+//		
+//		Caracteristica caracteristica1 = new Caracteristica();
+//		caracteristica1.setDescripcion("piso");
+//		caracteristica1.setEstatus(0);
+//		caracteristica1.setFecha_creacion(DateUtil.getCurrentDate());
+//		caracteristica1.setFecha_modificacion(cal.getTime());
+////		caracteristica.setPadre_descripcion("padre descripcion");
+////		caracteristica.setTipoCaracteristica(tipoCaracteristica1);
+//		caracteristicaService.saveOrUpdate(caracteristica1);
+//		
+//		// Ubicacion
+//		Ubicacion ubicacion2 = new Ubicacion();
+//		ubicacion2.setDescripcion("Cocina");
+//		ubicacion2.setEstatus(0);
+//		ubicacion2.setFecha_creacion(DateUtil.getCurrentDate());
+//		ubicacion2.setFecha_modificacion(cal.getTime());
+//		ubicacionService.saveOrUpdate(ubicacion2);
+//		
+//		// TipoCaracteristicaServicio
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio.setServicio(servicio);
+//		tipoCaracteristicaServicio.setTipoCaracteristica(tipoCaracteristica1);
+//		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio);
+//		
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio2 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio2.setServicio(servicio);
+//		tipoCaracteristicaServicio2.setTipoCaracteristica(tipoCaracteristica2);
+//		
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio3 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio3.setServicio(servicio2);
+//		tipoCaracteristicaServicio3.setTipoCaracteristica(tipoCaracteristica1);
+//		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio3);
+//		
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio4 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio4.setServicio(servicio3);
+//		tipoCaracteristicaServicio4.setTipoCaracteristica(tipoCaracteristica2);
+//		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio4);
+//		
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio5 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio5.setServicio(servicio4);
+//		tipoCaracteristicaServicio5.setTipoCaracteristica(tipoCaracteristica1);
+//		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio5);
+//		
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio6 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio6.setServicio(servicio3);
+//		tipoCaracteristicaServicio6.setTipoCaracteristica(tipoCaracteristica1);
+//		tipoCaracteristicaServicioService.saveOrUpdate(tipoCaracteristicaServicio6);
+//		
+//		//caracteristicaInmueble
+//		
+//		CaracteristicaInmueble caracteristicaInmueble = new CaracteristicaInmueble();
+//		caracteristicaInmueble.setCaracteristica(caracteristica1);
+//		caracteristicaInmueble.setEstatus(0);
+//		caracteristicaInmueble.setFecha_creacion(DateUtil.getCurrentDate());
+//		caracteristicaInmueble.setFecha_modificacion(cal.getTime());
+//		caracteristicaInmueble.setInmueble(inmueble);
+//		caracteristicaInmueble.setUbicacion(ubicacion2);
+//		caracteristicaInmuebleService.saveOrUpdate(caracteristicaInmueble);
+//		
+//		// cargo tipo servicio
+//		CargoTipoServicio cargoTipoServicio = new CargoTipoServicio();
+//		cargoTipoServicio.setCargo(cargo);
+//		cargoTipoServicio.setEstatus(0);
+//		cargoTipoServicio.setFecha_creacion(DateUtil.getCurrentDate());
+//		cargoTipoServicio.setFecha_modificacion(cal.getTime());
+//		cargoTipoServicio.setTipoServicio(tipoServicio3);
+//		cargoTipoServicioService.saveOrUpdate(cargoTipoServicio);
+//		
+//		//cliente profesion
+//		
+//		ClienteProfesion clienteProfesion = new ClienteProfesion();
+//		clienteProfesion.setCliente(cliente2);
+//		clienteProfesion.setEstatus(0);
+//		clienteProfesion.setFecha_creacion(DateUtil.getCurrentDate());
+//		clienteProfesion.setProfesion(profesion);
+//		clienteProfesion.setFecha_modificacion(cal.getTime());
+//		clienteProfesion.setProfesionStr("ingeniero");
+//		clienteProfesionService.saveOrUpdate(clienteProfesion);
+//				
+//		//comentario externo
+//		
+//		ComentarioExterno comentarioExterno = new ComentarioExterno();
+//		comentarioExterno.setAsuntoComentario(asuntoComentario1);
+//		comentarioExterno.setCorreoEmisor("mhlyrda@gmail.com");
+//		comentarioExterno.setDescripcion("descripcion del comentario");
+//		comentarioExterno.setEstatus(0);
+//		comentarioExterno.setFecha_creacion(DateUtil.getCurrentDate());
+//		comentarioExterno.setFecha_modificacion(cal.getTime());
+//		comentarioExternoService.saveOrUpdate(comentarioExterno);
+//		
+//		// condicion
+//		Condicion condicion1 = new Condicion();
+//		condicion1.setDescripcion("Buena");
+//		condicion1.setEstatus(0);
+//		condicion1.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicion1.setFecha_modificacion(cal.getTime());
+//		condicionService.saveOrUpdate(condicion1);
+//		
+//		// condicionInmueble
+//		//condicion 
+//		
+//		Condicion condicion11 = new Condicion();
+//		//condicion.setCondicionInmueble(condicionInmueble);
+//		condicion11.setDescripcion("condicion del inmueble");
+//		condicion11.setEstatus(0);
+//		condicion11.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicion11.setFecha_modificacion(cal.getTime());
+//		condicionService.saveOrUpdate(condicion11);
+//		
+//		// condicion inmueble
+//		CondicionInmueble condicionInmueble = new CondicionInmueble();
+//		condicionInmueble.setDescripcion("Buena");
+//		condicionInmueble.setEstatus(0);
+//		condicionInmueble.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicionInmueble.setFecha_modificacion(cal.getTime());
+//		condicionInmueble.setCondicion(condicion11);
+//		condicionInmuebleService.saveOrUpdate(condicionInmueble);
+//		
+//		// tipoRespuesta
+//		
+//		// opcion
+//		Opcion opcion = new Opcion();
+//		opcion.setDescripcion("descripcion de la opcion");
+//		opcion.setEstatus(0);
+//		opcion.setFecha_creacion(DateUtil.getCurrentDate());
+//		opcion.setFecha_modificacion(cal.getTime());
+//		//opcion.setOpcionClientes(opcionClientes);
+//		//opcion.setOpcionPreguntas(opcionPreguntas);
+//		opcionService.saveOrUpdate(opcion);
+//		
+//		//opcion clientes
+//		OpcionCliente opcionCliente = new OpcionCliente();
+//		opcionCliente.setCliente(cliente);
+//		opcionCliente.setEstatus(0);
+//		opcionCliente.setFecha_creacion(DateUtil.getCurrentDate());
+//		opcionCliente.setFecha_modificacion(cal.getTime());
+//		opcionCliente.setOpcion(opcion);
+//		
+//		
+//		
+//		
+//		
+//		//pregunta
+//		
+//		Pregunta pregunta = new Pregunta();
+//		pregunta.setDescripcion("descripcion Pregunta");
+//		pregunta.setEstatus(0);
+//		pregunta.setFecha_creacion(DateUtil.getCurrentDate());
+//		pregunta.setFecha_modificacion(cal.getTime());
+//		//pregunta.setOpcionPreguntas(opcionPreguntas);
+//		preguntaService.saveOrUpdate(pregunta);
+//		
+//		// red social
+//		
+//		RedSocial redSocial = new RedSocial();
+//		redSocial.setDescripcion("facebook");
+//		redSocial.setEmpresa(empresa);
+//		redSocial.setEstatus(0);
+//		redSocial.setFecha_creacion(DateUtil.getCurrentDate());
+//		redSocial.setFecha_modificacion(cal.getTime());
+//		redSocialService.saveOrUpdate(redSocial);
+//	
+//		// rol funcion
+//		
+//		RolFuncion rolFuncion = new RolFuncion();
+//		rolFuncion.setEstatus(0);
+//		rolFuncion.setFecha_creacion(DateUtil.getCurrentDate());
+//		rolFuncion.setRol(rol);
+//		///rolFuncion.setMenu(menu);
+//		rolFuncionesService.saveOrUpdate(rolFuncion);
+//		
+//		//solicitud eventualdad
+//		
+//		SolicitudEventualidad solicitudEventualidad = new SolicitudEventualidad();
+//		solicitudEventualidad.setEstatus(0);
+//		solicitudEventualidad.setEventualidad(eventualidad);
+//		solicitudEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
+//		solicitudEventualidad.setFecha_modificacion(cal.getTime());
+//		solicitudEventualidad.setSolicitud(solicitud);
+//		solicitudEventualidadService.saveOrUpdate(solicitudEventualidad);
+//		
+//		// solicitud servicio
+//		
+//		SolicitudServicio solicitudServicio1 = new SolicitudServicio();
+//		//solicitudServicio.setDetalleOrdenServicios(detalleOrdenServicios);
+//		solicitudServicio1.setEstatus(0);
+//		solicitudServicio1.setFecha_creacion(DateUtil.getCurrentDate());
+//		solicitudServicio1.setFecha_modificacion(cal.getTime());
+//		solicitudServicio1.setServicio(servicio2);
+//		solicitudServicio1.setSolicitud(solicitud);
+//		solicitudServicioService.saveOrUpdate(solicitudServicio1);
+//
+//		
+//		// tarea
+//		Tarea tarea = new Tarea();
+//		tarea.setDescripcion("limpiar piso");
+//		tarea.setEstatus(0);
+//		tarea.setFecha_creacion(DateUtil.getCurrentDate());
+//		tarea.setFecha_modificacion(cal.getTime());
+//		tareaService.saveOrUpdate(tarea);
+//		
+//		// servicio tarea
+//		
+//		ServicioTarea servicioTarea = new ServicioTarea();
+//		servicioTarea.setDescripcion("descripcion de sevicio tarea");
+//		servicioTarea.setEstatus(0);
+//		servicioTarea.setFecha_creacion(DateUtil.getCurrentDate());
+//		servicioTarea.setFecha_modificacion(cal.getTime());
+//		servicioTarea.setServicio(servicio2);
+//		servicioTarea.setTarea(tarea);
+//		servicioTareaService.saveOrUpdate(servicioTarea);
+//		
+//		// tipo Catactristica
+//		
+//		TipoCaracteristica tipoCaracteristica11 = new TipoCaracteristica();
+//		tipoCaracteristica11.setDescripcion("piso");
+//		tipoCaracteristica11.setEstatus(0);
+//		tipoCaracteristica11.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoCaracteristica11.setFecha_modificacion(cal.getTime());
+//		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica11);
+//		
+//		//tipoCaracteristica inmueble
+//		TipoCaracteristicaInmueble tipoCaracteristicaInmueble1 = new TipoCaracteristicaInmueble();
+//		tipoCaracteristicaInmueble1.setEstatus(0);
+//		tipoCaracteristicaInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoCaracteristicaInmueble1.setFecha_modificacion(cal.getTime());
+//		tipoCaracteristicaInmueble1.setTipoCaracteristica(tipoCaracteristica11);
+//		tipoCaracteristicaInmueble1.setTipoInmueble(tipoInmueble);
+//		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble1);
+//		
+//		//tipo caracteristica servicio
+//		TipoCaracteristicaServicio tipoCaracteristicaServicio1 = new TipoCaracteristicaServicio();
+//		tipoCaracteristicaServicio1.setEstatus(0);
+//		tipoCaracteristicaServicio1.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoCaracteristicaServicio1.setFecha_modificacion(cal.getTime());
+//		tipoCaracteristicaServicio1.setServicio(servicio);
+//		tipoCaracteristicaServicio1.setTipoCaracteristica(tipoCaracteristica11);
+//		tipoCaracteristcaServicioService.saveOrUpdate(tipoCaracteristicaServicio1);
+//		
+//		//tipo diagnostico visita
+//		TipoDiagnosticoVisita tipoDiagnosticoVisita = new TipoDiagnosticoVisita();
+//		tipoDiagnosticoVisita.setDescripcion("Reclamo");
+//		tipoDiagnosticoVisita.setEstatus(0);
+//		tipoDiagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoDiagnosticoVisita.setFecha_modificacion(cal.getTime());
+//		tipoDiagnosticoVisitaService.saveOrUpdate(tipoDiagnosticoVisita);
+//		
+//		// tipo motivo
+//		TipoMotivo tipoMotivo = new TipoMotivo();
+//		tipoMotivo.setDescripcion("descripcion del motivo");
+//		tipoMotivo.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoMotivo.setFecha_modificacion(cal.getTime());
+//		tipoMotivoService.saveOrUpdate(tipoMotivo);
+//		
+//		//tipo reclammo
+//		TipoReclamo tipoReclamo = new TipoReclamo();
+//		tipoReclamo.setDescripcion("descripcion del reclamo");
+//		tipoReclamo.setEstatus(0);
+//		tipoReclamo.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoReclamo.setFecha_modificacion(cal.getTime());
+//		tipoReclamoService.saveOrUpdate(tipoReclamo);
+//		
+//		// tipo respuesta
+//		
+//		TipoRespuesta tipoRespuesta = new TipoRespuesta();
+//		tipoRespuesta.setDescripcion("SI");
+//		tipoRespuesta.setEstatus(0);
+//		tipoRespuesta.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoRespuesta.setFecha_modificacion(cal.getTime());
+//		tipoRespuestaService.saveOrUpdate(tipoRespuesta);
+//		
+//		//ubicacion 
+//		Ubicacion ubicacion11 = new Ubicacion();
+//		ubicacion11.setDescripcion("descripcion de la ubicacion");
+//		ubicacion11.setEstatus(0);
+//		ubicacion11.setFecha_creacion(DateUtil.getCurrentDate());
+//		ubicacion11.setFecha_modificacion(cal.getTime());
+//		ubicacionService.saveOrUpdate(ubicacion11);
+//		
+//		
+//		//respuestas
+//		
+//		// respuesta
+//		Respuesta respuesta = new Respuesta();
+//		respuesta.setDescripcion("Buena");
+//		respuesta.setEstatus(0);
+//		respuesta.setFecha_creacion(DateUtil.getCurrentDate());
+//		respuesta.setFecha_modificacion(cal.getTime());
+//		respuesta.setTipoRespuesta(tipoRespuesta);
+//		respuesta.setOrdenServicio(ordenServicio);
+//		
+//		// presupuesto
+//		Presupuesto presupuesto = new Presupuesto();
+//		presupuesto.setDescripcion("Presupuesto");
+//		presupuesto.setEstatus(0);
+//		presupuesto.setFecha_creacion(DateUtil.getCurrentDate());
+//		presupuesto.setFecha_modificacion(cal.getTime());
+//		presupuesto.setMontoTotal(200.00);
+//		presupuesto.setRespuesta(respuesta);	
+//		presupuestoService.saveOrUpdate(presupuesto);
+//		
+//		//tipoDiagnosticoVisita
+//		TipoDiagnosticoVisita tipoDiagnosticoVisita1 = new TipoDiagnosticoVisita();
+//		tipoDiagnosticoVisita1.setDescripcion("Garantia");
+//		tipoDiagnosticoVisita1.setEstatus(0);
+//		tipoDiagnosticoVisita1.setFecha_creacion(DateUtil.getCurrentDate());
+//		tipoDiagnosticoVisita1.setFecha_modificacion(cal.getTime());
+//		tipoDiagnosticoVisitaService.saveOrUpdate(tipoDiagnosticoVisita1);
+//		
+//		// DiagnosticoVisita
+//		DiagnosticoVisita diagnosticoVisitas = new DiagnosticoVisita();
+//		diagnosticoVisitas.setDescripcion("Detalle diagnostico 1");
+//		diagnosticoVisitas.setEstatus(0);
+//		diagnosticoVisitas.setFecha_creacion(DateUtil.getCurrentDate());
+//		diagnosticoVisitas.setFecha_modificacion(cal.getTime());
+//		diagnosticoVisitas.setTipoDiagnosticoVisita(tipoDiagnosticoVisita1);
+//		//diagnosticoVisitas.setPresupuesto(presupuesto);
+//		diagnosticoVisitas.setOrdenServicio(ordenServicio);
+//		diagnosticoVisitaService.saveOrUpdate(diagnosticoVisitas);
+//		
+//		//presupuesto.setDiagnosticoVisita(diagnosticoVisitas);
+//		presupuestoService.saveOrUpdate(presupuesto);
+//		
+//		// diagnostico visita
+//		DiagnosticoVisita diagnosticoVisita = new DiagnosticoVisita();
+//		diagnosticoVisita.setDescripcion("descripcion de la visita");
+//		//diagnosticoVisita.setDetalleDiagnosticos(detalleDiagnosticos);
+//		diagnosticoVisita.setEstatus(0);
+//		diagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
+//		diagnosticoVisita.setFecha_modificacion(cal.getTime());
+//		diagnosticoVisita.setOrdenServicio(ordenServicio);
+//		diagnosticoVisita.setPresupuesto(presupuesto);
+//		//diagnosticoVisita.setRespuesta(respuesta);
+//		diagnosticoVisita.setTipoDiagnosticoVisita(tipoDiagnosticoVisita1);
+//		//diagnosticoVisita.setValoracionOrdenServicio(valoracionOrdenServicio);
+//		//diagnosticoVisita.setVisita(visita);
+//		diagnosticoVisitaService.saveOrUpdate(diagnosticoVisita);		
+//		
+//		respuesta.setDiagnosticoVisita(diagnosticoVisitas);
+//		respuesta.setPresupuesto(presupuesto);
+//		respuestaService.saveOrUpdate(respuesta);
+//
+//		//condicion diagnostico
+//		
+//		CondicionDiagnostico condicionDiagnostico = new CondicionDiagnostico();
+//		condicionDiagnostico.setCaracteristicaInmueble(caracteristicaInmueble);
+//		condicionDiagnostico.setCondicionInmueble(condicionInmueble);
+//		condicionDiagnostico.setDiagnosticoVisita(diagnosticoVisitas);
+//		condicionDiagnostico.setEstatus(0);
+//		condicionDiagnostico.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicionDiagnostico.setFecha_modificacion(cal.getTime());
+//		condicionDiagnosticoService.saveOrUpdate(condicionDiagnostico);
+//		//zona
+//		
+//		Zona zona = new Zona();
+//		zona.setDescripcion("descripcion de la zona");
+//		zona.setEstatus(0);
+//		zona.setFecha_creacion(DateUtil.getCurrentDate());
+//		zona.setFecha_modificacion(cal.getTime());
+//		zona.setSector(sector);
+//		zona.setServicio(servicio);
+//		zonaService.saveOrUpdate(zona);
+//		
+//		// motivo
+//		
+//		Motivo motivo1 = new Motivo();
+//		motivo1.setDescripcion("descripcion del motivo");
+//		motivo1.setEstatus(0);
+//		motivo1.setFecha_creacion(DateUtil.getCurrentDate());
+//		motivo1.setFecha_modificacion(cal.getTime());
+//		//motivo.setMotivoOrdenServicioEventualidads(motivoOrdenServicioEventualidads);
+//		motivo1.setTipoMotivo(tipoMotivo);
+//		motivoService.saveOrUpdate(motivo1);
+//		//motivo presupuesto
+//				
+//		MotivoPresupuesto motivoPresupuesto = new MotivoPresupuesto();
+//		motivoPresupuesto.setEstatus(0);
+//		motivoPresupuesto.setFecha_creacion(DateUtil.getCurrentDate());
+//		motivoPresupuesto.setFecha_modificacion(cal.getTime());
+//		motivoPresupuesto.setMotivo(motivo1);
+//		motivoPresupuesto.setPresupuesto(presupuesto);
+//		motivoPresupuestoService.saveOrUpdate(motivoPresupuesto);
+//				
+//		//solicitud servicio motivo
+//				
+//		SolicitudServicioMotivo solicitudServicioMotivo1 = new SolicitudServicioMotivo();
+//		solicitudServicioMotivo1.setEstatus(0);
+//		solicitudServicioMotivo1.setFecha_creacion(DateUtil.getCurrentDate());
+//		solicitudServicioMotivo1.setFecha_modificacion(cal.getTime());
+//		solicitudServicioMotivo1.setMotivo(motivo1);
+//		solicitudServicioMotivo1.setSolicitudServicio(solicitudServicio1);
+//		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo1);
+//				
+//		//ordenServicio eventualidad
+////				
+////		OrdenServicioEventualidad ordenServicioEventualidad = new OrdenServicioEventualidad();
+////		ordenServicioEventualidad.setDescripcionEstatus("descripcion orden servicio eventualidad");
+////		ordenServicioEventualidad.setEstatus(0);
+////		ordenServicioEventualidad.setEventualidad(eventualidad);
+////		ordenServicioEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
+////		ordenServicioEventualidad.setFecha_modificacion(cal.getTime());
+////		//ordenServicioEventualidad.setMotivoOrdenServicioEventualidads(motivoOrdenServicioEventualidads);
+////		ordenServicioEventualidad.setOrdenServicio(ordenServicio);
+////		ordenServicioEventualidadService.saveOrUpdate(ordenServicioEventualidad);			
+////				
+////		//motivo orden de servicio eventualidad
+//						
+////		MotivoOrdenServicioEventualidad motivoOrdenEventualidad = new MotivoOrdenServicioEventualidad();
+////		motivoOrdenEventualidad.setEstatus(0);
+////		motivoOrdenEventualidad.setFecha_creacion(DateUtil.getCurrentDate());
+////		motivoOrdenEventualidad.setFecha_modificacion(cal.getTime());
+////		motivoOrdenEventualidad.setMotivo(motivo1);
+////		motivoOrdenEventualidad.setOrdenServicioEventualidad(ordenServicioEventualidad);
+////		motivoOrdenServicioEventualidadService.saveOrUpdate(motivoOrdenEventualidad);
+////						
+//			
+//		//motivo reclamo
+//						
+//		MotivoReclamo motivoReclamo = new MotivoReclamo();
+//		motivoReclamo.setEstatus(0);
+//		motivoReclamo.setFecha_creacion(DateUtil.getCurrentDate());
+//		motivoReclamo.setFecha_modificacion(cal.getTime());
+//		motivoReclamo.setMotivo(motivo1);
+//		motivoReclamo.setDescripcion("Queja");
+//		//motivoReclamo.setReclamoOrdenEntregas(reclamoOrdenEntregas);
+//		motivoReclamoService.saveOrUpdate(motivoReclamo);
+//						
+//		//reclamo orden entrega
+//						
+//		ReclamoOrdenEntrega reclamoOrdenEntrega = new ReclamoOrdenEntrega();
+//		reclamoOrdenEntrega.setEstatus(0);
+//		reclamoOrdenEntrega.setFecha_creacion(DateUtil.getCurrentDate());
+//		reclamoOrdenEntrega.setFecha_modificacion(cal.getTime());
+//		reclamoOrdenEntrega.setMotivoReclamo(motivoReclamo);
+//		//reclamoOrdenEntrega.setOrdenEntregas(ordenEntregas);
+//		reclamoOrdenEntrega.setTipoReclamo(tipoReclamo);
+//		reclamoOrdenEntregaService.saveOrUpdate(reclamoOrdenEntrega);
+//						
+//		
+//		// detalle orden servicio
+////				
+////		DetalleOrdenServicio detalleOrdenServicio = new DetalleOrdenServicio();
+////		detalleOrdenServicio.setEstatus(0);
+////		detalleOrdenServicio.setFecha_creacion(DateUtil.getCurrentDate());
+////		detalleOrdenServicio.setFecha_modificacion(cal.getTime());
+////		detalleOrdenServicio.setOrdenServicio(ordenServicio);
+////		detalleOrdenServicio.setServicioTarea(servicioTarea);
+////		detalleOrdenServicio.setSolicitudServicio(solicitudServicio1);
+////		detalleOrdenServicio.setTrabajador(trabajador);
+////		detalleOrdenServicioService.saveOrUpdate(detalleOrdenServicio);
+////				
+//		//opcion pregunta
+//		OpcionPregunta opcionPregunta = new OpcionPregunta();
+//		opcionPregunta.setDescripcion("esta de acuerdo con el precio del servicio");
+//		opcionPregunta.setEstatus(0);
+//		opcionPregunta.setFecha_creacion(DateUtil.getCurrentDate());
+//		opcionPregunta.setFecha_modificacion(cal.getTime());
+//		opcionPregunta.setOpcion(opcion);
+//		opcionPregunta.setPregunta(pregunta);
+//		opcionPreguntaService.saveOrUpdate(opcionPregunta);
+//	
+//				
+//				
+//		//************** la cagada **************			
+//		//valoracion orden servicio
+//				
+//		ValoracionOrdenServicio valoracionOrdenServico = new ValoracionOrdenServicio();
+//		valoracionOrdenServico.setDiagnosticoVisita(diagnosticoVisita);
+//		valoracionOrdenServico.setEstatus(0);
+//		valoracionOrdenServico.setFecha_creacion(DateUtil.getCurrentDate());
+//		valoracionOrdenServico.setFecha_modificacion(cal.getTime());
+//		//valoracionOrdenServico.setOrdenEntrega(ordenEntrega);
+//		valoracionOrdenServico.setOrdenServicio(ordenServicio);
+//		valoracionOrdenServicioService.saveOrUpdate(valoracionOrdenServico);
+//				
+//		//orden de entrega
+//				
+//		OrdenEntrega ordenEntrega = new OrdenEntrega();
+//		//ordenEntrega.setCalificarServicios(calificarServicios)
+//		ordenEntrega.setDescripcion("descripcion de la orden de entrega");
+//		ordenEntrega.setEstatus(0);
+//		ordenEntrega.setFecha_creacion(DateUtil.getCurrentDate());
+//		ordenEntrega.setFecha_modificacion(cal.getTime());
+//		//ordenEntrega.setValoracionOrdenServicio(valoracionOrdenServico);
+//		ordenEntregaService.saveOrUpdate(ordenEntrega);
+//				
+//				
+//				
+//		// CALIFICAR SERVICIO
+//				
+//		CalificarServicio calificarServicio1 = new CalificarServicio();
+//		calificarServicio1.setDescripcion("Excelente");
+//		calificarServicio1.setEstatus(0);
+//		calificarServicio1.setFecha_creacion(DateUtil.getCurrentDate());
+//		calificarServicio1.setFecha_modificacion(cal.getTime());
+//		calificarServicio1.setOrdenEntrega(ordenEntrega);
+//		calificarServicio1.setServicio(servicio2);
+//		calificarServicio1.setValor(5);
+//		calificarServicioService.saveOrUpdate(calificarServicio1);
+//				
+//		// caracteristica
+//				
+//		Caracteristica caracteristica11 = new Caracteristica();
+//		//caracteristica.setCaracteristicaInmuebles(caracteristicaInmuebles);
+//		caracteristica11.setDescripcion("piso");
+//		caracteristica11.setEstatus(0);
+//		caracteristica11.setFecha_creacion(DateUtil.getCurrentDate());
+//		caracteristica11.setFecha_modificacion(cal.getTime());
+//		caracteristica11.setPadre_descripcion("padre descripcion");
+//		//caracteristica.setPadre_id(padre_id);
+//		caracteristica11.setTipoCaracteristica(tipoCaracteristica11);
+//		caracteristicaService.saveOrUpdate(caracteristica11);
+//				
+//		//caracteristicaInmueble
+//				
+//		CaracteristicaInmueble caracteristicaInmueble1 = new CaracteristicaInmueble();
+//		caracteristicaInmueble1.setCaracteristica(caracteristica11);
+//		//caracteristicaInmueble.setDetalleDiagnostico(detalleDiagnostico);
+//		caracteristicaInmueble1.setEstatus(0);
+//		caracteristicaInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
+//		caracteristicaInmueble1.setFecha_modificacion(cal.getTime());
+//		caracteristicaInmueble1.setInmueble(inmueble);
+//		caracteristicaInmueble1.setUbicacion(ubicacion11);
+//		caracteristicaInmuebleService.saveOrUpdate(caracteristicaInmueble1);
+//				
+//				
+//		//preferencia cliente
+//				
+////		PreferenciaCliente preferenciaCliente = new PreferenciaCliente();
+////		preferenciaCliente.setCliente(cliente);
+////		preferenciaCliente.setEstatus(0);
+////		preferenciaCliente.setFecha_creacion(DateUtil.getCurrentDate());
+////		preferenciaCliente.setFecha_modificacion(cal.getTime());
+////		preferenciaCliente.setCategoria(categoria);
+////		preferenciaCliente.setTipoServicio(tipoServicio);
+////		preferenciaCliente.setTipoCaracteristica(tipocaracteristica);;
+////		preferenciaClienteService.saveOrUpdate(preferenciaCliente);
+////				
+//				
+//		//detalle servicio inmueble
+//				
+//		DetalleServicioInmueble detalleServicioInmueble1 = new DetalleServicioInmueble();
+//		detalleServicioInmueble1.setEstatus(0);
+//		detalleServicioInmueble1.setFecha_creacion(DateUtil.getCurrentDate());
+//		detalleServicioInmueble1.setFecha_modificacion(cal.getTime());
+//		detalleServicioInmueble1.setServicio(servicio);
+//		detalleServicioInmueble1.setTipoCaracteristicaInmueble(tipoCaracteristicaInmueble1);
+//		detalleServicioInmuebleService.saveOrUpdate(detalleServicioInmueble1);
+//				
+//		//condicion diagnostico
+//				
+//		CondicionDiagnostico condicionDiagnostico1 = new CondicionDiagnostico();
+//		condicionDiagnostico1.setCaracteristicaInmueble(caracteristicaInmueble1);
+//		condicionDiagnostico1.setCondicionInmueble(condicionInmueble);
+//				
+//		//condicionDiagnostico.setDetalleDiagnosticoVisitas(detalleDiagnosticoVisitas);
+//		condicionDiagnostico1.setDiagnosticoVisita(diagnosticoVisita);
+//		condicionDiagnostico1.setEstatus(0);
+//		condicionDiagnostico1.setFecha_creacion(DateUtil.getCurrentDate());
+//		condicionDiagnostico1.setFecha_modificacion(cal.getTime());
+//		condicionDiagnosticoService.saveOrUpdate(condicionDiagnostico1);
+//				
+//		// detalle diagnostico visita
+////				
+////		DetalleDiagnosticoVisita detalleDiagnosticoVisita = new DetalleDiagnosticoVisita();
+////		detalleDiagnosticoVisita.setArea(12.2);
+////		detalleDiagnosticoVisita.setCondicionDiagnostico(condicionDiagnostico1);
+////		//detalleDiagnosticoVisita.setDetallePresupuestos(0);
+////		detalleDiagnosticoVisita.setEstatus(0);
+////		detalleDiagnosticoVisita.setFecha_creacion(DateUtil.getCurrentDate());
+////		detalleDiagnosticoVisita.setFecha_modificacion(cal.getTime());
+////		detalleDiagnosticoVisitaService.saveOrUpdate(detalleDiagnosticoVisita);
+//				
+//		//detalle presupuesto
+//				
+////		DetallePresupuesto detallePresupuesto = new DetallePresupuesto();
+////		detallePresupuesto.setArea(12.6);
+////		detallePresupuesto.setCosto(1000.00);
+////		detallePresupuesto.setDetalleDiagnosticoVisita(detalleDiagnosticoVisita);
+////		detallePresupuesto.setEstatus(0);
+////		detallePresupuesto.setFecha_creacion(DateUtil.getCurrentDate());
+////		detallePresupuesto.setFecha_modificacion(cal.getTime());
+////		detallePresupuesto.setPresupuesto(presupuesto);
+////		detallePresupuesto.setSolicitudServicio(solicitudServicio1);
+////		detallePresupuestoService.saveOrUpdate(detallePresupuesto);
+//		
+//		Tarea tarea1 = new Tarea();
+//		tarea1.setDescripcion("Limpiar pisos");
+//		tarea1.setEstatus(0);
+//		tarea1.setFecha_creacion( DateUtil.getCurrentDate() );
+//		tareaService.saveOrUpdate(tarea1);
+//		
+//
+//		//Tipo Caracteristica
+//		TipoCaracteristica tipoCaracteristica21 = new TipoCaracteristica();
+//		tipoCaracteristica21.setDescripcion("techo de platabanda");
+//		tipoCaracteristica21.setEstatus(0);
+//		tipoCaracteristica21.setFecha_creacion( DateUtil.getCurrentDate() );
+//		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica21);
+//		
+//		TipoCaracteristica tipoCaracteristica111 = new TipoCaracteristica();
+//		tipoCaracteristica111.setDescripcion("Piso de madera");
+//		tipoCaracteristica111.setEstatus(0);
+//		tipoCaracteristica111.setFecha_creacion( DateUtil.getCurrentDate() );
+//		tipoCaracteristicaService.saveOrUpdate(tipoCaracteristica111);
+//		
+//		//Tipo Caracteristica Inmueble
+//		TipoCaracteristicaInmueble tipoCaracteristicaInmueble31 = new TipoCaracteristicaInmueble();
+//		tipoCaracteristicaInmueble31.setTipoCaracteristica(tipoCaracteristica111);
+//		tipoCaracteristicaInmueble31.setTipoInmueble(tipoInmueble);
+//		tipoCaracteristicaInmueble31.setEstatus(0);
+//		tipoCaracteristicaInmueble31.setFecha_creacion( DateUtil.getCurrentDate() );
+//		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble31);
+//		
+//		TipoCaracteristicaInmueble tipoCaracteristicaInmueble13 = new TipoCaracteristicaInmueble();
+//		tipoCaracteristicaInmueble13.setTipoCaracteristica(tipoCaracteristica11);
+//		tipoCaracteristicaInmueble13.setTipoInmueble(tipoInmueble);
+//		tipoCaracteristicaInmueble13.setEstatus(0);
+//		tipoCaracteristicaInmueble13.setFecha_creacion( DateUtil.getCurrentDate() );
+//		tipoCaracteristicaInmuebleService.saveOrUpdate(tipoCaracteristicaInmueble13);
+//		
+//		// Preferencia Cliente
+////		PreferenciaCliente preferenciaCliente1 = new PreferenciaCliente();
+////		preferenciaCliente1.setTipoCaracteristica(tipoCaracteristica);
+////		preferenciaCliente1.setCliente(cliente);
+////		preferenciaCliente1.setCategoria(categoria);
+////		preferenciaCliente1.setTipoServicio(tipoServicio);
+////		preferenciaCliente1.setEstatus(0);
+////		preferenciaCliente1.setFecha_creacion( DateUtil.getCurrentDate() );
+////		preferenciaClienteService.saveOrUpdate(preferenciaCliente1);
+////
+////		
+////		PreferenciaCliente preferenciaCliente2 = new PreferenciaCliente();
+////		preferenciaCliente2.setEstatus(0);
+////		preferenciaCliente2.setFecha_creacion( DateUtil.getCurrentDate() );
+////		preferenciaCliente2.setCategoria(categoria2);
+////		preferenciaCliente2.setCliente(cliente2);
+////		preferenciaCliente2.setTipoCaracteristica(tipoCaracteristica111);
+////		preferenciaCliente2.setTipoServicio(tipoServicio2);
+////		preferenciaClienteService.saveOrUpdate(preferenciaCliente2);
+//		
+//		//Solicitud Servicio
+////		SolicitudServicio solserv = new SolicitudServicio();
+////		solserv.setServicio(servicio);
+////		solserv.setSolicitud(solicitud);
+////		solserv.setEstatus(0);
+////		solserv.setFecha_creacion(DateUtil.getCurrentDate());
+////		solicitudServicioService.saveOrUpdate(solserv);
+////		
+////		//Servicio Tarea
+//		ServicioTarea servtar = new ServicioTarea();
+//		servtar.setDescripcion("Una cosa ahi");
+//		servtar.setServicio(servicio4);
+//		servtar.setTarea(tarea1);
+//		servicioTareaService.saveOrUpdate(servtar);
+//		
+////		//Detalle orden de servicio
+////		DetalleOrdenServicio detOrdenServ1 = new DetalleOrdenServicio();
+////		detOrdenServ1.setOrdenServicio(ordenServicio);
+////		detOrdenServ1.setTrabajador(trabajador3);
+////		detOrdenServ1.setServicioTarea(servtar);
+////		detOrdenServ1.setSolicitudServicio(solserv);
+////		detalleOrdenServicioService.saveOrUpdate(detOrdenServ1);
+////		
+//		//TipoDiagnosticoVisita
+//		TipoDiagnosticoVisita tdvta1 = new TipoDiagnosticoVisita();
+//		tdvta1.setDescripcion("Diagnostico");
+//		tipoDiagnosticoVisitaService.saveOrUpdate(tdvta1);
+//		
+//		//DiagnosticoVisita
+//		DiagnosticoVisita diagv1 = new DiagnosticoVisita();
+//		diagv1.setDescripcion("Diagnostico Interesante");
+//		diagv1.setTipoDiagnosticoVisita(tdvta1);
+//		diagnosticoVisitaService.saveOrUpdate(diagv1);
+//		
 	}
 
 }

@@ -49,7 +49,7 @@ public class Persona extends Base {
 	private String telefono;
 	@Column(nullable = false)
 	private String password;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 	private int tipoPersona;
 	// aqui coloco la descripcion del tipoPersona

@@ -36,6 +36,11 @@ public class TipoInmuebleController {
 		return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	}
 
+	@RequestMapping(value="/buscarActivos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> buscarActivos(HttpServletRequest request) {
+		return ResponseDefault.ok(service.getAllActivos(), CLASE, ResponseDefault.PLURAL);
+	}
+	
 	@RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
 		return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);

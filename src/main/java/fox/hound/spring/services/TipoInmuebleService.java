@@ -25,6 +25,12 @@ public class TipoInmuebleService implements ServiceGeneral<TipoInmueble> {
 		 repository.findAll().forEach(lista::add);
 		 return lista;
 	 }
+	 
+	 public List<TipoInmueble> getAllActivos() {
+		 List<TipoInmueble> lista = new ArrayList<>();
+		 repository.findByEstatus(0).forEach(lista::add);
+		 return lista;
+	 }
 
 	 @Override
 	 public TipoInmueble getOne(Long id) {

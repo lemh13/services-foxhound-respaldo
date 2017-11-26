@@ -1,5 +1,6 @@
 package fox.hound.spring.models.combo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,6 +17,9 @@ import fox.hound.spring.models.maestros.Maestro;
 @CustomJsonRootName(plural = "buzonSugerencia", singular = "buzonSugerencia")
 public class BuzonSugerencia extends Maestro {
 
+	@Column(nullable = false)
+    private String asunto;
+	
 	@ManyToOne
 	@JoinColumn(name="asuntoComentario_id")
 	@JsonBackReference(value="asuntoComentario-buzonSugerencias")
@@ -29,9 +33,10 @@ public class BuzonSugerencia extends Maestro {
 	public BuzonSugerencia() {
 		super();
 	}
-	public BuzonSugerencia(Long id, String descripcion, int estatusId, String correoEmisor,
+	public BuzonSugerencia(Long id, String descripcion, int estatusId, String asunto,
 			String asuntoComentarioId, String personaId) {
 		super(id, descripcion, estatusId);
+		this.asunto = asunto;
 		this.asuntoComentario = new AsuntoComentario(asuntoComentarioId);
 		this.persona = new Persona(personaId);
 	}
@@ -50,5 +55,12 @@ public class BuzonSugerencia extends Maestro {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	public String getAsunto() {
+		return asunto;
+	}
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+	
 	
 }

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fox.hound.spring.models.Cliente;
+import fox.hound.spring.models.Persona;
 import fox.hound.spring.repositories.ClienteRepository;
 import fox.hound.spring.utils.DateUtil;
+import fox.hound.spring.utils.EncryptionUtil;
 
 @Service
 public class ClienteService implements ServiceGeneral<Cliente> {
@@ -14,7 +16,8 @@ public class ClienteService implements ServiceGeneral<Cliente> {
 	 @Autowired
 	 private ClienteRepository repository;
 
-	 
+	 @Autowired
+	 private EncryptionUtil encript;
 
 	 @Override
 	 public List<Cliente> getAll() {
@@ -31,8 +34,14 @@ public class ClienteService implements ServiceGeneral<Cliente> {
 	 @Override
 	 public Cliente saveOrUpdate(Cliente clase) {
 		 if (clase.getId() != null) {
-			 Cliente claseAux = getOne( clase.getId() );
+			 Persona claseAux = getOne( clase.getId() );
 			 clase.setFecha_creacion( claseAux.getFecha_creacion() );
+			 
+			 if (!claseAux.getPassword().equals( encript.md5( clase.getPassword() ) )) {
+				 clase.setPassword( encript.md5( clase.getPassword() ) );
+			 }
+		 } else {
+			 clase.setPassword( encript.md5( clase.getPassword() ) );
 		 }
 		 clase.setFecha_modificacion( DateUtil.getCurrentDate() );
 		 
