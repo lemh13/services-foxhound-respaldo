@@ -1227,13 +1227,13 @@ public class DataLoader implements ApplicationRunner {
 //		trabajador5.setFecha_ingreso(DateUtil.getCurrentDate());
 //		trabajadorService.saveOrUpdate(trabajador5);
 //		
-		// TrabajadorVisita
-		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
-		trabajadorVisita.setTrabajador(trabajador);
-		trabajadorVisita.setVisita(visita);
-		trabajadorVisita.setEstatus(0);
-		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
-		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+//		// TrabajadorVisita
+//		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
+//		trabajadorVisita.setTrabajador(trabajador);
+//		trabajadorVisita.setVisita(visita);
+//		trabajadorVisita.setEstatus(0);
+//		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+//		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
 //		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
