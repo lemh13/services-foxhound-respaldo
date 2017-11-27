@@ -608,6 +608,17 @@ public class DataLoader implements ApplicationRunner {
 		inmueble.setFecha_creacion( DateUtil.getCurrentDate() );
 		inmuebleService.saveOrUpdate(inmueble);
 		
+		Inmueble inmueble2 = new Inmueble();
+		inmueble2.setCliente(cliente2);
+		inmueble2.setTipoInmueble(tipoInmueble);
+		inmueble2.setUsoInmueble(usoInmueble);
+		inmueble2.setSector(sector);
+		inmueble2.setDireccion("carrera 13c");
+		inmueble2.setDescripcion("mi casita");
+		inmueble2.setEstatus(0);
+		inmueble2.setFecha_creacion( DateUtil.getCurrentDate() );
+		inmuebleService.saveOrUpdate(inmueble2);
+		
 		
 		//TipoCaracteristica
 		TipoCaracteristica tipocaracteristica = new TipoCaracteristica();
@@ -625,10 +636,24 @@ public class DataLoader implements ApplicationRunner {
 		caracteristica.setTipoCaracteristica(tipocaracteristica);
 		caracteristicaService.saveOrUpdate(caracteristica);
 		
+		Caracteristica caracteristica2 = new Caracteristica();
+		caracteristica2.setEstatus(0);
+		caracteristica2.setFecha_creacion(DateUtil.getCurrentDate());
+		caracteristica2.setDescripcion("Pared de color marron");
+		caracteristica2.setTipoCaracteristica(tipocaracteristica);
+		caracteristicaService.saveOrUpdate(caracteristica2);
+		
+		Caracteristica caracteristica3 = new Caracteristica();
+		caracteristica3.setEstatus(0);
+		caracteristica3.setFecha_creacion(DateUtil.getCurrentDate());
+		caracteristica3.setDescripcion("Pared de piedra");
+		caracteristica3.setTipoCaracteristica(tipocaracteristica);
+		caracteristicaService.saveOrUpdate(caracteristica3);
+		
 		//Ubicacion
 		Ubicacion ubicacion = new Ubicacion();
 		ubicacion.setEstatus(0);
-		ubicacion.setDescripcion("calle 36b");
+		ubicacion.setDescripcion("sala");
 		ubicacion.setFecha_creacion(DateUtil.getCurrentDate());
 		ubicacionService.saveOrUpdate(ubicacion);
 		
@@ -652,6 +677,38 @@ public class DataLoader implements ApplicationRunner {
         ci.setInmueble(inmueble);
         ci.setUbicacion(ubicacion);
         caracteristicainmService.saveOrUpdate(ci);
+        
+		CaracteristicaInmueble ci2 = new CaracteristicaInmueble(); 
+        ci2.setEstatus(0);
+        ci2.setFecha_creacion(DateUtil.getCurrentDate());
+        ci2.setCaracteristica(caracteristica2);
+        ci2.setInmueble(inmueble2);
+        ci2.setUbicacion(ubicacion);
+        caracteristicainmService.saveOrUpdate(ci2);
+        
+		CaracteristicaInmueble ci3 = new CaracteristicaInmueble(); 
+        ci3.setEstatus(0);
+        ci3.setFecha_creacion(DateUtil.getCurrentDate());
+        ci3.setCaracteristica(caracteristica3);
+        ci3.setInmueble(inmueble);
+        ci3.setUbicacion(ubicacion);
+        caracteristicainmService.saveOrUpdate(ci2);
+        
+		CaracteristicaInmueble ci4 = new CaracteristicaInmueble(); 
+        ci4.setEstatus(0);
+        ci4.setFecha_creacion(DateUtil.getCurrentDate());
+        ci4.setCaracteristica(caracteristica);
+        ci4.setInmueble(inmueble2);
+        ci4.setUbicacion(ubicacion);
+        caracteristicainmService.saveOrUpdate(ci4);
+        
+		CaracteristicaInmueble ci5 = new CaracteristicaInmueble(); 
+        ci5.setEstatus(0);
+        ci5.setFecha_creacion(DateUtil.getCurrentDate());
+        ci5.setCaracteristica(caracteristica2);
+        ci5.setInmueble(inmueble2);
+        ci5.setUbicacion(ubicacion);
+        caracteristicainmService.saveOrUpdate(ci5); 
         
 		
         //Condicion
@@ -1060,12 +1117,12 @@ public class DataLoader implements ApplicationRunner {
 		tipoVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoVisitaService.saveOrUpdate(tipoVisita);
 		
-//		// Solicitud
-//		Solicitud solicitud = new Solicitud();
-//		solicitud.setInmueble(inmueble);
-//		solicitud.setEstatus(0);
-//		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
-//		solicitudService.saveOrUpdate(solicitud);
+		// Solicitud
+		Solicitud solicitud = new Solicitud();
+		solicitud.setInmueble(inmueble);
+		solicitud.setEstatus(0);
+		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
+		solicitudService.saveOrUpdate(solicitud);
 //		
 //		Solicitud solicitud1 = new Solicitud();
 //		solicitud1.setInmueble(inmueble);
@@ -1090,22 +1147,22 @@ public class DataLoader implements ApplicationRunner {
 		motivo.setFecha_creacion( DateUtil.getCurrentDate() );
 		motivoService.saveOrUpdate(motivo);		
 		
-//		//SolicitudServicio
-//		SolicitudServicio solicitudServicio= new SolicitudServicio();
-//		solicitudServicio.setEstatus(0);
-//		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
-//		solicitudServicio.setServicio(servicio);
-//		solicitudServicio.setSolicitud(solicitud);
-//		solicitudservicioservice.saveOrUpdate(solicitudServicio);
-//		
-//
-//		//SolicitudServicioMotivo
-//		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
-//		solicitudServicioMotivo.setEstatus(0);
-//		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
-//		solicitudServicioMotivo.setMotivo(motivo);
-//		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
-//		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
+		//SolicitudServicio
+		SolicitudServicio solicitudServicio= new SolicitudServicio();
+		solicitudServicio.setEstatus(0);
+		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
+		solicitudServicio.setServicio(servicio);
+		solicitudServicio.setSolicitud(solicitud);
+		solicitudservicioservice.saveOrUpdate(solicitudServicio);
+		
+
+		//SolicitudServicioMotivo
+		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
+		solicitudServicioMotivo.setEstatus(0);
+		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
+		solicitudServicioMotivo.setMotivo(motivo);
+		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
+		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
 //		
 //		//DetallePresupuesto
 //		
@@ -1118,7 +1175,7 @@ public class DataLoader implements ApplicationRunner {
 //		d.setSolicitudServicio(solicitudServicio);
 //		detallePresupuestoService.saveOrUpdate(d);
 //		
-//		// Visita
+		// Visita
 //		Visita visita = new Visita();
 //		visita.setFechaVisita(DateUtil.getCurrentDate());
 //		visita.setTurno(turno);
@@ -1128,27 +1185,27 @@ public class DataLoader implements ApplicationRunner {
 //		visita.setEstatus(0);
 //		visita.setFecha_creacion( DateUtil.getCurrentDate() );
 //		visitaService.saveOrUpdate(visita);
-//		
-//		
-//		// Trabajador
-//		Trabajador trabajador = new Trabajador();
-//		trabajador.setNombre("Jose Duin");
-//		trabajador.setSexo('M');
-//		trabajador.setTipoPersona(0);
-//		trabajador.setCargo(cargo);
-//		trabajador.setIdentificacion(21526571);
-//		trabajador.setDireccion("Carrera 13b");
-//		trabajador.setSector(sector);
-//		trabajador.setTelefono("04120523025");
-//		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-//		trabajador.setEmail("jose@duin.com");
-//		trabajador.setPassword( "123" );
-//		trabajador.setRol(rol);
-//		trabajador.setEstatus(0);
-//		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
-//		trabajador.setEmpresa(empresa);
-//		trabajador.setFecha_ingreso(DateUtil.getCurrentDate());
-//		trabajadorService.saveOrUpdate(trabajador);
+		
+	
+		// Trabajador
+		Trabajador trabajador = new Trabajador();
+		trabajador.setNombre("Jose Duin");
+		trabajador.setSexo('M');
+		trabajador.setTipoPersona(0);
+		trabajador.setCargo(cargo);
+		trabajador.setIdentificacion(21526571);
+		trabajador.setDireccion("Carrera 13b");
+		trabajador.setSector(sector);
+		trabajador.setTelefono("04120523025");
+		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador.setEmail("jose@duin.com");
+		trabajador.setPassword( "123" );
+		trabajador.setRol(rol);
+		trabajador.setEstatus(0);
+		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
+		trabajador.setEmpresa(empresa);
+		trabajador.setFecha_ingreso(DateUtil.getCurrentDate());
+		trabajadorService.saveOrUpdate(trabajador);
 //		
 //		Trabajador trabajador2 = new Trabajador();
 //		trabajador2.setNombre("Jose Miguel");
@@ -1226,14 +1283,14 @@ public class DataLoader implements ApplicationRunner {
 //		trabajador5.setFecha_ingreso(DateUtil.getCurrentDate());
 //		trabajadorService.saveOrUpdate(trabajador5);
 //		
-//		// TrabajadorVisita
+		// TrabajadorVisita
 //		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
 //		trabajadorVisita.setTrabajador(trabajador);
 //		trabajadorVisita.setVisita(visita);
 //		trabajadorVisita.setEstatus(0);
 //		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 //		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
-//		
+		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
 		asuntoComentario.setDescripcion("Sugerencia");

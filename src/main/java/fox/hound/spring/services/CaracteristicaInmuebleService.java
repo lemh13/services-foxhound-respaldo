@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import fox.hound.spring.models.Inmueble;
+import fox.hound.spring.models.combo.Caracteristica;
 import fox.hound.spring.models.puente.CaracteristicaInmueble;
 import fox.hound.spring.repositories.CaracteristicaInmuebleRepository;
 import fox.hound.spring.utils.DateUtil;
@@ -20,6 +23,13 @@ public class CaracteristicaInmuebleService implements ServiceGeneral<Caracterist
 	 public List<CaracteristicaInmueble> getAll() {
 		 List<CaracteristicaInmueble> lista = new ArrayList<>();
 		 repository.findAll().forEach(lista::add);
+		 return lista;
+	 }
+	 
+	 
+	 public List<CaracteristicaInmueble> getAllByInmuebleId(Long id){
+		 List<CaracteristicaInmueble> lista = new ArrayList<>();
+		 repository.findByInmuebleId(id).forEach(lista::add);
 		 return lista;
 	 }
 

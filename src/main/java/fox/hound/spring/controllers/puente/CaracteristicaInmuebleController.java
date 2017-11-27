@@ -41,6 +41,11 @@ public class CaracteristicaInmuebleController {
 	 public ResponseEntity<?> getAll(HttpServletRequest request) {
 		 return ResponseDefault.ok(service.getAll(), CLASE, ResponseDefault.PLURAL);
 	 }
+	 
+	 @RequestMapping(value="/buscarPorInmueble/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> getAllInmueble(@PathVariable String inmuebleid, HttpServletRequest request){
+		 return ResponseDefault.ok(service.getAllByInmuebleId(Long.valueOf(inmuebleid)), CLASE, ResponseDefault.PLURAL);
+	 }
 
 	 @RequestMapping(value="/buscar/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> getOne(@PathVariable String id, HttpServletRequest request) {
