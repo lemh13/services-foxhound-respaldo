@@ -51,45 +51,45 @@ public class ReclamoOrdenEntregaController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="ordenEntrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> agregar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id,  @PathVariable String id_t,  @PathVariable String id_m, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
-		 OrdenEntrega ordenentrega = ordenentregaService.getOne(Long.valueOf(id));
-		 TipoReclamo tiporeclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
-		 MotivoReclamo motivoreclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
+		 OrdenEntrega ordenEntrega = ordenentregaService.getOne(Long.valueOf(id));
+		 TipoReclamo tipoReclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
+		 MotivoReclamo motivoReclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
 			
-			if (ordenentrega != null && tiporeclamo != null && motivoreclamo !=null) {
-				clase.setOrdenEntrega(ordenentrega);
-				clase.setTipoReclamo(tiporeclamo);
-				clase.setMotivoReclamo(motivoreclamo);
+			if (ordenEntrega != null && tipoReclamo != null && motivoReclamo !=null) {
+				clase.setOrdenEntrega(ordenEntrega);
+				clase.setTipoReclamo(tipoReclamo);
+				clase.setMotivoReclamo(motivoReclamo);
 				
 				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Reclamo Orden Entrega", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else if (ordenentrega == null )
+			} else if (ordenEntrega == null )
 			{
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Orden de Entrega");
-			}else if (tiporeclamo == null ){
+			}else if (tipoReclamo == null ){
 					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Reclamo");
 			}else{
 			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");
 			}
 	 }
 
-	 @RequestMapping(value="ordenentrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(value="ordenEntrega/{id}/tipoReclamo/{id_t}/motivoReclamo/{id_m}/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	 public ResponseEntity<?> modificar(@RequestBody ReclamoOrdenEntrega clase, @PathVariable String id,  @PathVariable String id_t,  @PathVariable String id_m, HttpServletRequest request) {
-		 OrdenEntrega ordenentrega = ordenentregaService.getOne(Long.valueOf(id));
-		 TipoReclamo tiporeclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
-		 MotivoReclamo motivoreclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
+		 OrdenEntrega ordenEntrega = ordenentregaService.getOne(Long.valueOf(id));
+		 TipoReclamo tipoReclamo = tiporeclamoService.getOne(Long.valueOf(id_t));
+		 MotivoReclamo motivoReclamo = motivoreclamoService.getOne(Long.valueOf(id_m));
 			
-			if (ordenentrega != null && tiporeclamo != null && motivoreclamo !=null) {
-				clase.setOrdenEntrega(ordenentrega);
-				clase.setTipoReclamo(tiporeclamo);
-				clase.setMotivoReclamo(motivoreclamo);
+			if (ordenEntrega != null && tipoReclamo != null && motivoReclamo !=null) {
+				clase.setOrdenEntrega(ordenEntrega);
+				clase.setTipoReclamo(tipoReclamo);
+				clase.setMotivoReclamo(motivoReclamo);
 				
 				return ResponseDefault.messageAndObject(MessageUtil.ACTUALIZAR_REGISTRO, "Reclamo Orden Entrega", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
-			} else if (ordenentrega == null )
+			} else if (ordenEntrega == null )
 			{
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Orden de Entrega");
-			}else if (tiporeclamo == null ){
+			}else if (tipoReclamo == null ){
 					return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Tipo de Reclamo");
 			}else{
 			 return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo de Reclamo");

@@ -28,6 +28,7 @@ public class MotivoReclamoController {
 	 @Autowired
 	 private MotivoService motivoService;
 
+
 	 private Class<?> CLASE = MotivoReclamo.class;
 
 	 @RequestMapping(value="/buscarTodos", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -40,18 +41,18 @@ public class MotivoReclamoController {
 		 return ResponseDefault.ok(service.getOne(Long.valueOf(id)), CLASE, ResponseDefault.SINGULAR);
 	 }
 
-	 @RequestMapping(value="/motivo/{motivoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 public ResponseEntity<?> agregar(@PathVariable String motivoid, HttpServletRequest request) {
-		 MotivoReclamo clase = new MotivoReclamo();
+
+	 @RequestMapping(value="motivo/{motivoid}/agregar", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 public ResponseEntity<?> agregar(@RequestBody MotivoReclamo clase,@PathVariable String motivoid, HttpServletRequest request) {
 		 clase.setFecha_creacion( DateUtil.getCurrentDate() );
 		 Motivo motivo = motivoService.getOne(Long.valueOf(motivoid));
 		 
 		 if (motivo != null) {
 				clase.setMotivo(motivo);
-				return ResponseDefault.ok(service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
+				return ResponseDefault.messageAndObject(MessageUtil.GUARDAR_REGISTRO, "Motivo de Reclamo", service.saveOrUpdate(clase), CLASE, ResponseDefault.SINGULAR);
 			} else {
 				return ResponseDefault.message(MessageUtil.ERROR_ASOCIACION, "Motivo Reclamo");
-			}
+				}
 	 }
 
 	 @RequestMapping(value="/modificar", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
