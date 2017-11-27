@@ -1123,6 +1123,7 @@ public class DataLoader implements ApplicationRunner {
 		solicitud.setEstatus(0);
 		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
 		solicitudService.saveOrUpdate(solicitud);
+
 //		
 //		Solicitud solicitud1 = new Solicitud();
 //		solicitud1.setInmueble(inmueble);
@@ -1154,7 +1155,7 @@ public class DataLoader implements ApplicationRunner {
 		solicitudServicio.setServicio(servicio);
 		solicitudServicio.setSolicitud(solicitud);
 		solicitudservicioservice.saveOrUpdate(solicitudServicio);
-		
+
 
 		//SolicitudServicioMotivo
 		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
@@ -1174,7 +1175,8 @@ public class DataLoader implements ApplicationRunner {
 //		d.setPresupuesto(p);
 //		d.setSolicitudServicio(solicitudServicio);
 //		detallePresupuestoService.saveOrUpdate(d);
-//		
+
+
 		// Visita
 //		Visita visita = new Visita();
 //		visita.setFechaVisita(DateUtil.getCurrentDate());
@@ -1284,12 +1286,14 @@ public class DataLoader implements ApplicationRunner {
 //		trabajadorService.saveOrUpdate(trabajador5);
 //		
 		// TrabajadorVisita
+
 //		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
 //		trabajadorVisita.setTrabajador(trabajador);
 //		trabajadorVisita.setVisita(visita);
 //		trabajadorVisita.setEstatus(0);
 //		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 //		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+
 		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
