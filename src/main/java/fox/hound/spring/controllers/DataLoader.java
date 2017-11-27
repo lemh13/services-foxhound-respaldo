@@ -1060,12 +1060,12 @@ public class DataLoader implements ApplicationRunner {
 		tipoVisita.setFecha_creacion( DateUtil.getCurrentDate() );
 		tipoVisitaService.saveOrUpdate(tipoVisita);
 		
-//		// Solicitud
-//		Solicitud solicitud = new Solicitud();
-//		solicitud.setInmueble(inmueble);
-//		solicitud.setEstatus(0);
-//		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
-//		solicitudService.saveOrUpdate(solicitud);
+		// Solicitud
+		Solicitud solicitud = new Solicitud();
+		solicitud.setInmueble(inmueble);
+		solicitud.setEstatus(0);
+		solicitud.setFecha_creacion( DateUtil.getCurrentDate() );
+		solicitudService.saveOrUpdate(solicitud);
 //		
 //		Solicitud solicitud1 = new Solicitud();
 //		solicitud1.setInmueble(inmueble);
@@ -1090,22 +1090,22 @@ public class DataLoader implements ApplicationRunner {
 		motivo.setFecha_creacion( DateUtil.getCurrentDate() );
 		motivoService.saveOrUpdate(motivo);		
 		
-//		//SolicitudServicio
-//		SolicitudServicio solicitudServicio= new SolicitudServicio();
-//		solicitudServicio.setEstatus(0);
-//		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
-//		solicitudServicio.setServicio(servicio);
-//		solicitudServicio.setSolicitud(solicitud);
-//		solicitudservicioservice.saveOrUpdate(solicitudServicio);
-//		
-//
-//		//SolicitudServicioMotivo
-//		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
-//		solicitudServicioMotivo.setEstatus(0);
-//		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
-//		solicitudServicioMotivo.setMotivo(motivo);
-//		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
-//		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
+		//SolicitudServicio
+		SolicitudServicio solicitudServicio= new SolicitudServicio();
+		solicitudServicio.setEstatus(0);
+		solicitudServicio.setFecha_creacion(DateUtil.getCurrentDate());
+		solicitudServicio.setServicio(servicio);
+		solicitudServicio.setSolicitud(solicitud);
+		solicitudservicioservice.saveOrUpdate(solicitudServicio);
+		
+
+		//SolicitudServicioMotivo
+		SolicitudServicioMotivo solicitudServicioMotivo = new SolicitudServicioMotivo();
+		solicitudServicioMotivo.setEstatus(0);
+		solicitudServicioMotivo.setFecha_creacion(DateUtil.getCurrentDate());
+		solicitudServicioMotivo.setMotivo(motivo);
+		solicitudServicioMotivo.setSolicitudServicio(solicitudServicio);
+		solicitudServicioMotivoService.saveOrUpdate(solicitudServicioMotivo);
 //		
 //		//DetallePresupuesto
 //		
@@ -1118,37 +1118,37 @@ public class DataLoader implements ApplicationRunner {
 //		d.setSolicitudServicio(solicitudServicio);
 //		detallePresupuestoService.saveOrUpdate(d);
 //		
-//		// Visita
-//		Visita visita = new Visita();
-//		visita.setFechaVisita(DateUtil.getCurrentDate());
-//		visita.setTurno(turno);
-//		visita.setTipoVisita(tipoVisita);
-//		visita.setSolicitud(solicitud);
-//		visita.setOrdenServicio(ordenServicio);
-//		visita.setEstatus(0);
-//		visita.setFecha_creacion( DateUtil.getCurrentDate() );
-//		visitaService.saveOrUpdate(visita);
-//		
-//		
-//		// Trabajador
-//		Trabajador trabajador = new Trabajador();
-//		trabajador.setNombre("Jose Duin");
-//		trabajador.setSexo('M');
-//		trabajador.setTipoPersona(0);
-//		trabajador.setCargo(cargo);
-//		trabajador.setIdentificacion(21526571);
-//		trabajador.setDireccion("Carrera 13b");
-//		trabajador.setSector(sector);
-//		trabajador.setTelefono("04120523025");
-//		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
-//		trabajador.setEmail("jose@duin.com");
-//		trabajador.setPassword( "123" );
-//		trabajador.setRol(rol);
-//		trabajador.setEstatus(0);
-//		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
-//		trabajador.setEmpresa(empresa);
-//		trabajador.setFecha_ingreso(DateUtil.getCurrentDate());
-//		trabajadorService.saveOrUpdate(trabajador);
+		// Visita
+		Visita visita = new Visita();
+		visita.setFechaVisita(DateUtil.getCurrentDate());
+		visita.setTurno(turno);
+		visita.setTipoVisita(tipoVisita);
+		visita.setSolicitud(solicitud);
+		visita.setOrdenServicio(ordenServicio);
+		visita.setEstatus(0);
+		visita.setFecha_creacion( DateUtil.getCurrentDate() );
+		visitaService.saveOrUpdate(visita);
+		
+	
+		// Trabajador
+		Trabajador trabajador = new Trabajador();
+		trabajador.setNombre("Jose Duin");
+		trabajador.setSexo('M');
+		trabajador.setTipoPersona(0);
+		trabajador.setCargo(cargo);
+		trabajador.setIdentificacion(21526571);
+		trabajador.setDireccion("Carrera 13b");
+		trabajador.setSector(sector);
+		trabajador.setTelefono("04120523025");
+		trabajador.setFecha_de_nacimiento( DateUtil.getCurrentDate() );
+		trabajador.setEmail("jose@duin.com");
+		trabajador.setPassword( "123" );
+		trabajador.setRol(rol);
+		trabajador.setEstatus(0);
+		trabajador.setFecha_creacion( DateUtil.getCurrentDate() );
+		trabajador.setEmpresa(empresa);
+		trabajador.setFecha_ingreso(DateUtil.getCurrentDate());
+		trabajadorService.saveOrUpdate(trabajador);
 //		
 //		Trabajador trabajador2 = new Trabajador();
 //		trabajador2.setNombre("Jose Miguel");
@@ -1226,14 +1226,14 @@ public class DataLoader implements ApplicationRunner {
 //		trabajador5.setFecha_ingreso(DateUtil.getCurrentDate());
 //		trabajadorService.saveOrUpdate(trabajador5);
 //		
-//		// TrabajadorVisita
-//		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
-//		trabajadorVisita.setTrabajador(trabajador);
-//		trabajadorVisita.setVisita(visita);
-//		trabajadorVisita.setEstatus(0);
-//		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
-//		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
-//		
+		// TrabajadorVisita
+		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
+		trabajadorVisita.setTrabajador(trabajador);
+		trabajadorVisita.setVisita(visita);
+		trabajadorVisita.setEstatus(0);
+		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
 		asuntoComentario.setDescripcion("Sugerencia");
