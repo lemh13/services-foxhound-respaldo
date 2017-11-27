@@ -1228,12 +1228,12 @@ public class DataLoader implements ApplicationRunner {
 //		trabajadorService.saveOrUpdate(trabajador5);
 //		
 //		// TrabajadorVisita
-//		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
-//		trabajadorVisita.setTrabajador(trabajador);
-//		trabajadorVisita.setVisita(visita);
-//		trabajadorVisita.setEstatus(0);
-//		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
-//		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
+		TrabajadorVisita trabajadorVisita = new TrabajadorVisita();
+		trabajadorVisita.setTrabajador(trabajador);
+		trabajadorVisita.setVisita(visita);
+		trabajadorVisita.setEstatus(0);
+		trabajadorVisita.setFecha_creacion( DateUtil.getCurrentDate() );
+		trabajadorVisitaService.saveOrUpdate(trabajadorVisita);
 //		
 		// AsuntoComentario
 		AsuntoComentario asuntoComentario = new AsuntoComentario();
