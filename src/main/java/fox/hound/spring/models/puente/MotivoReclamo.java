@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,6 +29,10 @@ public class MotivoReclamo extends Maestro {
 	@JoinColumn(name="motivo_id")
 	@JsonBackReference(value="motivo-motivoReclamos")
 	private Motivo motivo;
+	@Transient
+	private Long padre_id;
+	@Transient
+	private String padre_descripcion;
 	
 	public MotivoReclamo() {
 		super();
