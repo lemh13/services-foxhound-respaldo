@@ -431,11 +431,6 @@ public class DataLoader implements ApplicationRunner {
 		estado.setFecha_creacion( DateUtil.getCurrentDate() );
 		estadoService.saveOrUpdate(estado);
 		
-		Estado estado1 = new Estado();
-		estado1.setDescripcion("Yaracuy");
-		estado1.setEstatus(0);
-		estado1.setFecha_creacion( DateUtil.getCurrentDate() );
-		estadoService.saveOrUpdate(estado1);
 		// Ciudad
 		Ciudad ciudad = new Ciudad();
 		ciudad.setDescripcion("Barquisimeto");
@@ -444,13 +439,6 @@ public class DataLoader implements ApplicationRunner {
 		ciudad.setFecha_creacion( DateUtil.getCurrentDate() );
 		ciudadService.saveOrUpdate(ciudad);
 		
-		Ciudad ciudad1 = new Ciudad();
-		ciudad1.setDescripcion("Yaritagua");
-		ciudad1.setEstatus(0);
-		ciudad1.setEstado(estado1);
-		ciudad1.setFecha_creacion( DateUtil.getCurrentDate() );
-		ciudadService.saveOrUpdate(ciudad1);
-
 		// Municipio
 		Municipio municipio = new Municipio();
 		municipio.setDescripcion("Iribarren");
@@ -459,13 +447,6 @@ public class DataLoader implements ApplicationRunner {
 		municipio.setFecha_creacion( DateUtil.getCurrentDate() );
 		municipioService.saveOrUpdate(municipio);
 		
-		Municipio municipio1 = new Municipio();
-		municipio1.setDescripcion("Peña");
-		municipio1.setEstatus(0);
-		municipio1.setCiudad(ciudad1);
-		municipio1.setFecha_creacion( DateUtil.getCurrentDate() );
-		municipioService.saveOrUpdate(municipio1);
-
 		// Parroquia
 		Parroquia parroquia = new Parroquia();
 		parroquia.setDescripcion("Concepción");
@@ -474,12 +455,6 @@ public class DataLoader implements ApplicationRunner {
 		parroquia.setFecha_creacion( DateUtil.getCurrentDate() );
 		parroquiaService.saveOrUpdate(parroquia);
 		
-		Parroquia parroquia1 = new Parroquia();
-		parroquia1.setDescripcion("Concepción");
-		parroquia1.setEstatus(0);
-		parroquia1.setMunicipio(municipio1);
-		parroquia1.setFecha_creacion( DateUtil.getCurrentDate() );
-		parroquiaService.saveOrUpdate(parroquia1);
 		
 
 		//Presupuesto
@@ -499,14 +474,6 @@ public class DataLoader implements ApplicationRunner {
 		sector.setParroquia(parroquia);
 		sector.setFecha_creacion( DateUtil.getCurrentDate() );
 		sectorService.saveOrUpdate(sector);
-
-
-		Sector sector1 = new Sector();
-		sector1.setDescripcion("Centro");
-		sector1.setEstatus(0);
-		sector1.setParroquia(parroquia);
-		sector1.setFecha_creacion( DateUtil.getCurrentDate() );
-		sectorService.saveOrUpdate(sector1);
 		
 		// Rol
 		Rol rol = new Rol();
